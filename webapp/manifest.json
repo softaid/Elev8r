@@ -1,0 +1,384 @@
+{
+	"_version": "1.103.0",
+	"sap.app": {
+		"id": "sap.ui.elev8rerp.componentcontainer",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal",
+			"sap_belize",
+			"sap_tradeshow",
+			"sap_signature"
+		]
+	},
+	"sap.ui5": {
+		"handleValidation": true,
+		"rootView": {
+			"viewName": "sap.ui.elev8rerp.componentcontainer.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.f": {},
+				"sap.tnt": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"config": {
+			"fullWidth": true
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.ui.elev8rerp.componentcontainer.i18n.i18n"
+				}
+			},
+			"applicationModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationPopupModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationsTemplateModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationPlaceholderModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationCreatedForModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"side": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/sideContent.json"
+			},
+			"alerts": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/alerts.json"
+			},
+			"customer": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/customers.json"
+			},
+			"config": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "config/config.json"
+			},
+			"rowcountModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/rowCount.json"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"viewPath": "sap.ui.elev8rerp.componentcontainer.view",
+				"async": true,
+				"bypassed": {
+					"target": "login"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				},
+				{
+					"pattern": "login",
+					"name": "login",
+					"target": "login"
+				},
+				{
+					"pattern": "test",
+					"name": "test",
+					"target": "test"
+				},
+				{
+					"pattern": "home",
+					"name": "home",
+					"target": "master"
+				},
+				{
+					"pattern": "home1",
+					"name": "home1",
+					"target": "master"
+				},
+				{
+					"pattern": "notifications",
+					"name": "notifications",
+					"target": "master"
+				},
+				{
+					"pattern": "aboutus",
+					"name": "aboutus",
+					"target": "aboutus"
+				},
+				{
+					"pattern": "itemmaster",
+					"name": "itemmaster",
+					"target": "master"
+				},
+				{
+					"pattern": "bommaster",
+					"name": "bommaster",
+					"target": "bommaster"
+				},
+				{
+					"pattern":"salesorderlist",
+					"name":"salesorderlist",
+					"target":"salesorderlist"
+				},
+				{
+					"pattern":"salesorder",
+					"name":"salesorder",
+					"target":"salesorder"
+				},
+				{
+					"pattern":"salesdeliverylist",
+					"name":"salesdeliverylist",
+					"target":"salesdeliverylist"
+				},
+				{
+					"pattern":"salesdelivery",
+					"name":"salesdelivery",
+					"target":"salesdelivery"
+				},
+				{
+					"pattern":"salesinvoicelist",
+					"name":"salesinvoicelist",
+					"target":"salesinvoicelist"
+				},
+				{
+					"pattern":"salesinvoice",
+					"name":"salesinvoice",
+					"target":"salesinvoice"
+				},
+				{
+					"pattern": "chome",
+					"name": "chome",
+					"target": "companymaster"
+				},
+				{
+					"pattern": "manageapplication",
+					"name": "manageapplication",
+					"target":"companymaster"
+				},
+				{
+					"pattern": "usermanagement",
+					"name": "usermanagement",
+					"target": "companymaster"
+				},
+				{
+					"pattern": "companySettings",
+					"name": "companySettings",
+					"target": [
+						"detailSettings",
+						"companySettings"
+					]
+				},
+				{
+					"pattern":"licensemanagement",
+					"name": "licensemanagement",
+					"target":"companymaster"
+				},
+				{
+					"pattern": "importmaster",
+					"name": "importmaster",
+					"target": "companymaster"
+				},
+				{
+					"pattern": "financialyearsetting",
+					"name": "financialyearsetting",
+					"target": "companymaster"
+				},
+				{
+					"pattern":"documentseries",
+					"name":"documentseries",
+					"target":"companymaster"
+				},
+				{
+					"pattern": "pageshortcutkey",
+					"name": "pageshortcutkey",
+					"target":"companymaster"
+				}
+			],
+			"targets": {
+				"dashboard": {
+					"viewId": "dashboard",
+					"viewName": "Dashboard"
+				},
+				"login": {
+					"viewId": "login",
+					"viewName": "Login1"
+				},
+				"master": {
+					"viewId": "master",
+					"viewName": "Master"
+				},
+				"home": {
+					"viewId": "home",
+					"viewName": "Home",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"home1": {
+					"viewId": "home1",
+					"viewName": "Home1",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"notifications": {
+					"viewId": "notifications",
+					"viewName": "Notification",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"test": {
+					"viewId": "test",
+					"viewName": "Test",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"aboutus": {
+					"viewId": "aboutus",
+					"viewName": "Profile/Aboutus",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"itemmaster": {
+					"viewId": "itemmaster",
+					"viewName": "Inventory/ItemMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"bommaster":{
+					"viewId": "bommaster",
+					"viewName": "FeedMill/Master/BillOfMaterialList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesorderlist":{
+					"viewId": "salesorderlist",
+					"viewName": "Sales/SalesOrderList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesorder":{
+					"viewId": "salesorder",
+					"viewName": "Sales/SalesOrder",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesdeliverylist":{
+					"viewId": "salesdeliverylist",
+					"viewName": "Sales/SalesDeliveryList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesdelivery":{
+					"viewId": "salesdelivery",
+					"viewName": "Sales/SalesDelivery",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesinvoicelist":{
+					"viewId": "salesinvoicelist",
+					"viewName": "Sales/SalesInvoiceList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesinvoice":{
+					"viewId": "salesinvoice",
+					"viewName": "Sales/SalesInvoice",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"manageapplication": {
+					"viewId": "manageapplication",
+					"viewName": "Application/ManageApplication",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"usermanagement": {
+					"viewId": "usermanagement",
+					"viewName": "UserManagement",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"licensemanagement": {
+					"viewId": "licensemanagement",
+					"viewName": "CompanySettings/LicenseManagement",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"importmasters": {
+					"viewId": "importmasters",
+					"viewName": "CompanySettings/ImportMasters",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"financialyearsetting": {
+					"viewId": "financialyearsetting",
+					"viewName": "ApplicationSettings/FinancialYearSetting",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"documentseries": {
+					"viewId": "documentseries",
+					"viewName": "ApplicationSettings/DocumentSeries",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"pageshortcutkey": {
+					"viewId": "pageshortcutkey",
+					"viewName": "ApplicationSettings/PageShortcutKeys",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"chome": {
+					"viewId": "chome",
+					"viewName": "Chome",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"companymaster": {
+					"viewId": "companymaster",
+					"viewName": "CompanyMaster"
+				}
+			}
+		}
+	}
+}

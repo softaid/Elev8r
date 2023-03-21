@@ -1,0 +1,199 @@
+{
+	"navigation": [
+		{
+			"title": "Dashboard",
+			"icon": "sap-icon://area-chart",
+			"expanded": false,
+			"key": "home",
+			"eid": [9],
+			"items": []
+		},
+		{
+			"title": "Common",
+			"icon": "sap-icon://dimension",
+			"expanded": false,
+			"key": "home",
+			"eid": [6],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://database",
+					"expanded": false,
+					"key": "commonmaster",
+					"eid": [7],
+					"items": [
+						{
+							"title": "Location",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "locationmaster",
+							"eid": [4501],
+							"items": []
+						},
+						{
+							"title": "Item",
+							"icon": "sap-icon://area-chart",
+							"expanded": true,
+							"key": "itemmaster",
+							"eid": [8],
+							"items": []
+						},
+						{
+							"title": "Warehouse",
+							"icon": "sap-icon://area-chart",
+							"expanded": true,
+							"key": "warehousemaster",
+							"eid": [10],
+							"items": []
+						},
+						{
+							"title": "Lead Master",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "leadmaster",
+							"eid": [11],
+							"items": []
+						},{
+							"title": "Activity Master",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "activitymaster",
+							"eid": [12],
+							"items": []
+						},
+						{
+							"title": "Employee",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "employeemaster",
+							"eid": [13],
+							"items": []
+						},
+						{
+							"title": "Location",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "loctionmaster",
+							"eid": [14],
+							"items": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "BOM Master",
+			"icon": "sap-icon://process",
+			"expanded": false,
+			"key": "bommaster",
+			"eid": [5],
+			"items": []
+		},
+		{
+			"title": "Sales",
+			"icon": "sap-icon://add-process",
+			"expanded": false,
+			"key": "sales",
+			"eid": [1],
+			"items": [
+				{
+					"title": "Sales Order",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "salesorderlist",
+					"eid": [2],
+					"items": []
+				},
+				{
+					"title": "Sales Delivery",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "salesdeliverylist",
+					"eid": [3],
+					"items": []
+				},
+				{
+					"title": "Sales Invoice",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "salesinvoicelist",
+					"eid": [4],
+					"items": []
+				}
+			]
+		}
+	],
+	
+	"masterSettings": [
+		{
+			"title": "Company Initialization",
+			"key": "companySettings",
+			"selected": true
+		},
+		{
+			"title": "User Management",
+			"key": "usermanagement",
+			"selected": false
+		},
+		{
+			"title": "License Management",
+			"key": "licensemanagement",
+			"selected": false
+		},
+		{
+			"title": "Approval Templates",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "Email Settings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "SMS Settings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "Notification Settings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "Import Masters",
+			"key": "importmasters",
+			"selected": false
+		},
+		{
+			"title": "Application Settings",
+			"key": "manageapplication",
+			"selected": false
+		},
+		{
+			"title": "Financial Year Settings",
+			"key": "financialyearsetting",
+			"selected": false
+		},
+		{
+			"title": "Document Series",
+			"key": "documentseries",
+			"selected": false
+		},
+		{
+			"title": "Page Shortcut Key",
+			"key": "pageshortcutkey",
+			"selected": false
+		},
+		{
+			"title": "About Us",
+			"key": "home",
+			"selected": false
+		},
+		{
+			"title": "Support",
+			"key": "home",
+			"selected": false
+		}
+	]
+}

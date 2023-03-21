@@ -1,0 +1,14 @@
+
+{
+	"dateFormat": {
+		"valueFormat": "yyyy-MM-dd",
+        "displayFormat" : "dd/MM/yyyy",
+        "placeholder" : "DD/MM/YYYY"
+	},
+	"webapi" : {
+		"url" : "http://207.180.221.147:7200/",
+		"docurl" : "http://207.180.221.147:7200/documentImage/"
+	}
+}
+
+
