@@ -1,0 +1,81 @@
+
+
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.LeadMaster" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclLeadMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Lead Masters"/>
+				        </f:heading>
+                        <f:actions>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddIconPress"/>
+							<MenuButton icon="sap-icon://download">
+								<menu>
+									<Menu itemSelected="onMenuAction" >
+										<items>
+											<MenuItem id="existingCOA" text="Existing COA" icon="sap-icon://download" press="loadAllCOAData" />
+											<MenuItem text="COA Template" icon="sap-icon://download" press="onDownloadTemplate" />
+											<MenuItem text="Template for Ledger Opening Balance" icon="sap-icon://download" press="onLedgerTemplate" />
+										</items>
+									</Menu>
+								</menu>
+							</MenuButton>
+                            <ToolbarSpacer/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">  
+                        <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="true" class="sapUiResponsiveContentPadding" items ="{masterModel>/modelData}" select="onTabSelect">
+                            <items>
+                                <IconTabFilter text="{masterModel>typename}">
+                                    <VBox fitContainer="true">
+                                        <Table id="activityTbl"
+                                            inset="false" 
+                                            items="{
+                                                        path: 'masterDetailModel>/modelData',
+                                                        sorter: {
+                                                            path: 'id'
+                                                        }
+                                                    }">
+                                            <headerToolbar>
+                                                <Toolbar>
+                                                    <content>
+                                                        <Title text="{masterModel>typename}" level="H2"/>
+                                                        <ToolbarSpacer />
+                                                    </content>
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <columns>
+                                                <Column><Text text ="ID" /></Column>
+                                                <Column><Text text ="Description" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active" /></Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                                    <cells>
+                                                        <Text text="{masterDetailModel>id}"/>
+                                                        <Text text="{masterDetailModel>description}"/>
+                                                        <Text text="{masterDetailModel>active}" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>   
+                                    </VBox>  
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
+                    </VBox>
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

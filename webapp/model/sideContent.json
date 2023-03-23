@@ -5,119 +5,153 @@
 			"icon": "sap-icon://area-chart",
 			"expanded": false,
 			"key": "home",
-			"eid": [9],
+			"eid": [1],
 			"items": []
 		},
 		{
-			"title": "Common",
+			"title": "Master",
 			"icon": "sap-icon://dimension",
 			"expanded": false,
 			"key": "home",
-			"eid": [6],
+			"eid": [2],
 			"items": [
 				{
-					"title": "Master",
+					"title": "Lead Master",
 					"icon": "sap-icon://database",
 					"expanded": false,
-					"key": "commonmaster",
-					"eid": [7],
-					"items": [
-						{
-							"title": "Location",
-							"icon": "sap-icon://create-form",
-							"expanded": false,
-							"key": "locationmaster",
-							"eid": [4501],
-							"items": []
-						},
-						{
-							"title": "Item",
-							"icon": "sap-icon://area-chart",
-							"expanded": true,
-							"key": "itemmaster",
-							"eid": [8],
-							"items": []
-						},
-						{
-							"title": "Warehouse",
-							"icon": "sap-icon://area-chart",
-							"expanded": true,
-							"key": "warehousemaster",
-							"eid": [10],
-							"items": []
-						},
-						{
-							"title": "Lead Master",
-							"icon": "sap-icon://create-form",
-							"expanded": false,
-							"key": "leadmaster",
-							"eid": [11],
-							"items": []
-						},{
-							"title": "Activity Master",
-							"icon": "sap-icon://create-form",
-							"expanded": false,
-							"key": "activitymaster",
-							"eid": [12],
-							"items": []
-						},
-						{
-							"title": "Employee",
-							"icon": "sap-icon://create-form",
-							"expanded": false,
-							"key": "employeemaster",
-							"eid": [13],
-							"items": []
-						},
-						{
-							"title": "Location",
-							"icon": "sap-icon://create-form",
-							"expanded": false,
-							"key": "loctionmaster",
-							"eid": [14],
-							"items": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"title": "BOM Master",
-			"icon": "sap-icon://process",
-			"expanded": false,
-			"key": "bommaster",
-			"eid": [5],
-			"items": []
-		},
-		{
-			"title": "Sales",
-			"icon": "sap-icon://add-process",
-			"expanded": false,
-			"key": "sales",
-			"eid": [1],
-			"items": [
-				{
-					"title": "Sales Order",
-					"icon": "sap-icon://basket",
-					"expanded": false,
-					"key": "salesorderlist",
-					"eid": [2],
-					"items": []
-				},
-				{
-					"title": "Sales Delivery",
-					"icon": "sap-icon://account",
-					"expanded": false,
-					"key": "salesdeliverylist",
+					"key": "leadmaster",
 					"eid": [3],
 					"items": []
 				},
 				{
-					"title": "Sales Invoice",
+					"title": "Project Master",
+					"icon": "sap-icon://create-form",
+					"expanded": false,
+					"key": "projectmaster",
+					"eid": [4],
+					"items": []
+				},
+				{
+					"title": "Inventory",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "inventory",
+					"eid": [5],
+					"items": []
+				},
+				{
+					"title": "Users",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "users",
+					"eid": [6],
+					"items": []
+				}
+			]
+		},
+		{
+			"title": "Lead Management",
+			"icon": "sap-icon://process",
+			"expanded": false,
+			"key": "leadmanagement",
+			"eid": [7],
+			"items": [
+				{
+					"title": "Leads",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "leads",
+					"eid": [8],
+					"items": []
+				},
+				{
+					"title": "Activities",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "activities",
+					"eid": [9],
+					"items": []
+				},
+				{
+					"title": "Quotations",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "quotations",
+					"eid": [10],
+					"items": []
+				},
+				{
+					"title": "Reports",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "leadreports",
+					"eid": [11],
+					"items": []
+				}
+			]
+		},
+		{
+			"title": "Project Management",
+			"icon": "sap-icon://add-process",
+			"expanded": false,
+			"key": "projectmanagement",
+			"eid": [12],
+			"items": [
+				{
+					"title": "Projects",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "projects",
+					"eid": [13],
+					"items": []
+				},
+				{
+					"title": "Activities",
 					"icon": "sap-icon://account",
 					"expanded": false,
-					"key": "salesinvoicelist",
-					"eid": [4],
+					"key": "projectactivities",
+					"eid": [14],
+					"items": []
+				},
+				{
+					"title": "Payments",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "payments",
+					"eid": [15],
+					"items": []
+				},
+				{
+					"title": "Reports",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "projectreports",
+					"eid": [16],
+					"items": []
+				}
+			]
+		},
+		{
+			"title": "My Tasks",
+			"icon": "sap-icon://add-process",
+			"expanded": false,
+			"key": "mytasks",
+			"eid": [17],
+			"items": [
+				{
+					"title": "Attendance",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "attendance",
+					"eid": [18],
+					"items": []
+				},
+				{
+					"title": "Expenses",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "expenses",
+					"eid": [19],
 					"items": []
 				}
 			]

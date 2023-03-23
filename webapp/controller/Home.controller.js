@@ -33,7 +33,7 @@ sap.ui.define([
 
 			this.oFlexibleColumnLayout = this.byId("fclCommonDashboard");
 			this.gePandL();
-			this.getData();
+			// this.getData();
 		},
 
 		onTabSelect: function (oControlEvent) {
@@ -97,7 +97,7 @@ sap.ui.define([
 
 
 		onBeforeRendering: function () {
-			this.gePandL();
+			// this.gePandL();
 		},
 
 		gePandL: function () {
@@ -109,36 +109,36 @@ sap.ui.define([
 		},
 
 		drawBarColors: function () {
-			var model = {
-				to_date: commonFunction.getDate(commonFunction.getDateFromDB(new Date())),
+			// var model = {
+			// 	to_date: commonFunction.getDate(commonFunction.getDateFromDB(new Date())),
 
-			}
+			// }
 
-			var currentContext = this;
-			commondashboardService.get_Profitandloss_data(model, function (data) {
-				console.log("data", data);
-				var mapData = [];
-				var Header = ['Month', 'Income', 'Expenses'];
-				mapData.push(Header);
-				for (var i = 0; i < data[0].length; i++) {
-					var temp = [];
-					temp.push(data[0][i].Monthname, data[0][i].Income, data[0][i].Expenses);
+			// var currentContext = this;
+			// commondashboardService.get_Profitandloss_data(model, function (data) {
+			// 	console.log("data", data);
+			// 	var mapData = [];
+			// 	var Header = ['Month', 'Income', 'Expenses'];
+			// 	mapData.push(Header);
+			// 	for (var i = 0; i < data[0].length; i++) {
+			// 		var temp = [];
+			// 		temp.push(data[0][i].Monthname, data[0][i].Income, data[0][i].Expenses);
 
-					mapData.push(temp);
-				}
+			// 		mapData.push(temp);
+			// 	}
 
-				var data = google.visualization.arrayToDataTable(mapData);
-				var options = {
-					title: 'Income And Expenses',
-					vAxis: { title: 'Amount' },
-					hAxis: { title: 'Month' },
-					seriesType: 'bars',
-					series: { 5: { type: 'point' } }
-				};
-				var chart = new google.visualization.ComboChart(document.getElementById('liechart_3d_1'));
-				chart.draw(data, options);
+			// 	var data = google.visualization.arrayToDataTable(mapData);
+			// 	var options = {
+			// 		title: 'Income And Expenses',
+			// 		vAxis: { title: 'Amount' },
+			// 		hAxis: { title: 'Month' },
+			// 		seriesType: 'bars',
+			// 		series: { 5: { type: 'point' } }
+			// 	};
+			// 	var chart = new google.visualization.ComboChart(document.getElementById('liechart_3d_1'));
+			// 	chart.draw(data, options);
 
-			});
+			// });
 		},
 
 		getData: function () {
