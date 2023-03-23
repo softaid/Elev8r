@@ -206,7 +206,7 @@
 					"name": "companySettings",
 					"target": [
 						"detailSettings",
-						"companySettings"
+						"detailSettings"
 					]
 				},
 				{

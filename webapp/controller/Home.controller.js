@@ -2,11 +2,12 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/json/JSONModel',
 	'sap/ui/Device',
+	'sap/m/MessageToast',
 	'sap/ui/elev8rerp/componentcontainer/formatter/Breeder/BreederPlacementSchedule.formatter',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/DashBoard/CommonDashBoard.service',
-], function (BaseController, JSONModel, Device, formatter, commonService, commonFunction, commondashboardService) {
+], function (BaseController, JSONModel, Device,MessageToast,formatter, commonService, commonFunction, commondashboardService) {
 	"use strict";
 	return BaseController.extend("sap.ui.demo.nav.controller.Home", {
 		formatter: formatter,
@@ -146,7 +147,12 @@ sap.ui.define([
 			to_date = commonFunction.getDate(to_date);
 			commonService.getCommonDashBoard({ to_date: to_date }, function (data) {
 				var dashBoard_oModel = new sap.ui.model.json.JSONModel();
-				if (data[0] != "" || data[0] != undefined || data[0] != "null" || data[0] != null) {
+				// If data is not get from database  then handle Empty data condition
+				if (data.length === 0 && data.trim().length === 0) {
+					let msg = "Data for dashboard is not available";
+					MessageToast.show(msg);
+				}
+				else{
 					dashBoard_oModel.setData(data[0][0]);
 				}
 				currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
@@ -155,23 +161,30 @@ sap.ui.define([
 			google.charts.setOnLoadCallback(this.drawBarColors);
 
 			// All Models for dashboard setiing data
-			//breeder setting data
 			var modulearray = [];
-			commonService.getModuleDatabyUser(function (data10) {
+			commonService.getModuleDatabyUser(function (moduleData) {
 				var id = 1;
 				var moduleAccessoModel = new sap.ui.model.json.JSONModel();
-				if (data10[0] != "" || data10[0] != undefined || data10[0] != "null" || data10[0] != null) {
-					moduleAccessoModel.setData(data10[0]);
+				if (moduleData) {
+					moduleAccessoModel.setData(moduleData[0]);
 				}
 				currentContext.getView().setModel(moduleAccessoModel, "moduleAccessoModel");
+				
+				// If data is not get from database  then handle Empty data condition
+				if (moduleData.length === 0 && moduleData.trim().length === 0)
+					{
+						console.log("ModuleData is not available");
+					}
+				else
+					{
+						for (var i = 0; i < moduleData[0].length; i++) {
+							modulearray.push({
+								id: id++,
+								entityname: moduleData[0][i].entityname
+							});
+						}
+					}
 
-
-				for (var i = 0; i < data10[0].length; i++) {
-					modulearray.push({
-						id: id++,
-						entityname: data10[0][i].entityname
-					});
-				}
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: modulearray });
 				currentContext.getView().setModel(oModel, "moduleModel");
