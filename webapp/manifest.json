@@ -122,11 +122,6 @@
 					"target": "login"
 				},
 				{
-					"pattern": "test",
-					"name": "test",
-					"target": "test"
-				},
-				{
 					"pattern": "home",
 					"name": "home",
 					"target": "master"
@@ -147,44 +142,74 @@
 					"target": "aboutus"
 				},
 				{
-					"pattern": "itemmaster",
-					"name": "itemmaster",
-					"target": "master"
+					"pattern": "leadmaster",
+					"name": "leadmaster",
+					"target": "leadmaster"
 				},
 				{
-					"pattern": "bommaster",
-					"name": "bommaster",
-					"target": "bommaster"
+					"pattern": "projectmaster",
+					"name": "projectmaster",
+					"target": "projectmaster"
 				},
 				{
-					"pattern":"salesorderlist",
-					"name":"salesorderlist",
-					"target":"salesorderlist"
+					"pattern": "inventory",
+					"name": "inventory",
+					"target": "inventory"
 				},
 				{
-					"pattern":"salesorder",
-					"name":"salesorder",
-					"target":"salesorder"
+					"pattern": "users",
+					"name": "users",
+					"target": "users"
 				},
 				{
-					"pattern":"salesdeliverylist",
-					"name":"salesdeliverylist",
-					"target":"salesdeliverylist"
+					"pattern": "leads",
+					"name": "leads",
+					"target": "leads"
 				},
 				{
-					"pattern":"salesdelivery",
-					"name":"salesdelivery",
-					"target":"salesdelivery"
+					"pattern": "activities",
+					"name": "activities",
+					"target": "activities"
 				},
 				{
-					"pattern":"salesinvoicelist",
-					"name":"salesinvoicelist",
-					"target":"salesinvoicelist"
+					"pattern": "quotations",
+					"name": "quotations",
+					"target": "quotations"
 				},
 				{
-					"pattern":"salesinvoice",
-					"name":"salesinvoice",
-					"target":"salesinvoice"
+					"pattern": "leadreports",
+					"name": "leadreports",
+					"target": "leadreports"
+				},
+				{
+					"pattern": "projects",
+					"name": "projects",
+					"target": "projects"
+				},
+				{
+					"pattern": "projectctivities",
+					"name": "projectctivities",
+					"target": "projectctivities"
+				},
+				{
+					"pattern": "payments",
+					"name": "payments",
+					"target": "payments"
+				},
+				{
+					"pattern": "projectreports",
+					"name": "projectreports",
+					"target": "projectreports"
+				},
+				{
+					"pattern": "attendnce",
+					"name": "attendnce",
+					"target": "attendnce"
+				},
+				{
+					"pattern": "expenses",
+					"name": "expenses",
+					"target": "expenses"
 				},
 				{
 					"pattern": "chome",
@@ -278,52 +303,16 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"itemmaster": {
-					"viewId": "itemmaster",
-					"viewName": "Inventory/ItemMaster",
+				"leadmaster": {
+					"viewId": "leadmaster",
+					"viewName": "Masters/LeadMaster",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"bommaster":{
-					"viewId": "bommaster",
-					"viewName": "FeedMill/Master/BillOfMaterialList",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"salesorderlist":{
-					"viewId": "salesorderlist",
-					"viewName": "Sales/SalesOrderList",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"salesorder":{
-					"viewId": "salesorder",
-					"viewName": "Sales/SalesOrder",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"salesdeliverylist":{
-					"viewId": "salesdeliverylist",
-					"viewName": "Sales/SalesDeliveryList",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"salesdelivery":{
-					"viewId": "salesdelivery",
-					"viewName": "Sales/SalesDelivery",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"salesinvoicelist":{
-					"viewId": "salesinvoicelist",
-					"viewName": "Sales/SalesInvoiceList",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"salesinvoice":{
-					"viewId": "salesinvoice",
-					"viewName": "Sales/SalesInvoice",
-					"controlId": "mainContents",
+				"projectmaster" : {
+					"viewId" : "projectmaster",
+					"viewName" : "Masters/ProjectMster",
+					"controlId" : "mainContents",
 					"parent": "master"
 				},
 				"manageapplication": {
