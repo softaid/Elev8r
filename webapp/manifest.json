@@ -309,6 +309,12 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
+				"leads": {
+					"viewId": "leads",
+					"viewName": "LeadManagement/Leads",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
 				"projectmaster" : {
 					"viewId" : "projectmaster",
 					"viewName" : "Masters/ProjectMster",

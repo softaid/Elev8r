@@ -1,0 +1,119 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Leads" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified">
+    
+        
+    <f:FlexibleColumnLayout  id="fclPartyMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Leads"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                        <VBox fitContainer="true">
+                        <Table id="tblPartyMaster" 
+                                inset="false"
+                                sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
+                                items="{
+                                path: 'LeadsMasterModel>/modelData',
+                                sorter: {
+                                    path: 'hatchername'
+                                }
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        	<!-- <Select id="roletype"
+                                                enabled="true"
+                                                change="roleSelect"
+                                                forceSelection="false"
+                                                selectedKey="{subledgerModel>/subledgertypeid}" 
+                                                 items="{
+                                                            path: 'roleForPaymentModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                <core:Item key="{roleForPaymentModel>id}" text="{roleForPaymentModel>refname}" /> 
+                                            </Select> -->
+
+                                        <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                                        <Button icon="sap-icon://sort" type="Transparent" press="onSort"/>
+                                        <u:FileUploader 
+                                        id="fileUploader"
+                                        name="myFileUpload"
+                                        buttonText = ""
+                                        placeholder = "Please Select File"
+                                        icon="sap-icon://attachment"
+                                        uploadUrl="upload/"
+                                        tooltip="Import Data."
+                                        change="handleExcelUpload" 
+                                        uploadComplete="handleUploadComplete"/>
+                                        <Button
+                                        text="Upload template"
+                                        type="Emphasized"
+                                        press="onUploadMasterData" id="btnUploadData"/>
+                                        <MenuButton icon="sap-icon://download">
+                                            <menu>
+                                                <Menu itemSelected="onMenuAction" >
+                                                    <items>
+                                                        <MenuItem text="Party List" icon="sap-icon://download" press="onDataExport" />
+                                                        <MenuItem text="Party Template" icon="sap-icon://download" press="onpartyTemplate" />
+                                                        <MenuItem text="Party Opening Balance" icon="sap-icon://download" press="onDownloadTemplate" />
+                                                        <MenuItem text="Country List" icon="sap-icon://download" press="onDownloadCountry" />
+                                                        <MenuItem text="State List" icon="sap-icon://download" press="onDownloadState" />
+                                                        <MenuItem text="City List" icon="sap-icon://download" press="onDownloadCity" />
+                                                        <MenuItem text="Party Address Template" icon="sap-icon://download" press="onpartyAddressTemplate" />
+                                                    </items>
+                                                </Menu>
+                                            </menu>
+                                        </MenuButton>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="Lead Id" /></Column>
+                                <Column><Text text ="Lead Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Mobile No."/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Email"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Source"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Pipeline"/></Column>                                
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Supplier Ledger"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Ledger"/></Column> -->
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                    <ObjectIdentifier text="{LeadsMasterModel>id}" />
+                                        <Text text="{LeadsMasterModel>leadname}" />
+                                        <Text text="{LeadsMasterModel>mobileno}"/>
+                                        <Text text="{LeadsMasterModel>email}"/>
+                                        <Text text="{LeadsMasterModel>sourceid}"/>
+                                        <Text text="{LeadsMasterModel>pipelineid}"/> 
+                                        <!-- <Text text="{LeadsMasterModel>supplierledgername}"/>       
+                                        <Text text="{LeadsMasterModel>customerledgername}"/>        -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+                        </VBox >
+                        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+                            <items></items>
+                        </TabContainer>
+                        <HBox width="auto"></HBox>
+                        <HBox id="pnlMasterData" width="auto"></HBox>
+                    </VBox> 
+                    
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
