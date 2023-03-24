@@ -123,39 +123,32 @@ sap.ui.define([
 
 			var currentContext = this;
 			this.model = this.getView().getModel("viewModel");
+            console.log("this.model",this.model);
 			var oModel = new JSONModel();
 
 			if (this.model != undefined) {
 
-				partyService.getParty(this.model.id, function (data) {
+				Leadservice.getLeads({id: this.model.id}, function (data) {
+                    console.log("-----------------data----------------------",data);
 					oModel.setData(data[0][0]);
-					var roles = data[0][0].partyroleids.split(',');
-					currentContext.getView().byId("txtpartycode").setValue(data[0][0].partycode);
-					currentContext.moduleIds = data[0][0].moduleid;
-					if (data[0][0].moduleid != null) {
-						var moduleArray = data[0][0].moduleid.split(',');
-						currentContext.getView().byId("ddlMtxtModuleNameodule").setSelectedKeys(moduleArray);
-					}
 					var addresses = data[1];
-					var contacts = data[2];
-
-					currentContext.getView().byId("cmbPartyRole").setSelectedKey(roles);
-					currentContext.getRolewisePartyGroups(roles);
+					
+					//currentContext.getRolewisePartyGroups(roles);
 					if (addresses.length > 0) {
 
 						currentContext.counter = addresses.length;
 
 						for (var i = 0; i < addresses.length; i++) {
 							var cnt = i + 1;
-							currentContext.getView().byId("ddlAddrType" + cnt).setSelectedKey(addresses[i].addresstypeid);
+							//currentContext.getView().byId("ddlAddrType" + cnt).setSelectedKey(addresses[i].addresstypeid);
 							currentContext.getView().byId("txtAddress" + cnt).setValue(addresses[i].address);
 							currentContext.getView().byId("ddlCity" + cnt).setSelectedKey(addresses[i].cityid);
 							currentContext.getView().byId("ddlState" + cnt).setSelectedKey(addresses[i].stateid);
 							currentContext.getView().byId("ddlCountry" + cnt).setSelectedKey(addresses[i].countryid);
-							currentContext.getView().byId("ddlContact" + cnt).setSelectedKey(addresses[i].locationcontactno);
-							currentContext.getView().byId("ddlContact" + cnt).setValue(addresses[i].locationcontactno);
-							currentContext.getView().byId("txtGSTNo" + cnt).setValue(addresses[i].gstno);
-							currentContext.getView().byId("ddlGSTType" + cnt).setSelectedKey(addresses[i].gsttypeid);
+							//currentContext.getView().byId("ddlContact" + cnt).setSelectedKey(addresses[i].locationcontactno);
+							//currentContext.getView().byId("ddlContact" + cnt).setValue(addresses[i].locationcontactno);
+							//currentContext.getView().byId("txtGSTNo" + cnt).setValue(addresses[i].gstno);
+							//currentContext.getView().byId("ddlGSTType" + cnt).setSelectedKey(addresses[i].gsttypeid);
 							currentContext.getView().byId("txtPinCode" + cnt).setValue(addresses[i].pincode);
 
 							if (cnt > 1) {
@@ -165,24 +158,24 @@ sap.ui.define([
 						}
 					}
 
-					if (contacts.length > 0) {
-						for (var i = 0; i < contacts.length; i++) {
-							var cnt1 = i + 1;
-							currentContext.getView().byId("txtMobileNo" + cnt1).setValue(contacts[i].mobileno);
-							currentContext.getView().byId("txtFAXNo" + cnt1).setValue(contacts[i].faxno);
+					// if (contacts.length > 0) {
+					// 	for (var i = 0; i < contacts.length; i++) {
+					// 		var cnt1 = i + 1;
+					// 		currentContext.getView().byId("txtMobileNo" + cnt1).setValue(contacts[i].mobileno);
+					// 		currentContext.getView().byId("txtFAXNo" + cnt1).setValue(contacts[i].faxno);
 
-							if (cnt1 > 1) {
-								currentContext.getView().byId("containerMobile" + cnt1).setVisible(true);
-								currentContext.getView().byId("containerPincode" + cnt1).setVisible(true);
-							}
-						}
-					}
+					// 		if (cnt1 > 1) {
+					// 			currentContext.getView().byId("containerMobile" + cnt1).setVisible(true);
+					// 			currentContext.getView().byId("containerPincode" + cnt1).setVisible(true);
+					// 		}
+					// 	}
+					// }
 
-					if (roles.includes("31")) {
-						currentContext.getView().byId("textTds").setVisible(true);
-					} else {
-						currentContext.getView().byId("textTds").setVisible(false);
-					}
+					// if (roles.includes("31")) {
+					// 	currentContext.getView().byId("textTds").setVisible(true);
+					// } else {
+					// 	currentContext.getView().byId("textTds").setVisible(false);
+					// }
 
 
 				});

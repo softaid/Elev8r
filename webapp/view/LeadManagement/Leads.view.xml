@@ -95,8 +95,8 @@
                                         <Text text="{LeadsMasterModel>leadname}" />
                                         <Text text="{LeadsMasterModel>mobileno}"/>
                                         <Text text="{LeadsMasterModel>email}"/>
-                                        <Text text="{LeadsMasterModel>sourceid}"/>
-                                        <Text text="{LeadsMasterModel>pipelineid}"/> 
+                                        <Text text="{LeadsMasterModel>sourcename}"/>
+                                        <Text text="{LeadsMasterModel>pipelinename}"/> 
                                         <!-- <Text text="{LeadsMasterModel>supplierledgername}"/>       
                                         <Text text="{LeadsMasterModel>customerledgername}"/>        -->
                                     </cells>

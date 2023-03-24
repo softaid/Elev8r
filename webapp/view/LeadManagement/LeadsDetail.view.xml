@@ -15,7 +15,7 @@
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title text="{i18n>partyDetailPageHeader}"/>
+					<Title text="Leads Detail"/>
 				</f:heading>
 				<f:actions>
 					<ToolbarSpacer/>
@@ -76,7 +76,7 @@
 									</MultiComboBox>
                                 </form:fields>
                             </form:FormElement> -->
-                            <form:FormElement label="{i18n>partyDetailPartyNameLabel}">
+                            <form:FormElement label="Lead Name">
                                 <form:fields>
                                     <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
                                 </form:fields>
