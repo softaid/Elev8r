@@ -231,7 +231,7 @@
 					"name": "companySettings",
 					"target": [
 						"detailSettings",
-						"companySettings"
+						"detailSettings"
 					]
 				},
 				{
@@ -306,6 +306,12 @@
 				"leadmaster": {
 					"viewId": "leadmaster",
 					"viewName": "Masters/LeadMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leads": {
+					"viewId": "leads",
+					"viewName": "LeadManagement/Leads",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

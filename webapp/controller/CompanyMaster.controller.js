@@ -16,7 +16,7 @@ sap.ui.define([
 	'sap/ui/core/CustomData',
 	'sap/m/MessageToast',
 	'sap/ui/Device',
-	'sap/ui/elev8rerp/componentcontainer/control/CustomNavigationListItem',
+	'sap/ui/elev8rerp/componentcontainer/control/XNavigationListItem',
 	'sap/ui/model/Filter',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
@@ -25,12 +25,12 @@ sap.ui.define([
 	'jquery.sap.storage',
 ], function (BaseController, jQuery, Fragment, Controller, JSONModel, ResponsivePopover,
 	MessagePopover, ActionSheet, Button, Link, Bar, VerticalLayout, NotificationListItem,
-	MessagePopoverItem, CustomData, MessageToast, Device, CustomNavigationListItem, Filter, commonFunction, commonService, manageruserService) {
+	MessagePopoverItem, CustomData, MessageToast, Device, XNavigationListItem, Filter, commonFunction, commonService, manageruserService) {
 
 	"use strict";
 	var _navigationKeys = ["home", "dailyTransaction", "settings", "breederlocation"];
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.CompanyMaster", {
+	return BaseController.extend("sap.ui.poultryerp.componentcontainer.controller.CompanyMaster", {
 
 		_bExpanded: true,
 
@@ -348,7 +348,7 @@ sap.ui.define([
 					for (var i = 0; i < navigation.length; i++) {
 						var itemI = navigation[i];
 
-						var oNavI = new CustomNavigationListItem("", {
+						var oNavI = new XNavigationListItem("", {
 							text: itemI["title"],
 							icon: itemI["icon"],
 							key: itemI["key"],
@@ -358,7 +358,7 @@ sap.ui.define([
 						for (var j = 0; j < itemI["items"].length; j++) {
 							var itemJ = itemI["items"][j];
 
-							var oNavJ = new CustomNavigationListItem("", {
+							var oNavJ = new XNavigationListItem("", {
 								text: itemJ["title"],
 								icon: itemJ["icon"],
 								key: itemJ["key"],
@@ -368,7 +368,7 @@ sap.ui.define([
 							for (var k = 0; k < itemJ["items"].length; k++) {
 								var itemK = itemJ["items"][k];
 
-								var oNavK = new CustomNavigationListItem("", {
+								var oNavK = new XNavigationListItem("", {
 									text: itemK["title"],
 									icon: itemK["icon"],
 									key: itemK["key"],
@@ -377,7 +377,7 @@ sap.ui.define([
 
 								for (var l = 0; l < itemK["items"].length; l++) {
 									var itemL = itemK["items"][l];
-									var oNavL = new CustomNavigationListItem("", {
+									var oNavL = new XNavigationListItem("", {
 										text: itemL["title"],
 										icon: itemL["icon"],
 										key: itemL["key"],

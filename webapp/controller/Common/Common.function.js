@@ -1,10 +1,11 @@
 sap.ui.define([
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
+    'sap/ui/elev8rerp/componentcontainer/services/Masters.service',
     'sap/m/MessageBox',
     'sap/m/MessageToast',
     "sap/ui/core/format/NumberFormat",
     'sap/ui/model/json/JSONModel'
-], function (commonService, MessageBox, MessageToast, oNumberFormat, JSONModel) {
+], function (commonService,masterService, MessageBox, MessageToast, oNumberFormat, JSONModel) {
     "use strict";
 
     return {
@@ -409,7 +410,6 @@ sap.ui.define([
 
         // get module wise warehouses
         getModuleWiseWarehouses: function (moduleId, currentContext) {
-            debugger;
             commonService.getModuleWiseWarehouses({ moduleid: moduleId }, function (data) {
                 var oLocationModel = new sap.ui.model.json.JSONModel();
                 oLocationModel.setData({ modelData: data[0] });
@@ -588,6 +588,18 @@ sap.ui.define([
                 var selectModel = new sap.ui.model.json.JSONModel();
                 selectModel.setData({ modelData: data[0] });
                 currentContext.getView().setModel(selectModel, modelName);
+            });
+        },
+
+
+         // get reference types
+         getReferenceByType: function (typeCode,modelName, currentContext) {
+            masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
+                if(data.length && data[0].length){
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(selectModel, modelName);
+                }
             });
         },
 
