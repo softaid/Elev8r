@@ -16,19 +16,8 @@
 					       <Title text="Lead Masters"/>
 				        </f:heading>
                         <f:actions>
-                            <Button icon="sap-icon://add" type="Transparent" press="onAddIconPress"/>
-							<MenuButton icon="sap-icon://download">
-								<menu>
-									<Menu itemSelected="onMenuAction" >
-										<items>
-											<MenuItem id="existingCOA" text="Existing COA" icon="sap-icon://download" press="loadAllCOAData" />
-											<MenuItem text="COA Template" icon="sap-icon://download" press="onDownloadTemplate" />
-											<MenuItem text="Template for Ledger Opening Balance" icon="sap-icon://download" press="onLedgerTemplate" />
-										</items>
-									</Menu>
-								</menu>
-							</MenuButton>
                             <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddIconPress" align="right"/>
                         </f:actions>
 			        </f:DynamicPageTitle>
 		        </f:title>
@@ -36,7 +25,7 @@
 	                <VBox fitContainer="true">  
                         <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="true" class="sapUiResponsiveContentPadding" items ="{masterModel>/modelData}" select="onTabSelect">
                             <items>
-                                <IconTabFilter text="{masterModel>typename}">
+                                <IconTabFilter text="{masterModel>typename}" key="{masterModel>typecode}">
                                     <VBox fitContainer="true">
                                         <Table id="activityTbl"
                                             inset="false" 

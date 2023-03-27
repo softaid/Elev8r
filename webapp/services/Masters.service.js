@@ -53,7 +53,6 @@ sap.ui.define([
             deleteReference : function(params, callback){
                 commonService.runJQueryX("DELETE", "leadmaster/" + params.id, null, callback, null);
             },
-
             
         };
     }

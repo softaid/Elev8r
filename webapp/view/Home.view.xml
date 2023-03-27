@@ -7,71 +7,46 @@ xmlns:mvc="sap.ui.core.mvc"
 xmlns:core="sap.ui.core"
 xmlns:tnt="sap.tnt"
 xmlns:l="sap.ui.layout">
-<f:FlexibleColumnLayout  id="fclCommonDashboard" backgroundDesign="Solid">
-	<f:beginColumnPages>
-	  <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
-		  <f:title>
-			<f:DynamicPageTitle>
-				<f:heading>
-					 <Title id="DashboardTitle" text="Dashboard" />
-				 </f:heading>
+	<f:FlexibleColumnLayout  id="fclCommonDashboard" backgroundDesign="Solid">
+		<f:beginColumnPages>
+			<f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+				<f:title>
+					<f:DynamicPageTitle>
+						<f:heading>
+							<Title id="DashboardTitle" text="Dashboard" />
+						</f:heading>
 
-				<f:actions>
-					<ToolbarSpacer/>
-				</f:actions>
+						<f:actions>
+							<ToolbarSpacer/>
+						</f:actions>
 
-			</f:DynamicPageTitle>
-		</f:title>
-			<f:content>
-			<Page class="pgDashboard" showHeader="false" id="contentDashboard">
-<content>
-<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Over Due Invoices"
-			 press="on_Over_Due_Detail">
-
-<TileContent unit="₹" footer="{dashBoard_oModel>/sales_inv_overdue_amount}">
-		<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/sales_inv_overdue_count}" valueColor="Error" withMargin="false" />
-	</TileContent>
-</GenericTile>
-
-<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Payble Overdue" press="get_Purchase_invoice">
-	<TileContent unit="₹" footer="{dashBoard_oModel>/PI_overdue_amount}">
-		<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/PI_overdue_count}" valueColor="Good" withMargin="false" />
-	</TileContent>
-</GenericTile>
-
-
-<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Revenue" press="get_revenue_press">
-	<TileContent unit="₹" footer="{dashBoard_oModel>/revenu_amount}">
-	</TileContent>
-</GenericTile>
-<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Expenses" press="get_expenses_press">
-	<TileContent unit="₹" footer="{dashBoard_oModel>/expenses_amount}">
-	</TileContent>
-</GenericTile>
-
-<Panel expandable="false" expanded="true"  headerText="Profit and loss" width="auto">
-	<core:HTML  content="&lt;div id='liechart_3d_1' style='height: 200px;width:1000px'&gt;&lt;/div&gt;">
-	</core:HTML>
-	<layoutData>
-		<l:GridData span="L6" />
-	</layoutData>
-</Panel>
-
-<VBox>
-<IconTabBar selectedKey="{view>/selectedTabKey}" expanded="true" class="sapUiResponsiveContentPadding" items ="{moduleModel>/modelData}" select="onTabSelect">
-	                    <items>
-							<IconTabFilter id="catTab" text="{moduleModel>entityname}" key="{moduleModel>entityname}">
-						 
-							
-		                   </IconTabFilter>
-	                    </items>
-						
-			</IconTabBar>	
-		</VBox> 
-</content>		
-</Page>
-			</f:content>
-		</f:DynamicPage>
-	</f:beginColumnPages>
-</f:FlexibleColumnLayout>
+					</f:DynamicPageTitle>
+				</f:title>
+				<f:content>
+					<Page class="pgDashboard" showHeader="false" id="contentDashboard">
+						<content>
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="on_Over_Due_Detail">
+								<TileContent footer="30">
+									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/sales_inv_overdue_count}" valueColor="Error" withMargin="false" />
+								</TileContent>
+							</GenericTile>
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Live Projects" press="get_Purchase_invoice">
+								<TileContent footer="10">
+									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/PI_overdue_count}" valueColor="Good" withMargin="false" />
+								</TileContent>
+							</GenericTile>
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Activities" press="get_revenue_press">
+								<TileContent footer="20">
+								</TileContent>
+							</GenericTile>
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Overdue Activities" press="get_expenses_press">
+								<TileContent unit="" footer="5">
+								</TileContent>
+							</GenericTile>
+						</content>		
+					</Page>
+				</f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
 </mvc:View>
