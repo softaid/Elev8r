@@ -157,6 +157,16 @@
 					"target": "inventory"
 				},
 				{
+					"pattern": "billofmateriallist",
+					"name": "billofmateriallist",
+					"target": "billofmateriallist"
+				},
+				{
+					"pattern": "billofmaterial",
+					"name": "billofmaterial",
+					"target": "billofmaterial"
+				},
+				{
 					"pattern": "users",
 					"name": "users",
 					"target": "users"
@@ -319,6 +329,24 @@
 					"viewId" : "projectmaster",
 					"viewName" : "Masters/ProjectMster",
 					"controlId" : "mainContents",
+					"parent": "master"
+				},
+				"inventory": {
+					"viewId": "inventory",
+					"viewName": "Masters/ItemMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"billofmateriallist" : {
+					"viewId": "billofmateriallist",
+					"viewName": "Masters/BillOfMaterialList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"billofmaterial" : {
+					"viewId": "billofmaterial",
+					"viewName": "Masters/BillOfMaterial",
+					"controlId": "mainContents",
 					"parent": "master"
 				},
 				"manageapplication": {

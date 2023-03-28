@@ -1,6 +1,6 @@
 sap.ui.define([
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
-    'sap/ui/elev8rerp/componentcontainer/services/Masters.service',
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service',
     'sap/m/MessageBox',
     'sap/m/MessageToast',
     "sap/ui/core/format/NumberFormat",

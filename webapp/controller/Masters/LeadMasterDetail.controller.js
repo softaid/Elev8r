@@ -6,7 +6,7 @@ sap.ui.define([
     'sap/ui/model/Sorter',
     'sap/m/MessageBox',
     'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function', 
-    'sap/ui/elev8rerp/componentcontainer/services/Masters.service', 
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service', 
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
     'sap/m/MessageToast',
 

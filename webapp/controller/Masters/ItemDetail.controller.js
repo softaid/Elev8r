@@ -3,18 +3,18 @@ sap.ui.define([
     'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
     'sap/m/MessageToast',
     'sap/m/MessageBox',
-    'sap/ui/elev8rerp/componentcontainer/services/Inventory/Item.service',
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/Item.service',
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
     'sap/ui/elev8rerp/componentcontainer/utility/Validator',
     'sap/ui/core/ValueState',
     'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
-    'sap/ui/elev8rerp/componentcontainer/services/Inventory/ItemGroup.service',
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/ItemGroup.service',
 
 
 ], function (JSONModel, BaseController, MessageToast, MessageBox, itemService, commonService, Validator, ValueState, commonFunction) {
     "use strict";
 
-    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Inventory.ItemDetail", {
+    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemDetail", {
         onInit: function () {
             var currentContext = this;
             commonService.getAllItemgroup(function (data) {

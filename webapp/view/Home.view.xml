@@ -26,21 +26,23 @@ xmlns:l="sap.ui.layout">
 					<Page class="pgDashboard" showHeader="false" id="contentDashboard">
 						<content>
 							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="on_Over_Due_Detail">
-								<TileContent footer="30">
-									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/sales_inv_overdue_count}" valueColor="Error" withMargin="false" />
+								<TileContent footer="">
+									<NumericContent truncateValueTo="20" value="30" valueColor="Good" withMargin="false" />
 								</TileContent>
 							</GenericTile>
 							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Live Projects" press="get_Purchase_invoice">
-								<TileContent footer="10">
-									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/PI_overdue_count}" valueColor="Good" withMargin="false" />
+								<TileContent footer="">
+									<NumericContent truncateValueTo="20" value="10" valueColor="Good" withMargin="false" />
 								</TileContent>
 							</GenericTile>
 							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Activities" press="get_revenue_press">
-								<TileContent footer="20">
+								<TileContent footer="">
+									<NumericContent truncateValueTo="20" value="20" valueColor="Good" withMargin="false" />
 								</TileContent>
 							</GenericTile>
 							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Overdue Activities" press="get_expenses_press">
-								<TileContent unit="" footer="5">
+								<TileContent unit="" footer="">
+									<NumericContent truncateValueTo="20" value="5" valueColor="Error" withMargin="false" />
 								</TileContent>
 							</GenericTile>
 						</content>		

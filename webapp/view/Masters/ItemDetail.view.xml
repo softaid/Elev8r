@@ -1,6 +1,6 @@
 <mvc:View
 		xmlns:c="sap.ui.core"
-		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Inventory.ItemDetail"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemDetail"
 		xmlns:mvc="sap.ui.core.mvc"
 		xmlns:u="sap.ui.unified"
 		xmlns="sap.m"

@@ -4,28 +4,29 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	'sap/ui/model/Sorter',
-	'sap/ui/elev8rerp/componentcontainer/services/Inventory/ItemHSN.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/ItemGroup.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx'
-
-], function (JSONModel, BaseController, Filter, FilterOperator, Sorter, itemhsnService,xlsx) {
+], function (JSONModel, BaseController, Filter, FilterOperator, Sorter, itemgroupService,xlsx) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Inventory.ItemHSN", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemGroup", {
 
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("loaddata", "loadData", this.loadData, this);     			
+			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			this.loadData();
 			this.oFlexibleColumnLayout = this.byId("fclItemMaster");
 			this.fnShortCut();
 
 		},
+
 		onAfterRendering: function () {
 			jQuery.sap.delayedCall(1000, this, function () {
 				this.getView().byId("search").focus();
 			});
 
 		},
+
 		fnShortCut: function () {
 			var currentContext = this;
 			$(document).keydown(function (evt) {
@@ -39,15 +40,15 @@ sap.ui.define([
 		},
 
 		onListItemPress: function (oEvent) {
-			var viewModel = oEvent.getSource().getBindingContext("itemHSNModel");
+			var viewModel = oEvent.getSource().getBindingContext("itemGroupModel");
 			var model = { "id": viewModel.getProperty("id") }
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("itemmaster", "setDetailPage", { viewName: "ItemHSNDetail", viewModel: model });
+			this.bus.publish("itemmaster", "setDetailPage", { viewName: "ItemGroupDetail", viewModel: model });
 		},
 
-		onAddNew: function (oEvent) {
+		onAddNew: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("itemmaster", "setDetailPage", { viewName: "ItemHSNDetail" });
+			this.bus.publish("itemmaster", "setDetailPage", { viewName: "ItemGroupDetail" });
 		},
 
 		onSearch: function (oEvent) {
@@ -64,13 +65,13 @@ sap.ui.define([
 				oTableSearchState = [filters];
 			}
 
-			this.getView().byId("tblItemHSN").getBinding("items").filter(oTableSearchState, "Application");
+			this.getView().byId("tblItemGroup").getBinding("items").filter(oTableSearchState, "Application");
 		},
 
 		onSort: function (oEvent) {
 			this._bDescendingSort = !this._bDescendingSort;
 			var oView = this.getView(),
-				oTable = oView.byId("tblItemHSN"),
+				oTable = oView.byId("tblItemGroup"),
 				oBinding = oTable.getBinding("items"),
 				oSorter = new Sorter("groupname", this._bDescendingSort);
 			oBinding.sort(oSorter);
@@ -78,16 +79,17 @@ sap.ui.define([
 
 		loadData: function () {
 			var currentContext = this;
-			itemhsnService.getAllItemHSN(function (data) {
+			itemgroupService.getAllItemGroup(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
-				currentContext.getView().setModel(oModel, "itemHSNModel");
+				currentContext.getView().setModel(oModel, "itemGroupModel");
 			});
 		},
-		onHsnMasterExport:function(){
-			var ReportTitle = "HSN Master List";
+		// export a item group
+		onItemGroupExport : function(){
+			var ReportTitle = "Item Group List";
 			// get model for item group list
-			var JSONData = this.getView().getModel("itemHSNModel").oData.modelData;
+			var JSONData = this.getView().getModel("itemGroupModel").oData.modelData;
 			var aData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
 			if (aData.length) {
 				var aFinalXlsxData,
@@ -98,7 +100,7 @@ sap.ui.define([
 				aFinalXlsxData = [];
 
 				// Below array for  header data
-				aXlsxHeaderData.push("Id", "Chapter","Heading","Sub Heading","Description","Chapter ID")
+				aXlsxHeaderData.push("Item Id", "Item Group")
 
 				// Adding column header data in final XLSX data
 				aFinalXlsxData.push(aXlsxHeaderData);
@@ -107,7 +109,7 @@ sap.ui.define([
 				for (var i = 0; i < aData.length; i++) {
 					// Array variable to store content data in XLSX file
 					var aXlsxContentData = [];
-					aXlsxContentData.push(aData[i].id, aData[i].chapter,aData[i].heading,aData[i].subheading,aData[i].description,aData[i].chapterid);
+					aXlsxContentData.push(aData[i].id, aData[i].groupname);
 
 					// Adding content data in final XLSX data
 					aFinalXlsxData.push(aXlsxContentData);

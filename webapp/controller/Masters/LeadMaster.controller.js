@@ -2,7 +2,7 @@
 sap.ui.define([
     "sap/ui/model/json/JSONModel",
     'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
-    'sap/ui/elev8rerp/componentcontainer/services/Masters.service',
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service',
     'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
     'sap/m/MessageToast',
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
