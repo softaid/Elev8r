@@ -17,7 +17,7 @@
 			"items": [
 				{
 					"title": "Lead Master",
-					"icon": "sap-icon://database",
+					"icon": "sap-icon://account",
 					"expanded": false,
 					"key": "leadmaster",
 					"eid": [3],

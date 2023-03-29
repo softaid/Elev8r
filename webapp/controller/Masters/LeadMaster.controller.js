@@ -60,6 +60,7 @@ sap.ui.define([
             var viewModel = oEvent.getSource().getBindingContext("masterDetailModel");
             var model = {
                 "id": viewModel.getProperty("id"),
+                "typecode":viewModel.getProperty("typecode"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
             }
@@ -122,6 +123,9 @@ sap.ui.define([
             masterService.getReferenceByTypeCode({ typecode: oData.typecode }, function (data) {
                 var oModel = new sap.ui.model.json.JSONModel();
                 if(data.length && data[0].length){
+                    for(let i = 0; i < data[0].length;  i++){
+                        data[0][i].active = data[0][0].active == 1 ? true : false;
+                    }
                     oModel.setData({ modelData: data[0] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
                 }else{
