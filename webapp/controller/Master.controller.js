@@ -112,8 +112,8 @@ sap.ui.define([
 									localStorage.removeItem('currentSession');
 
 									// Sent to login screen prior to session destroy
-									oRouter.getTargets().display("", {});
-									oRouter.navTo("", true);
+									oRouter.getTargets().display("login", {});
+									oRouter.navTo("login", true);
 								}
 							}
 						})
@@ -595,10 +595,9 @@ sap.ui.define([
 				MessageToast.show(oEvent.getSource().getText() + " was pressed");
 			};
 
-			let oRouter = sap.ui.core.UIComponent.getRouterFor(oThis);
+			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
 			let fnLogoutPress = function (oEvent) {
-
 				MessageToast.show("Please Wait..", { duration: 1500, my: "center top", at: "center top" });
 				commonService.userLogout(function (data) {
 					if (data[0][0].accesstoken == null) {
@@ -606,11 +605,12 @@ sap.ui.define([
 						MYSAP.SessionManager.clearSession('currentSession');
 						localStorage.removeItem('currentSession');
 
-						// Sent to login screen prior to session destroy
-						oRouter.getTargets().display("", {});
-						oRouter.navTo("", true);
+						// Sent to login screen prior to session destroy 
+						//login page name property passesd instead of blank value for logout issue now navigation done successfully
+						oRouter.getTargets().display("login", {});
+						oRouter.navTo("login", true);
 					}
-				})
+				})	
 
 			};
 
