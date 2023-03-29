@@ -7,8 +7,8 @@
 	},
 
 	"webapi" : {
-		"url" : "http://localhost:3200/",
-		"docurl" : "http://localhost:3200/documentImage/"
+		"url" : "http://staging.poultryos.com:7200/",
+		"docurl" : "http://staging.poultryos.com:7200/documentImage/"
 	}
 }
 

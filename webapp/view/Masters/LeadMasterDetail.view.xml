@@ -61,6 +61,22 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
+                                <form:FormElement label="{i18n>leadPipeline}" id="pipelineId">
+                                    <form:fields>
+                                        <Select id="pipeline"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editMasterModel>/parentid}" 
+                                            forceSelection="false"
+                                            width="500px"
+                                            items="{
+                                                path: 'referenceModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{referenceModel>id}" text="{referenceModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadDescription}">
                                     <form:fields>
                                         <Input id="description" value="{editMasterModel>/description}"/>

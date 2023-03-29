@@ -25,12 +25,28 @@ sap.ui.define([
         onBeforeRendering: function () {
             var currentContext = this;
             
-			this.model = this.getView().getModel("viewModel");
+			currentContext.model = currentContext.getView().getModel("viewModel");
 			var oModel = new JSONModel();
+
+            if(currentContext.model.typecode == "Stage"){
+                currentContext.getView().byId("pipelineId").setVisible(true);
+                masterService.getReferenceByTypeCode({ typecode: "Pipeline" }, function (data) {
+                    var oModel = new sap.ui.model.json.JSONModel();
+                    if(data.length && data[0].length){
+                        oModel.setData({ modelData: data[0] });
+                        currentContext.getView().setModel(oModel, "referenceModel");
+                    }else{
+                        oModel.setData({ modelData: [] });
+                        currentContext.getView().setModel(oModel, "referenceModel");
+                    }
+                });
+            }else{
+                currentContext.getView().byId("pipelineId").setVisible(false);
+            }
             
-            if (this.model.id != null) {
+            if (currentContext.model.id != null) {
                 currentContext.getView().byId("btnSave").setText("Update");
-				masterService.getReference({id : this.model.id}, function(data){
+				masterService.getReference({id : currentContext.model.id}, function(data){
                     if(data.length && data[0].length){
                         data[0][0].active = data[0][0].active == 1 ? true : false;
                         oModel.setData(data[0][0]);
@@ -75,14 +91,18 @@ sap.ui.define([
 			if(isValid){
                 var model = this.getView().getModel("editMasterModel").oData;
 
-                console.log("model : ",model);
+                
                 model["companyid"] = commonService.session("companyId");
                 model["userid"] = commonService.session("userId");
 
-                var COASaveSuccess = this.resourceBundle().getText("COASaveSuccess");
-                var COAUpdateSuccess = this.resourceBundle().getText("COAUpdateSuccess");
+                var saveSuccess = this.resourceBundle().getText("leadSaveSuccess");
+                var updateSuccess = this.resourceBundle().getText("leadUpdateSuccess");
 
-                console.log(model);
+                if(this.model.typecode == "Stage"){
+                    model["parentid"] = this.getView().byId("pipeline").getSelectedKey();
+                    model["parenttypecode"] = "Pipeline";
+                }
+
                 var currentContext = this;
 
                 masterService.saveReference(model, function (data) {
@@ -90,9 +110,9 @@ sap.ui.define([
                     if (data.id > 0) {
                         currentContext.onCancel();
                         if(currentContext.flag == 1)
-                        MessageToast.show("Data saved successfully.");
+                        MessageToast.show(saveSuccess);
                         else
-                        MessageToast.show("Data updated successfully.");
+                        MessageToast.show(updateSuccess);
                         
                         currentContext.bus = sap.ui.getCore().getEventBus();
                         currentContext.bus.publish("loaddata", "loadData",{typecode : model["typecode"]});
@@ -104,8 +124,8 @@ sap.ui.define([
         onDelete : function(){
             var currentContext = this;
 
-			var confirmMsg = currentContext.resourceBundle().getText("DeleteConfirm");
-			var deleteSucc = currentContext.resourceBundle().getText("deleteSucc");
+			var confirmMsg = currentContext.resourceBundle().getText("deleteMsg");
+			var deleteSucc = currentContext.resourceBundle().getText("leadDeleteSucc");
 			var model = this.getView().getModel("editMasterModel").oData;
 			console.log(currentContext.model);
 			if (currentContext.model.id != undefined) {
@@ -117,7 +137,7 @@ sap.ui.define([
 								masterService.deleteReference({id : currentContext.model.id}, function (data) {
 									if (data) {
 										currentContext.onCancel();
-										MessageToast.show("Deleted Successfully.");
+										MessageToast.show(deleteSucc);
 										currentContext.bus = sap.ui.getCore().getEventBus();
 										currentContext.bus.publish("loaddata", "loadData",{typecode : model["typecode"]});
 									}
