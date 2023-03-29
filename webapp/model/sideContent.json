@@ -40,6 +40,14 @@
 					"items": []
 				},
 				{
+					"title": "Bill Of Material",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "billofmateriallist",
+					"eid": [20],
+					"items": []
+				},
+				{
 					"title": "Users",
 					"icon": "sap-icon://area-chart",
 					"expanded": true,

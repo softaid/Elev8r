@@ -14,7 +14,7 @@
 
                     <FlexBox class="loginForm" direction="Column">
                         <items>
-                            <Text text="Elevator Administration" class="headerText"></Text>
+                            <Text text="" class="headerText"></Text>
                         </items>
                     </FlexBox>
 
@@ -31,8 +31,6 @@
                                     <FlexItemData alignSelf="End" />
                                 </layoutData>
                             </Link>
-                            <Text class="noteText" text="PLEASE NOTE: If you have forgotten your company code, please click above link, you will get your credential on registered mobile..!"></Text>
-                            <!-- <Text class="noteText" text="PLEASE NOTE: Enter authorized company code given by administrator. Please contact administrator for further queries!"></Text> -->
                         </items>
                     </FlexBox>
 
@@ -49,7 +47,6 @@
                                     <FlexItemData alignSelf="End" />
                                 </layoutData>
                             </Link>
-                            <Text class="noteText" text="PLEASE NOTE: If you have forgotten your password, please click above link, you will get your credential on registered mobile..!"></Text>
                         </items>
                     </FlexBox>
 
@@ -62,12 +59,6 @@
                             <Input id="ufmobile" placeholder="Enter Mobile Number"></Input>
                             <Input id="ufcompanycode" placeholder="Enter Company Code"></Input>
                             <Button width="100%" text="Submit" type="Emphasized" press="onForgetPsw" class="loginButton"></Button>
-                            <!-- <Link text="Go to Login" press="onGotoLoginLnk">
-                                <layoutData>
-                                    <FlexItemData alignSelf="End" />
-                                </layoutData>
-                            </Link>
-                            <Text class="noteText" text="PLEASE NOTE: You will get your credential on registered mobile via OTP..!"></Text> -->
                         </items>
                     </FlexBox>
 

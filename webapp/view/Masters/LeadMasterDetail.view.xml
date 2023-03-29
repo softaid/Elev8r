@@ -61,12 +61,12 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
-                                <form:FormElement label="Description">
+                                <form:FormElement label="{i18n>leadDescription}">
                                     <form:fields>
                                         <Input id="description" value="{editMasterModel>/description}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Active">
+                                <form:FormElement label="{i18n>Active}">
                                     <form:fields>
                                         <Switch  state="{editMasterModel>/active}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
                                             <layoutData>

@@ -6,7 +6,7 @@ sap.ui.define([
 
     "use strict";
 
-    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Inventory.ItemMaster", {
+    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemMaster", {
 
         onInit: function () {
             this.bus = sap.ui.getCore().getEventBus();
@@ -61,7 +61,7 @@ sap.ui.define([
         setDetailPage: function (channel, event, data) {
 
             this.detailView = sap.ui.view({
-                viewName: "sap.ui.elev8rerp.componentcontainer.view.Inventory." + data.viewName,
+                viewName: "sap.ui.elev8rerp.componentcontainer.view.Masters." + data.viewName,
                 type: "XML"
             });
 
@@ -81,14 +81,14 @@ sap.ui.define([
             if (!isViewRendered) {
                 if (key === "itemGroup") {
                     var view = new sap.ui.view({
-                        viewName: "sap.ui.elev8rerp.componentcontainer.view.Inventory.ItemGroup",
+                        viewName: "sap.ui.elev8rerp.componentcontainer.view.Masters.ItemGroup",
                         type: "XML",
                     });
                     item.addContent(view);
                 }
                 else if (key === "item") {
                     var view = new sap.ui.view({
-                        viewName: "sap.ui.elev8rerp.componentcontainer.view.Inventory.Item",
+                        viewName: "sap.ui.elev8rerp.componentcontainer.view.Masters.Item",
                         type: "XML",
                     });
                     item.addContent(view);
@@ -96,7 +96,7 @@ sap.ui.define([
 
                 else if (key === "hsn") {
                     var view = new sap.ui.view({
-                        viewName: "sap.ui.elev8rerp.componentcontainer.view.Inventory.ItemHSN",
+                        viewName: "sap.ui.elev8rerp.componentcontainer.view.Masters.ItemHSN",
                         type: "XML",
                     });
                     item.addContent(view);

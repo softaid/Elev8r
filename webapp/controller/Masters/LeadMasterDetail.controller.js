@@ -6,7 +6,7 @@ sap.ui.define([
     'sap/ui/model/Sorter',
     'sap/m/MessageBox',
     'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function', 
-    'sap/ui/elev8rerp/componentcontainer/services/Masters.service', 
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service', 
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
     'sap/m/MessageToast',
 
@@ -90,9 +90,9 @@ sap.ui.define([
                     if (data.id > 0) {
                         currentContext.onCancel();
                         if(currentContext.flag == 1)
-                        MessageToast.show(COASaveSuccess);
+                        MessageToast.show("Data saved successfully.");
                         else
-                        MessageToast.show(COAUpdateSuccess);
+                        MessageToast.show("Data updated successfully.");
                         
                         currentContext.bus = sap.ui.getCore().getEventBus();
                         currentContext.bus.publish("loaddata", "loadData",{typecode : model["typecode"]});
@@ -117,7 +117,7 @@ sap.ui.define([
 								masterService.deleteReference({id : currentContext.model.id}, function (data) {
 									if (data) {
 										currentContext.onCancel();
-										MessageToast.show(deleteSucc);
+										MessageToast.show("Deleted Successfully.");
 										currentContext.bus = sap.ui.getCore().getEventBus();
 										currentContext.bus.publish("loaddata", "loadData",{typecode : model["typecode"]});
 									}

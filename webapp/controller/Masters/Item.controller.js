@@ -5,13 +5,13 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/formatter/fragment.formatter',
-	'sap/ui/elev8rerp/componentcontainer/services/Inventory/Item.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/Item.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/m/MessageToast'
 ], function (JSONModel, BaseController, Filter, FilterOperator, Sorter, formatter, itemService, commonService, MessageToast) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Inventory.Item", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.Item", {
 
 		formatter: formatter,
 

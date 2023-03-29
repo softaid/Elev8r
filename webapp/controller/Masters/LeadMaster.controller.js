@@ -2,7 +2,7 @@
 sap.ui.define([
     "sap/ui/model/json/JSONModel",
     'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
-    'sap/ui/elev8rerp/componentcontainer/services/Masters.service',
+    'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service',
     'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
     'sap/m/MessageToast',
     'sap/ui/elev8rerp/componentcontainer/services/Common.service',
@@ -60,8 +60,8 @@ sap.ui.define([
             var viewModel = oEvent.getSource().getBindingContext("masterDetailModel");
             var model = {
                 "id": viewModel.getProperty("id"),
-                "typecode": viewModel.getProperty("typecode"),
-                // "categoryid" : 1
+                "description": viewModel.getProperty("description"),
+                "active": viewModel.getProperty("active"),
             }
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "LeadMasterDetail", viewModel: model });
@@ -106,7 +106,6 @@ sap.ui.define([
             pModel.oData.typename = text;
 
             pModel.refresh();
-            console.log(pModel);
 
             this.loadData("", "", pModel.oData);
 
@@ -118,13 +117,15 @@ sap.ui.define([
         },
 
         loadData: function (sChannel, sEvent, oData) {
-            console.log(oData);
             var currentContext = this;
 
             masterService.getReferenceByTypeCode({ typecode: oData.typecode }, function (data) {
+                var oModel = new sap.ui.model.json.JSONModel();
                 if(data.length && data[0].length){
-                    var oModel = new sap.ui.model.json.JSONModel();
                     oModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(oModel, "masterDetailModel");
+                }else{
+                    oModel.setData({ modelData: [] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
                 }
             });

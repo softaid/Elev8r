@@ -3,14 +3,14 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/m/MessageToast',
 	'sap/m/MessageBox',
-	'sap/ui/elev8rerp/componentcontainer/services/Inventory/ItemGroup.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/ItemGroup.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 
 ], function (JSONModel, BaseController, MessageToast, MessageBox, itemgroupService, commonService, commonFunction) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Inventory.ItemGroupDetail", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemGroupDetail", {
 		onInit: function () {
 			this.fnShortCut();
 		},
@@ -177,7 +177,7 @@ sap.ui.define([
 		},
 
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---itemmaster--fclItemMaster");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---inventory--fclItemMaster");
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 		}
 	});
