@@ -253,7 +253,7 @@ sap.ui.define([
         },
 
         onCancel: function () {
-            this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---itemmaster--fclItemMaster");
+            this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---inventory--fclItemMaster");
             this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
         },
 
