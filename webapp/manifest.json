@@ -358,7 +358,7 @@
 				},
 				"projectmaster" : {
 					"viewId" : "projectmaster",
-					"viewName" : "Masters/ProjectMster",
+					"viewName" : "Masters/ProjectMaster",
 					"controlId" : "mainContents",
 					"parent": "master"
 				},

@@ -15,7 +15,7 @@
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title text="{i18n>LocationDetailTitle}"/>
+					<Title text="{i18n>ContactDetailTitle}"/>
 				</f:heading>
 				<f:actions>
 					<ToolbarSpacer/>
