@@ -167,6 +167,31 @@
 					"target": "billofmaterial"
 				},
 				{
+					"pattern": "materialrequestandtransfer",
+					"name": "materialrequestandtransfer",
+					"target": "master"
+				},
+				{
+					"pattern": "warehousemaster",
+					"name": "warehousemaster",
+					"target": "master"
+				},
+				{
+					"pattern": "employeemaster",
+					"name": "employeemaster",
+					"target": "master"
+				},
+				{
+					"pattern": "locationmaster",
+					"name": "locationmaster",
+					"target": "master"
+				},
+				{
+					"pattern": "contactmaster",
+					"name": "contactmaster",
+					"target": "master"
+				},
+				{
 					"pattern": "users",
 					"name": "users",
 					"target": "users"
@@ -177,9 +202,9 @@
 					"target": "leads"
 				},
 				{
-					"pattern": "activities",
-					"name": "activities",
-					"target": "activities"
+					"pattern": "leadactivities",
+					"name": "leadactivities",
+					"target": "leadactivities"
 				},
 				{
 					"pattern": "quotations",
@@ -325,6 +350,12 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
+				"leadactivities": {
+					"viewId": "leadactivities",
+					"viewName": "LeadManagement/LeadActivity",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
 				"projectmaster" : {
 					"viewId" : "projectmaster",
 					"viewName" : "Masters/ProjectMster",
@@ -346,6 +377,36 @@
 				"billofmaterial" : {
 					"viewId": "billofmaterial",
 					"viewName": "Masters/BillOfMaterial",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"materialrequestandtransfer": {
+					"viewId": "materialrequestandtransfer",
+					"viewName": "Common/MaterialRequestAndTransferMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"warehousemaster": {
+					"viewId": "warehousemaster",
+					"viewName": "Warehouse/WarehouseMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"employeemaster": {
+					"viewId": "employeemaster",
+					"viewName": "Employee/EmployeeMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"locationmaster": {
+					"viewId": "locationmaster",
+					"viewName": "Masters/LocationMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"contactmaster": {
+					"viewId": "contactmaster",
+					"viewName": "Masters/ContactMaster",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

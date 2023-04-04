@@ -6,15 +6,9 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/Common/MaterialTransfer.service',
 	'sap/ui/elev8rerp/componentcontainer/formatter/fragment.formatter',
-	'sap/ui/elev8rerp/componentcontainer/services/Breeder/BreederBatchTransfer.service',
-	'sap/ui/elev8rerp/componentcontainer/services/Breeder/BreederShed.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
-	'sap/ui/elev8rerp/componentcontainer/services/CommercialLayer/LayerBatchTransfer.service',
-	'sap/ui/elev8rerp/componentcontainer/services/CommercialLayer/LayerShed.service',
-    'sap/ui/elev8rerp/componentcontainer/services/CBF/FarmerEnquiry.service',
-	'sap/ui/elev8rerp/componentcontainer/services/CBF/CbfDailyTransaction.service',
 
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, materialTransferService, formatter, breederBatchTransferService, breederShedService, commonService, layerBatchTrnasferService, layerShedService, farmerEnquiryService, cbfDailyTransactionService) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, materialTransferService, formatter, commonService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialTransfer", {
@@ -27,16 +21,16 @@ sap.ui.define([
 
 			this.bus.subscribe("materialtransfer", "onTabChangeToTransfer", this.onTabChangeToTransfer, this);
 			// bind request source dropdown
-			commonFunction.getReference("MtrReqTransferSrcTrgt", "sourceModel", this);
+			// commonFunction.getReference("MtrReqTransferSrcTrgt", "sourceModel", this);
 
 			// bind request target dropdown
-			commonFunction.getReference("MtrReqTransferSrcTrgt", "targetModel", this);
+			// commonFunction.getReference("MtrReqTransferSrcTrgt", "targetModel", this);
 
 			// bind status dropdown
-			commonFunction.getReference("MtrTransferSts", "statusModel", this);
+			commonFunction.getReference("MtrReqAndTrsfr", "statusModel", this);
 
 			// bind usage type dropdown
-			commonFunction.getReference("MtrTransferUsgTyp", "usageTypeModel", this);
+			// commonFunction.getReference("MtrTransferUsgTyp", "usageTypeModel", this);
 
 			// warehouse help box	
 			// commonFunction.getWarehouseList(this);
@@ -46,9 +40,6 @@ sap.ui.define([
 
 			// load material transfer dialog data
 			this.loadData();
-
-			//Breeder batch help box
-			commonFunction.getAllBreederBatches(this);
 
 			// set empty model to view for parent table 
 			var emptyModel = this.getModelDefault();
@@ -65,7 +56,6 @@ sap.ui.define([
 			itemmodel.setData({ modelData: [] });
 			this.getView().setModel(itemmodel, "itemDetailModel");
 
-			this.getView().byId("LayerToBatch").setVisible(false);
 		},
 
 		getDefaultWarehouse: function () {
@@ -137,70 +127,7 @@ sap.ui.define([
 				var model = new sap.ui.model.json.JSONModel();
 
 				model.setData({ modelData: data[0] });
-				if (input == 502) {
-					currentContext.getView().setModel(model, "setterBatchList");
-					currentContext.getView().byId("setterToBatch").setVisible(true);
-					currentContext.getView().byId("breederToBatch").setVisible(false);
-					currentContext.getView().byId("txtFromShedEle").setVisible(false);
-					currentContext.getView().byId("locationEle").setVisible(false);
-					currentContext.getView().byId("LayerToBatch").setVisible(false);
-					currentContext.getView().byId("CbfToBatch").setVisible(false);
-					
-					currentContext.getView().byId("txtFromFarmer").setVisible(false);
-					currentContext.getView().byId("txtToFarmer").setVisible(false);
-				}
-
-				else if (input == 501) {
-					currentContext.getView().setModel(model, "breederBatchList");
-					currentContext.getView().byId("setterToBatch").setVisible(false);
-					currentContext.getView().byId("breederToBatch").setVisible(true);
-					currentContext.getView().byId("txtFromShedEle").setVisible(true);
-					currentContext.getView().byId("locationEle").setVisible(true);
-					currentContext.getView().byId("LayerToBatch").setVisible(false);
-					currentContext.getView().byId("CbfToBatch").setVisible(false);
-
-					currentContext.getView().byId("txtFromFarmer").setVisible(false);
-					currentContext.getView().byId("txtToFarmer").setVisible(false);
-				}
-				else if (input == 505) {
-					currentContext.getView().setModel(model, "layerBatchList");
-					currentContext.getView().byId("setterToBatch").setVisible(false);
-					currentContext.getView().byId("breederToBatch").setVisible(false);
-					currentContext.getView().byId("LayerToBatch").setVisible(true);
-					currentContext.getView().byId("txtFromShedEle").setVisible(false);
-					currentContext.getView().byId("locationEle").setVisible(false);
-					currentContext.getView().byId("txtlayerFromShedEle").setVisible(true);
-					currentContext.getView().byId("layerlocationEle").setVisible(true);
-					currentContext.getView().byId("CbfToBatch").setVisible(false);
-
-					currentContext.getView().byId("txtFromFarmer").setVisible(false);
-					currentContext.getView().byId("txtToFarmer").setVisible(false);
-				}
-				else if(input == 503){
-					currentContext.getView().setModel(model, "cbfBatchList");
-					currentContext.getView().byId("setterToBatch").setVisible(false);
-					currentContext.getView().byId("breederToBatch").setVisible(false);
-					currentContext.getView().byId("txtFromShedEle").setVisible(false);
-					currentContext.getView().byId("locationEle").setVisible(false);
-					currentContext.getView().byId("LayerToBatch").setVisible(false);
-					currentContext.getView().byId("CbfToBatch").setVisible(true);
-
-					if(pModel.oData.transfersourceid == 503){
-						currentContext.getView().byId("txtFromFarmer").setVisible(true);
-						currentContext.getView().byId("txtToFarmer").setVisible(true);
-
-						farmerEnquiryService.getAllFarmerEnquiry(function(data){
-							if(data[0].length){
-								var selectModel = new sap.ui.model.json.JSONModel();
-								selectModel.setData({modelData : data[0]}); 
-								currentContext.getView().setModel(selectModel,"farmerEnquiryModel");
-							}else{
-								MessageBox.error("No farmer available!");
-							}
-						})
-						commonFunction.getModuleWiseWarehouses(723,currentContext);
-					}
-				}
+				
 			});
 		},
 

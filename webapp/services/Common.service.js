@@ -752,6 +752,10 @@ sap.ui.define([
             getLayerBatchPhases: function (callback) {
                 this.runJQueryX("GET", "layerphase/search/" + this.session("companyId"), null, callback, null);
             },
+
+            getReferenceByTypeCode : function(params, callback){
+                this.runJQueryX("GET", "leadmaster/referencebytypecode/" + params.typecode, null, callback, null);
+            },
         };
     }
 );

@@ -1,0 +1,58 @@
+<View displayBlock="true"    
+xmlns:f="sap.f"
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m"
+controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ContactMaster" height="100%">
+
+    <f:FlexibleColumnLayout id="fclContactMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+ 		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					        <Title text="{i18n>ContactTitle}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+			    <f:content>
+	                <VBox fitContainer="true">
+						<Table id="tblContact"
+                            inset="false" 
+                            items="{
+                                        path: 'contactModel>/modelData'
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <SearchField search="onSearch" width="17.5rem" id = "search" selectOnFocus = "true"/>
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew" class=".keydown"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="{i18n>ContactName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactCompanyName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactReference}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactDesignation}" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{contactModel>contactname}" />
+                                        <Text text="{contactModel>contacttype}" />
+                                        <Text text="{contactModel>companyname}" />
+                                        <Text text="{contactModel>contactreference}" />
+                                        <Text text="{contactModel>designation}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+	                </VBox>
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

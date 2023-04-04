@@ -7,12 +7,8 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common/MaterialRequest.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/formatter/fragment.formatter',
-	'sap/ui/elev8rerp/componentcontainer/services/Breeder/BreederBatchTransfer.service',
-	'sap/ui/elev8rerp/componentcontainer/services/Breeder/BreederShed.service',
-	'sap/ui/elev8rerp/componentcontainer/services/CommercialLayer/LayerBatchTransfer.service',
-	'sap/ui/elev8rerp/componentcontainer/services/CommercialLayer/LayerShed.service',
 
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, materialRequestService, commonService, formatter, breederBatchTransferService, breederShedService, layerBatchTrnasferService, layerShedService) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, materialRequestService, commonService, formatter) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialRequest", {
@@ -25,7 +21,7 @@ sap.ui.define([
 			commonFunction.getReference("MtrReqTransferSrcTrgt", "sourceModel", this);
 
 			// bind status dropdown
-			commonFunction.getReference("MtrRequestSts", "statusModel", this);
+			commonFunction.getReference("MtrReqAndTrsfr", "statusModel", this);
 			// set empty model to view for parent table 
 			var emptyModel = this.getModelDefault();
 
@@ -38,65 +34,8 @@ sap.ui.define([
 			detailmodel.setData({ modelData: [] });
 			this.getView().setModel(detailmodel, "detailModel");
 
-			//Breeder batch help box
-			commonFunction.getAllBreederBatches(this);
-
 			// load material request dialog data
 			this.loadData();
-
-			this.getView().byId("layerToBatch").setVisible(false);
-			this.getView().byId("layershedEle").setVisible(false);
-		},
-
-		// Location fragment open
-		handleLocationValueHelp: function (oEvent) {
-			var sInputValue = oEvent.getSource().getValue();
-
-			this.inputId = oEvent.getSource().getId();
-			// create value help dialog
-			//	if (!this._valueHelpDialog) {
-			this._valueHelpDialog = sap.ui.xmlfragment(
-				"sap.ui.elev8rerp.componentcontainer.fragmentview.Common.LocationDialog",
-				this
-			);
-			this.getView().addDependent(this._valueHelpDialog);
-			this._valueHelpDialog.open(sInputValue);
-		},
-
-
-		handleLocationSearch: function (oEvent) {
-			var sValue = oEvent.getParameter("value");
-			var columns = ['locationcode', 'locationname'];
-			var oFilter = new sap.ui.model.Filter(columns.map(function (colName) {
-				return new sap.ui.model.Filter(colName, sap.ui.model.FilterOperator.Contains, sValue);
-			}),
-				false);  // false for OR condition
-			var oBinding = oEvent.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
-
-		},
-
-		onLocationDialogClose: function (oEvent) {
-			var currentContext = this;
-			var aContexts = oEvent.getParameter("selectedContexts");
-			// if (aContexts != undefined) {
-			var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
-			var oModel = currentContext.getView().getModel("inventoryRequestModel");
-
-			// update existing model to set locationid
-			//oModel.oData.itemid = selRow[0].itemid;
-			oModel.oData.locationcode = selRow[0].locationcode;
-			oModel.oData.locationid = selRow[0].id;
-			oModel.oData.locationname = selRow[0].locationname;
-
-			oModel.refresh();
-			currentContext.getView().byId("txtFromWarehouseCode").setEnabled(true);
-
-			commonFunction.getLocationWiseWarehouse(selRow[0].id, currentContext);
-			currentContext.getView().byId("txtToWarehouseCode").setEnabled(true);
-
-
-
 		},
 
 		getModelDefault: function () {
