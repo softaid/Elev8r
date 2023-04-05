@@ -40,6 +40,38 @@
 					"items": []
 				},
 				{
+					"title": "Location",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "locationmaster",
+					"eid": [24],
+					"items": []
+				},
+				{
+					"title": "Warehouse",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "warehousemaster",
+					"eid": [21],
+					"items": []
+				},
+				{
+					"title": "Employee",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "employeemaster",
+					"eid": [23],
+					"items": []
+				},
+				{
+					"title": "Material Request and Transfer",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "materialrequestandtransfer",
+					"eid": [22],
+					"items": []
+				},
+				{
 					"title": "Bill Of Material",
 					"icon": "sap-icon://area-chart",
 					"expanded": true,
@@ -53,6 +85,14 @@
 					"expanded": true,
 					"key": "users",
 					"eid": [6],
+					"items": []
+				},
+				{
+					"title": "Contacts",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "contactmaster",
+					"eid": [25],
 					"items": []
 				}
 			]
@@ -76,7 +116,7 @@
 					"title": "Activities",
 					"icon": "sap-icon://basket",
 					"expanded": false,
-					"key": "activities",
+					"key": "leadactivities",
 					"eid": [9],
 					"items": []
 				},

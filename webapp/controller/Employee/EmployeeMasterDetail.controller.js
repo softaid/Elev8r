@@ -18,15 +18,7 @@ sap.ui.define([
 
 		formatter: formatter,
 		onInit: function () {
-			var currentContext = this;
-			commonFunction.getReference("EMPRole", "roleModel", this);
-
-			commonService.getCategorywiseLedgers({ categoryid: 2 }, function (data) {
-				var oModel = new sap.ui.model.json.JSONModel();
-				oModel.setData({ modelData: data[0] });
-				oModel.setSizeLimit(1000);
-				currentContext.getView().setModel(oModel, "ledgerList");
-			});
+			commonFunction.getReference("EmpRole", "roleModel", this);
 
 			this.fnShortCut();
 		},
@@ -128,37 +120,13 @@ sap.ui.define([
 			return isValid
 		},
 
-		handleSelectionFinish: function (oEvent) {
-			var inputId = oEvent.mParameters.id;
-			var id = inputId.substring(inputId.lastIndexOf('-') + 1);
-
-			var selectedItems = oEvent.getParameter("selectedItems");
-			var emproleids = "";
-
-			for (var i = 0; i < selectedItems.length; i++) {
-
-				emproleids += selectedItems[i].getKey();
-
-				if (i != selectedItems.length - 1) {
-					emproleids += ",";
-				}
-			}
-			var model = this.getView().getModel("editemployeeModel")
-			model.oData.emproleids = emproleids;
-		},
-
-
 		validateForm: function () {
 			var isValid = true;
 			if (!commonFunction.isChaonly(this, "txtName", "User name is required!"))
 				isValid = false;
 			if (!commonFunction.isNumber(this, "txtMobile", "Mobile is required!"))
 				isValid = false;
-			if (!commonFunction.ismultiComRequired(this, "ddlMtxtModuleNameodule", " Role is required!"))
-				isValid = false;
 			if (!commonFunction.isEmail(this, "txtEmail", "Email is required!"))
-				isValid = false;
-	                if (!commonFunction.isRequired(this, "txtemployee", "Ledger is required!"))
 				isValid = false;
 
 			return isValid;

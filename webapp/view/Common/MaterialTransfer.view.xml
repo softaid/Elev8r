@@ -61,9 +61,7 @@
                                     valueLiveUpdate="true">
                                 </Input> 
                             </form:fields>
-                        </form:FormElement>
-                        
-                        
+                        </form:FormElement>                                        
                         <form:FormElement label="{i18n>MaterialTransferSource}">
                             <form:fields>
                                 <Select id="ddlRequestSource" 
@@ -89,158 +87,6 @@
 				                        }">
 				                    <core:Item key="{targetModel>id}" text="{targetModel>refname}" />                                                                                                                               
 			                    </Select>
-                            </form:fields>
-                        </form:FormElement>
-                        <form:FormElement label="{i18n>MaterialTransferFromBatch}" id="setterToBatch" visible="false">
-                            <form:fields>
-                                <Input
-                                    id="txtSetterToBatch"
-                                    type="Text"
-                                    required="true"
-                                    value="{materialTransferModel>/tobatchid}"
-                                    placeholder="Select Setter Batch"
-                                    enabled="true"
-                                    editable="true"
-                                    showValueHelp="true"     
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleSetterValueHelp"
-                                    >
-                                </Input>
-                            </form:fields>
-                        </form:FormElement>
-                        <form:FormElement label="{i18n>MaterialTransferFromBatch}" id="breederToBatch">
-                            <form:fields>
-                                <Input
-                                    id="txtBreederToBatch"
-                                    type="Text"
-                                    required="true"
-                                    value="{materialTransferModel>/tobatchid}"
-                                    placeholder="Select Breeder Batch"
-                                    enabled="true"
-                                    editable="true"
-                                    showValueHelp="true"     
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleBreederValueHelp">
-                                </Input>
-                            </form:fields>
-                        </form:FormElement>
-
-                        <form:FormElement label="{i18n>MaterialTransferFromBatch}" id="LayerToBatch">
-                            <form:fields>
-                                <Input
-                                    id="txtLayerToBatch"
-                                    type="Text"
-                                    required="true"
-                                    value="{materialTransferModel>/tobatchid}"
-                                    placeholder="Select Layer Batch"
-                                    enabled="true"
-                                    editable="true"
-                                    showValueHelp="true"     
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleLayerValueHelp">
-                                </Input>
-                            </form:fields>
-                        </form:FormElement>
-
-                        <form:FormElement label="From Farmer" id="FromFarmer">
-                            <form:fields>
-                                <Input
-                                    id="txtFromFarmer"
-                                    type="Text"
-                                    required="true"
-                                    value="{materialTransferModel>/fromfarmer}"
-                                    placeholder="Select CBF Farmer"
-                                    enabled="true"
-                                    editable="true"
-                                    showValueHelp="true"     
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleFarmerValueHelp">
-                                </Input>
-                            </form:fields>
-                        </form:FormElement>
-
-                        <form:FormElement label="To Farmer" id="ToFarmer">
-                            <form:fields>
-                                <Input
-                                    id="txtToFarmer"
-                                    type="Text"
-                                    required="true"
-                                    value="{materialTransferModel>/tofarmer}"
-                                    placeholder="Select CBF Farmer"
-                                    enabled="true"
-                                    editable="true"
-                                    showValueHelp="true"     
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleFarmerValueHelp">
-                                </Input>
-                            </form:fields>
-                        </form:FormElement>
-
-                        <form:FormElement label="{i18n>MaterialTransferFromBatch}" id="CbfToBatch" visible="false">
-                            <form:fields>
-                                <Input
-                                    id="txtCbfToBatch"
-                                    type="Text"
-                                    required="true"
-                                    value="{materialTransferModel>/tobatchid}"
-                                    placeholder="Select CBF Batch"
-                                    enabled="true"
-                                    editable="true"
-                                    showValueHelp="true"     
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleCbfValueHelp">
-                                </Input>
-                            </form:fields>
-                        </form:FormElement>
-                        <form:FormElement label="{i18n>ShedToShedTransferFromShed}" visible="false" id="txtFromShedEle">
-                            <form:fields>
-                                <Input
-                                    id="txtFromShed"
-                                    required="true"
-                                    type="Text"
-                                    value="{materialTransferModel>/fromshedname}"
-                                    placeholder="{i18n>ShedToShedTransferFromShedPlaceholder}"
-                                    showValueHelp="true"                    
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleShedValueHelp"
-                                    valueLiveUpdate="true"
-                                    enabled="false"
-                                    >
-                                </Input>   
-                            </form:fields>
-                        </form:FormElement>
-                        <form:FormElement label="{i18n>MaterialRequestLocation}" id="locationEle" visible="false">
-                            <form:fields>
-                                <Input
-                                    id="cmbLocation"
-                                    type="Text"
-                                    value="{materialTransferModel>/locationname}"
-                                    required="true"
-                                    placeholder="{i18n>ShedToShedTransferLocationPlaceholder}"
-                                    showValueHelp="true"                    
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handleLocationValueHelp"
-                                    valueLiveUpdate="true"
-                                    enabled="false">
-                                    </Input>
-                            </form:fields>
-                        </form:FormElement>
-
-                         <form:FormElement label="{i18n>ShedToShedTransferFromShed}" visible="false" id="txtlayerFromShedEle">
-                            <form:fields>
-                                <Input
-                                    id="txtlayerFromShed"
-                                    required="true"
-                                    type="Text"
-                                    value="{materialTransferModel>/fromshedname}"
-                                    placeholder="{i18n>ShedToShedTransferFromShedPlaceholder}"
-                                    showValueHelp="true"                    
-                                    valueHelpOnly="true"       
-                                    valueHelpRequest="handlelayerShedValueHelp"
-                                    valueLiveUpdate="true"
-                                    enabled="false"
-                                    >
-                                </Input>   
                             </form:fields>
                         </form:FormElement>
                         <form:FormElement label="{i18n>MaterialRequestLocation}" id="layerlocationEle" visible="false">
@@ -343,7 +189,7 @@
 					                        path: 'statusModel>/modelData',
 					                        sorter: { path: 'id' }
 				                        }">
-				                    <core:Item key="{statusModel>id}" text="{statusModel>refname}" />                                                                                                                               
+				                    <core:Item key="{statusModel>id}" text="{statusModel>description}" />                                                                                                                               
 			                    </Select>
                             </form:fields>
                         </form:FormElement>

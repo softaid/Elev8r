@@ -584,13 +584,12 @@ sap.ui.define([
         // get reference types
         getReference: function (typeCode, modelName, currentContext) {
 
-            commonService.getReference({ typecode: typeCode }, function (data) {
+            commonService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
                 var selectModel = new sap.ui.model.json.JSONModel();
                 selectModel.setData({ modelData: data[0] });
                 currentContext.getView().setModel(selectModel, modelName);
             });
         },
-
 
          // get reference types
          getReferenceByType: function (typeCode,modelName, currentContext) {

@@ -88,36 +88,21 @@
                                 </form:fields>
                             </form:FormElement>
                             <form:FormElement label="Employee Role">
-                            <form:fields>
-                                <MultiComboBox id="ddlMtxtModuleNameodule"
-                                    selectionChange="handleSelectionChange"
-                                    selectionFinish="handleSelectionFinish"
-                                    width="500px"
-                                    items="{
-                                        path: 'roleModel>/modelData',
-                                        sorter: { path: 'Name' }
-                                    }">
-                                    <core:Item key="{roleModel>id}" text="{roleModel>refname}" />
-                                </MultiComboBox>
-                            </form:fields>
-                        </form:FormElement> 
-
-                         <form:FormElement label="Employee Ledger">
-                                                        <form:fields>
-                                                            <Input
-                                                                id="txtemployee"
-                                                                required="true"
-                                                                type="Text"
-                                                                value="{editemployeeModel>/ledgername}"
-                                                                placeholder="Select Employee ledger"
-                                                                showValueHelp="true"              
-                                                                valueHelpOnly="true"       
-                                                                valueHelpRequest="handleLedgerValueHelp"
-                                                                valueLiveUpdate="true">
-                                                            </Input>
-                                                            <Input value="{editemployeeModel>/glcode}" enabled="false" />
-                                                        </form:fields>
-                                                    </form:FormElement>
+                                <form:fields>
+                                    <Select id="emprole"
+                                        required="true" 
+                                        change=""
+                                        selectedKey="{editemployeeModel>/roleid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'roleModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{roleModel>id}" text="{roleModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement> 
                         </form:formElements>
                     </form:FormContainer>
                 </form:formContainers>
