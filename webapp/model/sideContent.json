@@ -106,10 +106,10 @@
 			"eid": [12],
 			"items": [
 				{
-					"title": "Projects",
+					"title": "Project",
 					"icon": "sap-icon://basket",
 					"expanded": false,
-					"key": "projects",
+					"key": "project",
 					"eid": [13],
 					"items": []
 				},

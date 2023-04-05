@@ -29,6 +29,13 @@ sap.ui.define([
             console.log("this.model",this.model);
              // bind Pipeline dropdown
 			commonFunction.getReferenceByType("ProjType", "projectModel", this);
+
+            if(this.model.typecode == "ProMilestones"){
+                this.getView().byId("projecttype").setVisible(true);
+            }
+            else{
+                this.getView().byId("projecttype").setVisible(false);
+            }
             
             if (this.model.id != null) {    
                 currentContext.getView().byId("btnSave").setText("Update");

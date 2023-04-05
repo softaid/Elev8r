@@ -15,17 +15,17 @@
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title text="Leads Detail"/>
+					<Title text="{i18n>leadScreenDetailtitle}"/>
 				</f:heading>
 				<f:actions>
 					<ToolbarSpacer/>
 					<Button
-						text="{i18n>partyDetailSaveButtonText}"
+						text="{i18n>RoleAccessButtonSave}"
                         type="Emphasized"
 						press="onSave"
 						id="btnSave"/>
 				    <Button
-						text="{i18n>partyDetailDeleteButtonText}"
+						text="{i18n>RoleAccessButtonDelete}"
 						type="Emphasized"
 						id="btnDelete"
 						press="onDelete"/>						
@@ -58,30 +58,14 @@
                         singleContainerFullSize="false" />
                 </form:layout>
                 <form:formContainers>
-                    <form:FormContainer title="{i18n>partyDetailBasicInfoContainerLabel}">
+                    <form:FormContainer title="{i18n>leadScreenBasicInfo}">
 					    <form:formElements>
-                        
-                        <!-- <form:FormElement label="Module">
-                                <form:fields>
-                                   <MultiComboBox id="ddlMtxtModuleNameodule"
-                                        required="true"
-									    selectionChange="handleSelectionChange"
-										selectionFinish="handleSelectionFinish"
-										width="500px"
-										items="{
-											path: 'moduleList>/modelData',
-											sorter: { path: 'Name' }
-										}">
-										<core:Item key="{moduleList>id}" text="{moduleList>refname}" />
-									</MultiComboBox>
-                                </form:fields>
-                            </form:FormElement> -->
-                            <form:FormElement label="Lead Name">
+                            <form:FormElement label="{i18n>leadNameLabel}">
                                 <form:fields>
                                     <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
                                 </form:fields>
                             </form:FormElement>   
-                            <form:FormElement label="Lead Source">
+                            <form:FormElement label="{i18n>leadSourceLabel}">
                                 <form:fields>
                                     <Select id="sourceid"
 					                    required="true" 
@@ -97,10 +81,9 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-
-                             <form:FormElement label="Pipeline">
+                             <form:FormElement label="{i18n>leadPiPelineLabel}">
                                 <form:fields>
-                                    <Select id="pipelineid"
+                                    <Select id="txtpipelineid"
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/pipelineid}" 
@@ -114,197 +97,114 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-                             <!-- <form:FormElement label="PartyCode">
-                                    <form:fields>
-                                        <Input id="txtpartycode" enabled="false" value="{docSeriesModel>/newseries}" editable="false" />
-                                    </form:fields>
-                                </form:FormElement> -->
-                            <!-- <form:FormElement label="{i18n>partyDetailContactPersonLabel}">
+                              <form:FormElement label="{i18n>leadCategory}">
                                 <form:fields>
-                                    <Input id="txtContactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"/>
-                                </form:fields>
-                            </form:FormElement> -->
-                            <!-- <form:FormElement id="frmElementSupplierLedger" label="Supplier Ledger" visible="false">
-                                <form:fields>
-                                    <Select id="ddlSupplierLedger" selectedKey="{editPartyModel>/supplierledgerid}" 
+                                    <Select id="categoryid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editPartyModel>/leadcategoryid}" 
+                                        forceSelection="false"
+                                        width="500px"
                                         items="{
-                                            path: 'supplierLedgerModel>/modelData',
+                                            path: 'leadCategoryModel>/modelData',
                                             sorter: { path: 'id' }
-                                        }" change="onLedgerChange">
-				                        <core:Item key="{supplierLedgerModel>id}" text="{supplierLedgerModel>glcode}-{supplierLedgerModel>coaname}" />                                            
-			                        </Select>  
+                                        }">
+                                        <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
+                                    </Select>
                                 </form:fields>
-                            </form:FormElement>                              -->
+                            </form:FormElement>
+                             <form:FormElement label="{i18n>leadtypeoflift}">
+                                <form:fields>
+                                    <Select id="typeofliftid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editPartyModel>/leadtypeid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'leadTypeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{leadTypeModel>id}" text="{leadTypeModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                               <form:FormElement label="{i18n>leadnooflift}">
+                                <form:fields>
+                                    <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
+                                </form:fields>
+                            </form:FormElement>   
+                              <form:FormElement label="{i18n>leadStatus}">
+                                <form:fields>
+                                    <Select id="leadstatusid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editPartyModel>/statusid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'leadStatusModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{leadStatusModel>id}" text="{leadStatusModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                               <form:FormElement label="{i18n>leadlocation}">
+                                <form:fields>
+                                    <Select id="leadlocationid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editPartyModel>/statusid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'leadLocationModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{leadLocationModel>id}" text="{leadLocationModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                                 <form:FormElement label="{i18n>leadContactPerson}">
+                                <form:fields>
+                                    <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                </form:fields>
+                            </form:FormElement>   
+                             <form:FormElement label="{i18n>leadsalerep}">
+                                <form:fields>
+                                    <Input id="txtsalesrep" valueLiveUpdate="true" value="{editPartyModel>/salesrep}"  required="true" change="onPartyNameChange"/>
+                                </form:fields>
+                            </form:FormElement>   
+                             <form:FormElement label="{i18n>leadValue}">
+                                <form:fields>
+                                    <Input id="txtLeadValue" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadvalue}" required="true" />
+                                </form:fields>
+                            </form:FormElement>
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer>
                         <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailEmailIdLabel}">
+                            <form:FormElement label="{i18n>leadEmail}">
                                 <form:fields>
                                     <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange" required="true" />
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="Mobile No.">
+                            <form:FormElement label="{i18n>leadMobileNo}">
                                 <form:fields>
                                     <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
                                 </form:fields>
                             </form:FormElement>
-                            <!-- <form:FormElement label="{i18n>partyDetailPANNoLabel}">
-                                <form:fields>
-                                    <Input id="txtPANNo" valueLiveUpdate="true" maxLength="10" value="{editPartyModel>/panno}" required="true" />
-                                </form:fields>
-                            </form:FormElement> -->
-                            <!-- <form:FormElement label="{i18n>partyDetailPartyGroupLabel}">
-                                    <form:fields>
-                                        <Input
-                                            id="txtPartyGroup"
-                                            type="Text"
-                                            value="{editPartyModel>/partygroupname}"
-                                            placeholder="Select party group"
-                                            enabled="true"
-                                            editable="true"
-                                            showValueHelp="true"          
-                                            valueHelpOnly="true"       
-                                            valueHelpRequest="handleSelectPartyGroupList"
-                                            required="true">
-                                        </Input>
-                                    </form:fields>
-                                </form:FormElement>  -->
-                            <!-- <form:FormElement label="{i18n>partyDetailCSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtCSTNo" valueLiveUpdate="true" value="{editPartyModel>/cstno}"/>
-                                </form:fields>
-                            </form:FormElement> -->
-                            <!-- <form:FormElement label="{i18n>partyDetailCreditLimitLabel}">
-                                <form:fields>
-                                    <Input id="txtCreditLimit" valueLiveUpdate="true" value="{editPartyModel>/creditlimit}" change="onDecimalInputChange" required="true" />
-                                </form:fields>
-                            </form:FormElement>    -->
-                            <!-- <form:FormElement label="TDS" id = "textTds">
-                                <form:fields>
-                                    <Input
-                                        id="tds"
-                                        required="true"
-                                        type="Text"
-                                        value="{editPartyModel>/section}"
-                                        placeholder="Select TDS"
-                                        showValueHelp="true"              
-                                        valueHelpOnly="true"       
-                                        valueHelpRequest="handleTdsValueHelp"
-                                        valueLiveUpdate="true">
-                                    </Input>
-                                    <Input value="{editPartyModel>/rate}" enabled="false" />
-                                </form:fields>
-                            </form:FormElement> -->
-                            <!-- <form:FormElement id="frmElementCustomerLedger" label="Customer Ledger" visible="false">
-                                <form:fields>
-                                    <Select id="ddlCustomerLedger" selectedKey="{editPartyModel>/customerledgerid}" 
-                                        items="{
-                                            path: 'customerLedgerModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onLedgerChange">
-				                        <core:Item key="{customerLedgerModel>id}" text="{customerLedgerModel>glcode}-{customerLedgerModel>coaname}" />                                            
-			                        </Select>  
-                                </form:fields>
-                            </form:FormElement>   -->
                         </form:formElements>
                     </form:FormContainer>
-
-                    <!-- <form:FormContainer title="Bank Details">
-					                <form:formElements>
-                                    <form:FormElement label="Bank Name">
-                                     <form:fields>
-                                        <Input id="bankname" valueLiveUpdate="true"  value="{editPartyModel>/bankname}"/>
-                                     </form:fields>
-                                    </form:FormElement>
-                                    <form:FormElement label="Bank Branch">
-                                     <form:fields>
-                                        <Input id="bankbranch" valueLiveUpdate="true"  value="{editPartyModel>/bankbranch}"/>
-                                     </form:fields>
-                                    </form:FormElement>
-                                     <form:FormElement label="Account Type">
-                                            <form:fields>
-                                                <Select id="txtStatus" change="statusChage" selectedKey="{editPartyModel>/accounttype}" 
-                                                items="{
-                                                    path: 'accountTypeModel>/modelData',
-                                                    sorter: { path: 'id' }
-                                                }" >
-                                                    <core:Item key="{accountTypeModel>id}" text="{accountTypeModel>refname}"/>             
-                                                </Select>
-                                            </form:fields>
-                                        </form:FormElement>
-
-                                        <form:FormElement label="Account No">
-                                     <form:fields>
-                                        <Input id="accountno" valueLiveUpdate="true"  value="{editPartyModel>/accountno}"/>
-                                     </form:fields>
-                                    </form:FormElement>
-
-                                     <form:FormElement label="IFSC Code">
-                                     <form:fields>
-                                        <Input id="ifsccode" valueLiveUpdate="true"  value="{editPartyModel>/ifsccode}"/>
-                                     </form:fields>
-                                    </form:FormElement>
-                                       </form:formElements>
-                    </form:FormContainer> -->
-
-
-
-                    <!-- <form:FormContainer title="{i18n>partyDetailAdditionalInfoContainerLabel}">
+                    <form:FormContainer title="{i18n>leadPartyDetailAddress}">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailCreditPeriodLabel}">
-                                <form:fields>
-                                    <Select id="txtCreditPeriod" selectedKey="{editPartyModel>/creditperiod}" 
-                                        items="{
-                                            path: 'creditPeriodModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="">
-				                        <core:Item key="{creditPeriodModel>key}" text="{creditPeriodModel>period}" />       
-			                        </Select>  
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailShippingContactPersonLabel}">
-                                <form:fields>
-                                    <Input id="txtShippingContactPerson" valueLiveUpdate="true" value="{editPartyModel>/shippingcontactperson}"/>
-                                </form:fields>
-                            </form:FormElement>               
-                        </form:formElements>
-                    </form:FormContainer> -->
-                    <!-- <form:FormContainer title=" ">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailServiceTaxNoLabel}">
-                                <form:fields>
-                                    <Input id="txtServiceTaxNo" valueLiveUpdate="true" value="{editPartyModel>/servicetaxno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailShippingContactNoLabel}">
-                                <form:fields>
-                                    <Input id="txtShippingContactNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/shippingcontactno}" required="true"/>
-                                </form:fields>
-                            </form:FormElement> 
-                        </form:formElements>
-                    </form:FormContainer> -->
-                    <form:FormContainer title="{i18n>partyDetailAddressDetailContainerLabel}">
-					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType1" selectedKey="{editPartyAddressModel>/addresstypeid}"  
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress1" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity1" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -315,35 +215,11 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                            <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact1" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>    
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo1" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     -->
-<!-- 
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType1" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        icon="{path: 'editPartyAddressModel>/gsttypeid', formatter: '.commonFormatter.addDeselectOption'}"
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer>
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState1" selectedKey="{editPartyAddressModel>/stateid}" forceSelection="false"
                                         items="{
@@ -354,7 +230,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry1" selectedKey="{editPartyAddressModel>/countryid}" forceSelection="false"
                                         items="{
@@ -365,7 +241,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode1" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -383,19 +259,6 @@
 
                     <form:FormContainer id="containerCity2" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType2" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress2" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -412,29 +275,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>     
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact2" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>           -->
-                            <!-- <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo2" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>   -->
-
-                            <!-- <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType2" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState2" visible="false">
@@ -473,22 +313,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity3" visible="false">
 					    <form:formElements>
-
-                             <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType3" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress3" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -505,27 +331,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>  
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact3" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo3" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType3" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                    -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState3" visible="false">
@@ -564,22 +369,8 @@
                             </form:FormElement>                  
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity4" visible="false">
 					    <form:formElements>
-
-                             <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType4" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress4" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -596,27 +387,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact4" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo4" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType4" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                         -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState4" visible="false">
@@ -655,22 +425,8 @@
                             </form:FormElement>                 
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity5" visible="false">
 					    <form:formElements>
-
-                             <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType5" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress5" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -686,29 +442,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact5" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo5" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>   
-
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType5" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                       -->
+                            </form:FormElement>  
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState5" visible="false">
@@ -747,22 +481,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity6" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType6" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress6" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -778,29 +498,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact6" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo6" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType6" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
+                            </form:FormElement> 
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState6" visible="false">
@@ -842,19 +540,6 @@
 
                     <form:FormContainer id="containerCity7" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType7" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress7" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -871,27 +556,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact7" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo7" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType7" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                       -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState7" visible="false">
@@ -930,22 +594,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity8" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType8" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress8" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -962,27 +612,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact8" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo8" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType8" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                       -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState8" visible="false">
@@ -1021,22 +650,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity9" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType9" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress9" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1052,28 +667,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact9" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo9" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>                         
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType9" forceSelection="false" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
+                            </form:FormElement>  
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState9" visible="false">
@@ -1112,22 +706,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity10" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType10" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress10" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1144,28 +724,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact10" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo10" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType10" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState10" visible="false">
@@ -1204,27 +762,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-
-
-
-                    <!--   new address 11-->
-
                      <form:FormContainer id="containerCity11" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType11" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress11" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1241,28 +780,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact11" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo11" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType11" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState11" visible="false">
@@ -1301,24 +818,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-                      <!--   new address 12-->
-
                      <form:FormContainer id="containerCity12" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType12" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress12" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1334,29 +835,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact12" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo12" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType12" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
+                            </form:FormElement>  
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState12" visible="false">
@@ -1395,24 +874,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-                     <!--   new address 13-->
-
                      <form:FormContainer id="containerCity13" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType13" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress13" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1428,29 +891,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact13" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo13" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType13" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
+                            </form:FormElement>  
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState13" visible="false">
@@ -1489,24 +930,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-                     <!--   new address 14-->
-
                      <form:FormContainer id="containerCity14" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType14" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress14" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1522,29 +947,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact14" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo14" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType14" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
+                            </form:FormElement>  
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState14" visible="false">
@@ -1583,24 +986,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-                     <!--   new address 15-->
-
                      <form:FormContainer id="containerCity15" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType15" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress15" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1617,28 +1004,6 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact15" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo15" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType15" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState15" visible="false">
@@ -1677,24 +1042,8 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-                     <!--   new address 16-->
-
                      <form:FormContainer id="containerCity16" visible="false">
 					    <form:formElements>
-
-                            <!-- <form:FormElement label="{i18n>partyDetailAddressTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlAddrType16" selectedKey="{editPartyAddressModel>/addresstypeid}" 
-                                        items="{
-                                            path: 'addressTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{addressTypeModel>id}" text="{addressTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> -->
-
                             <form:FormElement label="{i18n>partyDetailAddressLabel}">
                                 <form:fields>
                                     <Input id="txtAddress16" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
@@ -1710,29 +1059,7 @@
 				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
 			                        </Select>
                                 </form:fields>
-                            </form:FormElement>   
-                             <!-- <form:FormElement label="{i18n>partyDetailLocationContactNo}">
-                                <form:fields>
-                                    <Input id="ddlContact16" valueLiveUpdate="true" value="{editPartyAddressModel>/locationcontactno}"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>partyDetailGSTNoLabel}">
-                                <form:fields>
-                                    <Input id="txtGSTNo16" valueLiveUpdate="true" value="{editPartyAddressModel>/gstno}" maxLength = "15"/>
-                                </form:fields>
-                            </form:FormElement>     
-                            <form:FormElement label="{i18n>partyDetailGSTTypeLabel}">
-                                <form:fields>
-                                    <Select id="ddlGSTType16" selectedKey="{editPartyAddressModel>/gsttypeid}" 
-                                        
-                                        items="{
-                                            path: 'gstTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-				                        <core:Item key="{gstTypeModel>id}" text="{gstTypeModel>refname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>                     -->
+                            </form:FormElement> 
                         </form:formElements>
                     </form:FormContainer>
                     <form:FormContainer id="containerState16" visible="false">
@@ -1771,186 +1098,7 @@
                             </form:FormElement>                   
                         </form:formElements>
                     </form:FormContainer>
-
-
-
-
-
-
-
-
-                      <!-- Contact Details Start-->
-                    <!-- <form:FormContainer title="{i18n>partyDetailContactDetailContainerLabel}">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo1" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer title=" ">
-                        <form:formElements>  
-                            <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo1" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://add" type="Transparent" tooltip="Add new contact details" press="onAddContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                        
-                        </form:formElements>
-                    </form:FormContainer> -->
-
-                    <!-- <form:FormContainer id="containerMobile2" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo2" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerPincode2" visible="false">
-                        <form:formElements>
-                             <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo2" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                         
-                        </form:formElements>
-                    </form:FormContainer> -->
-
-                    <!-- <form:FormContainer id="containerMobile3" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo3" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerPincode3" visible="false">
-                        <form:formElements>
-                             <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo3" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                      
-                        </form:formElements>
-                    </form:FormContainer> -->
-
-                    <!-- <form:FormContainer id="containerMobile4" visible="false">
-					   <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo4" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerPincode4" visible="false">
-                        <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo4" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                  
-                        </form:formElements>
-                    </form:FormContainer> -->
-
-                    <!-- <form:FormContainer id="containerMobile5" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo5" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerPincode5" visible="false">
-                        <form:formElements>
-                             <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo5" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer> -->
-
-                    <!-- <form:FormContainer id="containerMobile6" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo6" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerPincode6" visible="false">
-                        <form:formElements>
-                             <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo6" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer> -->
-
-                     <!-- <form:FormContainer id="containerMobile7" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailMobileNoLabel}">
-                                <form:fields>
-                                    <Input id="txtMobileNo7" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerPincode7" visible="false">
-                        <form:formElements>
-                             <form:FormElement label="{i18n>partyDetailFAXNoLabel}">
-                                <form:fields>
-                                    <Input id="txtFAXNo7" valueLiveUpdate="true" value="{editPartyModel>/faxno}"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContactInfo" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer> -->
-                <!-- Contact Details End-->
-
                 </form:formContainers>
-
             </form:Form>
 		</f:content>
 	</f:DynamicPage>

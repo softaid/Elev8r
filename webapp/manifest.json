@@ -167,6 +167,11 @@
 					"target": "billofmaterial"
 				},
 				{
+					"pattern": "Projects",
+					"name": "Projects",
+					"target": "Projects"
+				},
+				{
 					"pattern": "users",
 					"name": "users",
 					"target": "users"
@@ -192,9 +197,14 @@
 					"target": "leadreports"
 				},
 				{
-					"pattern": "projects",
-					"name": "projects",
-					"target": "projects"
+					"pattern": "project",
+					"name": "project",
+					"target": "project"
+				},
+				{
+					"pattern": "projectactivities",
+					"name": "projectactivities",
+					"target": "projectactivities"
 				},
 				{
 					"pattern": "projectctivities",
@@ -340,6 +350,18 @@
 				"billofmateriallist" : {
 					"viewId": "billofmateriallist",
 					"viewName": "Masters/BillOfMaterialList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"project" : {
+					"viewId": "project",
+					"viewName": "ProjectManagement/Project",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectactivities" : {
+					"viewId": "projectactivities",
+					"viewName": "ProjectManagement/ProjectActivity",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

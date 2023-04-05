@@ -10,7 +10,7 @@ sap.ui.define([
 
 ], function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, Leadservice, commonService, commonFunction) {
 
-    //function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, partyService, commonService, commonFunction) {
+	//function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, partyService, commonService, commonFunction) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetail", {
@@ -26,8 +26,16 @@ sap.ui.define([
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
 
-            // bind Pipeline dropdown
+			// bind Pipeline dropdown
 			commonFunction.getReferenceByType("Pipeline", "pipeLineModel", this);
+
+			// bind Pipeline dropdown
+			commonFunction.getReferenceByType("LeadStatus", "leadStatusModel", this);
+
+			// bind Lead dropdown
+			commonFunction.getReferenceByType("LeadCtgry", "leadCategoryModel", this);
+
+			
 
 			//bind country dropdown
 			commonService.getAllCountries(function (data) {
@@ -60,7 +68,7 @@ sap.ui.define([
 
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
-				oModel.setSizeLimit(data[0].length);  
+				oModel.setSizeLimit(data[0].length);
 				currentContext.getView().setModel(oModel, "partyCityModel");
 
 			});
@@ -88,13 +96,13 @@ sap.ui.define([
 
 			var currentContext = this;
 			this.model = this.getView().getModel("viewModel");
-            console.log("this.model",this.model);
+			console.log("this.model", this.model);
 			var oModel = new JSONModel();
 
 			if (this.model != undefined) {
 
-				Leadservice.getLeads({id: this.model.id}, function (data) {
-                    console.log("-----------------data----------------------",data);
+				Leadservice.getLeads({ id: this.model.id }, function (data) {
+					console.log("-----------------data----------------------", data);
 					oModel.setData(data[0][0]);
 					var addresses = data[1];
 
@@ -126,12 +134,12 @@ sap.ui.define([
 
 			this.getView().setModel(oModel, "editPartyModel");
 			var oModel = this.getView().getModel("editPartyModel");
-            console.log("ONBEFORERENDERING editPartyModel",oModel);
-            console.log("ONBEFORERENDERING editPartyModel",oModel);
+			console.log("ONBEFORERENDERING editPartyModel", oModel);
+			console.log("ONBEFORERENDERING editPartyModel", oModel);
 			oModel.refresh();
 		},
 
-		
+
 
 		onAddContact: function () {
 
@@ -231,10 +239,10 @@ sap.ui.define([
 		},
 
 		onSave: function () {
-			//if (this.validateForm()) {
+			if (this.validateForm()) {
 				var currentContext = this;
 				var model = this.getView().getModel("editPartyModel").oData;
-                console.log("editPartyModel",model);
+				console.log("editPartyModel", model);
 				model["companyid"] = commonService.session("companyId");
 				model["userid"] = commonService.session("userId");
 				var partyAddressModel = [];
@@ -253,8 +261,8 @@ sap.ui.define([
 								leadid: data.id,
 								//addresstypeid: currentContext.getView().byId("ddlAddrType" + i).getSelectedItem().mProperties.key,
 								address: currentContext.getView().byId("txtAddress" + i).getValue(),
-                                countryid: parseInt(countryid),
-                                stateid: parseInt(stateid),
+								countryid: parseInt(countryid),
+								stateid: parseInt(stateid),
 								cityid: parseInt(cityid),
 								pincode: parseInt(currentContext.getView().byId("txtPinCode" + i).getValue()),
 								companyid: commonService.session("companyId"),
@@ -262,7 +270,7 @@ sap.ui.define([
 							});
 						}
 
-                        console.log("-----------Inside-save-partyAddressModel-------------",partyAddressModel);
+						console.log("-----------Inside-save-partyAddressModel-------------", partyAddressModel);
 
 						//for (var i = 0; i < partyAddressModel.length; i++) {
 						//var gstNum = partyAddressModel[i].gstno;
@@ -275,57 +283,98 @@ sap.ui.define([
 							currentContext.bus.publish("loaddata", "loadData");
 						});
 						//}
-					} 
-					
+					}
+
 				});
-			//}
+			}
 		},
 
 		validateForm: function () {
 			var isValid = true;
 			var source = this.getView().byId("sourceid").getSelectedKey();
-			var pipeline = this.getView().byId("pipelineid").getSelectedKey();
+			var pipeline = this.getView().byId("txtpipelineid").getSelectedKey();
+
+			var location = this.getView().byId("leadlocationid").getSelectedKey();
+			var status = this.getView().byId("leadstatusid").getSelectedKey();
+
+			var category = this.getView().byId("categoryid").getSelectedKey();
+
+			var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
+
 			var emailId = this.getView().byId("txtEmailId").getValue();
 			var phoneNo = this.getView().byId("txtPhoneNo").getValue();
-				
+
 			if (!commonFunction.isRequired(this, "txtPartyName", "Please enter lead name."))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "contactPerson", "Please enter contact person name."))
 				isValid = false;
 
 			if (emailId != "") {
 				if (!commonFunction.isEmail(this, "txtEmailId"))
 					isValid = false;
-			}else if (!commonFunction.isRequired(this, "txtEmailId", "Please enter email ID."))
+			} else if (!commonFunction.isRequired(this, "txtEmailId", "Please enter email ID."))
 				isValid = false;
-			
+
 			else {
 				this.getView().byId("txtEmailId").setValueState(sap.ui.core.ValueState.None);
 			}
 
-			
+
 			if (phoneNo != "") {
 				if (!commonFunction.isNumber(this, "txtPhoneNo"))
 					isValid = false;
-			}else if (!commonFunction.isRequired(this, "txtPhoneNo", "Please enter phone no."))
+			}
+			else if (!commonFunction.isRequired(this, "txtPhoneNo", "Please enter phone no."))
 				isValid = false;
+
 			else {
 				this.getView().byId("txtPhoneNo").setValueState(sap.ui.core.ValueState.None);
 			}
-			
+
 
 			// check atleast one source is selected
+
+			if (pipeline.length == 0) {
+				this.getView().byId("txtpipelineid").setValueState(sap.ui.core.ValueState.Error)
+					.setValueStateText("Please select atleast one pipeline.");
+
+				isValid = false;
+			}
+
 			if (source.length == 0) {
 				this.getView().byId("sourceid").setValueState(sap.ui.core.ValueState.Error)
 					.setValueStateText("Please select atleast one source.");
 
 				isValid = false;
 			}
-			else if (pipeline.length == 0) {
-				this.getView().byId("pipelineid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one pipeline.");
+
+			if (typeoflift.length == 0) {
+				this.getView().byId("typeofliftid").setValueState(sap.ui.core.ValueState.Error)
+					.setValueStateText("Please select atleast one lift Type.");
 
 				isValid = false;
 			}
-			
+
+			if (location.length == 0) {
+				this.getView().byId("leadlocationid").setValueState(sap.ui.core.ValueState.Error)
+					.setValueStateText("Please select atleast one location.");
+
+				isValid = false;
+			}
+			if (status.length == 0) {
+				this.getView().byId("leadstatusid").setValueState(sap.ui.core.ValueState.Error)
+					.setValueStateText("Please select atleast one status.");
+
+				isValid = false;
+			}
+			if (category.length == 0) {
+				this.getView().byId("categoryid").setValueState(sap.ui.core.ValueState.Error)
+					.setValueStateText("Please select atleast one category.");
+
+				isValid = false;
+			}
+
 			return isValid;
 		},
 
@@ -422,10 +471,10 @@ sap.ui.define([
 
 			}
 		},
-	
+
 
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclPartyMaster");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 		},
 	});

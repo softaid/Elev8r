@@ -60,6 +60,7 @@ sap.ui.define([
             var viewModel = oEvent.getSource().getBindingContext("masterDetailModel");
             var model = {
                 "id": viewModel.getProperty("id"),
+                "typecode":viewModel.getProperty("typecode"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
             }
