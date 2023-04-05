@@ -152,6 +152,11 @@
 					"target": "projectmaster"
 				},
 				{
+					"pattern": "liftmaster",
+					"name": "liftmaster",
+					"target": "liftmaster"
+				},
+				{
 					"pattern": "inventory",
 					"name": "inventory",
 					"target": "inventory"
@@ -354,6 +359,12 @@
 					"viewId": "leadactivities",
 					"viewName": "LeadManagement/LeadActivity",
 					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"liftmaster" : {
+					"viewId" : "liftmaster",
+					"viewName" : "Masters/LiftMaster",
+					"controlId" : "mainContents",
 					"parent": "master"
 				},
 				"projectmaster" : {

@@ -153,6 +153,21 @@
                                     <Input id="designation"  valueLiveUpdate="true" value="{editContactModel>/designation}" type="Text" required="true"/>
                                 </form:fields>
                             </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailSocialLink1}">
+                                <form:fields>
+                                    <Input id="sociallink1"  valueLiveUpdate="true" value="{editContactModel>/sociallink1}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailSocialLink2}">
+                                <form:fields>
+                                    <Input id="sociallink2"  valueLiveUpdate="true" value="{editContactModel>/sociallink2}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailSocialLink3}">
+                                <form:fields>
+                                    <Input id="sociallink3"  valueLiveUpdate="true" value="{editContactModel>/sociallink3}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
                         </form:formElements>
                     </form:FormContainer>
                 </form:formContainers>

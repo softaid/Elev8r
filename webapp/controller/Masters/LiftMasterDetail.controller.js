@@ -13,7 +13,7 @@ sap.ui.define([
 ], function (JSONModel, BaseController, Filter, FilterOperator, Sorter, MessageBox, commonFunction, masterService, commonService, MessageToast) {
     "use strict";
 
-    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.LeadMasterDetail", {
+    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Masters.LiftMasterDetail", {
 
         onInit: function () {
             var currentContext = this;  
@@ -27,22 +27,6 @@ sap.ui.define([
             
 			currentContext.model = currentContext.getView().getModel("viewModel");
 			var oModel = new JSONModel();
-
-            if(currentContext.model.typecode == "Stage"){
-                currentContext.getView().byId("pipelineId").setVisible(true);
-                masterService.getReferenceByTypeCode({ typecode: "Pipeline" }, function (data) {
-                    var oModel = new sap.ui.model.json.JSONModel();
-                    if(data.length && data[0].length){
-                        oModel.setData({ modelData: data[0] });
-                        currentContext.getView().setModel(oModel, "referenceModel");
-                    }else{
-                        oModel.setData({ modelData: [] });
-                        currentContext.getView().setModel(oModel, "referenceModel");
-                    }
-                });
-            }else{
-                currentContext.getView().byId("pipelineId").setVisible(false);
-            }
             
             if (currentContext.model.id != null) {
                 currentContext.getView().byId("btnSave").setText("Update");
@@ -65,7 +49,7 @@ sap.ui.define([
         },
 
         onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---chartofaccounts--fclChartOfAccounts");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---liftmaster--fclLiftMaster");
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
         },
 
@@ -96,8 +80,8 @@ sap.ui.define([
                 model["companyid"] = commonService.session("companyId");
                 model["userid"] = commonService.session("userId");
 
-                var saveSuccess = this.resourceBundle().getText("leadSaveSuccess");
-                var updateSuccess = this.resourceBundle().getText("leadUpdateSuccess");
+                var liftMasterSaveSuccess = this.resourceBundle().getText("liftMasterSaveSuccess");
+                var liftMasterUpdateSuccess = this.resourceBundle().getText("liftMasterUpdateSuccess");
 
                 if(this.model.typecode == "Stage"){
                     model["parentid"] = this.getView().byId("pipeline").getSelectedKey();
@@ -111,9 +95,9 @@ sap.ui.define([
                     if (data.id > 0) {
                         currentContext.onCancel();
                         if(currentContext.flag == 1)
-                        MessageToast.show(saveSuccess);
+                        MessageToast.show(liftMasterSaveSuccess);
                         else
-                        MessageToast.show(updateSuccess);
+                        MessageToast.show(liftMasterUpdateSuccess);
                         
                         currentContext.bus = sap.ui.getCore().getEventBus();
                         currentContext.bus.publish("loaddata", "loadData",{typecode : model["typecode"]});
@@ -126,7 +110,7 @@ sap.ui.define([
             var currentContext = this;
 
 			var confirmMsg = currentContext.resourceBundle().getText("deleteMsg");
-			var deleteSucc = currentContext.resourceBundle().getText("leadDeleteSucc");
+			var liftMasterDeleteSucc = currentContext.resourceBundle().getText("liftMasterDeleteSucc");
 			var model = this.getView().getModel("editMasterModel").oData;
 			console.log(currentContext.model);
 			if (currentContext.model.id != undefined) {
@@ -138,7 +122,7 @@ sap.ui.define([
 								masterService.deleteReference({id : currentContext.model.id}, function (data) {
 									if (data) {
 										currentContext.onCancel();
-										MessageToast.show(deleteSucc);
+										MessageToast.show(liftMasterDeleteSucc);
 										currentContext.bus = sap.ui.getCore().getEventBus();
 										currentContext.bus.publish("loaddata", "loadData",{typecode : model["typecode"]});
 									}
@@ -150,7 +134,7 @@ sap.ui.define([
         },
 
         onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leadmaster--fclLeadMaster");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---liftmaster--fclLiftMaster");
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 		}
 
