@@ -2,20 +2,20 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/ProjectActivity.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, Lead, xlsx, MessageToast) {
+], function (JSONModel, BaseController, Sorter,ProjectActivity, xlsx,MessageToast) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Leads", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivity", {
 
 		onInit: function () {
 
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("partymaster", "setDetailPage", this.setDetailPage, this);
+			this.bus.subscribe("activitymaster", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
-			this.oFlexibleColumnLayout = this.byId("fclLead");
+			this.oFlexibleColumnLayout = this.byId("fclProjectActivity");
 
 			this.handleRouteMatched(null);
 
@@ -26,10 +26,6 @@ sap.ui.define([
 
 			var model = new JSONModel();
 			model.setData(emptyModel);
-			this.getView().setModel(model, "subledgerModel");
-			jQuery.sap.delayedCall(1000, this, function () {
-				this.getView().byId("onSearchId").focus();
-			});
 			this.fnShortCut();
 		},
 
@@ -53,13 +49,12 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.getView().byId("btnUploadData").setVisible(false);
 			this.loadData();
 		},
 
 		setDetailPage: function (channel, event, data) {
 			this.detailView = sap.ui.view({
-				viewName: "sap.ui.elev8rerp.componentcontainer.view.LeadManagement." + data.viewName,
+				viewName: "sap.ui.elev8rerp.componentcontainer.view.ProjectManagement." + data.viewName,
 				type: "XML"
 			});
 
@@ -70,15 +65,15 @@ sap.ui.define([
 		},
 
 		onListItemPress: function (oEvent) {
-			var viewModel = oEvent.getSource().getBindingContext("LeadsMasterModel");
+			var viewModel = oEvent.getSource().getBindingContext("PActivityMasterModel");
 			var model = { "id": viewModel.getProperty("id") }
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("partymaster", "setDetailPage", { viewName: "LeadsDetail", viewModel: model });
+			this.bus.publish("activitymaster", "setDetailPage", { viewName: "ProjectActivityDetail", viewModel: model });
 		},
 
 		onAddNew: function (oEvent) {
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("partymaster", "setDetailPage", { viewName: "LeadsDetail" });
+			this.bus.publish("activitymaster", "setDetailPage", { viewName: "ProjectActivityDetail" });
 		},
 
 		onSearch: function (oEvent) {
@@ -109,11 +104,11 @@ sap.ui.define([
 
 		loadData: function () {
 			var currentContext = this;
-			Lead.getAllLeads(function (data) {
+			ProjectActivity.getAllProjectActivity(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
-				currentContext.getView().setModel(oModel, "LeadsMasterModel");
-				console.log("LeadsMasterModel", oModel);
+				currentContext.getView().setModel(oModel, "PActivityMasterModel");
+                console.log("PActivityMasterModel",oModel);
 			});
 		},
 
