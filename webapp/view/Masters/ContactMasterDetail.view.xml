@@ -20,12 +20,12 @@
 				<f:actions>
 					<ToolbarSpacer/>
 					<Button
-						text="{i18n>LocationDetailSave}"
+						text="{i18n>saveButtonText}"
                         type="Emphasized"
 						press="onSave"
 						id="btnSave"/>
 				    <Button
-						text="{i18n>LocationDetailDelete}"
+						text="{i18n>deleteButtonText}"
 						type="Emphasized"
 						id="btnDelete"
 						press="onDelete"/>						
@@ -76,7 +76,7 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>ContactDetailContactCategoryid}">
+                            <form:FormElement label="{i18n>ContactDetailContactCategory}">
                                 <form:fields>
                                     <Select id="category"
                                         required="true" 
@@ -109,17 +109,17 @@
                             </form:FormElement>
                             <form:FormElement label="{i18n>ContactDetailEmailW}">
                                 <form:fields>
-                                    <Input id="emailw" valueLiveUpdate="true" value="{editContactModel>/emailw}" type="Text" required="true"/>
+                                    <Input id="emailw" valueLiveUpdate="true" value="{editContactModel>/emailw}" type="Text"/>
                                 </form:fields>
                             </form:FormElement>
                             <form:FormElement label="{i18n>ContactDetailMobileP}">
                                 <form:fields>
-                                    <Input id="mobilep"  valueLiveUpdate="true" value="{editContactModel>/mobilep}" type="Text" required="true"/>
+                                    <Input id="mobilep"  valueLiveUpdate="true" value="{editContactModel>/mobilep}" type="Number" required="true"/>
                                 </form:fields>
                             </form:FormElement>
                             <form:FormElement label="{i18n>ContactDetailMobileW}">
                                 <form:fields>
-                                    <Input id="mobilew"  valueLiveUpdate="true" value="{editContactModel>/mobilew}" type="Text" required="true"/>
+                                    <Input id="mobilew"  valueLiveUpdate="true" value="{editContactModel>/mobilew}" type="Text"/>
                                 </form:fields>
                             </form:FormElement>
                             <form:FormElement label="{i18n>ContactDetailDOB}">
@@ -140,7 +140,6 @@
                                         displayFormat="{config>/dateFormat/displayFormat}"
                                         value="{editContactModel>/DOM}"
                                         valueFormat="dd/MM/yyyy"
-                                        required="true"  
                                         />
                                 </form:fields>
                             </form:FormElement>

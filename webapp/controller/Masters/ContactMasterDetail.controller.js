@@ -45,10 +45,12 @@ sap.ui.define([
 				}
 			});
 
-			if (this.model.locationid != undefined) {
-				contactService.getContact(this.model, function (data) {
+			if (this.model.contactid != undefined) {
+				contactService.getContact({id : this.model.contactid}, function (data) {
                     if(data.length && data[0].length){
                         oModel.setData(data[0][0]);
+						currentContext.getView().byId("contacttype").setSelectedKey(data[0][0].contacttypeid);
+						currentContext.getView().byId("category").setSelectedKey(data[0][0].contactcategoryid);
                     }
 				});
 				this.getView().byId("btnSave").setText("Update");
@@ -121,7 +123,41 @@ sap.ui.define([
 		validateForm: function () {
 			var isValid = true;
 
-			if (!commonFunction.isRequired(this, "txtContactName", "Please enter location name."))
+			let contactNameValidate = this.resourceBundle().getText("contactNameValidate");
+			let contactCompanyValidate = this.resourceBundle().getText("contactCompanyValidate");
+			let contactEmailValidate = this.resourceBundle().getText("contactEmailValidate");
+			let contactMobileValidate = this.resourceBundle().getText("contactMobileValidate");
+			let contactDOBValidate = this.resourceBundle().getText("contactDOBValidate");
+			let contactReferenceValidate = this.resourceBundle().getText("contactReferenceValidate");
+			let contactDesignationValidate = this.resourceBundle().getText("contactDesignationValidate");
+			let contactTypeValidate = this.resourceBundle().getText("contactTypeValidate");
+			let contactCategoryValidate = this.resourceBundle().getText("contactCategoryValidate");
+
+			if (!commonFunction.isRequired(this, "txtContactName", contactNameValidate))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "txtCompanyName", contactCompanyValidate))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "emailp", contactEmailValidate))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "mobilep", contactMobileValidate))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "txtdatedob", contactDOBValidate))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "contactreference", contactReferenceValidate))
+				isValid = false;
+
+			if (!commonFunction.isRequired(this, "designation", contactDesignationValidate))
+				isValid = false;
+
+			if (!commonFunction.isSelectRequired(this, "contacttype", contactTypeValidate))
+				isValid = false;
+
+			if (!commonFunction.isSelectRequired(this, "category", contactCategoryValidate))
 				isValid = false;
 
 			return isValid;
@@ -130,7 +166,7 @@ sap.ui.define([
 		onDelete: function () {
 			var currentContext = this;
 			let deleteMsg = currentContext.resourceBundle().getText("deleteMsg");
-			let deleteContact = currentContext.resourceBundle().getText("deleteContact");
+			let contactDeleteMsg = currentContext.resourceBundle().getText("contactDeleteMsg");
 			if (this.model != undefined) {
 				MessageBox.confirm(
 					deleteMsg, {
@@ -140,7 +176,7 @@ sap.ui.define([
 							contactService.deleteContact(currentContext.model, function (data) {
 								if (data) {
 									currentContext.onCancel();
-									MessageToast.show(deleteContact);
+									MessageToast.show(contactDeleteMsg);
 									currentContext.bus = sap.ui.getCore().getEventBus();
 									currentContext.bus.publish("loaddata", "loadData");
 								}
