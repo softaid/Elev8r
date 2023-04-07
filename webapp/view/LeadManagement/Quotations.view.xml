@@ -1,0 +1,73 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Quotations" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified">
+    <f:FlexibleColumnLayout  id="fclQuotation" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>quotationTitle}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                        <VBox fitContainer="true">
+                        <Table id="tblQuotationMaster" 
+                                inset="false"
+                                sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
+                                items="{
+                                path: 'QuotationMasterModel>/modelData',
+                                sorter: {
+                                    path: 'hatchername'
+                                }
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                                        <Button
+                                        text="Upload template"
+                                        type="Emphasized"
+                                        press="onUploadMasterData" id="btnUploadData"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="{i18n>quotationId}" /></Column>
+                                <Column><Text text ="{i18n>quotationLeadName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationContactName}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationLiftType}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationQuoteValue}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationQuoteStage}"/></Column>      
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                    <ObjectIdentifier text="{QuotationMasterModel>id}" />
+                                        <Text text="{QuotationMasterModel>leadname}" />
+                                        <Text text="{QuotationMasterModel>contactname}"/>
+                                        <Text text="{QuotationMasterModel>lifttype}"/>
+                                        <Text text="{QuotationMasterModel>quotevalue}"/>
+                                        <Text text="{QuotationMasterModel>quotestage}"/> 
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+                        </VBox >
+                        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+                            <items></items>
+                        </TabContainer>
+                        <HBox width="auto"></HBox>
+                        <HBox id="pnlMasterData" width="auto"></HBox>
+                    </VBox> 
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

@@ -32,6 +32,14 @@
 					"items": []
 				},
 				{
+					"title": "Lift Master",
+					"icon": "sap-icon://area-chart",
+					"expanded": true,
+					"key": "liftmaster",
+					"eid": [26],
+					"items": []
+				},
+				{
 					"title": "Inventory",
 					"icon": "sap-icon://area-chart",
 					"expanded": true,
