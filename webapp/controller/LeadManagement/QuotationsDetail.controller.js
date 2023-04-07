@@ -76,8 +76,8 @@ sap.ui.define([
 				model["companyid"] = commonService.session("companyId");
 				model["userid"] = commonService.session("userId");
 
-                let saveMsg = currentContext.resourceBundle().getText("contactSaveMsg");
-                let updateMsg = currentContext.resourceBundle().getText("contactUpdateMsg");
+                let saveMsg = currentContext.resourceBundle().getText("quotationSaveMsg");
+                let updateMsg = currentContext.resourceBundle().getText("quotationUpdateMsg");
 				
 				quotationService.saveQuotation(model, function (data) {
 
