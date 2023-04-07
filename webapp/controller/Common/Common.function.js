@@ -617,6 +617,32 @@ sap.ui.define([
             });
         },
 
+        getAllLeads : function(modelName, currentContext){
+            var leadModel = new sap.ui.model.json.JSONModel();
+            commonService.getAllLeads(function(data){
+                if(data.length && data[0].length){
+                    leadModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(leadModel, modelName);
+                }else{
+                    leadModel.setData({ modelData: [] });
+                    currentContext.getView().setModel(leadModel, modelName);
+                }
+            })
+        },
+
+        getAllContacts : function(modelName, currentContext){
+            var leadModel = new sap.ui.model.json.JSONModel();
+            commonService.getAllContacts(function(data){
+                if(data.length && data[0].length){
+                    leadModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(leadModel, modelName);
+                }else{
+                    leadModel.setData({ modelData: [] });
+                    currentContext.getView().setModel(leadModel, modelName);
+                }
+            })
+        },
+
         //get all lines
         getAllLine: function (branchid, currentContext) {
             commonService.getAllLine({ branchid: branchid }, function (data) {

@@ -756,6 +756,14 @@ sap.ui.define([
             getReferenceByTypeCode : function(params, callback){
                 this.runJQueryX("GET", "leadmaster/referencebytypecode/" + params.typecode, null, callback, null);
             },
+
+            getAllLeads: function(callback){
+                this.runJQueryX("GET", "lead/searchlead/" + this.session("companyId"), null, callback, null);
+            },
+
+            getAllContacts: function(callback){
+                this.runJQueryX("GET", "contact/search/" + this.session("companyId"), null, callback, null);
+            },
         };
     }
 );

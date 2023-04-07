@@ -366,6 +366,12 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
+				"quotations" : {
+					"viewId": "quotations",
+					"viewName": "LeadManagement/Quotations",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
 				"liftmaster" : {
 					"viewId" : "liftmaster",
 					"viewName" : "Masters/LiftMaster",
