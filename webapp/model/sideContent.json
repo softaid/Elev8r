@@ -179,6 +179,28 @@
 				}
 			]
 		},
+
+		{
+			"title": "Sales",
+			"icon": "sap-icon://add-process",
+			"expanded": false,
+			"key": "sales",
+			"eid": [27],
+			"items": [
+				{
+					"title": "Sale Order",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "saleorder",
+					"eid": [28],
+					"items": []
+				}
+			
+			]
+		},
+
+
+		
 		{
 			"title": "My Tasks",
 			"icon": "sap-icon://add-process",

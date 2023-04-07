@@ -6,9 +6,10 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/formatter/common.formatter',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, Leadservice, commonService, commonFunction) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, Leadservice, commonService, locationService, commonFunction) {
 
 	//function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, partyService, commonService, commonFunction) {
 	"use strict";
@@ -35,6 +36,60 @@ sap.ui.define([
 			// bind Lead dropdown
 			commonFunction.getReferenceByType("LeadCtgry", "leadCategoryModel", this);
 
+			// bind CntCtgry dropdown
+			commonFunction.getReferenceByType("CntCtgry", "leadCntCategoryModel", this);
+
+			// bind CntType dropdown
+			commonFunction.getReferenceByType("CntType", "leadCntTypeModel", this);
+
+			// bind LiftType dropdown
+			commonFunction.getReferenceByType("LftTyp", "liftTypeModel", this);
+
+			// bind capacity dropdown
+			commonFunction.getReferenceByType("LftCpcty", "leadCapacityModel", this);
+
+			// bind Machine dropdown
+			commonFunction.getReferenceByType("LftMachine", "MachineModel", this);
+
+			// bind Model dropdown
+			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
+
+			// bind Drive dropdown
+			commonFunction.getReferenceByType("LftDrv", "leadDriveModel", this);
+
+			// bind Control dropdown
+			commonFunction.getReferenceByType("LftCtrl", "leadControlModel", this);
+
+			// bind Operation dropdown
+			commonFunction.getReferenceByType("LftOprn", "leadOperationModel", this);
+
+			// bind Speed dropdown
+			commonFunction.getReferenceByType("LftSpd", "leadSpeedModel", this);
+
+			// bind Door dropdown
+			commonFunction.getReferenceByType("DrTyp", "leadDoorTypeModel", this);
+
+			// bind landingDoorModel dropdown
+			commonFunction.getReferenceByType("LdnDr", "landingDoorModel", this);
+
+			// bind CarDoorModel dropdown
+			commonFunction.getReferenceByType("CarDr", "CarDoorModel", this);
+
+			// bind LowestFloorModel dropdown
+			commonFunction.getReferenceByType("LwstFlrMking", "LowestFloorModel", this);
+
+			// bind CWTPositionModel dropdown
+			commonFunction.getReferenceByType("CWTPstn", "CWTPositionModel", this);
+
+			// bind standaredFloorHeightModel dropdown
+			commonFunction.getReferenceByType("StdFlrHt", "standaredFloorHeightModel", this);
+
+			//bind all locations
+			locationService.getAllLocations(function (data) {
+				var oModel = new sap.ui.model.json.JSONModel();
+				oModel.setData({ modelData: data[0] });
+				currentContext.getView().setModel(oModel, "locationModel");
+			});
 			
 
 			//bind country dropdown
