@@ -30,10 +30,10 @@
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
                                         <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
-                                        <Button
+                                        <!-- <Button
                                         text="Upload template"
                                         type="Emphasized"
-                                        press="onUploadMasterData" id="btnUploadData"/>
+                                        press="onUploadMasterData" id="btnUploadData"/> -->
                                     </content>
                                 </Toolbar>
                             </headerToolbar>

@@ -118,7 +118,7 @@
                                     <Input id="nooflifts" valueLiveUpdate="true" value="{editQuotationModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
                                 </form:fields>
                             </form:FormElement>   
-                            <form:FormElement label="{i18n>quottionDetailQuoteStageId}">
+                            <form:FormElement label="{i18n>quottionDetailQuoteStage}">
                                 <form:fields>
                                     <Select id="stageid"
 					                    required="true" 
