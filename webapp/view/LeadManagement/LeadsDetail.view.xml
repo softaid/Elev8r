@@ -499,12 +499,12 @@
 
                     <form:FormContainer id="containerCity2" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress2" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity2" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -519,7 +519,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState2" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState2" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -530,7 +530,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry2" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -541,7 +541,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode2" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -555,12 +555,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity3" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress3" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity3" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -575,7 +575,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState3" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState3" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -586,7 +586,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry3" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -597,7 +597,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode3" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -611,12 +611,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity4" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress4" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity4" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -631,7 +631,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState4" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState4" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -642,7 +642,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry4" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -653,7 +653,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>  
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode4" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -667,12 +667,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity5" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress5" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity5" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -687,7 +687,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState5" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState5" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -698,7 +698,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry5" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -709,7 +709,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode5" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -723,12 +723,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity6" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress6" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity6" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -743,7 +743,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState6" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState6" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -754,7 +754,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry6" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -765,7 +765,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode6" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -780,12 +780,12 @@
 
                     <form:FormContainer id="containerCity7" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress7" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity7" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -800,7 +800,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState7" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState7" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -811,7 +811,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry7" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -822,7 +822,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode7" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -836,12 +836,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity8" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress8" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity8" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -856,7 +856,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState8" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState8" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -867,7 +867,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry8" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -878,7 +878,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode8" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -892,12 +892,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity9" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress9" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity9" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -912,7 +912,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState9" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState9" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -923,7 +923,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry9" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -934,7 +934,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode9" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -948,12 +948,12 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerCity10" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress10" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity10" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -968,7 +968,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState10" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState10" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -979,7 +979,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry10" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -990,7 +990,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode10" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -1004,12 +1004,12 @@
                     </form:FormContainer>
                      <form:FormContainer id="containerCity11" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress11" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity11" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -1024,7 +1024,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState11" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState11" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -1035,7 +1035,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry11" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -1046,7 +1046,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode11" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -1060,12 +1060,12 @@
                     </form:FormContainer>
                      <form:FormContainer id="containerCity12" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress12" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity12" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -1080,7 +1080,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState12" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState12" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -1091,7 +1091,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry12" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -1102,7 +1102,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode12" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -1116,12 +1116,12 @@
                     </form:FormContainer>
                      <form:FormContainer id="containerCity13" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress13" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity13" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -1136,7 +1136,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState13" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState13" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -1147,7 +1147,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry13" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -1158,7 +1158,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode13" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -1172,12 +1172,12 @@
                     </form:FormContainer>
                      <form:FormContainer id="containerCity14" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress14" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity14" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -1192,7 +1192,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState14" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState14" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -1203,7 +1203,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry14" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -1214,7 +1214,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode14" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -1228,12 +1228,12 @@
                     </form:FormContainer>
                      <form:FormContainer id="containerCity15" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress15" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity15" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -1248,7 +1248,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState15" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState15" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -1259,7 +1259,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry15" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -1270,7 +1270,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode15" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
@@ -1284,12 +1284,12 @@
                     </form:FormContainer>
                      <form:FormContainer id="containerCity16" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailAddressLabel}">
+                            <form:FormElement label="{i18n>leadAddress}">
                                 <form:fields>
                                     <Input id="txtAddress16" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="{i18n>partyDetailCityLabel}">
+                            <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
                                     <Select id="ddlCity16" selectedKey="{editPartyAddressModel>/cityid}" 
                                         items="{
@@ -1304,7 +1304,7 @@
                     </form:FormContainer>
                     <form:FormContainer id="containerState16" visible="false">
 					    <form:formElements>
-                            <form:FormElement label="{i18n>partyDetailStateLabel}">
+                            <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState16" selectedKey="{editPartyAddressModel>/stateid}" 
                                         items="{
@@ -1315,7 +1315,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailCountryLabel}">
+                            <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
                                     <Select id="ddlCountry16" selectedKey="{editPartyAddressModel>/countryid}" 
                                         items="{
@@ -1326,7 +1326,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>partyDetailPincodeLabel}">
+                            <form:FormElement label="{i18n>leadPinCode}">
                                 <form:fields>
                                     <Input id="txtPinCode16" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
                                 </form:fields>
