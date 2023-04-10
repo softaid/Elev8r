@@ -33,7 +33,7 @@ controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.LocationM
                             </headerToolbar>
                             <columns>
                                 <Column><Text text ="{i18n>LocationCode}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>LocationLocationName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>LocationName}" /></Column>
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">

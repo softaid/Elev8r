@@ -17,7 +17,7 @@
 			"items": [
 				{
 					"title": "Lead Master",
-					"icon": "sap-icon://account",
+					"icon": "sap-icon://leads",
 					"expanded": false,
 					"key": "leadmaster",
 					"eid": [3],
@@ -25,7 +25,7 @@
 				},
 				{
 					"title": "Project Master",
-					"icon": "sap-icon://create-form",
+					"icon": "sap-icon://activity-2",
 					"expanded": false,
 					"key": "projectmaster",
 					"eid": [4],
@@ -33,7 +33,7 @@
 				},
 				{
 					"title": "Lift Master",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://activity-2",
 					"expanded": true,
 					"key": "liftmaster",
 					"eid": [26],
@@ -49,7 +49,7 @@
 				},
 				{
 					"title": "Location",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://functional-location",
 					"expanded": true,
 					"key": "locationmaster",
 					"eid": [24],
@@ -57,7 +57,7 @@
 				},
 				{
 					"title": "Warehouse",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://factory",
 					"expanded": true,
 					"key": "warehousemaster",
 					"eid": [21],
@@ -65,7 +65,7 @@
 				},
 				{
 					"title": "Employee",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://employee",
 					"expanded": true,
 					"key": "employeemaster",
 					"eid": [23],
@@ -73,7 +73,7 @@
 				},
 				{
 					"title": "Material Request and Transfer",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://cart-5",
 					"expanded": true,
 					"key": "materialrequestandtransfer",
 					"eid": [22],
@@ -81,7 +81,7 @@
 				},
 				{
 					"title": "Bill Of Material",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://activity-items",
 					"expanded": true,
 					"key": "billofmateriallist",
 					"eid": [20],
@@ -89,7 +89,7 @@
 				},
 				{
 					"title": "Users",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://account",
 					"expanded": true,
 					"key": "users",
 					"eid": [6],
@@ -97,7 +97,7 @@
 				},
 				{
 					"title": "Contacts",
-					"icon": "sap-icon://area-chart",
+					"icon": "sap-icon://contacts",
 					"expanded": true,
 					"key": "contactmaster",
 					"eid": [25],
@@ -107,14 +107,14 @@
 		},
 		{
 			"title": "Lead Management",
-			"icon": "sap-icon://process",
+			"icon": "sap-icon://kpi-managing-my-area",
 			"expanded": false,
 			"key": "leadmanagement",
 			"eid": [7],
 			"items": [
 				{
 					"title": "Leads",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://leads",
 					"expanded": false,
 					"key": "leads",
 					"eid": [8],
@@ -122,7 +122,7 @@
 				},
 				{
 					"title": "Activities",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://activities",
 					"expanded": false,
 					"key": "leadactivities",
 					"eid": [9],
@@ -130,7 +130,7 @@
 				},
 				{
 					"title": "Quotations",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://sales-quote",
 					"expanded": false,
 					"key": "quotations",
 					"eid": [10],
@@ -138,7 +138,7 @@
 				},
 				{
 					"title": "Reports",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://expense-report",
 					"expanded": false,
 					"key": "leadreports",
 					"eid": [11],
@@ -148,14 +148,14 @@
 		},
 		{
 			"title": "Project Management",
-			"icon": "sap-icon://add-process",
+			"icon": "sap-icon://kpi-managing-my-area",
 			"expanded": false,
 			"key": "projectmanagement",
 			"eid": [12],
 			"items": [
 				{
 					"title": "Project",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://workflow-tasks",
 					"expanded": false,
 					"key": "project",
 					"eid": [13],
@@ -163,7 +163,7 @@
 				},
 				{
 					"title": "Activities",
-					"icon": "sap-icon://account",
+					"icon": "sap-icon://activities",
 					"expanded": false,
 					"key": "projectactivities",
 					"eid": [14],
@@ -171,7 +171,7 @@
 				},
 				{
 					"title": "Payments",
-					"icon": "sap-icon://account",
+					"icon": "sap-icon://batch-payments",
 					"expanded": false,
 					"key": "payments",
 					"eid": [15],
@@ -179,7 +179,7 @@
 				},
 				{
 					"title": "Reports",
-					"icon": "sap-icon://account",
+					"icon": "sap-icon://expense-report",
 					"expanded": false,
 					"key": "projectreports",
 					"eid": [16],
@@ -190,14 +190,14 @@
 
 		{
 			"title": "Sales",
-			"icon": "sap-icon://add-process",
+			"icon": "sap-icon://crm-sales",
 			"expanded": false,
 			"key": "sales",
 			"eid": [27],
 			"items": [
 				{
 					"title": "Sale Order",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://my-sales-order",
 					"expanded": false,
 					"key": "saleorder",
 					"eid": [28],
@@ -211,14 +211,14 @@
 		
 		{
 			"title": "My Tasks",
-			"icon": "sap-icon://add-process",
+			"icon": "sap-icon://receipt",
 			"expanded": false,
 			"key": "mytasks",
 			"eid": [17],
 			"items": [
 				{
 					"title": "Attendance",
-					"icon": "sap-icon://basket",
+					"icon": "sap-icon://account",
 					"expanded": false,
 					"key": "attendance",
 					"eid": [18],
@@ -226,7 +226,7 @@
 				},
 				{
 					"title": "Expenses",
-					"icon": "sap-icon://account",
+					"icon": "sap-icon://batch-payments",
 					"expanded": false,
 					"key": "expenses",
 					"eid": [19],
