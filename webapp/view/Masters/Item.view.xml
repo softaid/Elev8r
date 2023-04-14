@@ -1,4 +1,4 @@
-<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Inventory.Item" height="100%"
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.Item" height="100%"
   xmlns="sap.m"
   xmlns:f="sap.f"
   xmlns:core="sap.ui.core"

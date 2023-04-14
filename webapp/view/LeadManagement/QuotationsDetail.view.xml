@@ -108,7 +108,7 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>quotationDetailQuoteVlue}">
+                            <form:FormElement label="{i18n>quotationDetailQuoteValue}">
                                 <form:fields>
                                     <Input id="quotevalue" valueLiveUpdate="true" value="{editQuotationModel>/quotevalue}"  required="true" change="onPartyNameChange"/>
                                 </form:fields>
