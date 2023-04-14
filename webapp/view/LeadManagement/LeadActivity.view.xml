@@ -23,7 +23,7 @@
 				<f:content>	
 	                <VBox fitContainer="true">  
 
-                        <Table id="userTable"
+                        <Table id="activityTable"
                             inset="false" 
                             items="{
                                         path: 'leadActivityModel>/modelData',

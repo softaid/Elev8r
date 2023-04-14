@@ -80,7 +80,7 @@ sap.ui.define([
 			var oTableSearchState = [],
 				sQuery = oEvent.getParameter("query");
 			var contains = sap.ui.model.FilterOperator.Contains;
-			var columns = ['partyname', 'partyroles', 'emailid', 'mobileno', 'contactperson'];
+			var columns = ['projectname', 'milestone', 'status','startdate'];
 			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
 				return new sap.ui.model.Filter(colName, contains, sQuery);
 			}),
@@ -90,13 +90,13 @@ sap.ui.define([
 				oTableSearchState = [filters];
 			}
 
-			this.getView().byId("tblPartyMaster").getBinding("items").filter(oTableSearchState, "Application");
+			this.getView().byId("tblProjectMaster").getBinding("items").filter(oTableSearchState, "Application");
 		},
 
 		onSort: function (oEvent) {
 			this._bDescendingSort = !this._bDescendingSort;
 			var oView = this.getView(),
-				oTable = oView.byId("tblPartyMaster"),
+				oTable = oView.byId("tblProjectMaster"),
 				oBinding = oTable.getBinding("items"),
 				oSorter = new Sorter("partyname", this._bDescendingSort);
 			oBinding.sort(oSorter);

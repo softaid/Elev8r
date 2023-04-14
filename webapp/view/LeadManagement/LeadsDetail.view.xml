@@ -71,7 +71,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/sourceid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadSourceModel>/modelData',
@@ -81,19 +81,19 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-                             <form:FormElement label="{i18n>leadPiPelineLabel}">
+                             <form:FormElement label="{i18n>leadStageLabel}">
                                 <form:fields>
-                                    <Select id="txtpipelineid"
+                                    <Select id="txtStageid"
 					                    required="true" 
                                         change=""
-                                        selectedKey="{editPartyModel>/pipelineid}" 
-                                        forceSelection="false"
+                                        selectedKey="{editPartyModel>/stageid}" 
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
-                                            path: 'pipeLineModel>/modelData',
+                                            path: 'stageModel>/modelData',
                                             sorter: { path: 'id' }
                                         }">
-                                        <core:Item key="{pipeLineModel>id}" text="{pipeLineModel>description}" />
+                                        <core:Item key="{stageModel>id}" text="{stageModel>description}" />
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
@@ -103,7 +103,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/leadscategory}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadCategoryModel>/modelData',
@@ -119,7 +119,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/typeoflift}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'liftTypeModel>/modelData',
@@ -135,7 +135,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/capacityid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadCapacityModel>/modelData',
@@ -151,7 +151,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/modelid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadmodelModel>/modelData',
@@ -167,7 +167,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/driveid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadDriveModel>/modelData',
@@ -183,7 +183,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/machineid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'MachineModel>/modelData',
@@ -199,7 +199,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/controlid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadControlModel>/modelData',
@@ -215,7 +215,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/operationid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadOperationModel>/modelData',
@@ -231,7 +231,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/speedid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadSpeedModel>/modelData',
@@ -247,7 +247,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/typeofdoorid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadDoorTypeModel>/modelData',
@@ -263,7 +263,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/landingdoorid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'landingDoorModel>/modelData',
@@ -279,7 +279,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/cardoorid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'CarDoorModel>/modelData',
@@ -295,7 +295,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/lowestfloorid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'LowestFloorModel>/modelData',
@@ -311,7 +311,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/cwtpositionid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'CWTPositionModel>/modelData',
@@ -327,7 +327,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/floorheaightid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'standaredFloorHeightModel>/modelData',
@@ -343,7 +343,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/architectidid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadCntCategoryModel>/modelData',
@@ -359,7 +359,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/leadconsaltantid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadCntTypeModel>/modelData',
@@ -380,7 +380,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/leadstatus}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'leadStatusModel>/modelData',
@@ -396,7 +396,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editPartyModel>/locationid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'locationModel>/modelData',
@@ -461,7 +461,7 @@
 					    <form:formElements>
                             <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
-                                    <Select id="ddlState1" selectedKey="{editPartyAddressModel>/stateid}" forceSelection="false"
+                                    <Select id="ddlState1" selectedKey="{editPartyAddressModel>/stateid}" forceSelection="true"
                                         items="{
                                             path: 'partyStateModel>/modelData',
                                             sorter: { path: 'id' }
@@ -472,7 +472,7 @@
                             </form:FormElement>
                             <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
-                                    <Select id="ddlCountry1" selectedKey="{editPartyAddressModel>/countryid}" forceSelection="false"
+                                    <Select id="ddlCountry1" selectedKey="{editPartyAddressModel>/countryid}" forceSelection="true"
                                         items="{
                                             path: 'partyCountryModel>/modelData',
                                             sorter: { path: 'id' }

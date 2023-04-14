@@ -15,7 +15,7 @@
 		        </f:title>
 				<f:content>	
                         <VBox fitContainer="true">
-                        <Table id="tblPartyMaster" 
+                        <Table id="tblLeadMaster" 
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
                                 items="{
@@ -29,6 +29,7 @@
                                     <content>
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
+                                        <SearchField search="onSearch" width="17.5rem" id ="search"/>
                                         <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
                                         <Button
                                         text="Upload template"
@@ -43,7 +44,7 @@
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>leadMobileNo}"/></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>leadEmail}"/></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>leadSourceLabel}"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>leadPiPelineLabel}"/></Column>      
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>leadStageLabel}"/></Column>      
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
@@ -53,7 +54,7 @@
                                         <Text text="{LeadsMasterModel>mobileno}"/>
                                         <Text text="{LeadsMasterModel>email}"/>
                                         <Text text="{LeadsMasterModel>sourcename}"/>
-                                        <Text text="{LeadsMasterModel>pipelinename}"/> 
+                                        <Text text="{LeadsMasterModel>stagename}"/> 
                                     </cells>
                                 </ColumnListItem>
                             </items>

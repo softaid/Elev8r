@@ -39,7 +39,7 @@ sap.ui.define([
             var oTableSearchState = [],
                 sQuery = oEvent.getParameter("query");
             var contains = sap.ui.model.FilterOperator.Contains;
-            var columns = ['subject', 'type'];
+            var columns = ['subject', 'assignedtoemp','type','priority','status'];
             var filters = new sap.ui.model.Filter(columns.map(function (colName) {
                 return new sap.ui.model.Filter(colName, contains, sQuery);
             }),
@@ -49,7 +49,7 @@ sap.ui.define([
                 oTableSearchState = [filters];
             }
 
-            this.getView().byId("userTable").getBinding("items").filter(oTableSearchState, "Application");
+            this.getView().byId("activityTable").getBinding("items").filter(oTableSearchState, "Application");
         },
 
         onAddNew: function (oEvent) {

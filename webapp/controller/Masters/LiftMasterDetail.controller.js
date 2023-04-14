@@ -32,7 +32,8 @@ sap.ui.define([
                 currentContext.getView().byId("btnSave").setText("Update");
 				masterService.getReference({id : currentContext.model.id}, function(data){
                     if(data.length && data[0].length){
-                        data[0][0].active = data[0][0].active == 1 ? true : false;
+                        data[0][0].active = data[0][i].active == 1 ? true : false;
+                        data[0][0].defaultvalue = data[0][i].defaultvalue == 1 ? true : false;
                         oModel.setData(data[0][0]);
                     }
                 });

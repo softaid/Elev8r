@@ -84,6 +84,9 @@ sap.ui.define([
 			// bind standaredFloorHeightModel dropdown
 			commonFunction.getReferenceByType("StdFlrHt", "standaredFloorHeightModel", this);
 
+			// bind Stage dropdown
+			commonFunction.getReferenceByType("Stage", "stageModel", this);
+
 			//bind all locations
 			locationService.getAllLocations(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -347,7 +350,7 @@ sap.ui.define([
 		validateForm: function () {
 			var isValid = true;
 			var source = this.getView().byId("sourceid").getSelectedKey();
-			var pipeline = this.getView().byId("txtpipelineid").getSelectedKey();
+			var pipeline = this.getView().byId("txtStageid").getSelectedKey();
 
 			var location = this.getView().byId("leadlocationid").getSelectedKey();
 			var status = this.getView().byId("leadstatusid").getSelectedKey();
@@ -391,8 +394,8 @@ sap.ui.define([
 			// check atleast one source is selected
 
 			if (pipeline.length == 0) {
-				this.getView().byId("txtpipelineid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one pipeline.");
+				this.getView().byId("txtStageid").setValueState(sap.ui.core.ValueState.Error)
+					.setValueStateText("Please select atleast one Stage.");
 
 				isValid = false;
 			}

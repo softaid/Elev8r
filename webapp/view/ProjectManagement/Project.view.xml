@@ -17,7 +17,7 @@
 		        </f:title>
 				<f:content>	
                         <VBox fitContainer="true">
-                        <Table id="tblPartyMaster" 
+                        <Table id="tblProjectMaster" 
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
                                 items="{
@@ -29,6 +29,7 @@
                                     <content>
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
+                                        <SearchField search="onSearch" width="17.5rem" id = "searchId"/>
                                         <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
                                     </content>
                                 </Toolbar>

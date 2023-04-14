@@ -594,6 +594,7 @@ sap.ui.define([
          // get reference types
          getReferenceByType: function (typeCode,modelName, currentContext) {
             masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
+                console.log("------------datypecodeta---------------",data);
                 if(data.length && data[0].length){
                     var selectModel = new sap.ui.model.json.JSONModel();
                     selectModel.setData({ modelData: data[0] });

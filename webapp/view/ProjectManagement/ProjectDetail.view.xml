@@ -72,7 +72,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editProActivityModel>/milestoneid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'milestoneModel>/modelData',
@@ -118,7 +118,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editProActivityModel>/statusid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'projectStatusModel>/modelData',

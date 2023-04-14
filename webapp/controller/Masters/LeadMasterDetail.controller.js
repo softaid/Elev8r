@@ -49,6 +49,7 @@ sap.ui.define([
 				masterService.getReference({id : currentContext.model.id}, function(data){
                     if(data.length && data[0].length){
                         data[0][0].active = data[0][0].active == 1 ? true : false;
+                        data[0][0].defaultvalue = data[0][0].defaultvalue == 1 ? true : false;
                         oModel.setData(data[0][0]);
                     }
                 });
@@ -106,6 +107,7 @@ sap.ui.define([
 
                 var currentContext = this;
 
+                console.log("data : model",model);
                 masterService.saveReference(model, function (data) {
                     console.log("data : ",data);
                     if (data.id > 0) {
