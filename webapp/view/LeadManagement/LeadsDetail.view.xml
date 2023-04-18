@@ -496,7 +496,6 @@
                             </form:FormElement>                      
                         </form:formElements>
                     </form:FormContainer>
-
                     <form:FormContainer id="containerCity2" visible="false">
 					    <form:formElements>
                             <form:FormElement label="{i18n>leadAddress}">

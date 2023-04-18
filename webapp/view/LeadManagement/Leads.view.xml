@@ -14,6 +14,8 @@
 			        </f:DynamicPageTitle>
 		        </f:title>
 				<f:content>	
+
+                
                         <VBox fitContainer="true">
                         <Table id="tblLeadMaster" 
                                 inset="false"
