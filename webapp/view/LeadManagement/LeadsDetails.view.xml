@@ -72,7 +72,7 @@
                                         <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                     </form:FormElement>  
-                                     <form:FormElement label="Lead Creation Date">
+                                     <form:FormElement label="Lead Date">
                                         <form:fields>
                                             <DatePicker id="createddate" width="100%" 
                                             placeholder="{config>/dateFormat/placeholder}"
