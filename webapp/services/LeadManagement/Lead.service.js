@@ -28,7 +28,9 @@ sap.ui.define([
                 commonService.runJQueryX("POST", "lead/leadaddress" , Params, Callback, null);
             },
 
-
+            getLeadwiseDetails : function(Params, Callback){
+                commonService.runJQueryX("GET", "lead/leadwisedetails/" + Params.id, null, Callback, null);
+            },
         };
     }
 );

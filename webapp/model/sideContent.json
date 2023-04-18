@@ -121,6 +121,14 @@
 					"items": []
 				},
 				{
+					"title": "details",
+					"icon": "sap-icon://leads",
+					"expanded": false,
+					"key": "details",
+					"eid": [8],
+					"items": []
+				},
+				{
 					"title": "Activities",
 					"icon": "sap-icon://activities",
 					"expanded": false,
