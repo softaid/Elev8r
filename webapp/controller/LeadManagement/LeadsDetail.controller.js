@@ -103,17 +103,6 @@ sap.ui.define([
 				currentContext.getView().setModel(oModel, "partyCountryModel");
 			});
 
-			var period = [{ key: 7, period: 7 },
-			{ key: 14, period: 14 },
-			{ key: 30, period: 30 },
-			{ key: 45, period: 45 },
-			{ key: 90, period: 60 },
-			{ key: 60, period: 90 }];
-
-			var cModel = new sap.ui.model.json.JSONModel();
-			cModel.setData({ modelData: period });
-			currentContext.getView().setModel(cModel, "creditPeriodModel");
-
 			//bind state dropdown
 			commonService.getAllStates(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -300,7 +289,7 @@ sap.ui.define([
 			if (this.validateForm()) {
 				var currentContext = this;
 				var model = this.getView().getModel("editPartyModel").oData;
-				console.log("editPartyModel", model);
+				console.log("---------------editPartyModel-------------------", model);
 				model["companyid"] = commonService.session("companyId");
 				model["userid"] = commonService.session("userId");
 				var partyAddressModel = [];
