@@ -17,7 +17,7 @@ sap.ui.define([
 
 			//oThis.bus = sap.ui.getCore().getEventBus();
             this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
-
+			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			//this.oFlexibleColumnLayout = this.byId("fclLead");
 
@@ -32,7 +32,7 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "subledgerModel");
 			jQuery.sap.delayedCall(1000, this, function () {
-				this.getView().byId("onSearchId").focus();
+				// this.getView().byId("onSearchId").focus();
 			});
 			this.fnShortCut();
 		},
@@ -61,42 +61,35 @@ sap.ui.define([
 			this.loadData();
 		},
 
-		// setDetailPage: function (channel, event, data) {
-		// 	this.detailView = sap.ui.view({
-		// 		viewName: "sap.ui.elev8rerp.componentcontainer.view.LeadManagement." + data.viewName,
-		// 		type: "XML"
-		// 	});
-
-		// 	this.detailView.setModel(data.viewModel, "viewModel");
-		// 	this.oFlexibleColumnLayout.removeAllMidColumnPages();
-		// 	this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
-		// 	this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
-		// },
+		handleLeadDetails : function (sChannel, sEvent, oData) {
+            console.log("oData",oData);
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            this.bus = sap.ui.getCore().getEventBus();
+            oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+            oRouter.navTo(oData.pagekey, true);
+        },
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("LeadsMasterModel");
 			var model = { "id": viewModel.getProperty("id") }
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("partymaster", "", { viewName: "addlead", viewModel: model });
+			setTimeout(function () {
+                this.bus = sap.ui.getCore().getEventBus();
+                this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leadsdetail", viewModel:model });
+            }, 1000);
+            
+            this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leadsdetail", viewModel:model});
 		},
+		
+		onAddNew: function() {
 
-		// onAddNew: function (oEvent) {
-		// 	this.bus = sap.ui.getCore().getEventBus();
-		// 	this.bus.publish("partymaster", "", { viewName: "LeadsDetails" });
-		// },
-
-		    /**
-         * Function to redirect to add screen of bill of material.
-         */
-			onAddNew: function() {
-
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				setTimeout(function () {
-					this.bus = sap.ui.getCore().getEventBus();
-					this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel:null });
-				}, 1000);
-				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel:null});
-			},
+				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadsdetails", viewModel:null });
+			}, 1000);
+			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadsdetails", viewModel:null});
+		},
 
 			 /**
          * Function to navigate to specified route.

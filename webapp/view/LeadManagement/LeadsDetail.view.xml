@@ -1,1344 +1,164 @@
 <mvc:View
-	xmlns:c="sap.ui.core"
 	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetail"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:u="sap.ui.unified"
 	xmlns="sap.m"
-	xmlns:t="sap.ui.table"
-	xmlns:f="sap.f"
+    xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns:card="sap.f.cards"
+	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:layout="sap.ui.layout"
-	xmlns:form="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
-	height="100%">
-		
-	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
-		<f:title>
-			<f:DynamicPageTitle>
-				<f:heading>
-					<Title text="{i18n>leadScreenDetailtitle}"/>
-				</f:heading>
-				<f:actions>
-					<ToolbarSpacer/>
-					<Button
-						text="{i18n>RoleAccessButtonSave}"
-                        type="Emphasized"
-						press="onSave"
-						id="btnSave"/>
-				    <Button
-						text="{i18n>RoleAccessButtonDelete}"
-						type="Emphasized"
-						id="btnDelete"
-						press="onDelete"/>						
-				</f:actions>
-				<f:navigationActions>
-					<Button
-						icon="sap-icon://decline"
-						type="Transparent" press="onCancel" />
-				</f:navigationActions>
-			</f:DynamicPageTitle>
-		</f:title>
-		<f:content>				
-   			<form:Form editable="true">
-                <form:title>
-                </form:title>
-                <form:layout>
-                    <form:ResponsiveGridLayout
-                        labelSpanXL="4"
-                        labelSpanL="4"
-                        labelSpanM="4"
-                        labelSpanS="12"
-                        adjustLabelSpan="false"
-                        emptySpanXL="0"
-                        emptySpanL="0"
-                        emptySpanM="0"
-                        emptySpanS="0"
-                        columnsXL="3"
-                        columnsL="2"
-                        columnsM="2"
-                        singleContainerFullSize="false" />
-                </form:layout>
-                <form:formContainers>
-                    <form:FormContainer title="{i18n>leadScreenBasicInfo}">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadNameLabel}">
-                                <form:fields>
-                                    <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
-                                </form:fields>
-                            </form:FormElement>   
-                            <form:FormElement label="{i18n>leadSourceLabel}">
-                                <form:fields>
-                                    <Select id="sourceid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/sourceid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadSourceModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="{i18n>leadStageLabel}">
-                                <form:fields>
-                                    <Select id="txtStageid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/stageid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'stageModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{stageModel>id}" text="{stageModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadCategory}">
-                                <form:fields>
-                                    <Select id="categoryid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/leadscategory}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadCategoryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="{i18n>leadtypeoflift}">
-                                <form:fields>
-                                    <Select id="typeofliftid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/typeoflift}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'liftTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{liftTypeModel>id}" text="{liftTypeModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="{i18n>leadcapacity}">
-                                <form:fields>
-                                    <Select id="capacityid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/capacityid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadCapacityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadCapacityModel>id}" text="{leadCapacityModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadModel}">
-                                <form:fields>
-                                    <Select id="modelid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/modelid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadmodelModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadDrive}">
-                                <form:fields>
-                                    <Select id="driveid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/driveid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadDriveModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadDriveModel>id}" text="{leadDriveModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadMachine}">
-                                <form:fields>
-                                    <Select id="machineid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/machineid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'MachineModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{MachineModel>id}" text="{MachineModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadControl}">
-                                <form:fields>
-                                    <Select id="controlid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/controlid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadControlModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadControlModel>id}" text="{leadControlModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                                <form:FormElement label="{i18n>leadOperation}">
-                                <form:fields>
-                                    <Select id="operationid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/operationid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadOperationModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadOperationModel>id}" text="{leadOperationModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                                <form:FormElement label="{i18n>leadSpeed}">
-                                <form:fields>
-                                    <Select id="speedid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/speedid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadSpeedModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadSpeedModel>id}" text="{leadSpeedModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadTypesodDoor}">
-                                <form:fields>
-                                    <Select id="typesofdoorid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/typeofdoorid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadDoorTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadDoorTypeModel>id}" text="{leadDoorTypeModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadLandingDoors}">
-                                <form:fields>
-                                    <Select id="landingdoorsid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/landingdoorid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'landingDoorModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{landingDoorModel>id}" text="{landingDoorModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadCarDoor}">
-                                <form:fields>
-                                    <Select id="leadcarid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/cardoorid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'CarDoorModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{CarDoorModel>id}" text="{CarDoorModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>laedLowestFloorMarking}">
-                                <form:fields>
-                                    <Select id="landingfloorsid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/lowestfloorid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'LowestFloorModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{LowestFloorModel>id}" text="{LowestFloorModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadCWTPosition}">
-                                <form:fields>
-                                    <Select id="landingcwdpositionid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/cwtpositionid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'CWTPositionModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{CWTPositionModel>id}" text="{CWTPositionModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadStandardFloorHeight}">
-                                <form:fields>
-                                    <Select id="landingfloorid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/floorheaightid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'standaredFloorHeightModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{standaredFloorHeightModel>id}" text="{standaredFloorHeightModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadArchitect}">
-                                <form:fields>
-                                    <Select id="landarchitectid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/architectidid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadCntCategoryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadCntCategoryModel>id}" text="{leadCntCategoryModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadConsultant}">
-                                <form:fields>
-                                    <Select id="landconsaltantid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/leadconsaltantid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadCntTypeModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadnooflift}">
-                                <form:fields>
-                                    <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
-                                </form:fields>
-                            </form:FormElement>   
-                              <form:FormElement label="{i18n>leadStatus}">
-                                <form:fields>
-                                    <Select id="leadstatusid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/leadstatus}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'leadStatusModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{leadStatusModel>id}" text="{leadStatusModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadlocation}">
-                                <form:fields>
-                                    <Select id="leadlocationid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/locationid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'locationModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{locationModel>id}" text="{locationModel>locationname}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-                                 <form:FormElement label="{i18n>leadContactPerson}">
-                                <form:fields>
-                                    <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
-                                </form:fields>
-                            </form:FormElement>   
-                             <form:FormElement label="{i18n>leadsalerep}">
-                                <form:fields>
-                                    <Input id="txtsalesrep" valueLiveUpdate="true" value="{editPartyModel>/salesrep}"  required="true" change="onPartyNameChange"/>
-                                </form:fields>
-                            </form:FormElement>   
-                             <form:FormElement label="{i18n>leadValue}">
-                                <form:fields>
-                                    <Input id="txtLeadValue" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadvalue}" required="true" />
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer>
-                        <form:formElements>
-                            <form:FormElement label="{i18n>leadEmail}">
-                                <form:fields>
-                                    <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange" required="true" />
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadMobileNo}">
-                                <form:fields>
-                                    <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
-                                </form:fields>
-                            </form:FormElement>
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer title="{i18n>leadPartyDetailAddress}">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress1" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity1" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer>
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState1" selectedKey="{editPartyAddressModel>/stateid}" forceSelection="true"
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry1" selectedKey="{editPartyAddressModel>/countryid}" forceSelection="true"
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode1" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://add" type="Transparent" tooltip="Add new contact details" press="onAddContact" width="20%"/>
-                                </form:fields>
-                                <form:fields>
-                                    <Button icon="sap-icon://copy" type="Transparent" tooltip="copy adress details" press="oncopyadress" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                      
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity2" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress2" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity2" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>     
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState2" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState2" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry2" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode2" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity3" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress3" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity3" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState3" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState3" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry3" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode3" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity4" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress4" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity4" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState4" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState4" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry4" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode4" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new contact details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                 
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity5" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress5" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity5" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState5" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState5" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry5" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode5" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity6" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress6" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity6" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> 
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState6" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState6" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry6" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode6" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
+	xmlns:form="sap.ui.layout.form">
 
-                    <form:FormContainer id="containerCity7" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress7" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity7" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState7" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState7" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry7" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode7" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity8" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress8" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity8" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState8" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState8" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry8" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode8" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity9" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress9" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity9" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState9" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState9" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry9" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode9" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerCity10" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress10" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity10" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState10" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState10" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry10" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode10" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                     <form:FormContainer id="containerCity11" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress11" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity11" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState11" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState11" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry11" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode11" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                     <form:FormContainer id="containerCity12" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress12" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity12" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState12" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState12" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry12" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode12" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                     <form:FormContainer id="containerCity13" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress13" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity13" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState13" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState13" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry13" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode13" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                     <form:FormContainer id="containerCity14" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress14" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity14" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>  
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState14" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState14" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry14" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode14" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                     <form:FormContainer id="containerCity15" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress15" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity15" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>   
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState15" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState15" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry15" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode15" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                     <form:FormContainer id="containerCity16" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadAddress}">
-                                <form:fields>
-                                    <Input id="txtAddress16" valueLiveUpdate="true" value="{editPartyAddressModel>/address}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="{i18n>leadCity}">
-                                <form:fields>
-                                    <Select id="ddlCity16" selectedKey="{editPartyAddressModel>/cityid}" 
-                                        items="{
-                                            path: 'partyCityModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement> 
-                        </form:formElements>
-                    </form:FormContainer>
-                    <form:FormContainer id="containerState16" visible="false">
-					    <form:formElements>
-                            <form:FormElement label="{i18n>leadState}">
-                                <form:fields>
-                                    <Select id="ddlState16" selectedKey="{editPartyAddressModel>/stateid}" 
-                                        items="{
-                                            path: 'partyStateModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry16" selectedKey="{editPartyAddressModel>/countryid}" 
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode16" maxLength="5" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="">
-                                <form:fields>
-                                    <Button icon="sap-icon://less" type="Transparent" tooltip="Add new address details" press="onRemoveContact" width="20%"/>
-                                </form:fields>
-                            </form:FormElement>                   
-                        </form:formElements>
-                    </form:FormContainer>
-                </form:formContainers>
-            </form:Form>
-		</f:content>
-	</f:DynamicPage>
+	<Page class="pgDashboard" showHeader="false" >
+        <content>
+            <HBox>
+                <VBox width="100%">
+                    <f:Card class="sapUiMediumMargin">
+                        <f:header class="tileBox">
+                            <card:Header class="cardStyle" title="Lead Name - {leadModel>/leadname}" subtitle="Company Name - {leadModel>/companyname}" />
+                        </f:header>
+                        <f:content>
+                            <TextArea value="Address - {leadModel>/address}" width="100%"/>
+                        </f:content>
+                    </f:Card>
+                </VBox>
+                <VBox width="100%">
+                    <f:Card class="sapUiMediumMargin">
+                        <f:header class="tileBox">
+                            <card:Header title="Contact Person - {leadModel>/contacterson}" subtitle="Email - {leadModel>/email}" />
+                        </f:header>
+                        <f:content>
+                            <TextArea value="Mobile - {leadModel>/mobileno}" width="100%"/>
+                        </f:content>
+                    </f:Card>
+                </VBox>
+            </HBox>
+            <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                <items>
+                    <IconTabFilter icon="sap-icon://history" text="History" key="activity">
+                        <ScrollContainer
+                            height="100%"
+                            width="100%"
+                            horizontal="true"
+                            vertical="true"
+                            focusable="true">
+                            <List
+                                id="activityList"
+                                items="{ path: 'activityModel>/modelData' }">
+                                <StandardListItem
+                                    
+                                    info="{activityModel>subject}"
+                                    description="{activityModel>createddate}"
+                                    title="{activityModel>status}"
+                                    type="Inactive" />
+                            </List>
+                        </ScrollContainer>
+                    </IconTabFilter>
+
+                    <IconTabFilter icon="sap-icon://customer-and-supplier" text="Lift Details" key="liftdetails">
+                        <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="1"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:formContainer>
+                                    <form:formElements>                            
+                                        <form:FormElement label="{i18n>leadDetailTypeofLift}">
+                                            <form:fields>
+                                                <Input id="lftType" value="{liftModel>/typeoflift}" ebabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailLiftCapacity}">
+                                            <form:fields>
+                                                <Input id="capacity" value="{liftModel>/capacity}"  enabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>  
+                                        <form:FormElement label="{i18n>leadDetailLiftModel}">
+                                            <form:fields>
+                                                <Input id="model" value="{liftModel>/model}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailLiftMachine}">
+                                            <form:fields>
+                                                <Input id="machine" value="{liftModel>/machine}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailsFloorHeight}">
+                                            <form:fields>
+                                                <Input id="txtmobileNo" value="{liftModel>/floorheight}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailsConsultant}">
+                                            <form:fields>
+                                                <Input id="consultant" value="{LiftModel>/consultant}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>                                        
+                                        <form:FormElement label="{i18n>leadDetailsArchitect}">
+                                            <form:fields>
+                                                <Input id="architect" value="{LiftModel>/architect}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                    </form:formElements>
+                                </form:formContainer>
+                            </form:formContainers>
+                        </form:Form>
+                    </IconTabFilter>    
+
+                    <IconTabFilter icon="sap-icon://sales-quote" text="Quotation" key="quotation">
+                        <ScrollContainer
+                            height="100%"
+                            width="100%"
+                            horizontal="true"
+                            vertical="true"
+                            focusable="true">
+                            <List
+                                id="quotationList"
+                                items="{ path: 'liftModel>/modelData' }">
+                                <StandardListItem
+                                    
+                                    info="Lift Type - {liftModel>typeoflift}"
+                                    description="Qty - {liftModel>nooflifts}"
+                                    title="Capacity - {liftModel>capacity}"
+                                    type="Inactive" />
+                            </List>
+                        </ScrollContainer>
+                    </IconTabFilter>
+
+                    <IconTabFilter icon="sap-icon://sap-box" text="Files" key="files">
+                        <ScrollContainer
+                            height="100%"
+                            width="100%"
+                            horizontal="true"
+                            vertical="true"
+                            focusable="true">
+                            <List
+                                id="fileList"
+                                items="{ path: 'liftModel>/modelData' }">
+                                <StandardListItem
+                                    
+                                    info="Lift Type - {liftModel>typeoflift}"
+                                    description="Qty - {liftModel>nooflifts}"
+                                    title="Capacity - {liftModel>capacity}"
+                                    type="Inactive" />
+                            </List>
+                        </ScrollContainer>
+                    </IconTabFilter>      
+                </items>
+            </IconTabBar>
+        </content>
+	</Page>
 </mvc:View>

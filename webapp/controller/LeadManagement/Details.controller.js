@@ -13,8 +13,6 @@ sap.ui.define([
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
             this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 
-			this.handleRouteMatched(null);
-
 			var model = new JSONModel();
 			model.setData([]);
 			this.getView().setModel(model, "leadModel");
@@ -40,48 +38,44 @@ sap.ui.define([
             this.getView().setModel(attachmentModel, "attachmentModel");
 		},
 
-		handleRouteMatched: function (evt) {
-			// this.loadData();
-		},
-
         handleLeadDetails : function(sChannel, sEvent, oData) {
 
 			let selRow = oData.viewModel;
 			let oThis = this;
             console.log(selRow);
 			if(selRow != null)  {
-				oThis.loadData(selRow.id);
+
 			}
 
 		},
 
-        loadData : function(id){
+        loadData : function(){
             let oThis = this;
 
-            leadService.getLeadDetails({id : id},function(data){
+            leadService.getLeadwiseDetails(function(data){
                 if(data.length){
                     if(data[0].length){
                         let leadModel = oThis.getView().getModel("leadModel");
                         leadModel.setData(data[0][0]);
-                        oThis.getView().setModel(leadModel,"leadModel");
+                        oThis.getView.setModel(leadModel,"leadModel");
                     }
 
                     if(data[1].length){
                         let stageModel = oThis.getView().getModel("stageModel");
                         stageModel.setData({modelData : data[1]});
-                        oThis.getView().setModel(stageModel,"stageModel");
+                        oThis.getView.setModel(stageModel,"stageModel");
                     }
 
                     if(data[2].length){
                         let activityModel = oThis.getView().getModel("activityModel");
                         activityModel.setData({modelData : data[2]});
-                        oThis.getView().setModel(activityModel, "activityModel")
+                        oThis.getVi().setModel(activityModel, "activityModel")
                     }
-					console.log(data);
+
                     if(data[3].length){
                         let liftModel = oThis.getView().getModel("liftModel");
                         liftModel.setData(data[3]);
-                        oThis.getView().setModel(liftModel, "liftModel")
+                        oThis.getView.setModel(liftModel, "liftModel")
                     }
                 }
             })
