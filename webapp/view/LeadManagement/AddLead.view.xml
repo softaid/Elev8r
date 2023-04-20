@@ -1,7 +1,7 @@
 
     <mvc:View
 	xmlns:c="sap.ui.core"
-	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetails"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:u="sap.ui.unified"
 	xmlns="sap.m"
@@ -15,7 +15,7 @@
 			<f:title>
 				<f:DynamicPageTitle>
 					<f:heading>
-						<Title text="Lead Detail"/>
+						<Title text="Create Lead"/>
 					</f:heading>
 					<f:actions>
 						<ToolbarSpacer/>
@@ -38,6 +38,19 @@
 				</f:DynamicPageTitle>
 			</f:title>
 			<f:content>		
+
+              <VBox fitContainer="true">                                    
+              <Panel id="pnlShedMaster" expandable="true" expanded="true"  headerText="Lead Details" width="auto">
+                <infoToolbar>
+                <Toolbar>
+                    <ToolbarSpacer />
+                    <core:Icon src="sap-icon://leads" />
+                    <Text text="Lead Name : {editPartyModel>/leadname}"/>
+                    <ToolbarSpacer />
+                </Toolbar>
+            </infoToolbar>
+              </Panel>
+             
 				<form:Form editable="true">
                         <form:title>
                         </form:title>
@@ -58,7 +71,7 @@
                                 singleContainerFullSize="false" />
                         </form:layout>
                         <form:formContainers>
-                            <form:FormContainer title="Lead Basic Details">
+                            <form:FormContainer title="Lead Basic Details" width="100%">
 					            <form:formElements>
                               
                                     <form:FormElement label="{i18n>leadNameLabel}">
@@ -141,6 +154,10 @@
                                             <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/phoneno}" required="true" />
                                         </form:fields>
                                     </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer title=" ">
+					            <form:formElements>
                                     <form:FormElement label="{i18n>leadMobileNo}">
                                         <form:fields>
                                             <Input id="txtmobileNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
@@ -166,7 +183,7 @@
                                             <Input id="txtLeadScore" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadscore}" required="true" />
                                         </form:fields>
                                     </form:FormElement>
-                                     <form:FormElement label="{i18n>leadStatus}">
+                                    <form:FormElement label="{i18n>leadStatus}">
                                     <form:fields>
                                         <Select id="leadstatusid"
                                             required="true" 
@@ -180,35 +197,34 @@
                                             }">
                                             <core:Item key="{leadStatusModel>id}" text="{leadStatusModel>description}" />
                                         </Select>
-                                </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="Description">
+                                    </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Description">
                                         <form:fields>
                                             <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>   
                                     <form:FormElement label="{i18n>leadlocation}">
-                                <form:fields>
-                                    <Select id="leadlocationid"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editPartyModel>/locationid}" 
-                                        forceSelection="true"
-                                        width="500px"
-                                        items="{
-                                            path: 'locationModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{locationModel>id}" text="{locationModel>locationname}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
+                                    <form:fields>
+                                        <Select id="leadlocationid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/locationid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'locationModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{locationModel>id}" text="{locationModel>locationname}" />
+                                        </Select>
+                                    </form:fields>
+                                    </form:FormElement>
                                 </form:formElements>
                             </form:FormContainer>
-
-                              <form:FormContainer title="Lift Details">
+                            <form:FormContainer title="Lift Details">
 					            <form:formElements>
-                               <form:FormElement label="{i18n>leadtypeoflift}">
+                                <form:FormElement label="{i18n>leadtypeoflift}">
                                 <form:fields>
                                     <Select id="typeofliftid"
 					                    required="true" 
@@ -223,8 +239,8 @@
                                         <core:Item key="{liftTypeModel>id}" text="{liftTypeModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadcapacity}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadcapacity}">
                                 <form:fields>
                                     <Select id="capacityid"
 					                    required="true" 
@@ -239,8 +255,8 @@
                                         <core:Item key="{leadCapacityModel>id}" text="{leadCapacityModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadModel}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadModel}">
                                 <form:fields>
                                     <Select id="modelid"
 					                    required="true" 
@@ -255,8 +271,8 @@
                                         <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadDrive}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadDrive}">
                                 <form:fields>
                                     <Select id="driveid"
 					                    required="true" 
@@ -271,8 +287,8 @@
                                         <core:Item key="{leadDriveModel>id}" text="{leadDriveModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadMachine}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadMachine}">
                                 <form:fields>
                                     <Select id="machineid"
 					                    required="true" 
@@ -287,8 +303,8 @@
                                         <core:Item key="{MachineModel>id}" text="{MachineModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadControl}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadControl}">
                                 <form:fields>
                                     <Select id="controlid"
 					                    required="true" 
@@ -303,7 +319,7 @@
                                         <core:Item key="{leadControlModel>id}" text="{leadControlModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadOperation}">
                                 <form:fields>
                                     <Select id="operationid"
@@ -319,7 +335,7 @@
                                         <core:Item key="{leadOperationModel>id}" text="{leadOperationModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadSpeed}">
                                 <form:fields>
                                     <Select id="speedid"
@@ -335,8 +351,8 @@
                                         <core:Item key="{leadSpeedModel>id}" text="{leadSpeedModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadTypesodDoor}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadTypesodDoor}">
                                 <form:fields>
                                     <Select id="typesofdoorid"
 					                    required="true" 
@@ -351,8 +367,12 @@
                                         <core:Item key="{leadDoorTypeModel>id}" text="{leadDoorTypeModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadLandingDoors}">
+                                </form:FormElement>
+                            </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer title=" ">
+					        <form:formElements>
+                                <form:FormElement label="{i18n>leadLandingDoors}">
                                 <form:fields>
                                     <Select id="landingdoorsid"
 					                    required="true" 
@@ -367,8 +387,8 @@
                                         <core:Item key="{landingDoorModel>id}" text="{landingDoorModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadCarDoor}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadCarDoor}">
                                 <form:fields>
                                     <Select id="leadcarid"
 					                    required="true" 
@@ -383,8 +403,8 @@
                                         <core:Item key="{CarDoorModel>id}" text="{CarDoorModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>laedLowestFloorMarking}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>laedLowestFloorMarking}">
                                 <form:fields>
                                     <Select id="landingfloorsid"
 					                    required="true" 
@@ -399,7 +419,7 @@
                                         <core:Item key="{LowestFloorModel>id}" text="{LowestFloorModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
+                               </form:FormElement>
                                <form:FormElement label="{i18n>leadCWTPosition}">
                                 <form:fields>
                                     <Select id="landingcwdpositionid"
@@ -415,8 +435,8 @@
                                         <core:Item key="{CWTPositionModel>id}" text="{CWTPositionModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadStandardFloorHeight}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadStandardFloorHeight}">
                                 <form:fields>
                                     <Select id="landingfloorid"
 					                    required="true" 
@@ -431,8 +451,8 @@
                                         <core:Item key="{standaredFloorHeightModel>id}" text="{standaredFloorHeightModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadArchitect}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadArchitect}">
                                 <form:fields>
                                     <Select id="landarchitectid"
 					                    required="true" 
@@ -447,8 +467,8 @@
                                         <core:Item key="{leadCntCategoryModel>id}" text="{leadCntCategoryModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                              <form:FormElement label="{i18n>leadConsultant}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadConsultant}">
                                 <form:fields>
                                     <Select id="landconsaltantid"
 					                    required="true" 
@@ -463,15 +483,18 @@
                                         <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement>
-                               <form:FormElement label="{i18n>leadnooflift}">
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadnooflift}">
                                 <form:fields>
                                     <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
                                 </form:fields>
-                            </form:FormElement>   
+                                </form:FormElement>  
                             </form:formElements>
-                            </form:FormContainer>
+                        </form:FormContainer>
                         </form:formContainers>
+
+
+
                          <form:formContainers>
                             <form:FormContainer title="Lead Address Details">
 					            <form:formElements>
@@ -486,7 +509,7 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                                  <form:FormElement label="{i18n>leadState}">
+                                <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
                                     <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="true"
                                         items="{
@@ -497,52 +520,61 @@
 			                        </Select>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="{i18n>leadCountry}">
-                                <form:fields>
-                                    <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="true"
-                                        items="{
-                                            path: 'partyCountryModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }" change="onStatusChange">
-				                        <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
-			                        </Select>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement label="{i18n>leadPinCode}">
-                                <form:fields>
-                                    <Input id="txtPinCode1" maxLength="6" valueLiveUpdate="true" value="{editPartyAddressModel>/pincode}" change="onNumberInputChange"/>
-                                </form:fields>
-                            </form:FormElement>
+                            </form:formElements>
+                            </form:FormContainer>
+                             <form:FormContainer title=" ">
+					            <form:formElements>
+                                     <form:FormElement label="{i18n>leadCountry}">
+                                        <form:fields>
+                                            <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="true"
+                                                items="{
+                                                    path: 'partyCountryModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }" change="onStatusChange">
+                                                <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>leadPinCode}">
+                                        <form:fields>
+                                            <Input id="txtPinCode1" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/pincode}" change="onNumberInputChange"/>
+                                        </form:fields>
+                                    </form:FormElement>
                                 </form:formElements>
                             </form:FormContainer>
-                              <form:FormContainer title="Social Links">
-					            <form:formElements>
-                               
-                            <form:FormElement label="LinkedIn">
-                                <form:fields>
-                                	<Link
-				                        text="Linked In"
-				                        press="handleLinkPress" />
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="FaceBook">
-                                <form:fields>
-                                	<Link
-				                        text="FaceBook"
-				                        press="handleLinkPress" />
-                                </form:fields>
-                            </form:FormElement>
-                             <form:FormElement label="YouTube">
-                                <form:fields>
-                                	<Link
-				                        text="YouTube"
-				                        press="handleLinkPress" />
-                                </form:fields>
-                            </form:FormElement>
+                            <form:FormContainer title="Social Links">
+					        <form:formElements>
+                                <form:FormElement label="LinkedIn">
+                                    <form:fields>
+                                        <Link
+                                            text="Linked In"
+                                            press="handleLinkPress" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="FaceBook">
+                                    <form:fields>
+                                        <Link
+                                            text="FaceBook"
+                                            press="handleLinkPress" />
+                                    </form:fields>
+                                </form:FormElement>
                                 </form:formElements>
+                            </form:FormContainer>
+
+                            <form:FormContainer title=" ">
+					        <form:formElements>
+                                    <form:FormElement label="YouTube">
+                                    <form:fields>
+                                        <Link
+                                            text="YouTube"
+                                            press="handleLinkPress" />
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
                             </form:FormContainer>
                         </form:formContainers>
                     </form:Form>
+                     </VBox>
 		    </f:content>
 	    </f:DynamicPage>
 </mvc:View>

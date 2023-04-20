@@ -77,7 +77,7 @@ sap.ui.define([
 			var viewModel = oEvent.getSource().getBindingContext("LeadsMasterModel");
 			var model = { "id": viewModel.getProperty("id") }
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("partymaster", "", { viewName: "LeadsDetails", viewModel: model });
+			this.bus.publish("partymaster", "", { viewName: "addlead", viewModel: model });
 		},
 
 		// onAddNew: function (oEvent) {
@@ -93,9 +93,9 @@ sap.ui.define([
 				this.bus = sap.ui.getCore().getEventBus();
 				setTimeout(function () {
 					this.bus = sap.ui.getCore().getEventBus();
-					this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadsdetails", viewModel:null });
+					this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel:null });
 				}, 1000);
-				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadsdetails", viewModel:null});
+				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel:null});
 			},
 
 			 /**

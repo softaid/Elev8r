@@ -15,16 +15,16 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "lead/searchlead/" + commonService.session("companyId"), null, callback, null);
             },
            
-            getLeads : function(params, callback){
+            getLeads: function(params, callback){
                 commonService.runJQueryX("GET", "lead/leadselect/" + params.id, null, callback, null);
             },
 
-            saveLead : function(params, callback){
+            saveLead: function(params, callback){
                 console.log("params",params);
                 commonService.runJQueryX("POST", "lead/" , params, callback, null);
             },
 
-            saveLeadAddress : function(Params, Callback){
+            saveLeadAddress: function(Params, Callback){
                 commonService.runJQueryX("POST", "lead/leadaddress" , Params, Callback, null);
             },
 

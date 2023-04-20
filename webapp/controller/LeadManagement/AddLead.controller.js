@@ -10,7 +10,7 @@ sap.ui.define([
 ], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService,locationService,Leadservice) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetails", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead", {
 		onInit: function () {
 			var currentContext = this;
             this.bus = sap.ui.getCore().getEventBus();
@@ -341,6 +341,7 @@ sap.ui.define([
 							var message = model.id == null ? "Party created successfully!" : "Party edited successfully!";
 							currentContext.onCancel();
 							MessageToast.show(message);
+							
 							currentContext.bus = sap.ui.getCore().getEventBus();
 							currentContext.bus.publish("loaddata", "loadData");
 						});
@@ -349,6 +350,8 @@ sap.ui.define([
 
 				});
 			}
+			this.reset();
+			
 		},
 
 
@@ -541,6 +544,55 @@ sap.ui.define([
 
 			}
 		},
+
+
+		reset: function () {
+
+            let oThis = this;
+            let oLeadDetailnModel = oThis.getView().getModel("editPartyModel");
+            let oLeadDetailData = oLeadDetailnModel.getData();
+
+           
+			oLeadDetailData.leadname = "",
+            oLeadDetailData.companyname= "",
+            oLeadDetailData.leaddate=  "",
+            oLeadDetailData.sourceid = "4",
+            oLeadDetailData.leadscategory = "49",
+            oLeadDetailData.stageid = "14",
+            oLeadDetailData.email = "",
+            oLeadDetailData.phoneno = "",
+            oLeadDetailData.mobileno =  "",
+            oLeadDetailData.contactperson =  "",
+            oLeadDetailData.salesrep =  "",
+            oLeadDetailData.leadvalue = "",
+            oLeadDetailData.leadscore= "",
+            oLeadDetailData.leadstatus=  "46",
+            oLeadDetailData.leaddescription = "",
+            oLeadDetailData.locationid = "1",
+            oLeadDetailData.typeoflift = "67",
+            oLeadDetailData.capacityid = "68",
+            oLeadDetailData.modelid = "71",
+            oLeadDetailData.driveid =  "72",
+            oLeadDetailData.machineid =  "83",
+            oLeadDetailData.controlid =  "73",
+            oLeadDetailData.operationid = "74",
+            oLeadDetailData.speedid= "75",
+            oLeadDetailData.typeofdoorid=  "76",
+            oLeadDetailData.landingdoorid = "77",
+            oLeadDetailData.cardoorid = "78",
+            oLeadDetailData.lowestfloorid = "79",
+            oLeadDetailData.cwtpositionid = "80",
+            oLeadDetailData.floorheaightid = "82",
+            oLeadDetailData.architectidid =  "58",
+            oLeadDetailData.leadconsaltantid =  "51",
+            oLeadDetailData.nooflifts =  "",
+            oLeadDetailData.cityid = "1",
+            oLeadDetailData.stateid = "1",
+            oLeadDetailData.countryid = "1",
+            oLeadDetailData.pincode =  ""
+           
+            oLeadDetailnModel.refresh();
+        },
 
 
 
