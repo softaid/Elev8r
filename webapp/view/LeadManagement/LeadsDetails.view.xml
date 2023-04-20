@@ -25,7 +25,7 @@
                             type="Emphasized"
                             press = "onSave"/>
 						<Button
-                            id = "btndelete"
+                            id = "btnDelete"
 							text="{i18n>deleteButtonText}"
 							type="Emphasized"					
                             press = "onDelete"/>						
@@ -69,7 +69,7 @@
 
                                     <form:FormElement label="Company Name">
                                     <form:fields>
-                                        <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/companyname}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                     </form:FormElement>  
                                      <form:FormElement label="Lead Date">
@@ -77,7 +77,7 @@
                                             <DatePicker id="createddate" width="100%" 
                                             placeholder="{config>/dateFormat/placeholder}"
                                             displayFormat="{config>/dateFormat/displayFormat}"
-                                            value="{editLeadActivityModel>/createddate}"
+                                            value="{editPartyModel>/leaddate}"
                                             valueFormat="dd/MM/yyyy"
                                             required="true"  
                                             />
@@ -138,7 +138,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="Phone No">
                                         <form:fields>
-                                            <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
+                                            <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/phoneno}" required="true" />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadMobileNo}">
@@ -163,7 +163,7 @@
                                     </form:FormElement>
                                       <form:FormElement label="Lead Score">
                                         <form:fields>
-                                            <Input id="txtLeadScore" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadvalue}" required="true" />
+                                            <Input id="txtLeadScore" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadscore}" required="true" />
                                         </form:fields>
                                     </form:FormElement>
                                      <form:FormElement label="{i18n>leadStatus}">
@@ -184,9 +184,25 @@
                             </form:FormElement>
                                <form:FormElement label="Description">
                                         <form:fields>
-                                            <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/salesrep}"  required="true" change="onPartyNameChange"/>
+                                            <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>   
+                                    <form:FormElement label="{i18n>leadlocation}">
+                                <form:fields>
+                                    <Select id="leadlocationid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editPartyModel>/locationid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'locationModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{locationModel>id}" text="{locationModel>locationname}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
                                 </form:formElements>
                             </form:FormContainer>
 
@@ -461,7 +477,7 @@
 					            <form:formElements>
                                 <form:FormElement label="{i18n>leadCity}">
                                 <form:fields>
-                                    <Select id="ddlCity1" selectedKey="{editPartyAddressModel>/cityid}" 
+                                    <Select id="ddlCity1" selectedKey="{editPartyModel>/cityid}" 
                                         items="{
                                             path: 'partyCityModel>/modelData',
                                             sorter: { path: 'id' }
@@ -472,7 +488,7 @@
                             </form:FormElement>
                                   <form:FormElement label="{i18n>leadState}">
                                 <form:fields>
-                                    <Select id="ddlState1" selectedKey="{editPartyAddressModel>/stateid}" forceSelection="true"
+                                    <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="true"
                                         items="{
                                             path: 'partyStateModel>/modelData',
                                             sorter: { path: 'id' }
@@ -483,7 +499,7 @@
                             </form:FormElement>
                             <form:FormElement label="{i18n>leadCountry}">
                                 <form:fields>
-                                    <Select id="ddlCountry1" selectedKey="{editPartyAddressModel>/countryid}" forceSelection="true"
+                                    <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="true"
                                         items="{
                                             path: 'partyCountryModel>/modelData',
                                             sorter: { path: 'id' }
