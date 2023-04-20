@@ -63,6 +63,7 @@ sap.ui.define([
                 "typecode":viewModel.getProperty("typecode"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
+                "defaultvalue": viewModel.getProperty("defaultvalue"),
             }
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "ProjectMasterDetail", viewModel: model });
@@ -142,7 +143,8 @@ sap.ui.define([
                 typecode: oModel.oData.typecode,
                 typename : oModel.oData.typename,
                 description: oModel.oData.description,
-                active: true
+                active: true,
+                defaultvalue: true
             };
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "ProjectMasterDetail", viewModel: model });

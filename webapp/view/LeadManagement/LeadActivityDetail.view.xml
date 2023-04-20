@@ -70,7 +70,7 @@
                                         required="true" 
                                         change=""
                                         selectedKey="{editLeadActivityModel>/assignedto}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'employeeModel>/modelData',
@@ -86,7 +86,7 @@
                                         required="true" 
                                         change=""
                                         selectedKey="{editLeadActivityModel>/assignedby}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'employeeModel>/modelData',
@@ -124,7 +124,7 @@
                                         required="true" 
                                         change=""
                                         selectedKey="{editLeadActivityModel>/statusid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'statusModel>/modelData',
@@ -155,7 +155,7 @@
                                         required="true" 
                                         change=""
                                         selectedKey="{editLeadActivityModel>/typeid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'typeModel>/modelData',
@@ -171,7 +171,7 @@
                                         required="true" 
                                         change=""
                                         selectedKey="{editLeadActivityModel>/priorityid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'priorityModel>/modelData',

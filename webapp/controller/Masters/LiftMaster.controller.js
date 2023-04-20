@@ -63,6 +63,7 @@ sap.ui.define([
                 "typecode":viewModel.getProperty("typecode"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
+                "defaultvalue": viewModel.getProperty("defaultvalue"),
             }
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "LeadMasterDetail", viewModel: model });
@@ -124,7 +125,8 @@ sap.ui.define([
                 var oModel = new sap.ui.model.json.JSONModel();
                 if(data.length && data[0].length){
                     for(let i = 0; i < data[0].length;  i++){
-                        data[0][i].active = data[0][0].active == 1 ? true : false;
+                        data[0][i].active = data[0][i].active == 1 ? true : false;
+                        data[0][i].defaultvalue = data[0][i].defaultvalue == 1 ? true : false;
                     }
                     oModel.setData({ modelData: data[0] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
@@ -145,7 +147,8 @@ sap.ui.define([
                 typecode: oModel.oData.typecode,
                 typename : oModel.oData.typename,
                 description: oModel.oData.description,
-                active: true
+                active: true,
+                defaultvalue: true
             };
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "LeadMasterDetail", viewModel: model });

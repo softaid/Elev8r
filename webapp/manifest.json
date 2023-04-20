@@ -207,9 +207,14 @@
 					"target": "leads"
 				},
 				{
-					"pattern": "details",
-					"name": "details",
-					"target": "details"
+					"pattern": "leadsdetail",
+					"name": "leadsdetail",
+					"target": "leadsdetail"
+				},
+				{
+					"pattern": "leadsdetails",
+					"name": "leadsdetails",
+					"target": "leadsdetails"
 				},
 				{
 					"pattern": "leadactivities",
@@ -365,9 +370,15 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"details" : {
+				"leadsdetail" : {
 					"viewId": "details",
 					"viewName": "LeadManagement/LeadsDetail",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leadsdetails": {
+					"viewId": "leadsdetails",
+					"viewName": "LeadManagement/LeadsDetails",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

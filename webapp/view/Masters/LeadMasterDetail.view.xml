@@ -91,6 +91,15 @@
                                         </Switch>
                                     </form:fields>
                                 </form:FormElement>
+                                  <form:FormElement label="Default">
+                                    <form:fields>
+                                        <Switch  state="{editMasterModel>/defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>

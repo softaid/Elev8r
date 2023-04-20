@@ -71,7 +71,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editProActivityModel>/projectid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'projectModel>/modelData',
@@ -87,7 +87,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editProActivityModel>/milestoneid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'milestoneModel>/modelData',
@@ -103,7 +103,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editProActivityModel>/proactivitytypeid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'projectActivityModel>/modelData',
@@ -149,7 +149,7 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{editProActivityModel>/statusid}" 
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         width="500px"
                                         items="{
                                             path: 'projectActivityStatusModel>/modelData',

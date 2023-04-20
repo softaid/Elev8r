@@ -1,58 +1,40 @@
 <mvc:View
-	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Details"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetail"
 	xmlns="sap.m"
-	xmlns:tnt="sap.tnt"
-	xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
 	xmlns:core="sap.ui.core"
 	xmlns:card="sap.f.cards"
-	xmlns:plugins="sap.ui.table.plugins"
-	xmlns:common="sap.ui.commons"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form">
 
 	<Page class="pgDashboard" showHeader="false" >
         <content>
-            <!--<l:VerticalLayout>
-                <l:HorizontalLayout
-                        id="container"
-                        allowWrapping="true"
-                        content="{tModel>/modelData}">
-                    <GenericTile
-                        failedText="Lead Name"
-                        header="Lead Name - Test"
-                        subheader="Company - LDNA"
-                        state="{=${state} || 'Loaded'}"
-                        scope="{=${/actionsScope} ? 'Actions' : 'Display'}"
-                        press="onListItemPressed"
-                        class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-                        sizeBehavior="{/sizeBehavior}">
-                        <TileContent footer="{tModel>footer}">
-                            <NumericContent						    
-                                truncateValueTo="20"
-                                withMargin="false"
-                                value="Mortality - {tModel>Mortality}"
-                                valueColor="{tModel>color}"
-                                indicator="{tModel>trend}"
-                                scale="{tModel>scale}"/>
-                        </TileContent>
-                    </GenericTile>
-                </l:HorizontalLayout>
-            </l:VerticalLayout> -->
-    	
-
-            <l:Grid containerQuery="true" class="sapUiSmallMarginTop">
-                <TileContent footer="Address - Parvati Apt., AB Chowk, Pune - 28" class="sapUiSmallMargin">
-                    <NewsContent contentText="Lead Name - Lead 1                    "
-                        subheader="Company - LogicalDNA Technosystems Pvt Ltd, Pune" />
-                </TileContent>
-                <TileContent footer="August 21, 2013" class="sapUiSmallMargin">
-                    <NewsContent contentText="SAP Unveils Powerful New Player Comparison Tool Exclusively on NFL.com"
-                        subheader="SAP News" />
-                </TileContent>
-            </l:Grid>
-
+            <HBox>
+                <VBox width="100%">
+                    <f:Card class="sapUiMediumMargin">
+                        <f:header class="tileBox">
+                            <card:Header class="cardStyle" title="Lead Name - {leadModel>/leadname}" subtitle="Company Name - {leadModel>/companyname}" />
+                        </f:header>
+                        <f:content>
+                            <TextArea value="Address - {leadModel>/address}" width="100%"/>
+                        </f:content>
+                    </f:Card>
+                </VBox>
+                <VBox width="100%">
+                    <f:Card class="sapUiMediumMargin">
+                        <f:header class="tileBox">
+                            <card:Header title="Contact Person - {leadModel>/contacterson}" subtitle="Email - {leadModel>/email}" />
+                        </f:header>
+                        <f:content>
+                            <TextArea value="Mobile - {leadModel>/mobileno}" width="100%"/>
+                        </f:content>
+                    </f:Card>
+                </VBox>
+            </HBox>
             <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
                 <items>
-                    <IconTabFilter text="History" key="activity">
+                    <IconTabFilter icon="sap-icon://history" text="History" key="activity">
                         <ScrollContainer
                             height="100%"
                             width="100%"
@@ -67,34 +49,76 @@
                                     info="{activityModel>subject}"
                                     description="{activityModel>createddate}"
                                     title="{activityModel>status}"
-                                    type="Navigation"
-                                    press="tileDetail" />
+                                    type="Inactive" />
                             </List>
                         </ScrollContainer>
                     </IconTabFilter>
 
-                    <IconTabFilter text="Lift Details" key="liftdetails">
-                        <ScrollContainer
-                            height="100%"
-                            width="100%"
-                            horizontal="true"
-                            vertical="true"
-                            focusable="true">
-                            <List
-                                id="liftList"
-                                items="{ path: 'liftModel>/modelData' }">
-                                <StandardListItem
-                                    
-                                    info="Lift Type - {liftModel>typeoflift}"
-                                    description="Qty - {liftModel>nooflifts}"
-                                    title="Capacity - {liftModel>capacity}"
-                                    type="Navigation"
-                                    press="tileDetail" />
-                            </List>
-                        </ScrollContainer>
+                    <IconTabFilter icon="sap-icon://customer-and-supplier" text="Lift Details" key="liftdetails">
+                        <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="1"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:formContainer>
+                                    <form:formElements>                            
+                                        <form:FormElement label="{i18n>leadDetailTypeofLift}">
+                                            <form:fields>
+                                                <Input id="lftType" value="{liftModel>/typeoflift}" ebabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailLiftCapacity}">
+                                            <form:fields>
+                                                <Input id="capacity" value="{liftModel>/capacity}"  enabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>  
+                                        <form:FormElement label="{i18n>leadDetailLiftModel}">
+                                            <form:fields>
+                                                <Input id="model" value="{liftModel>/model}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailLiftMachine}">
+                                            <form:fields>
+                                                <Input id="machine" value="{liftModel>/machine}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailsFloorHeight}">
+                                            <form:fields>
+                                                <Input id="txtmobileNo" value="{liftModel>/floorheight}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>leadDetailsConsultant}">
+                                            <form:fields>
+                                                <Input id="consultant" value="{LiftModel>/consultant}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>                                        
+                                        <form:FormElement label="{i18n>leadDetailsArchitect}">
+                                            <form:fields>
+                                                <Input id="architect" value="{LiftModel>/architect}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                    </form:formElements>
+                                </form:formContainer>
+                            </form:formContainers>
+                        </form:Form>
                     </IconTabFilter>    
 
-                    <IconTabFilter text="Quotation" key="quotation">
+                    <IconTabFilter icon="sap-icon://sales-quote" text="Quotation" key="quotation">
                         <ScrollContainer
                             height="100%"
                             width="100%"
@@ -109,13 +133,12 @@
                                     info="Lift Type - {liftModel>typeoflift}"
                                     description="Qty - {liftModel>nooflifts}"
                                     title="Capacity - {liftModel>capacity}"
-                                    type="Navigation"
-                                    press="tileDetail" />
+                                    type="Inactive" />
                             </List>
                         </ScrollContainer>
                     </IconTabFilter>
 
-                    <IconTabFilter text="Files" key="files">
+                    <IconTabFilter icon="sap-icon://sap-box" text="Files" key="files">
                         <ScrollContainer
                             height="100%"
                             width="100%"
@@ -130,8 +153,7 @@
                                     info="Lift Type - {liftModel>typeoflift}"
                                     description="Qty - {liftModel>nooflifts}"
                                     title="Capacity - {liftModel>capacity}"
-                                    type="Navigation"
-                                    press="tileDetail" />
+                                    type="Inactive" />
                             </List>
                         </ScrollContainer>
                     </IconTabFilter>      
