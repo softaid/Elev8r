@@ -212,6 +212,11 @@
 					"target": "addlead"
 				},
 				{
+					"pattern": "leaddetail",
+					"name": "leaddetail",
+					"target": "leaddetail"
+				},
+				{
 					"pattern": "leadactivities",
 					"name": "leadactivities",
 					"target": "leadactivities"
@@ -368,6 +373,12 @@
 				"addlead": {
 					"viewId": "addlead",
 					"viewName": "LeadManagement/AddLead",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leaddetail": {
+					"viewId": "leaddetail",
+					"viewName": "LeadManagement/LeadsDetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

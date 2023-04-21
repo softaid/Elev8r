@@ -37,20 +37,79 @@
 					</f:navigationActions>
 				</f:DynamicPageTitle>
 			</f:title>
-			<f:content>		
+			<f:content>	
 
-              <VBox fitContainer="true">                                    
-              <Panel id="pnlShedMaster" expandable="true" expanded="true"  headerText="Lead Details" width="auto">
-                <infoToolbar>
-                <Toolbar>
-                    <ToolbarSpacer />
-                    <core:Icon src="sap-icon://leads" />
-                    <Text text="Lead Name : {editPartyModel>/leadname}"/>
-                    <ToolbarSpacer />
-                </Toolbar>
-            </infoToolbar>
+              <VBox> 
+             <Panel id="pnlShedMaster" expandable="true" expanded="true"  headerText="Lead Details" width="auto">
+               	<form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="Lead Details" width="100%"> 
+                                <form:formElements>
+                                  <form:FormElement label="{i18n>leadNameLabel}">
+                                    <form:fields>
+                                        <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
+                                    </form:fields>
+                                    </form:FormElement>   
+
+                                    <form:FormElement label="Company Name">
+                                    <form:fields>
+                                        <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/companyname}"  required="true" change="onPartyNameChange"/>
+                                    </form:fields>
+                                    </form:FormElement>  
+                                     <form:FormElement label="Lead Date">
+                                        <form:fields>
+                                            <DatePicker id="createddate" width="100%" 
+                                            placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}"
+                                            value="{editPartyModel>/leaddate}"
+                                            valueFormat="dd/MM/yyyy"
+                                            required="true"  
+                                            />
+                                        </form:fields>
+                                    </form:FormElement>  
+                                  </form:formElements>      
+                </form:FormContainer>
+
+                 <form:FormContainer title=" " width="100%"> 
+                                <form:formElements>
+                                      <form:FormElement label="{i18n>leadMobileNo}">
+                                        <form:fields>
+                                            <Input id="txtmobileNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                      <form:FormElement label="Phone No">
+                                        <form:fields>
+                                            <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/phoneno}" required="true" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                  </form:formElements>      
+                                         <form:FormElement label="{i18n>leadEmail}">
+                                        <form:fields>
+                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange" required="true" />
+                                        </form:fields>
+                                    </form:FormElement>
+                 </form:FormContainer>
+                </form:formContainers>
+                </form:Form>               
               </Panel>
-             
 				<form:Form editable="true">
                         <form:title>
                         </form:title>
@@ -73,29 +132,6 @@
                         <form:formContainers>
                             <form:FormContainer title="Lead Basic Details" width="100%">
 					            <form:formElements>
-                              
-                                    <form:FormElement label="{i18n>leadNameLabel}">
-                                    <form:fields>
-                                        <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
-                                    </form:fields>
-                                    </form:FormElement>   
-
-                                    <form:FormElement label="Company Name">
-                                    <form:fields>
-                                        <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/companyname}"  required="true" change="onPartyNameChange"/>
-                                    </form:fields>
-                                    </form:FormElement>  
-                                     <form:FormElement label="Lead Date">
-                                        <form:fields>
-                                            <DatePicker id="createddate" width="100%" 
-                                            placeholder="{config>/dateFormat/placeholder}"
-                                            displayFormat="{config>/dateFormat/displayFormat}"
-                                            value="{editPartyModel>/leaddate}"
-                                            valueFormat="dd/MM/yyyy"
-                                            required="true"  
-                                            />
-                                        </form:fields>
-                                    </form:FormElement>
                                     <form:FormElement label="{i18n>leadSourceLabel}">
                                     <form:fields>
                                     <Select id="sourceid"
@@ -144,26 +180,7 @@
                                         </Select>
                                     </form:fields>
                                     </form:FormElement>
-                                      <form:FormElement label="{i18n>leadEmail}">
-                                        <form:fields>
-                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange" required="true" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                    <form:FormElement label="Phone No">
-                                        <form:fields>
-                                            <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/phoneno}" required="true" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                </form:formElements>
-                            </form:FormContainer>
-                            <form:FormContainer title=" ">
-					            <form:formElements>
-                                    <form:FormElement label="{i18n>leadMobileNo}">
-                                        <form:fields>
-                                            <Input id="txtmobileNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                       <form:FormElement label="{i18n>leadContactPerson}">
+                                         <form:FormElement label="{i18n>leadContactPerson}">
                                         <form:fields>
                                             <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
                                         </form:fields>
@@ -173,7 +190,11 @@
                                             <Input id="txtsalesrep" valueLiveUpdate="true" value="{editPartyModel>/salesrep}"  required="true" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>   
-                                    <form:FormElement label="{i18n>leadValue}">
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer title=" ">
+					            <form:formElements>
+                                    <form:FormElement label="Lead Value">
                                         <form:fields>
                                             <Input id="txtLeadValue" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadvalue}" required="true" />
                                         </form:fields>

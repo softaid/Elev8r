@@ -75,10 +75,10 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
-                this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leadsdetail", viewModel:model });
+                this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leaddetail", viewModel:model });
             }, 1000);
             
-            this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leadsdetail", viewModel:model});
+            this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leaddetail", viewModel:model});
 		},
 		
 		onAddNew: function() {
@@ -86,9 +86,9 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadsdetails", viewModel:null });
+				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel:null });
 			}, 1000);
-			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadsdetails", viewModel:null});
+			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel:null});
 		},
 
 			 /**

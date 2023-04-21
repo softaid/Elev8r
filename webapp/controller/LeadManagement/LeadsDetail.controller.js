@@ -96,9 +96,9 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:null });
+				this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:null });
 			}, 1000);
-			this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:null});
+			this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:null});
 		},
 
 		newLead : function (sChannel, sEvent, oData) {
@@ -110,15 +110,15 @@ sap.ui.define([
 		},
 
 		editLead : function(oEvent){
-			var viewModel = this.getView().getModel("liftModel");
+			var viewModel = this.getView().getModel("leadModel");
 			var model = { "id": viewModel.oData.id }
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
-                this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:model });
+                this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:model });
             }, 1000);
             
-            this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:model});
+            this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:model});
 		},
 
 		resourceBundle: function () {
