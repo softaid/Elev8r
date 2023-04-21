@@ -8,47 +8,47 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form">
 
-	<Page class="pgDashboard" showHeader="true" title="Lead Details">
+	<Page class="pgDashboard" showHeader="true" title="{i18n>leadDetailsTitle}">
         <headerContent>
             <layout:VerticalLayout
             class="sapUiContentPadding"
             width="100%">
                 <layout:content>
                     <Link
-                        text="Convert to Quote"
+                        text="{i18n>leadDetailsConverttoQuote}"
                         press="handleLinkPress" />
                 </layout:content>
             </layout:VerticalLayout>
-			<Button icon="sap-icon://add" tooltip="Add New Lead" press="addNewLead"/>
-            <Button icon="sap-icon://edit" tooltip="Update Lead" press="editLead"/>
-            <Button icon="sap-icon://delete" tooltip="Delete Lead" press="deleteLead"/>
+			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewLead"/>
+            <Button icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editLead"/>
+            <Button icon="sap-icon://delete" tooltip="{i18n>leadDetailsDeleteLead}" press="deleteLead"/>
 		</headerContent>
         <content>
             <HBox>
                 <VBox width="100%">
                     <f:Card class="sapUiMediumMargin">
                         <f:header class="tileBox">
-                            <card:Header class="cardStyle" title="Lead Name - {leadModel>/leadname}" subtitle="Company Name - {leadModel>/companyname}" />
+                            <card:Header class="cardStyle" title="{i18n>leadDetailsLeadName} - {leadModel>/leadname}" subtitle="{i18n>leadDetailsCompanyName} - {leadModel>/companyname}" />
                         </f:header>
                         <f:content>
-                            <TextArea value="Address - {leadModel>/address}" width="100%"/>
+                            <TextArea value="{i18n>leadDetailsAddress} - {leadModel>/address}" width="100%"/>
                         </f:content>
                     </f:Card>
                 </VBox>
                 <VBox width="100%">
                     <f:Card class="sapUiMediumMargin">
                         <f:header class="tileBox">
-                            <card:Header title="Contact Person - {leadModel>/contacterson}" subtitle="Email - {leadModel>/email}" />
+                            <card:Header title="{i18n>leadDetailsContactPerson} - {leadModel>/contacterson}" subtitle="{i18n>leadDetailsEmail} - {leadModel>/email}" />
                         </f:header>
                         <f:content>
-                            <TextArea value="Mobile - {leadModel>/mobileno}" width="100%"/>
+                            <TextArea value="{i18n>leadDetailsMobile} - {leadModel>/mobileno}" width="100%"/>
                         </f:content>
                     </f:Card>
                 </VBox>
             </HBox>
             <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
                 <items>
-                    <IconTabFilter icon="sap-icon://history" text="History" key="activity">
+                    <IconTabFilter icon="sap-icon://history" text="{i18n>leadDetailsHistory}" key="activity">
                         <ScrollContainer
                             height="100%"
                             width="100%"
@@ -60,15 +60,15 @@
                                 items="{ path: 'activityModel>/modelData' }">
                                 <StandardListItem
                                     
-                                    info="{activityModel>subject}"
-                                    description="{activityModel>createddate}"
-                                    title="{activityModel>status}"
+                                    info="{i18n>leadDetailsActivity} - {activityModel>subject}"
+                                    description="{i18n>leadDetailsDate} - {activityModel>createddate}"
+                                    title="{i18n>leadDetailsStatus} - {activityModel>status}"
                                     type="Inactive" />
                             </List>
                         </ScrollContainer>
                     </IconTabFilter>
 
-                    <IconTabFilter icon="sap-icon://customer-and-supplier" text="Lift Details" key="liftdetails">
+                    <IconTabFilter icon="sap-icon://customer-and-supplier" text="{i18n>leadDetailsLiftDetails}" key="liftdetails">
                         <form:Form editable="true">
                             <form:title>
                             </form:title>
@@ -91,22 +91,22 @@
                             <form:formContainers>
                                 <form:formContainer>
                                     <form:formElements>                            
-                                        <form:FormElement label="{i18n>leadDetailTypeofLift}">
+                                        <form:FormElement label="{i18n>leadDetailsTypeofLift}">
                                             <form:fields>
                                                 <Input id="lftType" value="{liftModel>/typeoflift}" enabled="false"/>
                                             </form:fields>
                                         </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailLiftCapacity}">
+                                        <form:FormElement label="{i18n>leadDetailsLiftCapacity}">
                                             <form:fields>
                                                 <Input id="capacity" value="{liftModel>/capacity}"  enabled="false"/>
                                             </form:fields>
                                         </form:FormElement>  
-                                        <form:FormElement label="{i18n>leadDetailLiftModel}">
+                                        <form:FormElement label="{i18n>leadDetailsLiftModel}">
                                             <form:fields>
                                                 <Input id="model" value="{liftModel>/model}" enabled="false" />
                                             </form:fields>
                                         </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailLiftMachine}">
+                                        <form:FormElement label="{i18n>leadDetailsLiftMachine}">
                                             <form:fields>
                                                 <Input id="machine" value="{liftModel>/machine}" enabled="false" />
                                             </form:fields>
@@ -122,12 +122,12 @@
                                         </form:FormElement>
                                         <form:FormElement label="{i18n>leadDetailsConsultant}">
                                             <form:fields>
-                                                <Input id="consultant" value="{LiftModel>/consultant}" enabled="false" />
+                                                <Input id="consultant" value="{liftModel>/consultant}" enabled="false" />
                                             </form:fields>
                                         </form:FormElement>                                        
                                         <form:FormElement label="{i18n>leadDetailsArchitect}">
                                             <form:fields>
-                                                <Input id="architect" value="{LiftModel>/architect}" enabled="false" />
+                                                <Input id="architect" value="{liftModel>/architect}" enabled="false" />
                                             </form:fields>
                                         </form:FormElement>   
                                     </form:formElements>
@@ -136,7 +136,7 @@
                         </form:Form>
                     </IconTabFilter>    
 
-                    <IconTabFilter icon="sap-icon://sales-quote" text="Quotation" key="quotation">
+                    <IconTabFilter icon="sap-icon://sales-quote" text="{i18n>leadDetailsQuotation}" key="quotation">
                         <ScrollContainer
                             height="100%"
                             width="100%"
@@ -148,7 +148,7 @@
                                 items="{ path: 'liftModel>/modelData' }">
                                 <StandardListItem
                                     
-                                    info="Lift Type - {liftModel>typeoflift}"
+                                    info="{i18n>leadDetailsLiftType} - {liftModel>typeoflift}"
                                     description="Qty - {liftModel>nooflifts}"
                                     title="Capacity - {liftModel>capacity}"
                                     type="Inactive" />
@@ -156,7 +156,7 @@
                         </ScrollContainer>
                     </IconTabFilter>
 
-                    <IconTabFilter icon="sap-icon://sap-box" text="Files" key="files">
+                    <IconTabFilter icon="sap-icon://sap-box" text="{i18n>leadDetailsFiles}" key="files">
                         <ScrollContainer
                             height="100%"
                             width="100%"

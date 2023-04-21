@@ -4,7 +4,8 @@ sap.ui.define([
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/m/MessageBox',
-], function (JSONModel, BaseController, Sorter, leadService, MessageBox) {
+	'sap/m/MessageToast'
+], function (JSONModel, BaseController, Sorter, leadService, MessageBox, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Details", {
@@ -96,9 +97,9 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:null });
+				this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:null });
 			}, 1000);
-			this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:null});
+			this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:null});
 		},
 
 		newLead : function (sChannel, sEvent, oData) {
@@ -109,16 +110,17 @@ sap.ui.define([
 			oRouter.navTo(oData.pagekey, true);
 		},
 
-		editLead : function(oEvent){
-			var viewModel = this.getView().getModel("liftModel");
-			var model = { "id": viewModel.oData.id }
+		editLead : function(){
+			var model = { "id": this.id }
 			this.bus = sap.ui.getCore().getEventBus();
+
+			console.log(model);
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
-                this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:model });
+                this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:model });
             }, 1000);
             
-            this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:model});
+            this.bus.publish("leaddetails", "newLead", { pagekey: "addlead", viewModel:model});
 		},
 
 		resourceBundle: function () {

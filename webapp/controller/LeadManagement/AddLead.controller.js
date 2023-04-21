@@ -115,7 +115,7 @@ sap.ui.define([
 		},
 
 		onBeforeRendering: function () {
-
+			console.log(this.getView().getModel("viewModel"));
 			var currentContext = this;
 			this.model = this.getView().getModel("viewModel");
 			console.log("this.model", this.model);
