@@ -16,7 +16,7 @@ sap.ui.define([
             },
 
             getLeadDetails : function(params, callback){
-                commonService.runJQueryX("GET", "leadactivity/leaddetails/" + params.id, null, callback, null);
+                commonService.runJQueryX("GET", "lead/leaddetails/" + params.id, null, callback, null);
             },
            
             getLeads : function(params, callback){
@@ -30,6 +30,11 @@ sap.ui.define([
 
             saveLeadAddress : function(Params, Callback){
                 commonService.runJQueryX("POST", "lead/leadaddress" , Params, Callback, null);
+            },
+
+            deleteLead  : function(params, callback){
+                console.log(params);
+                commonService.runJQueryX("DELETE", "lead/" + params.id, null, callback, null);
             }
         };
     }

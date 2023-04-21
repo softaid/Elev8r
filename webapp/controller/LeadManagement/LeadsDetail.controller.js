@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service'
-], function (JSONModel, BaseController, Sorter, leadService) {
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
+	'sap/m/MessageBox',
+], function (JSONModel, BaseController, Sorter, leadService, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Details", {
@@ -11,6 +12,7 @@ sap.ui.define([
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
+            this.bus.subscribe("leaddetails", "newLead", this.newLead, this);
             this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 
 			this.handleRouteMatched(null);
@@ -53,6 +55,7 @@ sap.ui.define([
 				oThis.loadData(selRow.id);
 			}
 
+			oThis.id = selRow.id;
 		},
 
         loadData : function(id){
@@ -80,12 +83,80 @@ sap.ui.define([
 					console.log(data);
                     if(data[3].length){
                         let liftModel = oThis.getView().getModel("liftModel");
-                        liftModel.setData(data[3]);
+                        liftModel.setData(data[3][0]);
                         oThis.getView().setModel(liftModel, "liftModel")
                     }
+
+					console.group(oThis.getView().getModel("liftModel"));
                 }
             })
         },
+
+		addNewLead : function(){
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:null });
+			}, 1000);
+			this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:null});
+		},
+
+		newLead : function (sChannel, sEvent, oData) {
+
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
+
+		editLead : function(oEvent){
+			var viewModel = this.getView().getModel("liftModel");
+			var model = { "id": viewModel.oData.id }
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
+                this.bus = sap.ui.getCore().getEventBus();
+                this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:model });
+            }, 1000);
+            
+            this.bus.publish("leaddetails", "newLead", { pagekey: "leadsdetails", viewModel:model});
+		},
+
+		resourceBundle: function () {
+			var currentContext = this;
+			var oBundle = this.getModel("i18n").getResourceBundle()
+			return oBundle
+		},
+
+		deleteLead : function(){
+			var currentContext = this;
+
+			var confirmMsg = currentContext.resourceBundle().getText("deleteMsg");
+			var deleteSucc = currentContext.resourceBundle().getText("leadDeleteSucc");
+			var model = this.getView().getModel("liftModel").oData;
+			// console.log(currentContext.model);
+			if (model.id != undefined) {
+				MessageBox.confirm(
+					confirmMsg, {
+						styleClass: "sapUiSizeCompact",
+						onClose: function (sAction) {
+							if (sAction == "OK") {
+								leadService.deleteLead({id : model.id}, function (data) {
+									if (data) {
+										currentContext.onCancel();
+										MessageToast.show(deleteSucc);
+										currentContext.bus = sap.ui.getCore().getEventBus();
+										currentContext.bus.publish("loaddata", "loadData");
+									}
+								});
+							}
+						}
+					});
+			}
+		},
+
+		onCancel: function () {
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
+		},
 	});
 
 }, true);

@@ -8,7 +8,21 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form">
 
-	<Page class="pgDashboard" showHeader="false" >
+	<Page class="pgDashboard" showHeader="true" title="Lead Details">
+        <headerContent>
+            <layout:VerticalLayout
+            class="sapUiContentPadding"
+            width="100%">
+                <layout:content>
+                    <Link
+                        text="Convert to Quote"
+                        press="handleLinkPress" />
+                </layout:content>
+            </layout:VerticalLayout>
+			<Button icon="sap-icon://add" tooltip="Add New Lead" press="addNewLead"/>
+            <Button icon="sap-icon://edit" tooltip="Update Lead" press="editLead"/>
+            <Button icon="sap-icon://delete" tooltip="Delete Lead" press="deleteLead"/>
+		</headerContent>
         <content>
             <HBox>
                 <VBox width="100%">
@@ -79,7 +93,7 @@
                                     <form:formElements>                            
                                         <form:FormElement label="{i18n>leadDetailTypeofLift}">
                                             <form:fields>
-                                                <Input id="lftType" value="{liftModel>/typeoflift}" ebabled="false"/>
+                                                <Input id="lftType" value="{liftModel>/typeoflift}" enabled="false"/>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement label="{i18n>leadDetailLiftCapacity}">
@@ -97,6 +111,10 @@
                                                 <Input id="machine" value="{liftModel>/machine}" enabled="false" />
                                             </form:fields>
                                         </form:FormElement>
+                                    </form:formElements>
+                                </form:formContainer>
+                                <form:formContainer>
+                                    <form:formElements>
                                         <form:FormElement label="{i18n>leadDetailsFloorHeight}">
                                             <form:fields>
                                                 <Input id="txtmobileNo" value="{liftModel>/floorheight}" enabled="false" />
