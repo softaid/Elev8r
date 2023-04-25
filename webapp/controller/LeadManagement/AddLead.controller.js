@@ -13,8 +13,11 @@ sap.ui.define([
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead", {
 		onInit: function () {
 			var currentContext = this;
+
+			// currentContext.reset();
             this.bus = sap.ui.getCore().getEventBus();
-            this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
+            this.bus.subscribe("leaddetails", "newLead", this.leaddetails, this);
+			
 
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
@@ -118,12 +121,42 @@ sap.ui.define([
 			console.log(this.getView().getModel("viewModel"));
 			var currentContext = this;
 			this.model = this.getView().getModel("viewModel");
-			console.log("this.model", this.model);
+		},
+
+
+		leaddetails: function(sChannel, sEvent, oData) {
+
+			let selRow = oData.viewModel;
+			let oThis = this;
+
+			if(selRow != null)  {
+
+				if (selRow.action == "view") {
+					oThis.getView().byId("btnSave").setEnabled(false);
+				} else {
+					oThis.getView().byId("btnSave").setEnabled(true);
+				}
+
+				oThis.bindLeadDetails(selRow.id);
+
+			}
+
+			else{
+				var oModel = new JSONModel();
+				this.getView().setModel(oModel, "editPartyModel");
+			}
+
+		},
+
+
+
+
+		bindLeadDetails: function (id) {
+			var currentContext = this;
 			var oModel = new JSONModel();
+			if (id != undefined) {
 
-			if (this.model != undefined) {
-
-				Leadservice.getLeads({ id: this.model.id }, function (data) {
+				Leadservice.getLeads({ id: id }, function (data) {
 					console.log("-----------------data----------------------", data);
 					oModel.setData(data[0][0]);
 					var addresses = data[1];
@@ -151,34 +184,11 @@ sap.ui.define([
 				this.getView().byId("btnSave").setText("Update");
 
 			} else {
-				this.getView().byId("btnDelete").setVisible(false);
+				// this.getView().byId("btnDelete").setVisible(false);
 			}
 
 			this.getView().setModel(oModel, "editPartyModel");
 			var oModel = this.getView().getModel("editPartyModel");
-			console.log("ONBEFORERENDERING editPartyModel", oModel);
-			console.log("ONBEFORERENDERING editPartyModel", oModel);
-			oModel.refresh();
-		},
-
-
-        handleLeadList: function(sChannel, sEvent, oData) {
-
-			let selRow = oData.viewModel;
-			let oThis = this;
-
-			if(selRow != null)  {
-
-				if (selRow.action == "view") {
-					oThis.getView().byId("btnSave").setEnabled(false);
-				} else {
-					oThis.getView().byId("btnSave").setEnabled(true);
-				}
-
-				//oThis.bindBillOfMaterial(selRow.id);
-
-			}
-
 		},
 
 		handleSelectionFinish: function (oEvent) {
@@ -593,11 +603,11 @@ sap.ui.define([
            
             oLeadDetailnModel.refresh();
         },
+	
 
-
-
-		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
-		},
+		onCancel: function() {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("leads");
+		}	
 	});
 }, true);

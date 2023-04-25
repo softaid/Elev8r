@@ -88,6 +88,20 @@ sap.ui.define([
                         oThis.getView().setModel(liftModel, "liftModel")
                     }
 
+					// if(data[4].length){
+						let arr = [];
+						// for(let i = 0; i < data[4].length; i++){
+							arr.push({
+								"revision" : "Revision" + (1+1),
+								"drive" : "drive"
+							})
+						// }
+
+						let quotationModel = oThis.getView().getModel("quotationModel");
+                        quotationModel.setData({modelData : arr});
+                        oThis.getView().setModel(quotationModel, "quotationModel")
+					// }
+
 					console.group(oThis.getView().getModel("liftModel"));
                 }
             })
@@ -110,8 +124,9 @@ sap.ui.define([
 			oRouter.navTo(oData.pagekey, true);
 		},
 
-		editLead : function(){
-			var model = { "id": this.id }
+		editLead : function(oEvent){
+			var viewModel = this.getView().getModel("leadModel");
+			var model = { "id": viewModel.oData.id }
 			this.bus = sap.ui.getCore().getEventBus();
 
 			console.log(model);

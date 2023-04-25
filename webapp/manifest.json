@@ -124,17 +124,17 @@
 				{
 					"pattern": "home",
 					"name": "home",
-					"target": "master"
+					"target": "home"
 				},
 				{
 					"pattern": "home1",
 					"name": "home1",
-					"target": "master"
+					"target": "home1"
 				},
 				{
 					"pattern": "notifications",
 					"name": "notifications",
-					"target": "master"
+					"target": "notifications"
 				},
 				{
 					"pattern": "aboutus",
@@ -174,27 +174,27 @@
 				{
 					"pattern": "materialrequestandtransfer",
 					"name": "materialrequestandtransfer",
-					"target": "master"
+					"target": "materialrequestandtransfer"
 				},
 				{
 					"pattern": "warehousemaster",
 					"name": "warehousemaster",
-					"target": "master"
+					"target": "warehousemaster"
 				},
 				{
 					"pattern": "employeemaster",
 					"name": "employeemaster",
-					"target": "master"
+					"target": "employeemaster"
 				},
 				{
 					"pattern": "locationmaster",
 					"name": "locationmaster",
-					"target": "master"
+					"target": "locationmaster"
 				},
 				{
 					"pattern": "contactmaster",
 					"name": "contactmaster",
-					"target": "master"
+					"target": "contactmaster"
 				},
 				{
 					"pattern": "users",
@@ -215,6 +215,11 @@
 					"pattern": "addlead",
 					"name": "addlead",
 					"target": "addlead"
+				},
+				{
+					"pattern": "leaddetail",
+					"name": "leaddetail",
+					"target": "leaddetail"
 				},
 				{
 					"pattern": "leadactivities",
@@ -379,6 +384,12 @@
 				"addlead": {
 					"viewId": "addlead",
 					"viewName": "LeadManagement/AddLead",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leaddetail": {
+					"viewId": "leaddetail",
+					"viewName": "LeadManagement/LeadsDetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
