@@ -1,118 +1,177 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
-	'sap/m/MessageToast',
+	'sap/ui/model/Sorter',
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/m/MessageBox',
-	'sap/ui/elev8rerp/componentcontainer/formatter/common.formatter',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service',
-	'sap/ui/elev8rerp/componentcontainer/services/Masters/Contact.service',
-	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
-	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
-
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFormatter, quotationService, contactService, commonService, commonFunction) {
-
+], function (JSONModel, BaseController, Sorter, leadService, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.QuotationsDetail", {
-
-		commonFormatter: commonFormatter,
-
 		onInit: function () {
 
-			this.counter = 1;
-			this.counter1 = 1;
+			this.bus = sap.ui.getCore().getEventBus();
+			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
+			
+			this.bus.subscribe("qutationdetails", "newQutation", this.newQutation, this);
+			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 
-			// bind lift type dropdown
-			commonFunction.getReferenceByType("LftTyp", "liftTypeModel", this);
+			this.handleRouteMatched(null);
 
-			// bind lead dropdown
-			commonFunction.getAllLeads("leadModel", this);
+			var model = new JSONModel();
+			model.setData([]);
+			this.getView().setModel(model, "leadModel");
 
-			// bind quotation stage dropdown
-			commonFunction.getReferenceByType("quoteStg", "quoteStageModel", this);
+			let stageModel = new JSONModel();
+			stageModel.setData({ modelData: [] });
+			this.getView().setModel(stageModel, "stageModel");
 
-			// bind contact dropdown
-			commonFunction.getAllContacts("contactModel", this);
+			let activityModel = new JSONModel();
+			activityModel.setData({ modelData: [] });
+			this.getView().setModel(activityModel, "activityModel");
+
+			let liftModel = new JSONModel();
+			liftModel.setData({ modelData: [] });
+			this.getView().setModel(liftModel, "liftModel");
+
+			let quotationModel = new JSONModel();
+			quotationModel.setData({ modelData: [] });
+			this.getView().setModel(quotationModel, "quotationModel");
+
+			let attachmentModel = new JSONModel();
+			attachmentModel.setData({ modelData: [] });
+			this.getView().setModel(attachmentModel, "attachmentModel");
 		},
 
-        onBeforeRendering: function () {
+		handleRouteMatched: function (evt) {
+			// this.loadData();
+		},
 
-			var currentContext = this;
-			this.model = this.getView().getModel("viewModel");
-			console.log("this.model", this.model);
-			var oModel = new JSONModel();
+		handleQutationDetails: function (sChannel, sEvent, oData) {
 
-			if (this.model != undefined) {
-
-				quotationService.getQuotation({ id: this.model.id }, function (data) {
-                    if(data.length && data[0].length){
-					    oModel.setData(data[0][0]);
-                    }else{
-                        oModel.setData([]);
-                    }
-				});
-				this.getView().byId("btnSave").setText("Update");
-
-			} else {
-				this.getView().byId("btnDelete").setVisible(false);
+			let selRow = oData.viewModel;
+			let oThis = this;
+			console.log(selRow);
+			if (selRow != null) {
+				oThis.loadData(selRow.id);
 			}
 
-			this.getView().setModel(oModel, "editQuotationModel");
-			var oModel = this.getView().getModel("editQuotationModel");
-			oModel.refresh();
+			oThis.id = selRow.id;
 		},
 
-        resourceBundle: function () {
+		loadData: function (id) {
+			let oThis = this;
+
+			leadService.getLeadDetails({ id: id }, function (data) {
+				if (data.length) {
+					if (data[0].length) {
+						let leadModel = oThis.getView().getModel("leadModel");
+						leadModel.setData(data[0][0]);
+						oThis.getView().setModel(leadModel, "leadModel");
+					}
+
+					if (data[1].length) {
+						let stageModel = oThis.getView().getModel("stageModel");
+						stageModel.setData({ modelData: data[1] });
+						oThis.getView().setModel(stageModel, "stageModel");
+					}
+
+					if (data[2].length) {
+						let activityModel = oThis.getView().getModel("activityModel");
+						activityModel.setData({ modelData: data[2] });
+						oThis.getView().setModel(activityModel, "activityModel")
+					}
+					console.log(data);
+					if (data[3].length) {
+						let liftModel = oThis.getView().getModel("liftModel");
+						liftModel.setData(data[3][0]);
+						oThis.getView().setModel(liftModel, "liftModel")
+					}
+
+					if (data[4].length) {
+						let quotationModel = oThis.getView().getModel("quotationModel");
+						// quotationModel.setData({ modelData: data[4] });
+						// oThis.getView().setModel(quotationModel, "quotationModel")
+
+						var arrary =[];
+						arrary.push({
+							"id": "id",
+							"quotevalue": "quotevalue",
+							"quotestageid": "quotestageid",
+							"nooflifts": "nooflifts"
+						})
+
+						for(var i=0;i<data[4].length;i++){
+							arrary.push({
+								"id": data[4][i].id,
+								"quotevalue": data[4][i].quotevalue,
+								"quotestageid": data[4][i].quotestageid,
+								"nooflifts": data[4][i].nooflifts,
+							})
+						}
+						quotationModel.setData({ modelData: arrary });
+						oThis.getView().setModel(quotationModel, "quotationModel")
+						console.log("quotationModel",quotationModel);
+					}
+					
+
+					console.group(oThis.getView().getModel("liftModel"));
+				}
+			})
+		},
+
+		addNewQutation: function () {
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("qutationdetails", "newQutation", { pagekey: "addqutation", viewModel: null });
+			}, 1000);
+			this.bus.publish("qutationdetails", "newQutation", { pagekey: "addqutation", viewModel: null });
+		},
+
+		newQutation: function (sChannel, sEvent, oData) {
+
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
+
+		editLead: function (oEvent) {
+			var viewModel = this.getView().getModel("leadModel");
+			var model = { "id": viewModel.oData.id }
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("qutationdetails", "newQutation", { pagekey: "addqutation", viewModel: model });
+			}, 1000);
+
+			this.bus.publish("qutationdetails", "newQutation", { pagekey: "addqutation", viewModel: model });
+		},
+
+		resourceBundle: function () {
 			var currentContext = this;
 			var oBundle = this.getModel("i18n").getResourceBundle()
 			return oBundle
 		},
 
-		onSave: function () {
-			if (this.validateForm()) {
-				var currentContext = this;
-				var model = this.getView().getModel("editQuotationModel").oData;
-				
-				model["companyid"] = commonService.session("companyId");
-				model["userid"] = commonService.session("userId");
+		deleteLead: function () {
+			var currentContext = this;
 
-                let saveMsg = currentContext.resourceBundle().getText("quotationSaveMsg");
-                let updateMsg = currentContext.resourceBundle().getText("quotationUpdateMsg");
-				
-				quotationService.saveQuotation(model, function (data) {
-
-					if (data.id > 0) {
-						var message = model.id == null ? saveMsg : updateMsg;
-                        currentContext.onCancel();
-                        MessageToast.show(message);
-                        currentContext.bus = sap.ui.getCore().getEventBus();
-                        currentContext.bus.publish("loaddata", "loadData");
-					}
-
-				});
-			}
-		},
-
-		validateForm: function () {
-			var isValid = true;
-				
-			return isValid;
-		},
-
-		onDelete: function () {
-            var currentContext = this;
-			let deleteMsg = currentContext.resourceBundle().getText("deleteMsg");
-			let contactDeleteMsg = currentContext.resourceBundle().getText("contactDeleteMsg");
-			if (this.model != undefined) {
+			var confirmMsg = currentContext.resourceBundle().getText("deleteMsg");
+			var deleteSucc = currentContext.resourceBundle().getText("leadDeleteSucc");
+			var model = this.getView().getModel("liftModel").oData;
+			// console.log(currentContext.model);
+			if (model.id != undefined) {
 				MessageBox.confirm(
-					deleteMsg, {
+					confirmMsg, {
 					styleClass: "sapUiSizeCompact",
 					onClose: function (sAction) {
 						if (sAction == "OK") {
-							contactService.deleteContact(currentContext.model, function (data) {
+							leadService.deleteLead({ id: model.id }, function (data) {
 								if (data) {
 									currentContext.onCancel();
-									MessageToast.show(contactDeleteMsg);
+									MessageToast.show(deleteSucc);
 									currentContext.bus = sap.ui.getCore().getEventBus();
 									currentContext.bus.publish("loaddata", "loadData");
 								}
@@ -123,10 +182,9 @@ sap.ui.define([
 			}
 		},
 
-
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---quotations--fclQuotation");
-			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
 		},
 	});
+
 }, true);

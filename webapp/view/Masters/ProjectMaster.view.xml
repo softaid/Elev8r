@@ -27,7 +27,7 @@
                             <items>
                                 <IconTabFilter text="{masterModel>typename}" key="{masterModel>typecode}">
                                     <VBox fitContainer="true">
-                                        <Table id="activityTbl"
+                                        <Table id="projectactivityTbl"
                                             inset="false" 
                                             items="{
                                                         path: 'masterDetailModel>/modelData',
@@ -54,8 +54,16 @@
                                                     <cells>
                                                         <Text text="{masterDetailModel>id}"/>
                                                         <Text text="{masterDetailModel>description}"/>
-                                                        <Text text="{masterDetailModel>active}" />
-                                                         <Text text="{masterDetailModel>defaultvalue}" />
+                                                         <Switch state="{masterDetailModel>active}" id="projectactive" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                         <Switch state="{masterDetailModel>defaultvalue}" id="projectdefault" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
                                                     </cells>
                                                 </ColumnListItem>
                                             </items>

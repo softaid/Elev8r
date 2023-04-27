@@ -17,7 +17,6 @@ sap.ui.define([
 
         onInit: function () {
             var currentContext = this;  
-
             currentContext.flag = 1;
             
         },
@@ -41,9 +40,8 @@ sap.ui.define([
                 currentContext.getView().byId("btnSave").setText("Update");
 				masterService.getReference({id : this.model.id}, function(data){
                     if(data.length && data[0].length){
-                         console.log("data[0][0].parentid == 0",data[0][0].parentid == 0);
                         data[0][0].active = data[0][0].active == 1 ? true : false;
-                       // data[0][0].parentid = data[0][0].parentid == 0 ? this.getView().byId("projecttype").setVisible(false) : this.getView().byId("projecttype").setVisible(true);
+                        data[0][0].defaultvalue = data[0][0].defaultvalue == 1 ? true : false;
                         oModel.setData(data[0][0]);
                     }
                 });
@@ -74,8 +72,6 @@ sap.ui.define([
 
         validateForm: function () {
 			var isValid = true;
-
-
 			if (!commonFunction.isRequired(this, "description", "Description is mandatory!"))
 				isValid = false;
 	

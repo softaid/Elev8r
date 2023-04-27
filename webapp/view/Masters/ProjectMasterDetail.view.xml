@@ -77,12 +77,6 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-
-                              <!-- <form:FormElement  id="projecttype" label="Project Type">
-                                    <form:fields>
-                                        <Input id="project" value="{editMasterModel>/projecttype}"/>
-                                    </form:fields>
-                                </form:FormElement> -->
                                 <form:FormElement label="{i18n>leadDescription}">
                                     <form:fields>
                                         <Input id="description" value="{editMasterModel>/description}"/>
@@ -97,7 +91,6 @@
                                         </Switch>
                                     </form:fields>
                                 </form:FormElement>
-
                                   <form:FormElement label="{i18n>Default}">
                                     <form:fields>
                                         <Switch  state="{editMasterModel>/defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >

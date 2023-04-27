@@ -39,21 +39,21 @@
                             </headerToolbar>
                             <columns>
                                 <Column><Text text ="{i18n>quotationId}" /></Column>
-                                <Column><Text text ="{i18n>quotationLeadName}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationContactName}"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationLiftType}"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationQuoteValue}"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationQuoteStage}"/></Column>      
+                                <Column><Text text ="Qutation Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationLeadName}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Category"/></Column>      
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
                                     <cells>
                                     <ObjectIdentifier text="{QuotationMasterModel>id}" />
-                                        <Text text="{QuotationMasterModel>leadname}" />
-                                        <Text text="{QuotationMasterModel>contactname}"/>
-                                        <Text text="{QuotationMasterModel>lifttype}"/>
-                                        <Text text="{QuotationMasterModel>quotevalue}"/>
-                                        <Text text="{QuotationMasterModel>quotestage}"/> 
+                                        <Text text="{QuotationMasterModel>quotename}" />
+                                        <Text text="{QuotationMasterModel>leadname}"/>
+                                        <Text text="{QuotationMasterModel>quotedate}"/>
+                                        <Text text="{QuotationMasterModel>leadstatus}"/>
+                                        <Text text="{QuotationMasterModel>quotecategory}"/> 
                                     </cells>
                                 </ColumnListItem>
                             </items>

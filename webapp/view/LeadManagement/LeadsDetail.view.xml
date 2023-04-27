@@ -143,16 +143,41 @@
                             horizontal="true"
                             vertical="true"
                             focusable="true">
-                            <List
-                                id="quotationList"
-                                items="{ path: 'liftModel>/modelData' }">
-                                <StandardListItem
-                                    
-                                    info="{i18n>leadDetailsLiftType} - {liftModel>typeoflift}"
-                                    description="Qty - {liftModel>nooflifts}"
-                                    title="Capacity - {liftModel>capacity}"
-                                    type="Inactive" />
-                            </List>
+
+                              <Table id="leadqutationTbl"
+                                            inset="false" 
+                                            items="{
+                                                        path: 'quotationModel>/modelData',
+                                                        sorter: {
+                                                            path: 'id'
+                                                        }
+                                                    }">
+                                            <headerToolbar>
+                                                <Toolbar>
+                                                    <content>
+                                                        <Title text="{masterModel>typename}" level="H2"/>
+                                                        <ToolbarSpacer />
+                                                    </content>
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <columns>
+                                                <Column><Text text =" " /></Column>
+                                                <Column><Text text ="Revision-1" /></Column>
+                                                 <Column><Text text ="Revision-2" /></Column>
+                                                <Column><Text text ="Revision-3" /></Column>
+                                                
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem >
+                                                    <cells>
+                                                        <Text text="{quotationModel>id}"/>
+                                                        <Text text="{quotationModel>quotevalue}"/>
+                                                        <Text text="{quotationModel>quotestageid}"/>
+                                                        <Text text="{quotationModel >nooflifts}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>   
                         </ScrollContainer>
                     </IconTabFilter>
 

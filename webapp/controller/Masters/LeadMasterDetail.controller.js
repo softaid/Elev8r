@@ -17,9 +17,7 @@ sap.ui.define([
 
         onInit: function () {
             var currentContext = this;  
-
             currentContext.flag = 1;
-            
         },
 
         onBeforeRendering: function () {
@@ -97,8 +95,8 @@ sap.ui.define([
                 model["companyid"] = commonService.session("companyId");
                 model["userid"] = commonService.session("userId");
 
-                var saveSuccess = this.resourceBundle().getText("leadSaveSuccess");
-                var updateSuccess = this.resourceBundle().getText("leadUpdateSuccess");
+                var saveSuccess = this.resourceBundle().getText("leadMasterSaveSuccess");
+                var updateSuccess = this.resourceBundle().getText("leadMasterUpdateSuccess");
 
                 if(this.model.typecode == "Stage"){
                     model["parentid"] = this.getView().byId("pipeline").getSelectedKey();

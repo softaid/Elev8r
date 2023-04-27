@@ -13,9 +13,11 @@ sap.ui.define([
 		onInit: function () {
 
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
+			// this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
+			this.bus.subscribe("qutationcreen", "handleQutationList", this.handleQutationList, this);
+			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
-			this.oFlexibleColumnLayout = this.byId("fclQuotation");
+			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
 
 			this.handleRouteMatched(null);
 
@@ -56,29 +58,50 @@ sap.ui.define([
 			this.loadData();
 		},
 
-		setDetailPage: function (channel, event, data) {
-			this.detailView = sap.ui.view({
-				viewName: "sap.ui.elev8rerp.componentcontainer.view.LeadManagement." + data.viewName,
-				type: "XML"
-			});
-
-			this.detailView.setModel(data.viewModel, "viewModel");
-			this.oFlexibleColumnLayout.removeAllMidColumnPages();
-			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
-			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
-		},
+		
+		handleQutationDetails : function (sChannel, sEvent, oData) {
+            console.log("oData",oData);
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            this.bus = sap.ui.getCore().getEventBus();
+            oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+            oRouter.navTo(oData.pagekey, true);
+        },
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("QuotationMasterModel");
 			var model = { "id": viewModel.getProperty("id") }
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("quotationmaster", "setDetailPage", { viewName: "QuotationsDetail", viewModel: model });
+			setTimeout(function () {
+                this.bus = sap.ui.getCore().getEventBus();
+                this.bus.publish("qutationdetail", "handleQutationDetails", { pagekey: "qutationdetail", viewModel:model });
+            }, 1000);
+            
+            this.bus.publish("qutationdetail", "handleQutationDetails", { pagekey: "qutationdetail", viewModel:model});
+		},
+		
+		onAddNew: function() {
+
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel:null });
+			}, 1000);
+			this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel:null});
 		},
 
-		onAddNew: function (oEvent) {
-			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("quotationmaster", "setDetailPage", { viewName: "QuotationsDetail" });
-		},
+			 /**
+         * Function to navigate to specified route.
+         * @param {*} sChannel 
+         * @param {*} sEvent 
+         * @param {*} oData 
+         */
+			 handleQutationList : function (sChannel, sEvent, oData) {
+				console.log("oData",oData);
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				this.bus = sap.ui.getCore().getEventBus();
+				oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+				oRouter.navTo(oData.pagekey, true);
+			},
 
 		onSearch: function (oEvent) {
 			var oTableSearchState = [],

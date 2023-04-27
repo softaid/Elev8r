@@ -6,30 +6,36 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice) {
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service'
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice,Quotationservice) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation", {
 		onInit: function () {
 			var currentContext = this;
 
 			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("leaddetails", "newLead", this.leaddetails, this);
-
+			this.bus.subscribe("qutationdetail", "newQutation", this.qutationdetail, this);
 
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
 
-			// bind Pipeline dropdown
-			commonFunction.getReferenceByType("Pipeline", "pipeLineModel", this);
-
-			// bind Pipeline dropdown
-			commonFunction.getReferenceByType("LeadStatus", "leadStatusModel", this);
-
 			// bind Lead dropdown
 			commonFunction.getReferenceByType("LeadCtgry", "leadCategoryModel", this);
+
+			// bind Source dropdown
+			commonFunction.getReferenceByType("QuoteType", "quoteTypeModel", this);
+
+			// bind Pipeline dropdown
+			commonFunction.getReferenceByType("QuoteStatus", "QuoteStatusModel", this);
+
+			// bind Pipeline dropdown
+			commonFunction.getReferenceByType("QuoteCategory", "QuoteCategoryModel", this);
+
+			// bind Lead dropdown
+			commonFunction.getReferenceByType("QuoteSubCategory", "QuoteSubCategoryModel", this);
 
 			// bind CntCtgry dropdown
 			commonFunction.getReferenceByType("CntCtgry", "leadCntCategoryModel", this);
@@ -76,6 +82,9 @@ sap.ui.define([
 			// bind CWTPositionModel dropdown
 			commonFunction.getReferenceByType("CWTPstn", "CWTPositionModel", this);
 
+			// bind Pipeline dropdown
+			commonFunction.getReferenceByType("LeadStatus", "leadStatusModel", this);
+
 			// bind standaredFloorHeightModel dropdown
 			commonFunction.getReferenceByType("StdFlrHt", "standaredFloorHeightModel", this);
 
@@ -96,6 +105,14 @@ sap.ui.define([
 
 			// bind AllOpeningSameSide dropdown
 			commonFunction.getReferenceByType("RightOpening", "rightOpeningModel", this);
+
+			//bind all Leads
+			Leadservice.getAllLeads(function (data) {
+				var oModel = new sap.ui.model.json.JSONModel();
+				oModel.setData({ modelData: data[0] });
+				currentContext.getView().setModel(oModel, "LeadsMasterModel");
+				console.log("LeadsMasterModel", oModel);
+			});
 
 			//bind all locations
 			locationService.getAllLocations(function (data) {
@@ -132,7 +149,7 @@ sap.ui.define([
 			var emptyModel = this.getModelDefault();
 			var model = new JSONModel();
 			model.setData(emptyModel);
-			this.getView().setModel(model, "editPartyModel");
+			this.getView().setModel(model, "editQutationModel");
 
 		},
 
@@ -141,7 +158,7 @@ sap.ui.define([
 				id: null,
 				leadname: null,
 				companyname: null,
-				leaddate: commonFunction.getDateFromDB(new Date()),
+				quotedate: commonFunction.getDateFromDB(new Date()),
 				sourceid: null,
 				leadscategory: null,
 				stageid: null,
@@ -179,14 +196,12 @@ sap.ui.define([
 		},
 
 		onBeforeRendering: function () {
-			console.log(this.getView().getModel("viewModel"));
 			var currentContext = this;
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
 
-		leaddetails: function(sChannel, sEvent, oData) {
-
+		qutationdetail: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
 
@@ -198,57 +213,126 @@ sap.ui.define([
 					oThis.getView().byId("btnSave").setEnabled(true);
 				}
 
-				oThis.bindLeadDetails(selRow.id);
+				oThis.bindQutationDetails(selRow.id);
 
 			}
 
-			else{
+			else {
 				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editPartyModel");
+				this.getView().setModel(oModel, "editQutationModel");
 			}
 
 		},
 
+		LeadChange: function () {
+            var leadid = this.getView().byId("txtLead").getSelectedItem().mProperties.key;
+            var currentContext = this;
+            currentContext.leadname = this.getView().byId("txtLead").getSelectedItem();
+			var oQutationModel = this.getView().getModel("editQutationModel");
+			console.log("------------oLeadDetailnModel--------------",oQutationModel);
 
+			// let oLeadDetailnModel = this.getView().getModel("editQutationModel").oData;
+			// console.log("oLeadDetailnModel",oLeadDetailnModel);
+			// let oQutationModel.oData = oLeadDetailnModel.getData();
+			// console.log("oQutationModel.oData",oQutationModel.oData);
 
+			
+           
+           Leadservice.getLeads({ id: leadid },function (data) {
+                var oLeadModel = new sap.ui.model.json.JSONModel();
+                if (data.length > 0) {
+                    if (data[0].length > 0) {
+                        //data[0].unshift({ "id": "All", "linename": "Select All" });
+                    } else {
+                        MessageBox.error("Lead  not availabel.")
+                    }
+                }
 
-		bindLeadDetails: function (id) {
+                currentContext.getView().setModel(oLeadModel, "leadModel");
+                oLeadModel.setData({ modelData: data[0] });
+				console.log("--------------leadModel--------------------",oLeadModel);
+
+				oQutationModel.oData.leadname = oLeadModel.oData.modelData[0].leadname,
+				oQutationModel.oData.companyname = oLeadModel.oData.modelData[0].companyname,
+				oQutationModel.oData.leaddate = oLeadModel.oData.modelData[0].leaddate,
+				oQutationModel.oData.salesrep = oLeadModel.oData.modelData[0].salesrep,
+				oQutationModel.oData.sourceid = oLeadModel.oData.modelData[0].sourceid,
+				oQutationModel.oData.leadscategory = oLeadModel.oData.modelData[0].leadscategory,
+				oQutationModel.oData.stageid = oLeadModel.oData.modelData[0].stageid,
+				oQutationModel.oData.email = oLeadModel.oData.modelData[0].email,
+				oQutationModel.oData.phoneno = oLeadModel.oData.modelData[0].phoneno,
+				oQutationModel.oData.mobileno = oLeadModel.oData.modelData[0].mobileno,
+				oQutationModel.oData.contactperson = oLeadModel.oData.modelData[0].contactperson,
+				oQutationModel.oData.leadvalue = oLeadModel.oData.modelData[0].leadvalue,
+				oQutationModel.oData.leadscore = oLeadModel.oData.modelData[0].leadscore,
+				oQutationModel.oData.leadstatus = oLeadModel.oData.modelData[0].leadstatus,
+				oQutationModel.oData.leaddescription = oLeadModel.oData.modelData[0].leaddescription,
+				oQutationModel.oData.locationid = oLeadModel.oData.modelData[0].locationid,
+				oQutationModel.oData.typeoflift = oLeadModel.oData.modelData[0].typeoflift,
+				oQutationModel.oData.capacityid = oLeadModel.oData.modelData[0].capacityid,
+				oQutationModel.oData.modelid = oLeadModel.oData.modelData[0].modelid,
+				oQutationModel.oData.driveid = oLeadModel.oData.modelData[0].driveid,
+				oQutationModel.oData.machineid = oLeadModel.oData.modelData[0].machineid,
+				oQutationModel.oData.controlid = oLeadModel.oData.modelData[0].controlid,
+				oQutationModel.oData.operationid = oLeadModel.oData.modelData[0].operationid,
+				oQutationModel.oData.speedid = oLeadModel.oData.modelData[0].speedid,
+				oQutationModel.oData.typeofdoorid = oLeadModel.oData.modelData[0].typeofdoorid,
+				oQutationModel.oData.landingdoorid = oLeadModel.oData.modelData[0].landingdoorid,
+				oQutationModel.oData.cardoorid = oLeadModel.oData.modelData[0].cardoorid,
+				oQutationModel.oData.lowestfloorid = oLeadModel.oData.modelData[0].lowestfloorid,
+				oQutationModel.oData.cwtpositionid = oLeadModel.oData.modelData[0].cwtpositionid,
+				oQutationModel.oData.floorheaightid = oLeadModel.oData.modelData[0].floorheaightid,
+				oQutationModel.oData.architectidid = oLeadModel.oData.modelData[0].architectidid,
+				oQutationModel.oData.leadconsaltantid = oLeadModel.oData.modelData[0].leadconsaltantid,
+				oQutationModel.oData.nooflifts = oLeadModel.oData.modelData[0].nooflifts,
+				oQutationModel.oData.cityid = oLeadModel.oData.modelData[0].cityid,
+				oQutationModel.oData.stateid = oLeadModel.oData.modelData[0].stateid,
+				oQutationModel.oData.countryid = oLeadModel.oData.modelData[0].countryid,
+				oQutationModel.oData.pincode = oLeadModel.oData.modelData[0].pincode,
+				oQutationModel.oData.stopsid = oLeadModel.oData.modelData[0].stopsid,
+				oQutationModel.oData.floormarking = oLeadModel.oData.modelData[0].floormarking,
+				oQutationModel.oData.allopeningsameside = oLeadModel.oData.modelData[0].allopeningsameside,
+				oQutationModel.oData.frontopening = oLeadModel.oData.modelData[0].frontopening,
+				oQutationModel.oData.backopening = oLeadModel.oData.modelData[0].backopening,
+				oQutationModel.oData.leftopening = oLeadModel.oData.modelData[0].leftopening,
+				oQutationModel.oData.rightopening = oLeadModel.oData.modelData[0].rightopening,
+				oQutationModel.oData.shaftwidth = oLeadModel.oData.modelData[0].shaftwidth,
+				oQutationModel.oData.shaftdepth = oLeadModel.oData.modelData[0].shaftdepth,
+				oQutationModel.oData.cardepth = oLeadModel.oData.modelData[0].cardepth,
+				oQutationModel.oData.carwidth = oLeadModel.oData.modelData[0].carwidth,
+				oQutationModel.oData.carheight = oLeadModel.oData.modelData[0].carheight,
+				oQutationModel.oData.doorwidth = oLeadModel.oData.modelData[0].doorwidth,
+				oQutationModel.oData.doorheight = oLeadModel.oData.modelData[0].doorheight,
+				oQutationModel.oData.travel = oLeadModel.oData.modelData[0].travel,
+				oQutationModel.oData.pitdepth = oLeadModel.oData.modelData[0].pitdepth,
+				oQutationModel.oData.overhead = oLeadModel.oData.modelData[0].overhead,
+				oQutationModel.oData.mrwidth = oLeadModel.oData.modelData[0].mrwidth,
+				oQutationModel.oData.mrdepth = oLeadModel.oData.modelData[0].mrdepth,
+				oQutationModel.oData.mrheight = oLeadModel.oData.modelData[0].mrheight,
+				oQutationModel.oData.companyname = oLeadModel.oData.modelData[0].companyname,
+				console.log("-------------oQutationModel After lead set detail-------------",oQutationModel);
+			    oQutationModel.refresh();
+            });
+			console.log("-------------oQutationModel After lead set detail outside-------------",oQutationModel);
+			oQutationModel.refresh();
+
+            this.getView().byId("txtLead").setValueState(sap.ui.core.ValueState.None);
+        },
+
+		bindQutationDetails: function (id) {
 			var currentContext = this;
 			var oModel = new JSONModel();
 			if (id != undefined) {
 
-				Leadservice.getLeads({ id: id }, function (data) {
+				Quotationservice.getQuotation({ id: id }, function (data) {
 					oModel.setData(data[0][0]);
-					var addresses = data[1];
-
-					if (addresses.length > 0) {
-
-						currentContext.counter = addresses.length;
-
-						for (var i = 0; i < addresses.length; i++) {
-							var cnt = i + 1;
-							currentContext.getView().byId("txtAddress" + cnt).setValue(addresses[i].address);
-							currentContext.getView().byId("ddlCity" + cnt).setSelectedKey(addresses[i].cityid);
-							currentContext.getView().byId("ddlState" + cnt).setSelectedKey(addresses[i].stateid);
-							currentContext.getView().byId("ddlCountry" + cnt).setSelectedKey(addresses[i].countryid);
-							currentContext.getView().byId("txtPinCode" + cnt).setValue(addresses[i].pincode);
-
-							if (cnt > 1) {
-								currentContext.getView().byId("containerCity" + cnt).setVisible(true);
-								currentContext.getView().byId("containerState" + cnt).setVisible(true);
-							}
-						}
-					}
-
 				});
 				this.getView().byId("btnSave").setText("Update");
 
-			} else {
-				// this.getView().byId("btnDelete").setVisible(false);
-			}
+			} 
 
-			this.getView().setModel(oModel, "editPartyModel");
-			var oModel = this.getView().getModel("editPartyModel");
+			this.getView().setModel(oModel, "editQutationModel");
+			var oModel = this.getView().getModel("editQutationModel");
 		},
 
 		handleSelectionFinish: function (oEvent) {
@@ -266,7 +350,7 @@ sap.ui.define([
 					moduleids += ",";
 				}
 			}
-			var model = this.getView().getModel("editPartyModel")
+			var model = this.getView().getModel("editQutationModel")
 			model.oData.moduleid = moduleids;
 		},
 
@@ -323,49 +407,26 @@ sap.ui.define([
 		},
 
 		onSave: function () {
-			if (this.validateForm()) {
+			//if (this.validateForm()) {
 				var currentContext = this;
-				var model = this.getView().getModel("editPartyModel").oData;
-				console.log("editPartyModel", model);
+				var model = this.getView().getModel("editQutationModel").oData;
+				console.log("editQutationModel", model);
 				model["companyid"] = commonService.session("companyId");
-				model["leaddate"] = commonFunction.getDate(model.leaddate);
+				model["quotedate"] = commonFunction.getDate(model.quotedate);
 				model["userid"] = commonService.session("userId");
-				var partyAddressModel = [];
-				Leadservice.saveLead(model, function (data) {
+
+				Quotationservice.saveQuotation(model, function (data) {
 
 					if (data.id > 0) {
-						for (var i = 1; i <= currentContext.counter; i++) {
-
-							var cityid = currentContext.getView().byId("ddlCity" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCity" + i).getSelectedItem().mProperties.key : null;
-
-							var stateid = currentContext.getView().byId("ddlState" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlState" + i).getSelectedItem().mProperties.key : null;
-
-							var countryid = currentContext.getView().byId("ddlCountry" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCountry" + i).getSelectedItem().mProperties.key : null;
-							partyAddressModel.push({
-								id: null,
-								leadid: data.id,
-								address: currentContext.getView().byId("txtAddress" + i).getValue(),
-								countryid: parseInt(countryid),
-								stateid: parseInt(stateid),
-								cityid: parseInt(cityid),
-								pincode: parseInt(currentContext.getView().byId("txtPinCode" + i).getValue()),
-								companyid: commonService.session("companyId"),
-								userid: commonService.session("userId"),
-							});
-						}
-
-						Leadservice.saveLeadAddress({ address: JSON.stringify(partyAddressModel) }, function (data) {
-							var message = model.id == null ? "Party created successfully!" : "Party edited successfully!";
+							var message = model.id == null ? "Qutation created successfully!" : "Qutation edited successfully!";
 							currentContext.onCancel();
 							MessageToast.show(message);
-
 							currentContext.bus = sap.ui.getCore().getEventBus();
 							currentContext.bus.publish("loaddata", "loadData");
-						});
 					}
 
 				});
-			}
+			//}
 			this.reset();
 
 		},
@@ -554,51 +615,75 @@ sap.ui.define([
 
 		reset: function () {
 			let oThis = this;
-			let oLeadDetailnModel = oThis.getView().getModel("editPartyModel").oData;
-			let oLeadDetailData = oLeadDetailnModel.getData();
-			oLeadDetailData.leadname = "",
-				oLeadDetailData.companyname = "",
-				oLeadDetailData.leaddate = "",
-				oLeadDetailData.sourceid = "4",
-				oLeadDetailData.leadscategory = "49",
-				oLeadDetailData.stageid = "14",
-				oLeadDetailData.email = "",
-				oLeadDetailData.phoneno = "",
-				oLeadDetailData.mobileno = "",
-				oLeadDetailData.contactperson = "",
-				oLeadDetailData.salesrep = "",
-				oLeadDetailData.leadvalue = "",
-				oLeadDetailData.leadscore = "",
-				oLeadDetailData.leadstatus = "46",
-				oLeadDetailData.leaddescription = "",
-				oLeadDetailData.locationid = "1",
-				oLeadDetailData.typeoflift = "67",
-				oLeadDetailData.capacityid = "68",
-				oLeadDetailData.modelid = "71",
-				oLeadDetailData.driveid = "72",
-				oLeadDetailData.machineid = "83",
-				oLeadDetailData.controlid = "73",
-				oLeadDetailData.operationid = "74",
-				oLeadDetailData.speedid = "75",
-				oLeadDetailData.typeofdoorid = "76",
-				oLeadDetailData.landingdoorid = "77",
-				oLeadDetailData.cardoorid = "78",
-				oLeadDetailData.lowestfloorid = "79",
-				oLeadDetailData.cwtpositionid = "80",
-				oLeadDetailData.floorheaightid = "82",
-				oLeadDetailData.architectidid = "58",
-				oLeadDetailData.leadconsaltantid = "51",
-				oLeadDetailData.nooflifts = "",
-				oLeadDetailData.cityid = "1",
-				oLeadDetailData.stateid = "1",
-				oLeadDetailData.countryid = "1",
-				oLeadDetailData.pincode = ""
-			oLeadDetailnModel.refresh();
+			let oQutationModel = oThis.getView().getModel("editQutationModel");
+			console.log("---------------After Save oLeadDetailnModel---------------",oQutationModel);
+			
+			    oQutationModel.oData.leadname = "",
+				oQutationModel.oData.companyname = "",
+				oQutationModel.oData.quotedate = "",
+				oQutationModel.oData.sourceid = "4",
+				oQutationModel.oData.leadscategory = "49",
+				oQutationModel.oData.stageid = "14",
+				oQutationModel.oData.email = "",
+				oQutationModel.oData.phoneno = "",
+				oQutationModel.oData.mobileno = "",
+				oQutationModel.oData.contactperson = "",
+				oQutationModel.oData.salesrep = "",
+				oQutationModel.oData.leadvalue = "",
+				oQutationModel.oData.leadscore = "",
+				oQutationModel.oData.leadstatus = "46",
+				oQutationModel.oData.leaddescription = "",
+				oQutationModel.oData.locationid = "1",
+				oQutationModel.oData.typeoflift = "67",
+				oQutationModel.oData.capacityid = "68",
+				oQutationModel.oData.modelid = "71",
+				oQutationModel.oData.driveid = "72",
+				oQutationModel.oData.machineid = "83",
+				oQutationModel.oData.controlid = "73",
+				oQutationModel.oData.operationid = "74",
+				oQutationModel.oData.speedid = "75",
+				oQutationModel.oData.typeofdoorid = "76",
+				oQutationModel.oData.landingdoorid = "77",
+				oQutationModel.oData.cardoorid = "78",
+				oQutationModel.oData.lowestfloorid = "79",
+				oQutationModel.oData.cwtpositionid = "80",
+				oQutationModel.oData.floorheaightid = "82",
+				oQutationModel.oData.architectidid = "58",
+				oQutationModel.oData.leadconsaltantid = "51",
+				oQutationModel.oData.nooflifts = "",
+				oQutationModel.oData.cityid = "1",
+				oQutationModel.oData.stateid = "1",
+				oQutationModel.oData.countryid = "1",
+				oQutationModel.oData.pincode = "",
+				oQutationModel.oData.stopsid = "2",
+				oQutationModel.oData.floormarking = "",
+				oQutationModel.oData.allopeningsameside = "111",
+				oQutationModel.oData.frontopening = "113",
+				oQutationModel.oData.backopening = "116",
+				oQutationModel.oData.leftopening = "118",
+				oQutationModel.oData.rightopening = "120",
+				oQutationModel.oData.shaftwidth = "",
+				oQutationModel.oData.shaftdepth = "",
+				oQutationModel.oData.cardepth = "2",
+				oQutationModel.oData.carwidth = "82",
+				oQutationModel.oData.carheight = "58",
+				oQutationModel.oData.doorwidth = "51",
+				oQutationModel.oData.doorheight = "0",
+				oQutationModel.oData.travel = "",
+				oQutationModel.oData.pitdepth = "0",
+				oQutationModel.oData.overhead = "0",
+				oQutationModel.oData.mrwidth = "0",
+				oQutationModel.oData.mrdepth = "0",
+				oQutationModel.oData.mrheight = "0",
+				oQutationModel.oData.companyname = "",
+			
+
+			oQutationModel.refresh();
 		},
 
 		onCancel: function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("leads");
+			oRouter.navTo("quotations");
 		}
 	});
 }, true);
