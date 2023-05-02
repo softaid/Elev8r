@@ -125,7 +125,7 @@
                                 singleContainerFullSize="false" />
                         </form:layout>
                         <form:formContainers>
-                            <form:FormContainer title="Lead Basic Details" width="100%">
+                            <form:FormContainer title="Basic Details" width="100%">
 					            <form:formElements>
                                     <form:FormElement label="{i18n>leadSourceLabel}">
                                     <form:fields>

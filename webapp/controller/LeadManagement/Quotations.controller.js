@@ -69,7 +69,8 @@ sap.ui.define([
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("QuotationMasterModel");
-			var model = { "id": viewModel.getProperty("id") }
+			console.log("---------------viewModel-----------------",viewModel);
+			var model = { "id": viewModel.getProperty("leadid") }
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
@@ -80,7 +81,6 @@ sap.ui.define([
 		},
 		
 		onAddNew: function() {
-
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();

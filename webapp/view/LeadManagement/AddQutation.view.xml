@@ -15,7 +15,7 @@
 			<f:title>
 				<f:DynamicPageTitle>
 					<f:heading>
-						<Title text="Create Qutation"/>
+						<Title text="Create Quotation"/>
 					</f:heading>
 					<f:actions>
 						<ToolbarSpacer/>
@@ -56,9 +56,9 @@
                                 singleContainerFullSize="false" />
                         </form:layout>
                         <form:formContainers>
-                            <form:FormContainer title="Qutation Details" width="100%"> 
+                            <form:FormContainer title="Quotation Details" width="100%"> 
                                 <form:formElements>
-                                  <form:FormElement label="Qutation Name">
+                                  <form:FormElement label="Quotation Name">
                                     <form:fields>
                                         <Input id="txtQutationName" valueLiveUpdate="true" value="{editQutationModel>/quotename}"  required="true" />
                                     </form:fields>
@@ -79,7 +79,7 @@
                                         </Select>
                                     </form:fields>
                                     </form:FormElement>
-                                     <form:FormElement label="Quatation Date">
+                                     <form:FormElement label="Quotation Date">
                                         <form:fields>
                                             <DatePicker id="createddate" width="100%" 
                                             placeholder="{config>/dateFormat/placeholder}"
@@ -90,7 +90,7 @@
                                             />
                                         </form:fields>
                                     </form:FormElement>  
-                                     <form:FormElement label="Qutation Status">
+                                     <form:FormElement label="Quotation Status">
                                     <form:fields>
                                         <Select id="txtstatus"
                                             required="true" 
@@ -111,7 +111,7 @@
                     </form:FormContainer>
                     <form:FormContainer title=" " width="100%"> 
                                 <form:formElements>
-                                 <form:FormElement label="Qutation Type">
+                                 <form:FormElement label="Quotation Type">
                                     <form:fields>
                                         <Select id="txtQutationType"
                                             required="true" 
@@ -160,12 +160,12 @@
                                         </Select>
                                     </form:fields>
                                     </form:FormElement>
-                                     <form:FormElement label="Qutation Value">
+                                     <form:FormElement label="Quotation Value">
                                     <form:fields>
                                         <Input id="txtQutationValue" valueLiveUpdate="true" value="{editQutationModel>/quotevalue}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                     </form:FormElement> 
-                                      <form:FormElement label="Quatation Description">
+                                      <form:FormElement label="Quotation Description">
                                     <form:fields>
                                         <Input id="txtQutationDescription" valueLiveUpdate="true" value="{editQutationModel>/quotediscription}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
@@ -194,7 +194,7 @@
                                 singleContainerFullSize="false" />
                         </form:layout>
                         <form:formContainers>
-                            <form:FormContainer title="Qutation Basic Details" width="100%">
+                            <form:FormContainer title="Lead Details" width="100%">
 					            <form:formElements>
                                     <form:FormElement label="{i18n>leadSourceLabel}">
                                     <form:fields>

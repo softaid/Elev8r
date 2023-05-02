@@ -1,205 +1,174 @@
+
 <mvc:View
 	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.QuotationsDetail"
 	xmlns="sap.m"
     xmlns:f="sap.f"
 	xmlns:core="sap.ui.core"
-	xmlns:card="sap.f.cards"
+	xmlns:form="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:layout="sap.ui.layout"
-	xmlns:form="sap.ui.layout.form">
-
-	<Page class="pgDashboard" showHeader="true" title="Lead Details">
+    xmlns:table="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+	xmlns:layout="sap.ui.layout">
+	<Page class="pgDashboard" showHeader="true" title="Quotation Details">
         <headerContent>
-            <layout:VerticalLayout
-            class="sapUiContentPadding"
-            width="100%">
-                <layout:content>
-                    <Link
-                        text="Convert to Quote"
-                        press="handleLinkPress" />
-                </layout:content>
-            </layout:VerticalLayout>
-			<Button icon="sap-icon://add" tooltip="Add New Lead" press="addNewLead"/>
-            <Button icon="sap-icon://edit" tooltip="Update Lead" press="editLead"/>
-            <Button icon="sap-icon://delete" tooltip="Delete Lead" press="deleteLead"/>
+			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewQutation"/>
+            <Button icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editQutation"/>
+            <Button icon="sap-icon://delete" tooltip="{i18n>leadDetailsDeleteLead}" press="deleteQutation"/>
 		</headerContent>
         <content>
-            <HBox>
+            <Panel id="pnlShedMaster" headerText="Quotation Details" width="auto">
                 <VBox width="100%">
-                    <f:Card class="sapUiMediumMargin">
-                        <f:header class="tileBox">
-                            <card:Header class="cardStyle" title="Lead Name - {leadModel>/leadname}" subtitle="Company Name - {leadModel>/companyname}" />
-                        </f:header>
-                        <f:content>
-                            <TextArea value="Address - {leadModel>/address}" width="100%"/>
-                        </f:content>
-                    </f:Card>
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer>
+                                <form:formElements>                            
+                                    <form:FormElement label="Quotation Name">
+                                        <form:fields>
+                                            <Input id="leadname" value="{quoteModel>/quotename}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Quotation Discription">
+                                        <form:fields>
+                                            <Input id="company" value="{quoteModel>/quotediscription}"  enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>  
+                                    <form:FormElement label="Quotation Status">
+                                        <form:fields>
+                                            <Input id="address" value="{quoteModel>/quotestatus}" enabled="false" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                    <form:FormElement label="Quotation Score">
+                                        <form:fields>
+                                            <Input id="contactperson" value="{quoteModel>/quotescore}" enabled="false" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Lead Name">
+                                        <form:fields>
+                                            <Input id="email" value="{quoteModel>/leadname}"  enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>  
+                                    <form:FormElement label="Quotation Date">
+                                        <form:fields>
+                                            <Input id="mobileno" value="{quoteModel>/quotedate}" enabled="false" />
+                                        </form:fields>
+                                    </form:FormElement>  
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
                 </VBox>
-                <VBox width="100%">
-                    <f:Card class="sapUiMediumMargin">
-                        <f:header class="tileBox">
-                            <card:Header title="Contact Person - {leadModel>/contacterson}" subtitle="Email - {leadModel>/email}" />
-                        </f:header>
-                        <f:content>
-                            <TextArea value="Mobile - {leadModel>/mobileno}" width="100%"/>
-                        </f:content>
-                    </f:Card>
-                </VBox>
-            </HBox>
+            </Panel>
             <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
                 <items>
-                    <IconTabFilter icon="sap-icon://history" text="History" key="activity">
+                    <IconTabFilter icon="sap-icon://sales-quote" text="Revision" key="quotation">
                         <ScrollContainer
                             height="100%"
                             width="100%"
                             horizontal="true"
                             vertical="true"
                             focusable="true">
-                            <List
-                                id="activityList"
-                                items="{ path: 'activityModel>/modelData' }">
-                                <StandardListItem
-                                    
-                                    info="{activityModel>subject}"
-                                    description="{activityModel>createddate}"
-                                    title="{activityModel>status}"
-                                    type="Inactive" />
-                            </List>
+                                <Panel width="auto">
+                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px"
+                                    rows="{ path: 'quotationModel>/modelData' }" selectionMode="None"
+                                    visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed"  width="100%">
+                                    <table:columns>
+                                        <table:Column width="5%">
+                                            <Label text=" " />
+                                            <table:template>
+                                                <Text text="Revision:  {quotationModel>Sequence_no}" wrapping="true" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="5%">
+                                            <Label text="Quote Name" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="5%">
+                                            <Label text="Quote Value" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="5%">
+                                            <Label text="Lead" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                            </table:template>
+                                        </table:Column>
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="Lift Type" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>typeoflift}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Date" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotedate}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Category" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotecategory}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Sub Category" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotesubcategory}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="score" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotescore}" />
+                                            </table:template>
+                                        </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                            </Panel>
                         </ScrollContainer>
                     </IconTabFilter>
-
-                    <IconTabFilter icon="sap-icon://customer-and-supplier" text="Lift Details" key="liftdetails">
-                        <form:Form editable="true">
-                            <form:title>
-                            </form:title>
-                            <form:layout>
-                                <form:ResponsiveGridLayout
-                                    labelSpanXL="4"
-                                    labelSpanL="4"
-                                    labelSpanM="4"
-                                    labelSpanS="12"
-                                    adjustLabelSpan="false"
-                                    emptySpanXL="0"
-                                    emptySpanL="0"
-                                    emptySpanM="0"
-                                    emptySpanS="0"
-                                    columnsXL="3"
-                                    columnsL="2"
-                                    columnsM="1"
-                                    singleContainerFullSize="false" />
-                            </form:layout>
-                            <form:formContainers>
-                                <form:formContainer>
-                                    <form:formElements>                            
-                                        <form:FormElement label="{i18n>leadDetailTypeofLift}">
-                                            <form:fields>
-                                                <Input id="lftType" value="{liftModel>/typeoflift}" enabled="false"/>
-                                            </form:fields>
-                                        </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailLiftCapacity}">
-                                            <form:fields>
-                                                <Input id="capacity" value="{liftModel>/capacity}"  enabled="false"/>
-                                            </form:fields>
-                                        </form:FormElement>  
-                                        <form:FormElement label="{i18n>leadDetailLiftModel}">
-                                            <form:fields>
-                                                <Input id="model" value="{liftModel>/model}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailLiftMachine}">
-                                            <form:fields>
-                                                <Input id="machine" value="{liftModel>/machine}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>
-                                    </form:formElements>
-                                </form:formContainer>
-                                <form:formContainer>
-                                    <form:formElements>
-                                        <form:FormElement label="{i18n>leadDetailsFloorHeight}">
-                                            <form:fields>
-                                                <Input id="txtmobileNo" value="{liftModel>/floorheight}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailsConsultant}">
-                                            <form:fields>
-                                                <Input id="consultant" value="{LiftModel>/consultant}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>                                        
-                                        <form:FormElement label="{i18n>leadDetailsArchitect}">
-                                            <form:fields>
-                                                <Input id="architect" value="{LiftModel>/architect}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>   
-                                    </form:formElements>
-                                </form:formContainer>
-                            </form:formContainers>
-                        </form:Form>
-                    </IconTabFilter>    
-
-                    <IconTabFilter icon="sap-icon://sales-quote" text="Quotation" key="quotation">
-                        <ScrollContainer
-                            height="100%"
-                            width="100%"
-                            horizontal="true"
-                            vertical="true"
-                            focusable="true">
-
-                              <Table id="leadqutationTbl"
-                                            inset="false" 
-                                            items="{
-                                                        path: 'quotationModel>/modelData',
-                                                        sorter: {
-                                                            path: 'id'
-                                                        }
-                                                    }">
-                                            <headerToolbar>
-                                                <Toolbar>
-                                                    <content>
-                                                        <Title text="{masterModel>typename}" level="H2"/>
-                                                        <ToolbarSpacer />
-                                                    </content>
-                                                </Toolbar>
-                                            </headerToolbar>
-                                            <columns>
-                                                <Column><Text text =" " /></Column>
-                                                <Column><Text text ="Revision-1" /></Column>
-                                                 <Column><Text text ="Revision-2" /></Column>
-                                                <Column><Text text ="Revision-3" /></Column>
-                                                
-                                            </columns>
-                                            <items>
-                                                <ColumnListItem >
-                                                    <cells>
-                                                        <Text text="{quotationModel>id}"/>
-                                                        <Text text="{quotationModel>quotevalue}"/>
-                                                        <Text text="{quotationModel>quotestageid}"/>
-                                                        <Text text="{quotationModel >nooflifts}"/>
-                                                    </cells>
-                                                </ColumnListItem>
-                                            </items>
-                                        </Table>   
-                        </ScrollContainer>
-                    </IconTabFilter>
-
-                    <IconTabFilter icon="sap-icon://sap-box" text="Files" key="files">
-                        <ScrollContainer
-                            height="100%"
-                            width="100%"
-                            horizontal="true"
-                            vertical="true"
-                            focusable="true">
-                            <List
-                                id="fileList"
-                                items="{ path: 'liftModel>/modelData' }">
-                                <StandardListItem
-                                    
-                                    info="Lift Type - {liftModel>typeoflift}"
-                                    description="Qty - {liftModel>nooflifts}"
-                                    title="Capacity - {liftModel>capacity}"
-                                    type="Inactive" />
-                            </List>
-                        </ScrollContainer>
-                    </IconTabFilter>      
                 </items>
             </IconTabBar>
         </content>

@@ -3,8 +3,10 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service',
 	'sap/m/MessageBox',
-], function (JSONModel, BaseController, Sorter, leadService, MessageBox) {
+	'sap/m/MessageToast'
+], function (JSONModel, BaseController, Sorter, leadService, quotationService, MessageBox,MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.QuotationsDetail", {
@@ -12,7 +14,6 @@ sap.ui.define([
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
-			
 			this.bus.subscribe("qutationdetails", "newQutation", this.newQutation, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 
@@ -38,6 +39,11 @@ sap.ui.define([
 			quotationModel.setData({ modelData: [] });
 			this.getView().setModel(quotationModel, "quotationModel");
 
+			var quoteModel = new JSONModel();
+			quoteModel.setData([]);
+			this.getView().setModel(quoteModel, "quoteModel");
+
+			
 			let attachmentModel = new JSONModel();
 			attachmentModel.setData({ modelData: [] });
 			this.getView().setModel(attachmentModel, "attachmentModel");
@@ -48,7 +54,6 @@ sap.ui.define([
 		},
 
 		handleQutationDetails: function (sChannel, sEvent, oData) {
-
 			let selRow = oData.viewModel;
 			let oThis = this;
 			console.log(selRow);
@@ -61,61 +66,30 @@ sap.ui.define([
 
 		loadData: function (id) {
 			let oThis = this;
-
 			leadService.getLeadDetails({ id: id }, function (data) {
 				if (data.length) {
-					if (data[0].length) {
-						let leadModel = oThis.getView().getModel("leadModel");
-						leadModel.setData(data[0][0]);
-						oThis.getView().setModel(leadModel, "leadModel");
-					}
-
-					if (data[1].length) {
-						let stageModel = oThis.getView().getModel("stageModel");
-						stageModel.setData({ modelData: data[1] });
-						oThis.getView().setModel(stageModel, "stageModel");
-					}
-
-					if (data[2].length) {
-						let activityModel = oThis.getView().getModel("activityModel");
-						activityModel.setData({ modelData: data[2] });
-						oThis.getView().setModel(activityModel, "activityModel")
-					}
-					console.log(data);
-					if (data[3].length) {
-						let liftModel = oThis.getView().getModel("liftModel");
-						liftModel.setData(data[3][0]);
-						oThis.getView().setModel(liftModel, "liftModel")
-					}
-
 					if (data[4].length) {
+						let aRowsCount = [];
 						let quotationModel = oThis.getView().getModel("quotationModel");
-						// quotationModel.setData({ modelData: data[4] });
-						// oThis.getView().setModel(quotationModel, "quotationModel")
-
-						var arrary =[];
-						arrary.push({
-							"id": "id",
-							"quotevalue": "quotevalue",
-							"quotestageid": "quotestageid",
-							"nooflifts": "nooflifts"
-						})
-
-						for(var i=0;i<data[4].length;i++){
-							arrary.push({
-								"id": data[4][i].id,
-								"quotevalue": data[4][i].quotevalue,
-								"quotestageid": data[4][i].quotestageid,
-								"nooflifts": data[4][i].nooflifts,
-							})
-						}
-						quotationModel.setData({ modelData: arrary });
+						quotationModel.setData({ modelData: data[4] });
 						oThis.getView().setModel(quotationModel, "quotationModel")
 						console.log("quotationModel",quotationModel);
-					}
-					
 
-					console.group(oThis.getView().getModel("liftModel"));
+						aRowsCount.push({
+							rowsCount: data[4].length
+						});
+	
+						let oRowsCount = new JSONModel();
+						oRowsCount.setData(aRowsCount[0]);
+						console.log("oRowsCount", oRowsCount);
+						oThis.getView().setModel(oRowsCount, "rowcount_model");
+					}
+
+					if (data[5].length) {
+						let quoteModel = oThis.getView().getModel("quoteModel");
+						quoteModel.setData(data[5][0]);
+						oThis.getView().setModel(quoteModel, "quoteModel");
+					}
 				}
 			})
 		},
@@ -137,8 +111,9 @@ sap.ui.define([
 			oRouter.navTo(oData.pagekey, true);
 		},
 
-		editLead: function (oEvent) {
-			var viewModel = this.getView().getModel("leadModel");
+		editQutation: function (oEvent) {
+			var viewModel = this.getView().getModel("quoteModel");
+			console.log("---------viewModel-----------",viewModel);
 			var model = { "id": viewModel.oData.id }
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
@@ -155,12 +130,11 @@ sap.ui.define([
 			return oBundle
 		},
 
-		deleteLead: function () {
+		deleteQutation: function () {
 			var currentContext = this;
-
 			var confirmMsg = currentContext.resourceBundle().getText("deleteMsg");
-			var deleteSucc = currentContext.resourceBundle().getText("leadDeleteSucc");
-			var model = this.getView().getModel("liftModel").oData;
+			var deleteSucc = currentContext.resourceBundle().getText("quoteDeleteSucc");
+			var model = this.getView().getModel("quoteModel").oData;
 			// console.log(currentContext.model);
 			if (model.id != undefined) {
 				MessageBox.confirm(
@@ -168,7 +142,7 @@ sap.ui.define([
 					styleClass: "sapUiSizeCompact",
 					onClose: function (sAction) {
 						if (sAction == "OK") {
-							leadService.deleteLead({ id: model.id }, function (data) {
+							quotationService.deleteQuotation({ id: model.id }, function (data) {
 								if (data) {
 									currentContext.onCancel();
 									MessageToast.show(deleteSucc);

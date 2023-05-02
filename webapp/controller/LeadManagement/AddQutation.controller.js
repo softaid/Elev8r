@@ -17,7 +17,7 @@ sap.ui.define([
 
 			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("qutationdetail", "newQutation", this.qutationdetail, this);
+			this.bus.subscribe("qutationdetails", "newQutation", this.qutationdetail, this);
 
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);

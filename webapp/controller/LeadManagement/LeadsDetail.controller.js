@@ -89,45 +89,54 @@ sap.ui.define([
 					}
 
 					if (data[4].length) {
+						let aRowsCount = [];
 						let quotationModel = oThis.getView().getModel("quotationModel");
-						// quotationModel.setData({ modelData: data[4] });
-						// oThis.getView().setModel(quotationModel, "quotationModel")
-
-						var arrary =[];
-						arrary.push({
-							"id": "id",
-							"quotevalue": "quotevalue",
-							"quotestageid": "quotestageid",
-							"nooflifts": "nooflifts"
-						})
-
-						for(var i=0;i<data[4].length;i++){
-							arrary.push({
-								"id": data[4][i].id,
-								"quotevalue": data[4][i].quotevalue,
-								"quotestageid": data[4][i].quotestageid,
-								"nooflifts": data[4][i].nooflifts,
-							})
-						}
-						quotationModel.setData({ modelData: arrary });
+						quotationModel.setData({ modelData: data[4] });
 						oThis.getView().setModel(quotationModel, "quotationModel")
 						console.log("quotationModel",quotationModel);
+
+						aRowsCount.push({
+							rowsCount: data[4].length
+						});
+	
+						let oRowsCount = new JSONModel();
+						oRowsCount.setData(aRowsCount[0]);
+						console.log("oRowsCount", oRowsCount);
+						oThis.getView().setModel(oRowsCount, "rowcount_model");
+
+						// var arrary =[];
+						// arrary.push({
+						// 	"id": "id",
+						// 	"quotevalue": "quotevalue",
+						// 	"quotestageid": "quotestageid",
+						// 	"nooflifts": "nooflifts"
+						// })
+
+						// for(var i=0;i<data[4].length;i++){
+						// 	arrary.push({
+						// 		"id": data[4][i].id,
+						// 		"quotevalue": data[4][i].quotevalue,
+						// 		"quotestageid": data[4][i].quotestageid,
+						// 		"nooflifts": data[4][i].nooflifts,
+						// 	})
+						// }
+						// quotationModel.setData({ modelData: arrary });
+						// oThis.getView().setModel(quotationModel, "quotationModel")
+						// console.log("quotationModel",quotationModel);
 					}
+				
+						// let arr = [];
+					
+						// 	arr.push({
+						// 		"revision" : "Revision" + (1+1),
+						// 		"drive" : "drive"
+						// 	})
 					
 
-					// if(data[4].length){
-						let arr = [];
-						// for(let i = 0; i < data[4].length; i++){
-							arr.push({
-								"revision" : "Revision" + (1+1),
-								"drive" : "drive"
-							})
-						// }
-
-						let quotationModel = oThis.getView().getModel("quotationModel");
-                        quotationModel.setData({modelData : arr});
-                        oThis.getView().setModel(quotationModel, "quotationModel")
-					// }
+						// let quotationModel = oThis.getView().getModel("quotationModel");
+                        // quotationModel.setData({modelData : arr});
+                        // oThis.getView().setModel(quotationModel, "quotationModel")
+					
 
 					console.group(oThis.getView().getModel("liftModel"));
 				}

@@ -44,7 +44,7 @@
 					"icon": "sap-icon://area-chart",
 					"expanded": true,
 					"key": "inventory",
-					"eid": [5],
+					"eid": [],
 					"items": []
 				},
 				{
@@ -60,7 +60,7 @@
 					"icon": "sap-icon://factory",
 					"expanded": true,
 					"key": "warehousemaster",
-					"eid": [21],
+					"eid": [],
 					"items": []
 				},
 				{
@@ -76,7 +76,7 @@
 					"icon": "sap-icon://cart-5",
 					"expanded": true,
 					"key": "materialrequestandtransfer",
-					"eid": [22],
+					"eid": [],
 					"items": []
 				},
 				{
@@ -84,7 +84,7 @@
 					"icon": "sap-icon://activity-items",
 					"expanded": true,
 					"key": "billofmateriallist",
-					"eid": [20],
+					"eid": [],
 					"items": []
 				},
 				{

@@ -39,7 +39,7 @@
                             </headerToolbar>
                             <columns>
                                 <Column><Text text ="{i18n>quotationId}" /></Column>
-                                <Column><Text text ="Qutation Name" /></Column>
+                                <Column><Text text ="Quotation Name" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationLeadName}"/></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date"/></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status"/></Column>
