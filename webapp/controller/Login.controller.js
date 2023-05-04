@@ -24,10 +24,11 @@ sap.ui.define([
         onInit: function () {
             var url = window.location.hash;
             var tempCompanyCode = url.split('/');
-            if (tempCompanyCode[1] !== 'login') {
-                this.getView().byId("cmpcode").setValue(tempCompanyCode[1]);
-                this.onChkCompTap();
-            }
+            this.onChkCompTap();
+            // if (tempCompanyCode[1] !== 'login') {
+            //     // this.getView().byId("cmpcode").setValue(tempCompanyCode[1]);
+            //     this.onChkCompTap();
+            // }
 
             var model = new JSONModel();
             model.setData({});
@@ -56,6 +57,7 @@ sap.ui.define([
 	             },
 
         handleRouteMatched: function () {
+            this.getView().byId("vboxLogin").setVisible(true);
             this.initlogin();
         },
 
@@ -121,7 +123,7 @@ sap.ui.define([
             // Clear previous session with token and c-token
             MYSAP.SessionManager.clearSession('currentSession');
 
-            this.getView().byId("cmpcode").setValue('');
+            // this.getView().byId("cmpcode").setValue('');
             this.getView().byId("umobile").setValue('');
             this.getView().byId("pasw").setValue('');
             this.getView().byId("ufmobile").setValue('');
@@ -129,8 +131,8 @@ sap.ui.define([
             this.getView().byId("pwd").setValue('');
             this.getView().byId("cpwd").setValue('');
 
-            this.getView().byId("vboxCmp").setVisible(true);
-            this.getView().byId("vboxLogin").setVisible(false);
+            // this.getView().byId("vboxCmp").setVisible(true);
+            this.getView().byId("vboxLogin").setVisible(true);
             this.getView().byId("vboxForPsw").setVisible(false);
         },
 
@@ -209,10 +211,10 @@ sap.ui.define([
         },
 
         onForgetPswLnk: function () {
-            this.getView().byId("vboxLogin").setVisible(false);
+            this.getView().byId("vboxLogin").setVisible(true);
             this.getView().byId("vboxForPsw").setVisible(true);
             this.getView().byId("ufmobile").setValue('');
-            this.getView().byId("ufcompanycode").setValue('');
+            this.getView().byId("ufcompanycode").setValue('elev8r1');
             this.getView().byId("pwd").setValue('');
             this.getView().byId("cpwd").setValue('');
 
@@ -324,12 +326,12 @@ sap.ui.define([
         },
 
         onForgetCCLnk : function(){
-            this.getView().byId("vboxCmp").setVisible(false);
+            // this.getView().byId("vboxCmp").setVisible(false);
             this.getView().byId("vboxForCompanycode").setVisible(true);
         },
 
         onGotoCompanyCode : function(){
-            this.getView().byId("vboxCmp").setVisible(true);
+            // this.getView().byId("vboxCmp").setVisible(true);
             this.getView().byId("vboxForCompanycode").setVisible(false);
             this.getView().byId("ufemail").setValue('');
         },
@@ -387,8 +389,8 @@ sap.ui.define([
         validateCompCode: function () {
             var isValid = true;
 
-            if (!commonFunction.isRequired(this, "cmpcode", "Company code is required!"))
-                isValid = false;
+            // if (!commonFunction.isRequired(this, "cmpcode", "Company code is required!"))
+            //     isValid = false;
 
             return isValid;
         },
@@ -396,7 +398,7 @@ sap.ui.define([
         onChkCompTap: function (oEvent) {
             var currentContext = this;
             var loginData = {
-                companycode: this.getView().byId("cmpcode").getValue(),
+                companycode: 'elev8r1',
             };
 
             if (this.validateCompCode()) {
@@ -408,7 +410,7 @@ sap.ui.define([
                     oModel.oData.token = data.token;
                     oModel.refresh();
 
-                    currentContext.getView().byId("vboxCmp").setVisible(false);
+                    // currentContext.getView().byId("vboxCmp").setVisible(false);
                     currentContext.getView().byId("vboxLogin").setVisible(true);
                 },
 
@@ -425,18 +427,20 @@ sap.ui.define([
             var currentContext = this;
             $(document).keyup(function (evt) {
                 if (evt.keyCode === 13) {
-                    if ( currentContext.getView().byId("vboxCmp").getVisible(true)) {
-                    jQuery(document).ready(function ($) {
+                //     if ( currentContext.getView().byId("vboxCmp").getVisible(true)) {
+                //     jQuery(document).ready(function ($) {
 
-                        evt.preventDefault();
-                        currentContext.onChkCompTap()
-                    })
-                }
-                else
-                {
-                    currentContext.onLoginTap()
-                }
+                //         evt.preventDefault();
+                //         currentContext.onChkCompTap()
+                //     })
+                // }
+                // else
+                // {
+                    
+                // }
+                currentContext.onLoginTap();
             }
+                
             });
         },
 

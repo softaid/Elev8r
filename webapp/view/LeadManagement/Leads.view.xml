@@ -14,7 +14,7 @@
 			        </f:DynamicPageTitle>
 		        </f:title>
 				<f:content>	
-                        <VBox fitContainer="true">
+                    <VBox fitContainer="true">
                         <Table id="tblPartyMaster" 
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 

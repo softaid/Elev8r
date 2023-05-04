@@ -16,6 +16,35 @@ sap.ui.define([
 			return sap.ui.core.UIComponent.getRouterFor(this);
 		},
 
+		onButtonPress: function(oEvent) {
+			var oButton = oEvent.getSource();
+			this.byId("actionSheet").openBy(oButton);
+		},
+
+		addLead : function(oEvent){
+			let oThis = this;
+            let sRouteName = "addlead";
+            this.getRouter().navTo(sRouteName);
+		},
+
+		addLeadActivity : function(oEvent){
+			let oThis = this;
+            let sRouteName = "leadactivities";
+			oThis.getRouter().navTo(sRouteName);
+		},
+
+		addProject : function(oEvent){
+			let oThis = this;
+            let sRouteName = "project";
+			oThis.getRouter().navTo(sRouteName);
+		},
+
+		addQuotation : function(oEvent){
+			let oThis = this;
+            let sRouteName = "quotations";
+			oThis.getRouter().navTo(sRouteName);
+		},
+
 		onInit: function (evt) {
 			var router = this.getOwnerComponent().getRouter();
 			var target = router.getTarget("home");

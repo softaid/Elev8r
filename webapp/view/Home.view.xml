@@ -18,14 +18,26 @@ xmlns:l="sap.ui.layout">
 
 						<f:actions>
 							<ToolbarSpacer/>
+							<Button
+								text="Open Action Sheet"
+								class="sapUiSmallMargin"
+								press=".onButtonPress"
+								ariaHasPopup="Menu" >
+								<dependents>
+									<core:Fragment
+										fragmentName="sap.ui.elev8rerp.componentcontainer.fragmentview.DashboardShortcuts"
+										type="XML" />
+								</dependents>
+							</Button>
 						</f:actions>
+
 
 					</f:DynamicPageTitle>
 				</f:title>
 				<f:content>
 					<Page class="pgDashboard" showHeader="false" id="contentDashboard">
 						<content>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="on_Over_Due_Detail">
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="redirectTo('addlead')">
 								<TileContent footer="">
 									<NumericContent truncateValueTo="20" value="30" valueColor="Good" withMargin="false" />
 								</TileContent>
