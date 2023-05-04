@@ -214,11 +214,118 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement> 
-                                <form:FormElement label="{i18n>leadnooflift}">
+                                <form:FormElement label="{i18n>liftSeries}">
                                     <form:fields>
-                                        <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
+                                        <Select id="modelid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/modelid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftmodelModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftmodelModel>id}" text="{liftmodelModel>description}" />
+                                        </Select>
                                     </form:fields>
                                 </form:FormElement>  
+                                <form:FormElement label="{i18n>liftDrive}">
+                                    <form:fields>
+                                        <Select id="driveid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/driveid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftDriveModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftDriveModel>id}" text="{liftDriveModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>liftMachine}">
+                                    <form:fields>
+                                        <Select id="machineid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/machineid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'MachineModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{MachineModel>id}" text="{MachineModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>liftControl}">
+                                    <form:fields>
+                                        <Select id="controlid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/controlid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftControlModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftControlModel>id}" text="{liftControlModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>liftGroupControl}">
+                                    <form:fields>
+                                        <Select id="groupcontrolid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/controlid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftGroupControlModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftGroupControlModel>id}" text="{liftGroupControlModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>liftOperation}">
+                                    <form:fields>
+                                        <Select id="operationid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/operationid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftOperationModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftOperationModel>id}" text="{liftOperationModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>liftGroupControl}">
+                                    <form:fields>
+                                        <Select id="groupcontrolid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/groupcontrolid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftGroupControlModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftGroupControlModel>id}" text="{liftGroupControlModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadSourceLabel}">
                                     <form:fields>
                                         <Select id="sourceid"
