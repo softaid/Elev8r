@@ -18,7 +18,7 @@
                         </items>
                     </FlexBox>
 
-                    <FlexBox id="vboxCmp"
+                    <!-- <FlexBox id="vboxCmp"
                         class="loginForm"		
                         direction="Column">
                         <items>
@@ -32,10 +32,10 @@
                                 </layoutData>
                             </Link>
                         </items>
-                    </FlexBox>
+                    </FlexBox> -->
 
                     <FlexBox id="vboxLogin" 
-                        class="loginForm" visible="false"		
+                        class="loginForm" visible="true"		
                         direction="Column">
                         <items>
                             <Text text="Login" class="titleText"></Text>

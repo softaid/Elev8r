@@ -57,7 +57,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.getView().byId("btnUploadData").setVisible(false);
+			// this.getView().byId("btnUploadData").setVisible(false);
 			this.loadData();
 		},
 
