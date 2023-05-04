@@ -156,6 +156,22 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement label="Lead Type">
+                                    <form:fields>
+                                        <Select id="typeid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/leadtype}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadTypeModel>id}" text="{leadTypeModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadStageLabel}">
                                     <form:fields>
                                         <Select id="txtStageid"

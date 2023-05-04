@@ -28,8 +28,11 @@ sap.ui.define([
 			// bind Pipeline dropdown
 			commonFunction.getReferenceByType("LeadStatus", "leadStatusModel", this);
 
-			// bind Lead dropdown
+			// bind Lead dropdown  LeadType
 			commonFunction.getReferenceByType("LeadCtgry", "leadCategoryModel", this);
+
+			// bind LeadType dropdown  
+			commonFunction.getReferenceByType("LeadType", "leadTypeModel", this);
 
 			// bind CntCtgry dropdown
 			commonFunction.getReferenceByType("CntCtgry", "leadCntCategoryModel", this);
@@ -144,6 +147,7 @@ sap.ui.define([
 				leaddate: commonFunction.getDateFromDB(new Date()),
 				sourceid: null,
 				leadscategory: null,
+				leadtype: null,
 				stageid: null,
 				email: null,
 				phoneno: null,
@@ -561,6 +565,7 @@ sap.ui.define([
 				oLeadDetailData.leaddate = "",
 				oLeadDetailData.sourceid = "4",
 				oLeadDetailData.leadscategory = "49",
+				oLeadDetailData.leadtype = "97",
 				oLeadDetailData.stageid = "14",
 				oLeadDetailData.email = "",
 				oLeadDetailData.phoneno = "",
