@@ -9,7 +9,7 @@ sap.ui.define([
 	'sap/m/MessageToast',
 	'sap/ui/core/Fragment'
 
-], function (JSONModel, BaseController, Device,Filter, Sorter, Lead, xlsx, MessageToast, Fragment) {
+], function (JSONModel, BaseController, Device, Filter, Sorter, Lead, xlsx, MessageToast, Fragment) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Leads", {
@@ -17,14 +17,9 @@ sap.ui.define([
 		onInit: function () {
 
 			this.bus = sap.ui.getCore().getEventBus();
-			//	this.bus.subscribe("partymaster", "setDetailPage", this.setDetailPage, this);
-
-			//oThis.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
-			//this.oFlexibleColumnLayout = this.byId("fclLead");
-
 			this.handleRouteMatched(null);
 
 			Fragment.load({
@@ -36,10 +31,8 @@ sap.ui.define([
 				return oMenu;
 			});
 
-
 			// Keeps reference to any of the created sap.m.ViewSettingsDialog-s in this sample
 			this._mViewSettingsDialogs = {};
-
 			var model = new JSONModel();
 			var emptyModel = this.getModelDefault();
 			model.setData(emptyModel);
@@ -52,18 +45,108 @@ sap.ui.define([
 				// this.getView().byId("onSearchId").focus();
 			});
 			this.fnShortCut();
+
+			// grouping fields
+			this.mGroupFunctions = {
+				leadtype: function (oContext) {
+					var name = oContext.getProperty("leadtype");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				leadscategory: function (oContext) {
+					var name = oContext.getProperty("leadscategory");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				stagename: function (oContext) {
+					var name = oContext.getProperty("stagename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+			}
 		},
 
-		resetFilterDialog: function(oEvent) {
-			this.filterReset =  true;
+		//Define function for Grouping load GroupDialog for grouping
+		handleGroupButtonPressed: function () {
+			this.getViewSettingsDialog("sap.ui.elev8rerp.componentcontainer.fragmentview.Common.GroupDialog")
+				.then(function (oViewSettingsDialog) {
+					oViewSettingsDialog.open();
+				});
 		},
 
+		//Group fragment close functionality
+		handleGroupDialogConfirm: function (oEvent) {
+			var oTable = this.byId("tblPartyMaster"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				vGroup,
+				aGroups = [];
+
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				vGroup = this.mGroupFunctions[sPath];
+				aGroups.push(new Sorter(sPath, bDescending, vGroup));
+				// apply the selected group settings
+				oBinding.sort(aGroups);
+			} else if (this.groupReset) {
+				oBinding.sort();
+				this.groupReset = false;
+			}
+		},
+
+		//reset group Dialog
+		resetGroupDialog: function (oEvent) {
+			this.groupReset = true;
+		},
+
+		//reset filer Dialog
+		resetFilterDialog: function (oEvent) {
+			this.filterReset = true;
+		},
+
+		// Default model
 		getModelDefault: function () {
 			return {
 
 			}
 		},
 
+		// Sorting on Lead 
+		handleSortDialogConfirm: function (oEvent) {
+			var oTable = this.byId("tblPartyMaster"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				aSorters = [];
+
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+
+			// apply the selected sort and group settings
+			oBinding.sort(aSorters);
+		},
+
+
+		// sorting function
+		handleSortButtonPressed: function () {
+			this.getViewSettingsDialog("sap.ui.elev8rerp.componentcontainer.fragmentview.Common.SortDialog")
+				.then(function (oViewSettingsDialog) {
+					oViewSettingsDialog.open();
+				});
+		},
+
+		// Shortcut keys
 		fnShortCut: function () {
 			var currentContext = this;
 			$(document).keydown(function (evt) {
@@ -102,8 +185,8 @@ sap.ui.define([
 			this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leaddetail", viewModel: model });
 		},
 
+		// Add new lead
 		onAddNew: function () {
-
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
@@ -112,8 +195,8 @@ sap.ui.define([
 			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel: null });
 		},
 
+		// Dispaly Demo leadlist need to remove code after demo
 		onAddNewLeadList: function () {
-
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
@@ -124,11 +207,12 @@ sap.ui.define([
 
 
 		/**
-	* Function to navigate to specified route.
-	* @param {*} sChannel 
-	* @param {*} sEvent 
-	* @param {*} oData 
-	*/
+		* Function to navigate to specified route.
+		* @param {*} sChannel 
+		* @param {*} sEvent 
+		* @param {*} oData 
+		*/
+
 		handleLeadList: function (sChannel, sEvent, oData) {
 			console.log("oData", oData);
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -137,6 +221,7 @@ sap.ui.define([
 			oRouter.navTo(oData.pagekey, true);
 		},
 
+		//search lead 
 		onSearch: function (oEvent) {
 			var oTableSearchState = [],
 				sQuery = oEvent.getParameter("query");
@@ -205,38 +290,41 @@ sap.ui.define([
 			var oTable = this.byId("tblPartyMaster"),
 				mParams = oEvent.getParameters(),
 				oBinding = oTable.getBinding("items"),
+				aSplit = [],
 				aFilters = [];
+				var sPath = '';
 
-			if (mParams.filterItems) {	
-			mParams.filterItems.forEach(function (oItem) {
-				console.log("------oItem--------",oItem);
-				console.log("------oItem2--------",oItem.getKey());
+			if (mParams.filterItems) {
+				mParams.filterItems.forEach(function (oItem) {
+					console.log("------oItem--------", oItem);
+					console.log("------oItem2--------", oItem.getKey());
 
-				var aSplit = oItem.getKey().split("___"),
-					sPath = aSplit[0],
-					sOperator = aSplit[1],
-					sValue1 = aSplit[2],
-					sValue2 = aSplit[3],
-					// sPath = "stagename",
-					// sOperator = "LT",
-					// sValue1 = "Unqualified",
-					// sValue2 = "Unqualified",
+					 aSplit = oItem.getKey().split("___");
+					 console.log("------aSplit--------", aSplit);
+						// sPath = aSplit[0];
+						// var sOperator = aSplit[1],
+						// sValue1 = aSplit[2],
+						// sValue2 = aSplit[3],
+						// sPath = "stagename",
+						// sOperator = "LT",
+						// sValue1 = "Unqualified",
+						// sValue2 = "Unqualified",
 
-				oFilter = new Filter(sPath, sOperator,sValue1,sValue2);
-				aFilters.push(oFilter);
-			});
+					var oFilter = new Filter(mParams.filterString);
+					aFilters.push(oFilter);
+				});
 
-			// apply filter settings
-			oBinding.filter(aFilters);
+				// apply filter settings
+				oBinding.filter(aFilters);
 
-			// update filter bar
-			this.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-			this.byId("vsdFilterLabel").setText(mParams.filterString);
-		}
-		else if (this.filterReset) {
-			oBinding.sort();
-			this.filterReset = false;
-		}
+				// update filter bar
+				this.byId("vsdFilterBar").setVisible(aFilters.length > 0);
+				this.byId("vsdFilterLabel").setText(mParams.filterString);
+			}
+			else if (this.filterReset) {
+				oBinding.sort();
+				this.filterReset = false;
+			}
 		},
 
 		onExit: function () {

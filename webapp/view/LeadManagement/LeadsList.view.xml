@@ -92,6 +92,10 @@
                                     <content>
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
+
+                                          <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
+                                          <Button icon="sap-icon://sort" type="Transparent" press="sort"/>
+
                                         	<!-- <Button
                                                 tooltip="Sort"
                                                 icon="sap-icon://sort"
