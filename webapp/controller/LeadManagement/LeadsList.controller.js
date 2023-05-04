@@ -12,7 +12,7 @@ sap.ui.define([
 ], function (JSONModel, BaseController, Device,Filter, Sorter, Lead, xlsx, MessageToast, Fragment) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Leads", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsList", {
 
 		onInit: function () {
 
@@ -111,17 +111,6 @@ sap.ui.define([
 			}, 1000);
 			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel: null });
 		},
-
-		onAddNewLeadList: function () {
-
-			this.bus = sap.ui.getCore().getEventBus();
-			setTimeout(function () {
-				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadslist", viewModel: null });
-			}, 1000);
-			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadslist", viewModel: null });
-		},
-
 
 		/**
 	* Function to navigate to specified route.
