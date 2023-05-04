@@ -44,22 +44,25 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftTyp", "liftTypeModel", this);
 
 			// bind capacity dropdown
-			commonFunction.getReferenceByType("LftCpcty", "leadCapacityModel", this);
+			commonFunction.getReferenceByType("LftCpcty", "liftCapacityModel", this);
 
 			// bind Machine dropdown
 			commonFunction.getReferenceByType("LftMachine", "MachineModel", this);
 
 			// bind Model dropdown
-			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
+			commonFunction.getReferenceByType("LftMdl", "liftmodelModel", this);
 
 			// bind Drive dropdown
-			commonFunction.getReferenceByType("LftDrv", "leadDriveModel", this);
+			commonFunction.getReferenceByType("LftDrv", "liftDriveModel", this);
 
 			// bind Control dropdown
-			commonFunction.getReferenceByType("LftCtrl", "leadControlModel", this);
+			commonFunction.getReferenceByType("LftCtrl", "liftControlModel", this);
+
+			// bind group control dropdown
+			commonFunction.getReferenceByType("LftGrpCtrl", "liftGroupControlModel", this);
 
 			// bind Operation dropdown
-			commonFunction.getReferenceByType("LftOprn", "leadOperationModel", this);
+			commonFunction.getReferenceByType("LftOprn", "liftOperationModel", this);
 
 			// bind Speed dropdown
 			commonFunction.getReferenceByType("LftSpd", "leadSpeedModel", this);

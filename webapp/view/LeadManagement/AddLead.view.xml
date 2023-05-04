@@ -57,16 +57,22 @@
                         <form:formContainers>
                             <form:FormContainer title="Lead Details"> 
                                 <form:formElements>
-                                    <form:FormElement label="{i18n>leadNameLabel}">
+                                    <form:FormElement label="Lead Type">
                                         <form:fields>
-                                            <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
+                                            <Select id="typeid"
+                                                required="true" 
+                                                change=""
+                                                selectedKey="{editPartyModel>/leadtype}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'leadTypeModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{leadTypeModel>id}" text="{leadTypeModel>description}" />
+                                            </Select>
                                         </form:fields>
-                                    </form:FormElement>   
-                                    <form:FormElement label="Company Name">
-                                        <form:fields>
-                                            <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/companyname}"  required="true" change="onPartyNameChange"/>
-                                        </form:fields>
-                                    </form:FormElement>  
+                                    </form:FormElement>                                      
                                     <form:FormElement label="Lead Date">
                                         <form:fields>
                                             <DatePicker id="createddate" width="100%" 
@@ -77,7 +83,59 @@
                                             required="true"  
                                             />
                                         </form:fields>
-                                    </form:FormElement>  
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>leadNameLabel}">
+                                        <form:fields>
+                                            <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
+                                        </form:fields>
+                                    </form:FormElement>   
+                                    <form:FormElement label="Description">
+                                        <form:fields>
+                                            <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
+                                        </form:fields>
+                                    </form:FormElement>   
+                                    <form:FormElement label="{i18n>leadContactPerson}">
+                                        <form:fields>
+                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                        </form:fields>
+                                    </form:FormElement>    
+                                    <form:FormElement label="{i18n>leadCategory}">
+                                        <form:fields>
+                                            <Select id="categoryid"
+                                                required="true" 
+                                                change=""
+                                                selectedKey="{editPartyModel>/leadscategory}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'leadCategoryModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Lead Subcategory">
+                                        <form:fields>
+                                            <Select id="subcategoryid"
+                                                required="true" 
+                                                change=""
+                                                selectedKey="{editPartyModel>/leadscategory}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'leadCategoryModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <!-- <form:FormElement label="Company Name">
+                                        <form:fields>
+                                            <Input id="txtCompanyName" valueLiveUpdate="true" value="{editPartyModel>/companyname}"  required="true" change="onPartyNameChange"/>
+                                        </form:fields>
+                                    </form:FormElement>   -->
                                 </form:formElements>      
                             </form:FormContainer>
                             <form:FormContainer> 
@@ -122,8 +180,45 @@
                             singleContainerFullSize="false" />
                     </form:layout>
                     <form:formContainers>
-                        <form:FormContainer title="Basic Details" width="100%">
+                        <form:FormContainer title="Lift Details" width="100%">
 					        <form:formElements>
+                                <form:FormElement label="Lift Type">
+                                    <form:fields>
+                                        <Select id="lifttypeid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/typeoflift}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'typeoflift>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{typeoflift>id}" text="{typeoflift>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Lift Capacity">
+                                    <form:fields>
+                                        <Select id="capacityid"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editPartyModel>/capacityid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftCapacityModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftCapacityModel>id}" text="{liftCapacityModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="{i18n>leadnooflift}">
+                                    <form:fields>
+                                        <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>  
                                 <form:FormElement label="{i18n>leadSourceLabel}">
                                     <form:fields>
                                         <Select id="sourceid"
@@ -139,39 +234,7 @@
                                             <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
                                         </Select>
                                     </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadCategory}">
-                                    <form:fields>
-                                        <Select id="categoryid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/leadscategory}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadCategoryModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Lead Type">
-                                    <form:fields>
-                                        <Select id="typeid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/leadtype}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadTypeModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadTypeModel>id}" text="{leadTypeModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
+                                </form:FormElement>                                
                                 <form:FormElement label="{i18n>leadStageLabel}">
                                     <form:fields>
                                         <Select id="txtStageid"
@@ -186,11 +249,6 @@
                                             }">
                                             <core:Item key="{stageModel>id}" text="{stageModel>description}" />
                                         </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadContactPerson}">
-                                    <form:fields>
-                                        <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>   
                                 <form:FormElement label="{i18n>leadsalerep}">
@@ -300,11 +358,6 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Description">
-                                    <form:fields>
-                                        <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
-                                    </form:fields>
-                                </form:FormElement>   
                                 <form:FormElement label="{i18n>leadlocation}">
                                     <form:fields>
                                         <Select id="leadlocationid"
@@ -406,155 +459,7 @@
                                 </form:FormElement>
                             </form:formElements>
                         </form:FormContainer>
-                        <form:FormContainer title="Lift Details">
-					        <form:formElements>
-                                <form:FormElement label="{i18n>leadtypeoflift}">
-                                    <form:fields>
-                                        <Select id="typeofliftid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/typeoflift}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'liftTypeModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{liftTypeModel>id}" text="{liftTypeModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadcapacity}">
-                                    <form:fields>
-                                        <Select id="capacityid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/capacityid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadCapacityModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadCapacityModel>id}" text="{leadCapacityModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadModel}">
-                                    <form:fields>
-                                        <Select id="modelid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/modelid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadmodelModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadDrive}">
-                                    <form:fields>
-                                        <Select id="driveid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/driveid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadDriveModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadDriveModel>id}" text="{leadDriveModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadMachine}">
-                                    <form:fields>
-                                        <Select id="machineid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/machineid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'MachineModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{MachineModel>id}" text="{MachineModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadControl}">
-                                    <form:fields>
-                                        <Select id="controlid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/controlid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadControlModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadControlModel>id}" text="{leadControlModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadOperation}">
-                                    <form:fields>
-                                        <Select id="operationid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/operationid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadOperationModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadOperationModel>id}" text="{leadOperationModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadSpeed}">
-                                    <form:fields>
-                                        <Select id="speedid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/speedid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadSpeedModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadSpeedModel>id}" text="{leadSpeedModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadTypesodDoor}">
-                                    <form:fields>
-                                        <Select id="typesofdoorid"
-                                            required="true" 
-                                            change=""
-                                            selectedKey="{editPartyModel>/typeofdoorid}" 
-                                            forceSelection="true"
-                                            width="500px"
-                                            items="{
-                                                path: 'leadDoorTypeModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
-                                            <core:Item key="{leadDoorTypeModel>id}" text="{leadDoorTypeModel>description}" />
-                                        </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                            </form:formElements>
-                        </form:FormContainer>
-                        <form:FormContainer title=" ">
+                        <form:FormContainer>
 					        <form:formElements>
                                 <form:FormElement label="{i18n>leadLandingDoors}">
                                     <form:fields>
@@ -668,11 +573,6 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="{i18n>leadnooflift}">
-                                    <form:fields>
-                                        <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
-                                    </form:fields>
-                                </form:FormElement>  
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>
