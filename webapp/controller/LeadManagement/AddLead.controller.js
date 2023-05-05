@@ -44,25 +44,22 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftTyp", "liftTypeModel", this);
 
 			// bind capacity dropdown
-			commonFunction.getReferenceByType("LftCpcty", "liftCapacityModel", this);
+			commonFunction.getReferenceByType("LftCpcty", "leadCapacityModel", this);
 
 			// bind Machine dropdown
 			commonFunction.getReferenceByType("LftMachine", "MachineModel", this);
 
 			// bind Model dropdown
-			commonFunction.getReferenceByType("LftMdl", "liftmodelModel", this);
+			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
 
 			// bind Drive dropdown
-			commonFunction.getReferenceByType("LftDrv", "liftDriveModel", this);
+			commonFunction.getReferenceByType("LftDrv", "leadDriveModel", this);
 
 			// bind Control dropdown
-			commonFunction.getReferenceByType("LftCtrl", "liftControlModel", this);
-
-			// bind group control dropdown
-			commonFunction.getReferenceByType("LftGrpCtrl", "liftGroupControlModel", this);
+			commonFunction.getReferenceByType("LftCtrl", "leadControlModel", this);
 
 			// bind Operation dropdown
-			commonFunction.getReferenceByType("LftOprn", "liftOperationModel", this);
+			commonFunction.getReferenceByType("LftOprn", "leadOperationModel", this);
 
 			// bind Speed dropdown
 			commonFunction.getReferenceByType("LftSpd", "leadSpeedModel", this);
@@ -382,15 +379,15 @@ sap.ui.define([
 			var source = this.getView().byId("sourceid").getSelectedKey();
 			var pipeline = this.getView().byId("txtStageid").getSelectedKey();
 
-			var location = this.getView().byId("leadlocationid").getSelectedKey();
+			// var location = this.getView().byId("leadlocationid").getSelectedKey();
 			var status = this.getView().byId("leadstatusid").getSelectedKey();
 
 			var category = this.getView().byId("categoryid").getSelectedKey();
 
 			var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
 
-			var emailId = this.getView().byId("txtEmailId").getValue();
-			var phoneNo = this.getView().byId("txtPhoneNo").getValue();
+			// var emailId = this.getView().byId("txtEmailId").getValue();
+			// var phoneNo = this.getView().byId("txtPhoneNo").getValue();
 
 			if (!commonFunction.isRequired(this, "txtPartyName", "Please enter lead name."))
 				isValid = false;
@@ -398,27 +395,27 @@ sap.ui.define([
 			if (!commonFunction.isRequired(this, "contactPerson", "Please enter contact person name."))
 				isValid = false;
 
-			if (emailId != "") {
-				if (!commonFunction.isEmail(this, "txtEmailId"))
-					isValid = false;
-			} else if (!commonFunction.isRequired(this, "txtEmailId", "Please enter email ID."))
-				isValid = false;
+			// if (emailId != "") {
+			// 	if (!commonFunction.isEmail(this, "txtEmailId"))
+			// 		isValid = false;
+			// } else if (!commonFunction.isRequired(this, "txtEmailId", "Please enter email ID."))
+			// 	isValid = false;
 
-			else {
-				this.getView().byId("txtEmailId").setValueState(sap.ui.core.ValueState.None);
-			}
+			// else {
+			// 	this.getView().byId("txtEmailId").setValueState(sap.ui.core.ValueState.None);
+			// }
 
 
-			if (phoneNo != "") {
-				if (!commonFunction.isNumber(this, "txtPhoneNo"))
-					isValid = false;
-			}
-			else if (!commonFunction.isRequired(this, "txtPhoneNo", "Please enter phone no."))
-				isValid = false;
+			// if (phoneNo != "") {
+			// 	if (!commonFunction.isNumber(this, "txtPhoneNo"))
+			// 		isValid = false;
+			// }
+			// else if (!commonFunction.isRequired(this, "txtPhoneNo", "Please enter phone no."))
+			// 	isValid = false;
 
-			else {
-				this.getView().byId("txtPhoneNo").setValueState(sap.ui.core.ValueState.None);
-			}
+			// else {
+			// 	this.getView().byId("txtPhoneNo").setValueState(sap.ui.core.ValueState.None);
+			// }
 
 
 			// check atleast one source is selected
@@ -444,12 +441,12 @@ sap.ui.define([
 				isValid = false;
 			}
 
-			if (location.length == 0) {
-				this.getView().byId("leadlocationid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one location.");
+			// if (location.length == 0) {
+			// 	this.getView().byId("leadlocationid").setValueState(sap.ui.core.ValueState.Error)
+			// 		.setValueStateText("Please select atleast one location.");
 
-				isValid = false;
-			}
+			// 	isValid = false;
+			// }
 			if (status.length == 0) {
 				this.getView().byId("leadstatusid").setValueState(sap.ui.core.ValueState.Error)
 					.setValueStateText("Please select atleast one status.");
@@ -492,28 +489,28 @@ sap.ui.define([
 
 			inputId = inputId.substring(inputId.lastIndexOf('-') + 1);
 
-			if (inputId == "txtMobileNo") {
+			// if (inputId == "txtMobileNo") {
 
-				if (inputValue != "")
-					commonFunction.isNumber(this, "txtMobileNo")
-				else
-					this.getView().byId("txtMobileNo").setValueState(sap.ui.core.ValueState.None);
+			// 	if (inputValue != "")
+			// 		commonFunction.isNumber(this, "txtMobileNo")
+			// 	else
+			// 		this.getView().byId("txtMobileNo").setValueState(sap.ui.core.ValueState.None);
 
-			}
-			else if (inputId == "txtPinCode") {
+			// }
+			 if (inputId == "txtPinCode") {
 
 				if (inputValue != "")
 					commonFunction.isNumber(this, "txtPinCode")
 				else
 					this.getView().byId("txtPinCode").setValueState(sap.ui.core.ValueState.None);
 			}
-			else if (inputId == "txtCreditPeriod") {
+			// else if (inputId == "txtCreditPeriod") {
 
-				if (inputValue != "")
-					commonFunction.isNumber(this, "txtCreditPeriod")
-				else
-					this.getView().byId("txtCreditPeriod").setValueState(sap.ui.core.ValueState.None);
-			}
+			// 	if (inputValue != "")
+			// 		commonFunction.isNumber(this, "txtCreditPeriod")
+			// 	else
+			// 		this.getView().byId("txtCreditPeriod").setValueState(sap.ui.core.ValueState.None);
+			// }
 		},
 
 		onDecimalInputChange: function (oEvent) {
