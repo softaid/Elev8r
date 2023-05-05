@@ -142,7 +142,31 @@ sap.ui.define([
 			this.getView().byId("tblPartyMaster").getBinding("items").filter(oTableSearchState, "Application");
 		},
 
+		getSelectedItems: function(){
 
+			var oTable = this.getView().byId("tblPartyMaster");
+			var aSelectedItems = oTable.getSelectedItems();
+		    console.log("aSelectedItems",aSelectedItems);
+			
+			var aLeadIds = aSelectedItems.map(function(item){
+				return item.getBindingContext('LeadsMasterModel').getObject().id;
+			});
+			console.log("aLeadIds",aLeadIds);
+			var leadFinalTds = aLeadIds.toString();
+			console.log("leadFinalTds",leadFinalTds);
+
+			for(var i=0; i<aSelectedItems.length; i++){
+				// console.log("aSelectedItems",aSelectedItems[i].oBindingContexts.LeadsMasterModel.sPath);
+				// var path = aSelectedItems[i].oBindingContexts.LeadsMasterModel.sPath;
+				// console.log("path",path);
+				// var aProductIds = aSelectedItems.map(function(item){
+                //     return item.getBindingContext('LeadsMasterModel').getObject().id;
+                // });
+				// console.log("aProductIds",aProductIds);
+				oTable.removeItem(aSelectedItems[i])
+			}
+
+		},
 
 		onSort: function (oEvent) {
 			this._bDescendingSort = !this._bDescendingSort;

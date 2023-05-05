@@ -292,7 +292,7 @@ sap.ui.define([
 				oBinding = oTable.getBinding("items"),
 				aSplit = [],
 				aFilters = [];
-				var sPath = '';
+				
 
 			if (mParams.filterItems) {
 				mParams.filterItems.forEach(function (oItem) {
@@ -301,16 +301,13 @@ sap.ui.define([
 
 					 aSplit = oItem.getKey().split("___");
 					 console.log("------aSplit--------", aSplit);
-						// sPath = aSplit[0];
-						// var sOperator = aSplit[1],
-						// sValue1 = aSplit[2],
-						// sValue2 = aSplit[3],
-						// sPath = "stagename",
-						// sOperator = "LT",
-						// sValue1 = "Unqualified",
-						// sValue2 = "Unqualified",
+					
+						//var contains = sap.ui.model.FilterOperator.Contains;
+						var contains = sap.ui.model.FilterOperator.EQ;
+						var sPath = "stagename",
+						sValue1 = aSplit[2];
 
-					var oFilter = new Filter(mParams.filterString);
+					var oFilter = new Filter(sPath,contains,sValue1);
 					aFilters.push(oFilter);
 				});
 
