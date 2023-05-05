@@ -79,6 +79,7 @@
                 </form:Form>               
               </Panel>
                         <Table id="tblPartyMaster" 
+                                mode="MultiSelect"
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingThreshold="10" growingScrollToLoad="true"  
                                 items="{
@@ -95,6 +96,8 @@
 
                                           <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
                                           <Button icon="sap-icon://sort" type="Transparent" press="sort"/>
+
+                                           <Button icon="sap-icon://delete" type="Transparent" press="getSelectedItems"/>
 
                                         	<!-- <Button
                                                 tooltip="Sort"
@@ -137,7 +140,7 @@
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
                                     <cells>
-                                    <ObjectIdentifier text="{LeadsMasterModel>id}" />
+                                    <ObjectIdentifier  id="leadid" text="{LeadsMasterModel>id}" />
                                         <Text text="{LeadsMasterModel>leadtype}" />
                                         <Text text="{LeadsMasterModel>leadscategory}" />
                                         <Text text="{LeadsMasterModel>leadname}" />

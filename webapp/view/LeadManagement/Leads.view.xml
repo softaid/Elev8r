@@ -43,10 +43,10 @@
                                                 press="handleGroupButtonPressed"/>
                                         <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
                                          <Button icon="sap-icon://add-activity-2" type="Transparent" press="onAddNewLeadList"/>
-                                        <Button
+                                        <!-- <Button
                                         text="Upload template"
                                         type="Emphasized"
-                                        press="onUploadMasterData" id="btnUploadData"/>
+                                        press="onUploadMasterData" id="btnUploadData"/> -->
                                     </content>
                                 </Toolbar>
                             </headerToolbar>
