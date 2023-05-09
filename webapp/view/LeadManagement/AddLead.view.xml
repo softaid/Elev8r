@@ -60,7 +60,6 @@
                                     <form:FormElement label="{i18n>leadType}">
                                         <form:fields>
                                             <Select id="typeid"
-                                                required="true" 
                                                 change=""
                                                 selectedKey="{editPartyModel>/typeid}" 
                                                 forceSelection="true"
@@ -80,34 +79,34 @@
                                             displayFormat="{config>/dateFormat/displayFormat}"
                                             value="{editPartyModel>/leaddate}"
                                             valueFormat="dd/MM/yyyy"
-                                            required="true"  
+                                             
                                             />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadNameLabel}">
                                         <form:fields>
-                                            <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  required="true" change="onPartyNameChange"/>
+                                            <Input id="txtPartyName" valueLiveUpdate="true" value="{editPartyModel>/leadname}"  change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>  
                                     <form:FormElement label="Description">
                                         <form:fields>
-                                            <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
+                                            <Input id="txtdiscription" valueLiveUpdate="true" value="{editPartyModel>/leaddescription}"  change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>   
                                     <form:FormElement label="{i18n>leadContactPerson}">
                                         <form:fields>
-                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <!-- <form:FormElement label="{i18n>leadContactPerson}">
                                         <form:fields>
-                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editPartyModel>/contactperson}"  change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>   -->
                                     <form:FormElement label="{i18n>leadCategory}">
                                         <form:fields>
                                             <Select id="categoryid"
-                                                required="true" 
+                                                
                                                 change=""
                                                 selectedKey="{editPartyModel>/leadscategory}" 
                                                 forceSelection="true"
@@ -123,7 +122,7 @@
                                     <form:FormElement label="{i18n>leadSubCategory}">
                                         <form:fields>
                                             <Select id="subcategoryid"
-                                                required="true" 
+                                                
                                                 change=""
                                                 selectedKey="{editPartyModel>/leadsubcategory}" 
                                                 forceSelection="true"
@@ -143,18 +142,18 @@
                                 <form:formElements>
                                       <form:FormElement label="{i18n>leadMobileNo}">
                                         <form:fields>
-                                            <Input id="txtmobileNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" required="true" />
+                                            <Input id="txtmobileNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/mobileno}" />
                                         </form:fields>
                                     </form:FormElement>
                                       <form:FormElement label="Phone No">
                                         <form:fields>
-                                            <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/phoneno}" required="true" />
+                                            <Input id="txtPhoneNo" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/phoneno}" />
                                         </form:fields>
                                     </form:FormElement>
                                   </form:formElements>      
                                          <form:FormElement label="{i18n>leadEmail}">
                                         <form:fields>
-                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange" required="true" />
+                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange" />
                                         </form:fields>
                                     </form:FormElement>
                  </form:FormContainer> -->
@@ -186,7 +185,7 @@
                                 <form:FormElement label="{i18n>leadtypeoflift}">
                                     <form:fields>
                                         <Select id="typeofliftid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/typeoflift}" 
                                             forceSelection="true"
@@ -201,13 +200,13 @@
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadnooflift}">
                                     <form:fields>
-                                        <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="txtnooflifts" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"  change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>  
                                 <form:FormElement label="{i18n>leadcapacity}">
                                     <form:fields>
                                         <Select id="capacityid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/capacityid}" 
                                             forceSelection="true"
@@ -223,7 +222,7 @@
                                 <form:FormElement label="{i18n>leadModel}">
                                     <form:fields>
                                         <Select id="modelid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/modelid}" 
                                             forceSelection="true"
@@ -239,7 +238,7 @@
                                 <form:FormElement label="{i18n>leadDrive}">
                                     <form:fields>
                                         <Select id="driveid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/driveid}" 
                                             forceSelection="true"
@@ -255,7 +254,7 @@
                                 <form:FormElement label="{i18n>leadMachine}">
                                     <form:fields>
                                         <Select id="machineid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/machineid}" 
                                             forceSelection="true"
@@ -271,7 +270,7 @@
                                 <form:FormElement label="{i18n>leadControl}">
                                     <form:fields>
                                         <Select id="controlid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/controlid}" 
                                             forceSelection="true"
@@ -287,7 +286,7 @@
                                 <form:FormElement label="{i18n>leadOperation}">
                                     <form:fields>
                                         <Select id="operationid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/operationid}" 
                                             forceSelection="true"
@@ -303,7 +302,7 @@
                                 <form:FormElement label="{i18n>leadGroupControl}">
                                     <form:fields>
                                         <Select id="groupcontrolid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/groupcontrolid}" 
                                             forceSelection="true"
@@ -319,7 +318,7 @@
                                 <form:FormElement label="{i18n>leadSpeed}">
                                     <form:fields>
                                         <Select id="speedid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/speedid}" 
                                             forceSelection="true"
@@ -335,7 +334,7 @@
                                 <form:FormElement label="{i18n>leadTypesodDoor}">
                                     <form:fields>
                                         <Select id="typesofdoorid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/typeofdoorid}" 
                                             forceSelection="true"
@@ -351,7 +350,7 @@
                                 <form:FormElement label="{i18n>leadLandingDoors}">
                                     <form:fields>
                                         <Select id="landingdoorsid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/landingdoorid}" 
                                             forceSelection="true"
@@ -367,7 +366,7 @@
                                 <form:FormElement label="{i18n>leadCarDoor}">
                                     <form:fields>
                                         <Select id="leadcarid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/cardoorid}" 
                                             forceSelection="true"
@@ -383,7 +382,7 @@
                                 <form:FormElement label="{i18n>leadStandardFloorHeight}">
                                     <form:fields>
                                         <Select id="landingfloorid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/floorheaightid}" 
                                             forceSelection="true"
@@ -404,7 +403,7 @@
                                 <form:FormElement label="{i18n>laedLowestFloorMarking}">
                                     <form:fields>
                                         <Select id="landingfloorsid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/lowestfloorid}" 
                                             forceSelection="true"
@@ -421,7 +420,7 @@
                                 <form:FormElement label="{i18n>leadCWTPosition}">
                                     <form:fields>
                                         <Select id="landingcwdpositionid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/cwtpositionid}" 
                                             forceSelection="true"
@@ -442,7 +441,7 @@
                                 <form:FormElement label="All Opening Same Side">
                                 <form:fields>
                                     <Select id="txtallopeningsameside"
-                                        required="true" 
+                                        
                                         change=""
                                         selectedKey="{editPartyModel>/allopeningsameside}" 
                                         forceSelection="true"
@@ -458,7 +457,7 @@
                                 <form:FormElement label="Front Opening">
                                     <form:fields>
                                         <Select id="txtFrontOpening"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/frontopening}" 
                                             forceSelection="true"
@@ -474,7 +473,7 @@
                                 <form:FormElement label="Back Opening">
                                     <form:fields>
                                         <Select id="txtbackopening"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/backopening}" 
                                             forceSelection="true"
@@ -490,7 +489,7 @@
                                 <form:FormElement label="Left Opening">
                                     <form:fields>
                                         <Select id="txtLeftOpening"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/leftopening}" 
                                             forceSelection="true"
@@ -506,7 +505,7 @@
                                 <form:FormElement label="Right Opening">
                                     <form:fields>
                                         <Select id="txtRightOpening"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/rightopening}" 
                                             forceSelection="true"
@@ -586,18 +585,18 @@
                                 </form:FormElement>
                                 <form:FormElement label="Win Probability">
                                     <form:fields>
-                                        <Input id="winprobability" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/winprobability}" required="true" />
+                                        <Input id="winprobability" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/winprobability}" />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Lead Value">
                                     <form:fields>
-                                        <Input id="txtLeadValue" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadvalue}" required="true" />
+                                        <Input id="txtLeadValue" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadvalue}" />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadStatus}">
                                     <form:fields>
                                         <Select id="leadstatusid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/leadstatus}" 
                                             forceSelection="true"
@@ -613,7 +612,7 @@
                                 <form:FormElement label="{i18n>leadStageLabel}">
                                     <form:fields>
                                         <Select id="txtStageid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/stageid}" 
                                             forceSelection="true"
@@ -628,13 +627,13 @@
                                 </form:FormElement>
                                 <form:FormElement label="Lead Score">
                                     <form:fields>
-                                        <Input id="txtLeadScore" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadscore}" required="true" />
+                                        <Input id="txtLeadScore" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/leadscore}" />
                                     </form:fields>
                                 </form:FormElement>                                    
                                 <form:FormElement label="{i18n>leadSourceLabel}">
                                     <form:fields>
                                         <Select id="sourceid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/sourceid}" 
                                             forceSelection="true"
@@ -650,7 +649,7 @@
                                 <form:FormElement label="{i18n>leadArchitect}">
                                     <form:fields>
                                         <Select id="landarchitectid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/architectidid}" 
                                             forceSelection="true"
@@ -666,7 +665,7 @@
                                 <form:FormElement label="{i18n>leadConsultant}">
                                     <form:fields>
                                         <Select id="landconsaltantid"
-                                            required="true" 
+                                            
                                             change=""
                                             selectedKey="{editPartyModel>/leadconsaltantid}" 
                                             forceSelection="true"
@@ -681,7 +680,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadsalerep}">
                                     <form:fields>
-                                        <Input id="txtsalesrep" valueLiveUpdate="true" value="{editPartyModel>/salesrep}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="txtsalesrep" valueLiveUpdate="true" value="{editPartyModel>/salesrep}"  change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>   
                             </form:formElements>
@@ -693,7 +692,7 @@
                                     <form:FormElement label="{i18n>leadlocation}">
                                         <form:fields>
                                             <Select id="leadlocationid"
-                                                required="true" 
+                                                
                                                 change=""
                                                 selectedKey="{editPartyModel>/locationid}" 
                                                 forceSelection="true"
