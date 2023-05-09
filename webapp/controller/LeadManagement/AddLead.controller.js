@@ -184,7 +184,8 @@ sap.ui.define([
 				cityid: null,
 				stateid: null,
 				countryid: null,
-				pincode: null
+				pincode: null,
+				isdeleted:0
 			}
 		},
 
@@ -340,39 +341,41 @@ sap.ui.define([
 				model["companyid"] = commonService.session("companyId");
 				model["leaddate"] = commonFunction.getDate(model.leaddate);
 				model["userid"] = commonService.session("userId");
-				var partyAddressModel = [];
+				//var partyAddressModel = [];
 				Leadservice.saveLead(model, function (data) {
+					console.log("---------data---------",data);
+					var message = model.id == null ? "Lead created successfully!" : "Lead edited successfully!";
+					currentContext.onCancel();
+					MessageToast.show(message);
 
-					if (data.id > 0) {
-						for (var i = 1; i <= currentContext.counter; i++) {
+					currentContext.bus = sap.ui.getCore().getEventBus();
+					currentContext.bus.publish("loaddata", "loadData");
 
-							var cityid = currentContext.getView().byId("ddlCity" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCity" + i).getSelectedItem().mProperties.key : null;
+					// if (data.id > 0) {
+					// 	for (var i = 1; i <= currentContext.counter; i++) {
 
-							var stateid = currentContext.getView().byId("ddlState" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlState" + i).getSelectedItem().mProperties.key : null;
+					// 		var cityid = currentContext.getView().byId("ddlCity" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCity" + i).getSelectedItem().mProperties.key : null;
 
-							var countryid = currentContext.getView().byId("ddlCountry" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCountry" + i).getSelectedItem().mProperties.key : null;
-							partyAddressModel.push({
-								id: null,
-								leadid: data.id,
-								address: currentContext.getView().byId("txtAddress" + i).getValue(),
-								countryid: parseInt(countryid),
-								stateid: parseInt(stateid),
-								cityid: parseInt(cityid),
-								pincode: parseInt(currentContext.getView().byId("txtPinCode" + i).getValue()),
-								companyid: commonService.session("companyId"),
-								userid: commonService.session("userId"),
-							});
-						}
+					// 		var stateid = currentContext.getView().byId("ddlState" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlState" + i).getSelectedItem().mProperties.key : null;
 
-						Leadservice.saveLeadAddress({ address: JSON.stringify(partyAddressModel) }, function (data) {
-							var message = model.id == null ? "Party created successfully!" : "Party edited successfully!";
-							currentContext.onCancel();
-							MessageToast.show(message);
+					// 		var countryid = currentContext.getView().byId("ddlCountry" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCountry" + i).getSelectedItem().mProperties.key : null;
+					// 		partyAddressModel.push({
+					// 			id: null,
+					// 			leadid: data.id,
+					// 			address: currentContext.getView().byId("txtAddress" + i).getValue(),
+					// 			countryid: parseInt(countryid),
+					// 			stateid: parseInt(stateid),
+					// 			cityid: parseInt(cityid),
+					// 			pincode: parseInt(currentContext.getView().byId("txtPinCode" + i).getValue()),
+					// 			companyid: commonService.session("companyId"),
+					// 			userid: commonService.session("userId"),
+					// 		});
+					// 	}
 
-							currentContext.bus = sap.ui.getCore().getEventBus();
-							currentContext.bus.publish("loaddata", "loadData");
-						});
-					}
+					// 	Leadservice.saveLeadAddress({ address: JSON.stringify(partyAddressModel) }, function (data) {
+							
+					// 	});
+					// }
 
 				});
 			}
@@ -566,7 +569,7 @@ sap.ui.define([
 			let oThis = this;
 			let oLeadDetailnModel = oThis.getView().getModel("editPartyModel").oData;
 			let oLeadDetailData = oLeadDetailnModel.getData();
-			oLeadDetailData.leadname = "",
+			    oLeadDetailData.leadname = "",
 				oLeadDetailData.companyname = "",
 				oLeadDetailData.leaddate = "",
 				oLeadDetailData.sourceid = "4",
@@ -603,7 +606,8 @@ sap.ui.define([
 				oLeadDetailData.cityid = "1",
 				oLeadDetailData.stateid = "1",
 				oLeadDetailData.countryid = "1",
-				oLeadDetailData.pincode = ""
+				oLeadDetailData.pincode = "",
+				oLeadDetailData.isdeleted = 0
 			oLeadDetailnModel.refresh();
 		},
 

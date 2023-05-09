@@ -207,11 +207,6 @@
 					"target": "leads"
 				},
 				{
-					"pattern": "leadslist",
-					"name": "leadslist",
-					"target": "leadslist"
-				},
-				{
 					"pattern": "leadsdetail",
 					"name": "leadsdetail",
 					"target": "leadsdetail"
@@ -387,12 +382,6 @@
 				"leads": {
 					"viewId": "leads",
 					"viewName": "LeadManagement/Leads",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"leadslist": {
-					"viewId": "leadslist",
-					"viewName": "LeadManagement/LeadsList",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

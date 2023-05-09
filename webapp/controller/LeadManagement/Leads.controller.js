@@ -5,23 +5,22 @@ sap.ui.define([
 	'sap/ui/model/Filter',
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
-	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/m/MessageToast',
-	'sap/ui/core/Fragment'
+	'sap/ui/core/Fragment',
+	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 
-], function (JSONModel, BaseController, Device, Filter, Sorter, Lead, xlsx, MessageToast, Fragment) {
+], function (JSONModel, BaseController, Device, Filter, Sorter, Lead, MessageToast, Fragment,commonFunction) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Leads", {
 
 		onInit: function () {
-
 			this.bus = sap.ui.getCore().getEventBus();
+			this.afilters = [];
 			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			this.handleRouteMatched(null);
-
 			Fragment.load({
 				id: this.getView().getId(),
 				name: "sap.m.sample.TableViewSettingsDialog.ColumnMenu",
@@ -30,6 +29,7 @@ sap.ui.define([
 				oView.addDependent(oMenu);
 				return oMenu;
 			});
+
 
 			// Keeps reference to any of the created sap.m.ViewSettingsDialog-s in this sample
 			this._mViewSettingsDialogs = {};
@@ -42,111 +42,24 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "subledgerModel");
 			jQuery.sap.delayedCall(1000, this, function () {
-				// this.getView().byId("onSearchId").focus();
 			});
 			this.fnShortCut();
 
-			// grouping fields
-			this.mGroupFunctions = {
-				leadtype: function (oContext) {
-					var name = oContext.getProperty("leadtype");
-					return {
-						key: name,
-						text: name
-					};
-				},
-				leadscategory: function (oContext) {
-					var name = oContext.getProperty("leadscategory");
-					return {
-						key: name,
-						text: name
-					};
-				},
-				stagename: function (oContext) {
-					var name = oContext.getProperty("stagename");
-					return {
-						key: name,
-						text: name
-					};
-				},
-			}
+			// bind LeadType dropdown  
+			commonFunction.getReferenceByTypeForFilter("LeadType", "leadTypeModel", this);
+
 		},
 
-		//Define function for Grouping load GroupDialog for grouping
-		handleGroupButtonPressed: function () {
-			this.getViewSettingsDialog("sap.ui.elev8rerp.componentcontainer.fragmentview.Common.GroupDialog")
-				.then(function (oViewSettingsDialog) {
-					oViewSettingsDialog.open();
-				});
-		},
+		// resetFilter: function () {
+		// 	this.filterReset = true;
+		// },
 
-		//Group fragment close functionality
-		handleGroupDialogConfirm: function (oEvent) {
-			var oTable = this.byId("tblPartyMaster"),
-				mParams = oEvent.getParameters(),
-				oBinding = oTable.getBinding("items"),
-				sPath,
-				bDescending,
-				vGroup,
-				aGroups = [];
-
-			if (mParams.groupItem) {
-				sPath = mParams.groupItem.getKey();
-				bDescending = mParams.groupDescending;
-				vGroup = this.mGroupFunctions[sPath];
-				aGroups.push(new Sorter(sPath, bDescending, vGroup));
-				// apply the selected group settings
-				oBinding.sort(aGroups);
-			} else if (this.groupReset) {
-				oBinding.sort();
-				this.groupReset = false;
-			}
-		},
-
-		//reset group Dialog
-		resetGroupDialog: function (oEvent) {
-			this.groupReset = true;
-		},
-
-		//reset filer Dialog
-		resetFilterDialog: function (oEvent) {
-			this.filterReset = true;
-		},
-
-		// Default model
 		getModelDefault: function () {
 			return {
 
 			}
 		},
 
-		// Sorting on Lead 
-		handleSortDialogConfirm: function (oEvent) {
-			var oTable = this.byId("tblPartyMaster"),
-				mParams = oEvent.getParameters(),
-				oBinding = oTable.getBinding("items"),
-				sPath,
-				bDescending,
-				aSorters = [];
-
-			sPath = mParams.sortItem.getKey();
-			bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath, bDescending));
-
-			// apply the selected sort and group settings
-			oBinding.sort(aSorters);
-		},
-
-
-		// sorting function
-		handleSortButtonPressed: function () {
-			this.getViewSettingsDialog("sap.ui.elev8rerp.componentcontainer.fragmentview.Common.SortDialog")
-				.then(function (oViewSettingsDialog) {
-					oViewSettingsDialog.open();
-				});
-		},
-
-		// Shortcut keys
 		fnShortCut: function () {
 			var currentContext = this;
 			$(document).keydown(function (evt) {
@@ -161,12 +74,11 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			// this.getView().byId("btnUploadData").setVisible(false);
+			this.getView().byId("btnUploadData").setVisible(false);
 			this.loadData();
 		},
 
 		handleLeadDetails: function (sChannel, sEvent, oData) {
-			console.log("oData", oData);
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.bus = sap.ui.getCore().getEventBus();
 			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
@@ -185,7 +97,6 @@ sap.ui.define([
 			this.bus.publish("leaddetail", "handleLeadDetails", { pagekey: "leaddetail", viewModel: model });
 		},
 
-		// Add new lead
 		onAddNew: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
@@ -195,56 +106,102 @@ sap.ui.define([
 			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel: null });
 		},
 
-		// Dispaly Demo leadlist need to remove code after demo
-		onAddNewLeadList: function () {
-			this.bus = sap.ui.getCore().getEventBus();
-			setTimeout(function () {
-				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadslist", viewModel: null });
-			}, 1000);
-			this.bus.publish("leadscreen", "handleLeadList", { pagekey: "leadslist", viewModel: null });
-		},
-
-
 		/**
 		* Function to navigate to specified route.
 		* @param {*} sChannel 
 		* @param {*} sEvent 
 		* @param {*} oData 
 		*/
-
 		handleLeadList: function (sChannel, sEvent, oData) {
-			console.log("oData", oData);
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.bus = sap.ui.getCore().getEventBus();
 			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
 			oRouter.navTo(oData.pagekey, true);
 		},
 
-		//search lead 
+		//Search functionality for all columns for particular value
 		onSearch: function (oEvent) {
 			var oTableSearchState = [],
 				sQuery = oEvent.getParameter("query");
 			var contains = sap.ui.model.FilterOperator.Contains;
-			var columns = ['leadname', 'email', 'sourcename'];
+			var columns = ['leadname', 'email', 'sourcename', 'leadtype', 'leadscategory', 'stagename'];
 			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
 				return new sap.ui.model.Filter(colName, contains, sQuery);
 			}),
 				false);
-			s
 			if (sQuery && sQuery.length > 0) {
 				oTableSearchState = [filters];
 			}
-
-			this.getView().byId("tblLeadMaster").getBinding("items").filter(oTableSearchState, "Application");
+			this.getView().byId("tblPartyMaster").getBinding("items").filter(oTableSearchState, "Application");
 		},
 
+		// Function for display Qualified Leads
+		onQulified: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'leadstatus';
 
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				this.afilters = [];
+			}
+			var list = this.getView().byId("tblPartyMaster");
+			var binding = list.getBinding("items");
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
+		// Function for display Type wise Leads
+		onLeadType: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'leadtype';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				let i = this.afilters.length;
+				while (i--) {
+					if (this.afilters[i].sPath == "leadtype") {
+						this.afilters.splice(i, 1);
+					}
+				}
+			}
+			var list = this.getView().byId("tblPartyMaster");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
+		resourceBundle: function () {
+			var oBundle = this.getModel("i18n").getResourceBundle()
+			return oBundle
+		},
+
+		getSelectedItems: function () {
+			var oTable = this.getView().byId("tblPartyMaster");
+			var deleteSucc = this.resourceBundle().getText("leadDeleteSucc");
+			var aSelectedItems = oTable.getSelectedItems();
+
+			var aLeadIds = aSelectedItems.map(function (item) {
+				return item.getBindingContext('LeadsMasterModel').getObject().id;
+			});
+			var leadFinalTds = aLeadIds.toString();
+			for (var i = 0; i < aSelectedItems.length; i++) {
+				oTable.removeItem(aSelectedItems[i])
+				Lead.deleteLead({ id: leadFinalTds }, function (data) {
+					if (data) {
+						MessageToast.show(deleteSucc);
+					}
+				});
+			}
+
+		},
 
 		onSort: function (oEvent) {
 			this._bDescendingSort = !this._bDescendingSort;
 			var oView = this.getView(),
-				oTable = oView.byId("tblLeadMaster"),
+				oTable = oView.byId("tblPartyMaster"),
 				oBinding = oTable.getBinding("items"),
 				oSorter = new Sorter("partyname", this._bDescendingSort);
 			oBinding.sort(oSorter);
@@ -256,7 +213,7 @@ sap.ui.define([
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
 				currentContext.getView().setModel(oModel, "LeadsMasterModel");
-				console.log("LeadsMasterModel", oModel);
+				console.log("LeadsMasterModel",oModel);
 			});
 		},
 
@@ -269,7 +226,6 @@ sap.ui.define([
 
 		getViewSettingsDialog: function (sDialogFragmentName) {
 			var pDialog = this._mViewSettingsDialogs[sDialogFragmentName];
-
 			if (!pDialog) {
 				pDialog = Fragment.load({
 					id: this.getView().getId(),
@@ -290,24 +246,16 @@ sap.ui.define([
 			var oTable = this.byId("tblPartyMaster"),
 				mParams = oEvent.getParameters(),
 				oBinding = oTable.getBinding("items"),
-				aSplit = [],
 				aFilters = [];
-				
 
 			if (mParams.filterItems) {
 				mParams.filterItems.forEach(function (oItem) {
-					console.log("------oItem--------", oItem);
-					console.log("------oItem2--------", oItem.getKey());
-
-					 aSplit = oItem.getKey().split("___");
-					 console.log("------aSplit--------", aSplit);
-					
-						//var contains = sap.ui.model.FilterOperator.Contains;
-						var contains = sap.ui.model.FilterOperator.EQ;
-						var sPath = "stagename",
-						sValue1 = aSplit[2];
-
-					var oFilter = new Filter(sPath,contains,sValue1);
+					var aSplit = oItem.getKey().split("___"),
+						sPath = aSplit[0],
+						sOperator = aSplit[1],
+						sValue1 = aSplit[2],
+						sValue2 = aSplit[3],
+						oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
 					aFilters.push(oFilter);
 				});
 

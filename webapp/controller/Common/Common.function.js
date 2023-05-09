@@ -603,6 +603,25 @@ sap.ui.define([
             });
         },
 
+          // get reference types
+          getReferenceByTypeForFilter: function (typeCode,modelName, currentContext) {
+            masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
+                console.log("------------datypecodeta---------------",data);
+                if(data.length && data[0].length){
+                    data[0].unshift({ "id": "All", "description": "All" });
+                    // if (data[0].length > 0) {
+                    //     data[0].unshift({ "id": "All", "branchname": "Select All" });
+                    // } else {
+                    //     MessageBox.error("branch not availabel.")
+                    // }
+
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(selectModel, modelName);
+                }
+            });
+        },
+
         getReferenceFilter: function (typeCode, condition, modelName, currentContext) {
             commonService.getReference({ typecode: typeCode }, function (data) {
                 var selectModel = new sap.ui.model.json.JSONModel();
