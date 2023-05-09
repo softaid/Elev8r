@@ -31,6 +31,9 @@ sap.ui.define([
 			// bind Lead dropdown  LeadType
 			commonFunction.getReferenceByType("LeadCtgry", "leadCategoryModel", this);
 
+			// bind Lead subcategory dropdown
+			commonFunction.getReferenceByType("LeadSubCtgry", "leadSubCategoryModel", this);
+
 			// bind LeadType dropdown  
 			commonFunction.getReferenceByType("LeadType", "leadTypeModel", this);
 
@@ -57,6 +60,9 @@ sap.ui.define([
 
 			// bind Control dropdown
 			commonFunction.getReferenceByType("LftCtrl", "leadControlModel", this);
+
+			// bind group Control dropdown
+			commonFunction.getReferenceByType("LftGrpCtrl", "leadGroupControlModel", this);
 
 			// bind Operation dropdown
 			commonFunction.getReferenceByType("LftOprn", "leadOperationModel", this);

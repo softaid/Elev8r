@@ -743,5 +743,19 @@ div#componentcontainer---cbfdashboard--batchwiseDashboard, div#__data45{
     border : none;
   }
 
+  div#componentcontainer---master--DTP3-content{
+    width: 100% !important;
+    border: none !important;
+    background-color: transparent !important;
+  }
+
+  div#componentcontainer---master--DTP3-content input{
+    color: #cae4fb !important;
+  }
+
+  span#componentcontainer---master--DTP3-icon{
+    display: none !important;
+  }
+
 
 
