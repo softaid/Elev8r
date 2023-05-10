@@ -16,7 +16,6 @@ sap.ui.define([
             this.oFlexibleColumnLayout = this.byId("fclLeadActivity");
             this.bus.subscribe("leadactivity", "LeadActivity", this.loadLeadActivities, this);
             this.loadLeadActivities();
-
         },
 
         onExit: function () {

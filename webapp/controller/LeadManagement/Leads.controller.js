@@ -58,6 +58,8 @@ sap.ui.define([
 			// bind Stage dropdown
 			commonFunction.getReferenceByTypeForFilter("Stage", "stageModel", this);
 
+			this.getView().byId("deleteicon").setVisible(false);
+
 		},
 
 		// resetFilter: function () {
@@ -263,7 +265,7 @@ sap.ui.define([
 			var oTable = this.getView().byId("tblPartyMaster");
 			var deleteSucc = this.resourceBundle().getText("leadDeleteSucc");
 			var aSelectedItems = oTable.getSelectedItems();
-
+			console.log(aSelectedItems.length);
 			var aLeadIds = aSelectedItems.map(function (item) {
 				return item.getBindingContext('LeadsMasterModel').getObject().id;
 			});
@@ -311,6 +313,15 @@ sap.ui.define([
 				currentContext.getView().setModel(oTotalLeadModel, "LeadsTotalCountModel");
 				console.log("LeadsTotalCountModel",oTotalLeadModel);
 			});
+		},
+
+		onSelectionChange : function(oEvent){
+			var oTable = this.getView().byId("tblPartyMaster");
+			let count = oTable.getSelectedItems();
+			if(count.length)
+				this.getView().byId("deleteicon").setVisible(true);
+			else
+				this.getView().byId("deleteicon").setVisible(false);
 		},
 
 		handleFilterButtonPressed: function () {

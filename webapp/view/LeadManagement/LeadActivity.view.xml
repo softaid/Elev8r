@@ -43,6 +43,7 @@
                             </headerToolbar>
                             <columns>
                                 <Column><Text text ="{i18n>leadActivitySubject}" /></Column>
+                                <Column><Text text ="{i18n>leadActivityLeadName}" /></Column>
                                 <Column><Text text ="{i18n>leadActivityAssignedTo}" /></Column>
                                 <Column><Text text ="{i18n>leadActivityCreatedDate}" /></Column>	
                                 <Column><Text text ="{i18n>leadActivityProgress}" /></Column>
@@ -54,6 +55,7 @@
                                 <ColumnListItem type="Navigation" press="onListItemPress">
                                     <cells>
                                         <Text text="{leadActivityModel>subject}"/>
+                                        <Text text="{leadActivityModel>leadname}"/>
                                         <Text text="{leadActivityModel>assignedtoemp}"/>
                                         <Text text="{leadActivityModel>createddate}" />
                                         <Text text="{leadActivityModel>progress}" />

@@ -63,7 +63,23 @@
                                 <form:fields>
                                     <Input id="subject" valueLiveUpdate="true" value="{editLeadActivityModel>/subject}" required="true"/>
                                 </form:fields>
-                            </form:FormElement>                            
+                            </form:FormElement>  
+                            <form:FormElement label="{i18n>leadActivityLeadName}">
+                                <form:fields>
+                                    <Select id="leadname"
+                                        required="true" 
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/leadid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'LeadsModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{LeadsModel>id}" text="{LeadsModel>leadname}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>                          
                             <form:FormElement label="{i18n>leadActivityAssignedTo}">
                                 <form:fields>
                                     <Select id="assignedto"

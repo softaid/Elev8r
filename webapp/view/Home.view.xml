@@ -17,24 +17,28 @@ xmlns:l="sap.ui.layout">
 						</f:heading>
 						<f:actions>
 							<Button
-							text="{i18n>addLead}"
 							id="addlead"
-							type="Emphasized"
+							icon="sap-icon://leads"
+							type="Transparent"
+					        tooltip="{i18n>addLead}"
 							press = "addLead"/>
 							<Button
-							text="{i18n>allLeadActivity}"
+							icon="sap-icon://activities"
+							tooltip="{i18n>allLeadActivity}"
 							id="addleadactivity"
-							type="Emphasized"
+							type="Transparent"
 							press = "addLeadActivity"/>
 							<Button
-							text="{i18n>addQuotation}"
+							icon="sap-icon://sales-quote"
+							tooltip="{i18n>addQuotation}"
 							id="addquotation"
-							type="Emphasized"
+							type="Transparent"
 							press = "addQuotation"/>
 							<Button
-							text="{i18n>addProject}"
+							icon="sap-icon://workflow-tasks"
+							tooltip="{i18n>addProject}"
 							id="addproject"
-							type="Emphasized"
+							type="Transparent"
 							press = "addProject"/>
 						</f:actions>
 

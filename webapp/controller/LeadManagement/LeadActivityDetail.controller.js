@@ -7,9 +7,10 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/LeadActivity.service',
-    'sap/ui/elev8rerp/componentcontainer/services/Employee/Employee.service'
+    'sap/ui/elev8rerp/componentcontainer/services/Employee/Employee.service',
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service'
 
-], function (JSONModel, BaseController, MessageBox, MessageToast, formatter, commonService, commonFunction, leadActivityService, employeeService) {
+], function (JSONModel, BaseController, MessageBox, MessageToast, formatter, commonService, commonFunction, leadActivityService, employeeService, leadService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadActivity", {
@@ -18,6 +19,8 @@ sap.ui.define([
 		onInit: function () {
 			var oThis = this;
             oThis.getAllEmployee();
+
+			oThis.getAllLeads();
 
             commonFunction.getReference("Priority", "priorityModel", this);
             commonFunction.getReference("ActStatus", "statusModel", this);
@@ -39,6 +42,18 @@ sap.ui.define([
 				this.getView().setModel(oModel, "editLeadActivityModel");
 			}
 		},
+
+		getAllLeads : function(){
+            let oThis = this;
+            leadService.getAllLeads(function (data) {
+                if(data.length && data[0].length){
+                    let oModel = new sap.ui.model.json.JSONModel();
+                    oModel.setData({ modelData: data[0] });
+                    oThis.getView().setModel(oModel, "LeadsModel");
+                    console.log("LeadsModel",oModel);
+                }
+            });
+        },
 
         getAllEmployee : function(){
             var currentContext = this;
@@ -104,17 +119,18 @@ sap.ui.define([
                 
 				leadActivityService.saveLeadActivity(model, function (data) {
 					if (data.id > 0) {
-						var saveMsg = currentContext.resourcebundle().getText("employeeMasterSaveMsg");
-						var editMsg = currentContext.resourcebundle().getText("employeeMasterEditedMsg");
+						var saveMsg = currentContext.resourcebundle().getText("activitySaveMsg");
+						var editMsg = currentContext.resourcebundle().getText("activityEditedMsg");
+						var alreadyExistMsg = currentContext.resourcebundle().getText("activityAlreadyExist");
 						var message = tempId == null ? saveMsg : editMsg;
-						MessageToast.show("Save");
+						MessageToast.show(message);
 
 						currentContext.bus = sap.ui.getCore().getEventBus();
-						currentContext.bus.publish("leadactivity", "loadLeadActivities");
+						currentContext.bus.publish("leadactivity", "LeadActivity");
 						currentContext.onCancel();
 					}
 					else if (data.id == -1) {
-						MessageToast.show("Data is already exist.");
+						MessageToast.show(alreadyExistMsg);
 					}
 				});
 			// }
@@ -129,7 +145,7 @@ sap.ui.define([
 			var currentContext = this;
 			var dleteMsg = currentContext.resourcebundle().getText("deleteMsg");
 			var okText = currentContext.resourcebundle().getText("OKText");
-			var deleteSuccessMsg = currentContext.resourcebundle().getText("employeeMasterDeleteMsg");
+			var activityDeletedMsg = currentContext.resourcebundle().getText("activityDeletedMsg");
 
 			if (this.model != undefined) {
 				var model = {
@@ -150,7 +166,7 @@ sap.ui.define([
 									currentContext.bus.publish("leadactivity", "loadLeadActivities");
 
 									currentContext.onCancel();
-									MessageToast.show(deleteSuccessMsg);
+									MessageToast.show(activityDeletedMsg);
 								});
 							}
 

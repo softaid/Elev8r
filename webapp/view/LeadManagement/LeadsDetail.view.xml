@@ -310,10 +310,9 @@
                                 id="activityList"
                                 items="{ path: 'activityModel>/modelData' }">
                                 <StandardListItem
-                                    
-                                    info="{i18n>leadDetailsActivity} - {activityModel>subject}"
+                                    info="{i18n>leadDetailsStatus} - {activityModel>status}"
+                                    title="{i18n>leadDetailsActivity} - {activityModel>subject}"
                                     description="{i18n>leadDetailsDate} - {activityModel>createddate}"
-                                    title="{i18n>leadDetailsStatus} - {activityModel>status}"
                                     type="Inactive" />
                             </List>
                         </ScrollContainer>
