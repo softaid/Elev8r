@@ -16,23 +16,6 @@ xmlns:l="sap.ui.layout">
 							<Title id="DashboardTitle" text="Dashboard" />
 						</f:heading>
 						<f:actions>
-							<!-- <ToolbarSpacer/> -->
-							<!-- <l:VerticalLayout
-								class="sapUiContentPadding"
-								width="100%">
-								<l:content>
-									<Link
-										text="Open message box"
-										press="handleLinkPress" />
-									<Link
-										text="Disabled link"
-										enabled="true" />
-									<Link
-										text="Open SAP Homepage"
-										target="_blank"
-										href="http://www.sap.com" />
-								</l:content>
-							</l:VerticalLayout> -->
 							<Button
 							text="{i18n>addLead}"
 							id="addlead"

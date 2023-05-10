@@ -125,13 +125,8 @@
 				            </Button>
 							<DateTimePicker
 							id="DTP3"
-							value= "{
-								'path': '/valueDTP3',
-								'type': 'sap.ui.model.type.DateTime',
-								'formatOptions': {
-									'pattern': 'M/d/yyyy h:mm a'
-								}
-							}"
+							value= "{/valueDTP3}"
+							valueFormat="M/d/yy h:mm a"
 							class="sapUiSmallMarginBottom"/>
 
 							<Button

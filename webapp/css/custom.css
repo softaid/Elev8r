@@ -743,6 +743,10 @@ div#componentcontainer---cbfdashboard--batchwiseDashboard, div#__data45{
     border : none;
   }
 
+  div#__title0-_actionsToolbar{
+    -webkit-justify-content: flex-start !important;
+  }
+
   div#componentcontainer---master--DTP3-content{
     width: 100% !important;
     border: none !important;

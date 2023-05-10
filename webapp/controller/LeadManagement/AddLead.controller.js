@@ -17,6 +17,7 @@ sap.ui.define([
 			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("leaddetails", "newLead", this.leaddetails, this);
+			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
 
 
 			// bind Source dropdown
@@ -189,10 +190,15 @@ sap.ui.define([
 			}
 		},
 
+		handleLeadList : function(sChannel, sEvent, oData){
+			let selRow = oData.viewModel;
+            let editPartyModel = this.getView().getModel("editPartyModel");
+			editPartyModel.oData.id = selRow.nextid;
+			editPartyModel.refresh();
+		},
+
 		onBeforeRendering: function () {
-			console.log(this.getView().getModel("viewModel"));
-			var currentContext = this;
-			this.model = currentContext.getView().getModel("viewModel");
+	
 		},
 
 
@@ -229,6 +235,7 @@ sap.ui.define([
 			if (id != undefined) {
 
 				Leadservice.getLeads({ id: id }, function (data) {
+					console.log(data[0][0]);
 					oModel.setData(data[0][0]);
 					var addresses = data[1];
 

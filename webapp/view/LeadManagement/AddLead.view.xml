@@ -57,6 +57,11 @@
                         <form:formContainers>
                             <form:FormContainer title="Lead Details" width="100%"> 
                                 <form:formElements>
+                                    <form:FormElement label="{i18n>leadID}">
+                                        <form:fields>
+                                            <Input id="leadid" valueLiveUpdate="true" value="{editPartyModel>/id}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>  
                                     <form:FormElement label="{i18n>leadType}">
                                         <form:fields>
                                             <Select id="typeid" 
@@ -134,8 +139,7 @@
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
-                                                    path: 'leadCategoryModel>/modelData',
-                                                    
+                                                    path: 'leadCategoryModel>/modelData'                                                    
                                                 }">
                                                 <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
                                             </Select>
@@ -149,8 +153,7 @@
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
-                                                    path: 'leadSubCategoryModel>/modelData',
-                                                    
+                                                    path: 'leadSubCategoryModel>/modelData'                                                    
                                                 }">
                                                 <core:Item key="{leadSubCategoryModel>id}" text="{leadSubCategoryModel>description}" />
                                             </Select>
@@ -165,8 +168,7 @@
                                         <form:fields>
                                             <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="true"
                                                 items="{
-                                                    path: 'partyCountryModel>/modelData',
-                                                    
+                                                    path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
                                                 <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
                                             </Select>
@@ -176,8 +178,7 @@
                                         <form:fields>
                                             <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="true"
                                                 items="{
-                                                    path: 'partyStateModel>/modelData',
-                                                    
+                                                    path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onStatusChange">
                                                 <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
                                             </Select>
@@ -187,8 +188,7 @@
                                         <form:fields>
                                             <Select id="ddlCity1" selectedKey="{editPartyModel>/cityid}" 
                                                 items="{
-                                                    path: 'partyCityModel>/modelData',
-                                                    
+                                                    path: 'partyCityModel>/modelData'                                                    
                                                 }" change="onStatusChange">
                                                 <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
                                             </Select>
@@ -274,8 +274,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'liftTypeModel>/modelData',
-                                                
+                                                path: 'liftTypeModel>/modelData'                                                
                                             }">
                                             <core:Item key="{liftTypeModel>id}" text="{liftTypeModel>description}" />
                                         </Select>
@@ -294,8 +293,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadCapacityModel>/modelData',
-                                                
+                                                path: 'leadCapacityModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadCapacityModel>id}" text="{leadCapacityModel>description}" />
                                         </Select>
@@ -309,8 +307,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadmodelModel>/modelData',
-                                                
+                                                path: 'leadmodelModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
                                         </Select>
@@ -324,8 +321,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadDriveModel>/modelData',
-                                                
+                                                path: 'leadDriveModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadDriveModel>id}" text="{leadDriveModel>description}" />
                                         </Select>
@@ -339,8 +335,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'MachineModel>/modelData',
-                                                
+                                                path: 'MachineModel>/modelData'                                                
                                             }">
                                             <core:Item key="{MachineModel>id}" text="{MachineModel>description}" />
                                         </Select>
@@ -354,8 +349,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadControlModel>/modelData',
-                                                
+                                                path: 'leadControlModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadControlModel>id}" text="{leadControlModel>description}" />
                                         </Select>
@@ -369,8 +363,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadOperationModel>/modelData',
-                                                
+                                                path: 'leadOperationModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadOperationModel>id}" text="{leadOperationModel>description}" />
                                         </Select>
@@ -384,8 +377,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadGroupControlModel>/modelData',
-                                                
+                                                path: 'leadGroupControlModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadGroupControlModel>id}" text="{leadGroupControlModel>description}" />
                                         </Select>
@@ -399,8 +391,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadSpeedModel>/modelData',
-                                                
+                                                path: 'leadSpeedModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadSpeedModel>id}" text="{leadSpeedModel>description}" />
                                         </Select>
@@ -414,8 +405,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadDoorTypeModel>/modelData',
-                                                
+                                                path: 'leadDoorTypeModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadDoorTypeModel>id}" text="{leadDoorTypeModel>description}" />
                                         </Select>
@@ -429,8 +419,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'landingDoorModel>/modelData',
-                                                
+                                                path: 'landingDoorModel>/modelData'                                                
                                             }">
                                             <core:Item key="{landingDoorModel>id}" text="{landingDoorModel>description}" />
                                         </Select>
@@ -444,8 +433,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'CarDoorModel>/modelData',
-                                                
+                                                path: 'CarDoorModel>/modelData'                                                
                                             }">
                                             <core:Item key="{CarDoorModel>id}" text="{CarDoorModel>description}" />
                                         </Select>
@@ -459,8 +447,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'standaredFloorHeightModel>/modelData',
-                                                
+                                                path: 'standaredFloorHeightModel>/modelData'                                                
                                             }">
                                             <core:Item key="{standaredFloorHeightModel>id}" text="{standaredFloorHeightModel>description}" />
                                         </Select>
@@ -479,8 +466,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'LowestFloorModel>/modelData',
-                                                
+                                                path: 'LowestFloorModel>/modelData'                                                
                                             }">
                                             <core:Item key="{LowestFloorModel>id}" text="{LowestFloorModel>description}" />
                                         </Select>
@@ -495,8 +481,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'CWTPositionModel>/modelData',
-                                                
+                                                path: 'CWTPositionModel>/modelData'                                                
                                             }">
                                             <core:Item key="{CWTPositionModel>id}" text="{CWTPositionModel>description}" />
                                         </Select>
@@ -515,8 +500,7 @@
                                         forceSelection="true"
                                         width="500px"
                                         items="{
-                                            path: 'openingSameSideModel>/modelData',
-                                            
+                                            path: 'openingSameSideModel>/modelData'                                            
                                         }">
                                         <core:Item key="{openingSameSideModel>id}" text="{openingSameSideModel>description}" />
                                     </Select>
@@ -530,8 +514,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'frontOpeningModel>/modelData',
-                                                
+                                                path: 'frontOpeningModel>/modelData'                                                
                                             }">
                                             <core:Item key="{frontOpeningModel>id}" text="{frontOpeningModel>description}" />
                                         </Select>
@@ -545,8 +528,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'backOpeningModel>/modelData',
-                                                
+                                                path: 'backOpeningModel>/modelData'                                                
                                             }">
                                             <core:Item key="{backOpeningModel>id}" text="{backOpeningModel>description}" />
                                         </Select>
@@ -560,8 +542,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leftOpeningModel>/modelData',
-                                                
+                                                path: 'leftOpeningModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leftOpeningModel>id}" text="{leftOpeningModel>description}" />
                                         </Select>
@@ -575,8 +556,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'rightOpeningModel>/modelData',
-                                                
+                                                path: 'rightOpeningModel>/modelData'                                                
                                             }">
                                             <core:Item key="{rightOpeningModel>id}" text="{rightOpeningModel>description}" />
                                         </Select>
@@ -665,8 +645,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadStatusModel>/modelData',
-                                                
+                                                path: 'leadStatusModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadStatusModel>id}" text="{leadStatusModel>description}" />
                                         </Select>
@@ -680,8 +659,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'stageModel>/modelData',
-                                                
+                                                path: 'stageModel>/modelData'                                                
                                             }">
                                             <core:Item key="{stageModel>id}" text="{stageModel>description}" />
                                         </Select>
@@ -700,8 +678,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadSourceModel>/modelData',
-                                                
+                                                path: 'leadSourceModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
                                         </Select>
@@ -715,8 +692,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadCntCategoryModel>/modelData',
-                                                
+                                                path: 'leadCntCategoryModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadCntCategoryModel>id}" text="{leadCntCategoryModel>description}" />
                                         </Select>
@@ -730,8 +706,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadCntTypeModel>/modelData',
-                                                
+                                                path: 'leadCntTypeModel>/modelData'                                                
                                             }">
                                             <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
                                         </Select>
