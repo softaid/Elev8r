@@ -12,7 +12,7 @@
 			"title": "Master",
 			"icon": "sap-icon://dimension",
 			"expanded": false,
-			"key": "home",
+			"key": "leadmaster",
 			"eid": [2],
 			"items": [
 				{
@@ -92,7 +92,7 @@
 					"icon": "sap-icon://account",
 					"expanded": true,
 					"key": "users",
-					"eid": [6],
+					"eid": [],
 					"items": []
 				},
 				{
@@ -109,7 +109,7 @@
 			"title": "Lead Management",
 			"icon": "sap-icon://kpi-managing-my-area",
 			"expanded": false,
-			"key": "leadmanagement",
+			"key": "leads",
 			"eid": [7],
 			"items": [
 				{
@@ -150,7 +150,7 @@
 			"title": "Project Management",
 			"icon": "sap-icon://kpi-managing-my-area",
 			"expanded": false,
-			"key": "projectmanagement",
+			"key": "project",
 			"eid": [12],
 			"items": [
 				{
@@ -192,7 +192,7 @@
 			"title": "Sales",
 			"icon": "sap-icon://crm-sales",
 			"expanded": false,
-			"key": "sales",
+			"key": "saleorder",
 			"eid": [27],
 			"items": [
 				{

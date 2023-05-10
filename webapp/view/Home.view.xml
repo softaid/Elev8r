@@ -15,8 +15,30 @@ xmlns:l="sap.ui.layout">
 						<f:heading>
 							<Title id="DashboardTitle" text="Dashboard" />
 						</f:heading>
-
 						<f:actions>
+							<Button
+							text="{i18n>addLead}"
+							id="addlead"
+							type="Emphasized"
+							press = "addLead"/>
+							<Button
+							text="{i18n>allLeadActivity}"
+							id="addleadactivity"
+							type="Emphasized"
+							press = "addLeadActivity"/>
+							<Button
+							text="{i18n>addQuotation}"
+							id="addquotation"
+							type="Emphasized"
+							press = "addQuotation"/>
+							<Button
+							text="{i18n>addProject}"
+							id="addproject"
+							type="Emphasized"
+							press = "addProject"/>
+						</f:actions>
+
+						<!-- <f:actions>
 							<ToolbarSpacer/>
 							<Button
 								text="Open Action Sheet"
@@ -29,7 +51,7 @@ xmlns:l="sap.ui.layout">
 										type="XML" />
 								</dependents>
 							</Button>
-						</f:actions>
+						</f:actions> -->
 
 
 					</f:DynamicPageTitle>
