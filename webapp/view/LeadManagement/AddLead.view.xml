@@ -26,9 +26,6 @@
                         press = "onSave"/>						
                 </f:actions>
                 <f:navigationActions>
-                    <Button
-                            icon="sap-icon://decline"
-                            type="Transparent" press="onCancel" />
                 </f:navigationActions>
             </f:DynamicPageTitle>
 		</f:title>

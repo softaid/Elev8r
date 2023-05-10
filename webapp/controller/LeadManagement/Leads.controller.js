@@ -21,14 +21,15 @@ sap.ui.define([
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			this.handleRouteMatched(null);
-			Fragment.load({
-				id: this.getView().getId(),
-				name: "sap.m.sample.TableViewSettingsDialog.ColumnMenu",
-				controller: this
-			}).then(function (oMenu) {
-				oView.addDependent(oMenu);
-				return oMenu;
-			});
+
+			// Fragment.load({
+			// 	id: this.getView().getId(),
+			// 	name: "sap.m.sample.TableViewSettingsDialog.ColumnMenu",
+			// 	controller: this
+			// }).then(function (oMenu) {
+			// 	oView.addDependent(oMenu);
+			// 	return oMenu;
+			// });
 
 
 			// Keeps reference to any of the created sap.m.ViewSettingsDialog-s in this sample
@@ -47,6 +48,15 @@ sap.ui.define([
 
 			// bind LeadType dropdown  
 			commonFunction.getReferenceByTypeForFilter("LeadType", "leadTypeModel", this);
+
+			// bind Lead dropdown  LeadType
+			commonFunction.getReferenceByTypeForFilter("LeadCtgry", "leadCategoryModel", this);
+
+			// bind Source dropdown
+			commonFunction.getReferenceByTypeForFilter("LeadSrc", "leadSourceModel", this);
+
+			// bind Stage dropdown
+			commonFunction.getReferenceByTypeForFilter("Stage", "stageModel", this);
 
 		},
 
@@ -173,6 +183,72 @@ sap.ui.define([
 			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
 		},
 
+		// Function for display Type wise Leads
+		onLeadCategory: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'leadscategory';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				let i = this.afilters.length;
+				while (i--) {
+					if (this.afilters[i].sPath == "leadscategory") {
+						this.afilters.splice(i, 1);
+					}
+				}
+			}
+			var list = this.getView().byId("tblPartyMaster");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
+		// Function for display Type wise Leads
+		onLeadSource: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'sourcename';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				let i = this.afilters.length;
+				while (i--) {
+					if (this.afilters[i].sPath == "sourcename") {
+						this.afilters.splice(i, 1);
+					}
+				}
+			}
+			var list = this.getView().byId("tblPartyMaster");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
+		// Function for display Type wise Leads
+		onLeadStage: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'stagename';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				let i = this.afilters.length;
+				while (i--) {
+					if (this.afilters[i].sPath == "stagename") {
+						this.afilters.splice(i, 1);
+					}
+				}
+			}
+			var list = this.getView().byId("tblPartyMaster");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
 		resourceBundle: function () {
 			var oBundle = this.getModel("i18n").getResourceBundle()
 			return oBundle
@@ -214,6 +290,21 @@ sap.ui.define([
 				oModel.setData({ modelData: data[0] });
 				currentContext.getView().setModel(oModel, "LeadsMasterModel");
 				console.log("LeadsMasterModel",oModel);
+
+				var oQualifiedModel = new sap.ui.model.json.JSONModel();
+				oQualifiedModel.setData(data[1][0]);
+				currentContext.getView().setModel(oQualifiedModel, "LeadsQualifiedModel");
+				console.log("LeadsQualifiedModel",oQualifiedModel);
+
+				var oUnqualifiedModel = new sap.ui.model.json.JSONModel();
+				oUnqualifiedModel.setData(data[2][0]);
+				currentContext.getView().setModel(oUnqualifiedModel, "LeadsUnqualifiedModel");
+				console.log("LeadsUnqualifiedModel",oUnqualifiedModel);
+
+				var oTotalLeadModel = new sap.ui.model.json.JSONModel();
+				oTotalLeadModel.setData(data[3][0]);
+				currentContext.getView().setModel(oTotalLeadModel, "LeadsTotalCountModel");
+				console.log("LeadsTotalCountModel",oTotalLeadModel);
 			});
 		},
 
