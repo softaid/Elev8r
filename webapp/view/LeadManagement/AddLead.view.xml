@@ -23,7 +23,10 @@
                         text="{i18n>saveButtonText}"
                         id="btnSave"
                         type="Emphasized"
-                        press = "onSave"/>						
+                        press = "onSave"/>	
+                        <Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />					
                 </f:actions>
                 <f:navigationActions>
                 </f:navigationActions>
@@ -56,14 +59,14 @@
                                 <form:formElements>
                                     <form:FormElement label="{i18n>leadID}">
                                         <form:fields>
-                                            <Input id="leadid" valueLiveUpdate="true" value="{editPartyModel>/id}" enabled="false"/>
+                                            <Input id="leadid" valueLiveUpdate="true" value="{editPartyModel>/leadid}" enabled="false"/>
                                         </form:fields>
                                     </form:FormElement>  
                                     <form:FormElement label="{i18n>leadType}">
                                         <form:fields>
                                             <Select id="typeid" 
                                                 change=""
-                                                selectedKey="{editPartyModel>/typeid}" 
+                                                selectedKey="{editPartyModel>/leadtype}" 
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
@@ -198,7 +201,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadMobileP}">
                                         <form:fields>
-                                            <Input id="mobilep" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadEmail}">
@@ -208,12 +211,12 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadGSTN}">
                                         <form:fields>
-                                            <Input id="gstn" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/gstn}"/>
+                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/gstn}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPanNo}">
                                         <form:fields>
-                                            <Input id="panno" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/panno}"/>
+                                            <Input id="panno" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/panno}"/>
                                         </form:fields>
                                     </form:FormElement>
                                 </form:formElements>      

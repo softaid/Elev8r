@@ -193,12 +193,13 @@ sap.ui.define([
 		handleLeadList : function(sChannel, sEvent, oData){
 			let selRow = oData.viewModel;
             let editPartyModel = this.getView().getModel("editPartyModel");
-			editPartyModel.oData.id = selRow.nextid;
+			editPartyModel.oData.leadid = selRow.nextid;
 			editPartyModel.refresh();
+
 		},
 
 		onBeforeRendering: function () {
-	
+			this.reset();
 		},
 
 
@@ -345,10 +346,10 @@ sap.ui.define([
 				var currentContext = this;
 				var model = this.getView().getModel("editPartyModel").oData;
 				console.log("editPartyModel", model);
+
 				model["companyid"] = commonService.session("companyId");
 				model["leaddate"] = commonFunction.getDate(model.leaddate);
 				model["userid"] = commonService.session("userId");
-				//var partyAddressModel = [];
 				Leadservice.saveLead(model, function (data) {
 					console.log("---------data---------",data);
 					var message = model.id == null ? "Lead created successfully!" : "Lead edited successfully!";
@@ -356,38 +357,10 @@ sap.ui.define([
 					MessageToast.show(message);
 
 					currentContext.bus = sap.ui.getCore().getEventBus();
-					currentContext.bus.publish("loaddata", "loadData");
-
-					// if (data.id > 0) {
-					// 	for (var i = 1; i <= currentContext.counter; i++) {
-
-					// 		var cityid = currentContext.getView().byId("ddlCity" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCity" + i).getSelectedItem().mProperties.key : null;
-
-					// 		var stateid = currentContext.getView().byId("ddlState" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlState" + i).getSelectedItem().mProperties.key : null;
-
-					// 		var countryid = currentContext.getView().byId("ddlCountry" + i).getSelectedItem() != null ? currentContext.getView().byId("ddlCountry" + i).getSelectedItem().mProperties.key : null;
-					// 		partyAddressModel.push({
-					// 			id: null,
-					// 			leadid: data.id,
-					// 			address: currentContext.getView().byId("txtAddress" + i).getValue(),
-					// 			countryid: parseInt(countryid),
-					// 			stateid: parseInt(stateid),
-					// 			cityid: parseInt(cityid),
-					// 			pincode: parseInt(currentContext.getView().byId("txtPinCode" + i).getValue()),
-					// 			companyid: commonService.session("companyId"),
-					// 			userid: commonService.session("userId"),
-					// 		});
-					// 	}
-
-					// 	Leadservice.saveLeadAddress({ address: JSON.stringify(partyAddressModel) }, function (data) {
-							
-					// 	});
-					// }
-
+					currentContext.bus.publish("loadLeadEditdata", "loadLeadEditdata");
 				});
 			}
 			this.reset();
-
 		},
 
 		validateForm: function () {
@@ -574,51 +547,13 @@ sap.ui.define([
 
 		reset: function () {
 			let oThis = this;
-			let oLeadDetailnModel = oThis.getView().getModel("editPartyModel").oData;
-			let oLeadDetailData = oLeadDetailnModel.getData();
-			    oLeadDetailData.leadname = "",
-				oLeadDetailData.companyname = "",
-				oLeadDetailData.leaddate = "",
-				oLeadDetailData.sourceid = "4",
-				oLeadDetailData.leadscategory = "49",
-				oLeadDetailData.leadtype = "97",
-				oLeadDetailData.stageid = "14",
-				oLeadDetailData.email = "",
-				oLeadDetailData.phoneno = "",
-				oLeadDetailData.mobileno = "",
-				oLeadDetailData.contactperson = "",
-				oLeadDetailData.salesrep = "",
-				oLeadDetailData.leadvalue = "",
-				oLeadDetailData.leadscore = "",
-				oLeadDetailData.leadstatus = "46",
-				oLeadDetailData.leaddescription = "",
-				oLeadDetailData.locationid = "1",
-				oLeadDetailData.typeoflift = "67",
-				oLeadDetailData.capacityid = "68",
-				oLeadDetailData.modelid = "71",
-				oLeadDetailData.driveid = "72",
-				oLeadDetailData.machineid = "83",
-				oLeadDetailData.controlid = "73",
-				oLeadDetailData.operationid = "74",
-				oLeadDetailData.speedid = "75",
-				oLeadDetailData.typeofdoorid = "76",
-				oLeadDetailData.landingdoorid = "77",
-				oLeadDetailData.cardoorid = "78",
-				oLeadDetailData.lowestfloorid = "79",
-				oLeadDetailData.cwtpositionid = "80",
-				oLeadDetailData.floorheaightid = "82",
-				oLeadDetailData.architectidid = "58",
-				oLeadDetailData.leadconsaltantid = "51",
-				oLeadDetailData.nooflifts = "",
-				oLeadDetailData.cityid = "1",
-				oLeadDetailData.stateid = "1",
-				oLeadDetailData.countryid = "1",
-				oLeadDetailData.pincode = "",
-				oLeadDetailData.isdeleted = 0
-			oLeadDetailnModel.refresh();
+			var model = oThis.getView().getModel("editPartyModel");
+			model.setData([]);
+			oThis.getView().setModel(model, "editPartyModel");
 		},
 
 		onCancel: function () {
+			this.reset();
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("leads");
 		}

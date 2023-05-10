@@ -20,6 +20,9 @@ sap.ui.define([
 			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+
+			//Event Bus for Edit scnario
+			this.bus.subscribe("loadLeadEditdata", "loadLeadEditdata", this.loadData, this);
 			this.handleRouteMatched(null);
 
 			// Fragment.load({
