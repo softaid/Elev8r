@@ -1,211 +1,3 @@
-<!-- <mvc:View
-	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetail"
-	xmlns="sap.m"
-    xmlns:f="sap.f"
-	xmlns:core="sap.ui.core"
-	xmlns:card="sap.f.cards"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:layout="sap.ui.layout"
-	xmlns:form="sap.ui.layout.form">
-
-	<Page class="pgDashboard" showHeader="true" title="{i18n>leadDetailsTitle}">
-        <headerContent>
-            <layout:VerticalLayout
-            class="sapUiContentPadding"
-            width="100%">
-                <layout:content>
-                    <Link
-                        text="{i18n>leadDetailsConverttoQuote}"
-                        press="handleLinkPress" />
-                </layout:content>
-            </layout:VerticalLayout>
-			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewLead"/>
-            <Button icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editLead"/>
-            <Button icon="sap-icon://delete" tooltip="{i18n>leadDetailsDeleteLead}" press="deleteLead"/>
-		</headerContent>
-        <content>
-            <HBox>
-                <VBox width="100%">
-                    <f:Card class="sapUiMediumMargin">
-                        <f:header class="tileBox">
-                            <card:Header class="cardStyle" title="{i18n>leadDetailsLeadName} - {leadModel>/leadname}" subtitle="{i18n>leadDetailsCompanyName} - {leadModel>/companyname}" />
-                        </f:header>
-                        <f:content>
-                            <TextArea value="{i18n>leadDetailsAddress} - {leadModel>/address}" width="100%"/>
-                        </f:content>
-                    </f:Card>
-                </VBox>
-                <VBox width="100%">
-                    <f:Card class="sapUiMediumMargin">
-                        <f:header class="tileBox">
-                            <card:Header title="{i18n>leadDetailsContactPerson} - {leadModel>/contacterson}" subtitle="{i18n>leadDetailsEmail} - {leadModel>/email}" />
-                        </f:header>
-                        <f:content>
-                            <TextArea value="{i18n>leadDetailsMobile} - {leadModel>/mobileno}" width="100%"/>
-                        </f:content>
-                    </f:Card>
-                </VBox>
-            </HBox>
-            <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
-                <items>
-                    <IconTabFilter icon="sap-icon://history" text="{i18n>leadDetailsHistory}" key="activity">
-                        <ScrollContainer
-                            height="100%"
-                            width="100%"
-                            horizontal="true"
-                            vertical="true"
-                            focusable="true">
-                            <List
-                                id="activityList"
-                                items="{ path: 'activityModel>/modelData' }">
-                                <StandardListItem
-                                    
-                                    info="{i18n>leadDetailsActivity} - {activityModel>subject}"
-                                    description="{i18n>leadDetailsDate} - {activityModel>createddate}"
-                                    title="{i18n>leadDetailsStatus} - {activityModel>status}"
-                                    type="Inactive" />
-                            </List>
-                        </ScrollContainer>
-                    </IconTabFilter>
-
-                    <IconTabFilter icon="sap-icon://customer-and-supplier" text="{i18n>leadDetailsLiftDetails}" key="liftdetails">
-                        <form:Form editable="true">
-                            <form:title>
-                            </form:title>
-                            <form:layout>
-                                <form:ResponsiveGridLayout
-                                    labelSpanXL="4"
-                                    labelSpanL="4"
-                                    labelSpanM="4"
-                                    labelSpanS="12"
-                                    adjustLabelSpan="false"
-                                    emptySpanXL="0"
-                                    emptySpanL="0"
-                                    emptySpanM="0"
-                                    emptySpanS="0"
-                                    columnsXL="3"
-                                    columnsL="2"
-                                    columnsM="1"
-                                    singleContainerFullSize="false" />
-                            </form:layout>
-                            <form:formContainers>
-                                <form:formContainer>
-                                    <form:formElements>                            
-                                        <form:FormElement label="{i18n>leadDetailsTypeofLift}">
-                                            <form:fields>
-                                                <Input id="lftType" value="{liftModel>/typeoflift}" enabled="false"/>
-                                            </form:fields>
-                                        </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailsLiftCapacity}">
-                                            <form:fields>
-                                                <Input id="capacity" value="{liftModel>/capacity}"  enabled="false"/>
-                                            </form:fields>
-                                        </form:FormElement>  
-                                        <form:FormElement label="{i18n>leadDetailsLiftModel}">
-                                            <form:fields>
-                                                <Input id="model" value="{liftModel>/model}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailsLiftMachine}">
-                                            <form:fields>
-                                                <Input id="machine" value="{liftModel>/machine}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>
-                                    </form:formElements>
-                                </form:formContainer>
-                                <form:formContainer>
-                                    <form:formElements>
-                                        <form:FormElement label="{i18n>leadDetailsFloorHeight}">
-                                            <form:fields>
-                                                <Input id="txtmobileNo" value="{liftModel>/floorheight}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>
-                                        <form:FormElement label="{i18n>leadDetailsConsultant}">
-                                            <form:fields>
-                                                <Input id="consultant" value="{liftModel>/consultant}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>                                        
-                                        <form:FormElement label="{i18n>leadDetailsArchitect}">
-                                            <form:fields>
-                                                <Input id="architect" value="{liftModel>/architect}" enabled="false" />
-                                            </form:fields>
-                                        </form:FormElement>   
-                                    </form:formElements>
-                                </form:formContainer>
-                            </form:formContainers>
-                        </form:Form>
-                    </IconTabFilter>    
-
-                    <IconTabFilter icon="sap-icon://sales-quote" text="{i18n>leadDetailsQuotation}" key="quotation">
-                        <ScrollContainer
-                            height="100%"
-                            width="100%"
-                            horizontal="true"
-                            vertical="true"
-                            focusable="true">
-
-                              <Table id="leadqutationTbl"
-                                            inset="false" 
-                                            items="{
-                                                        path: 'quotationModel>/modelData',
-                                                        sorter: {
-                                                            path: 'id'
-                                                        }
-                                                    }">
-                                            <headerToolbar>
-                                                <Toolbar>
-                                                    <content>
-                                                        <Title text="{masterModel>typename}" level="H2"/>
-                                                        <ToolbarSpacer />
-                                                    </content>
-                                                </Toolbar>
-                                            </headerToolbar>
-                                            <columns>
-                                                <Column><Text text =" " /></Column>
-                                                <Column><Text text ="Revision-1" /></Column>
-                                                 <Column><Text text ="Revision-2" /></Column>
-                                                <Column><Text text ="Revision-3" /></Column>
-                                                
-                                            </columns>
-                                            <items>
-                                                <ColumnListItem >
-                                                    <cells>
-                                                        <Text text="{quotationModel>id}"/>
-                                                        <Text text="{quotationModel>quotevalue}"/>
-                                                        <Text text="{quotationModel>quotestageid}"/>
-                                                        <Text text="{quotationModel >nooflifts}"/>
-                                                    </cells>
-                                                </ColumnListItem>
-                                            </items>
-                                        </Table>   
-                        </ScrollContainer>
-                    </IconTabFilter>
-
-                    <IconTabFilter icon="sap-icon://sap-box" text="{i18n>leadDetailsFiles}" key="files">
-                        <ScrollContainer
-                            height="100%"
-                            width="100%"
-                            horizontal="true"
-                            vertical="true"
-                            focusable="true">
-                            <List
-                                id="fileList"
-                                items="{ path: 'liftModel>/modelData' }">
-                                <StandardListItem
-                                    
-                                    info="Lift Type - {liftModel>typeoflift}"
-                                    description="Qty - {liftModel>nooflifts}"
-                                    title="Capacity - {liftModel>capacity}"
-                                    type="Inactive" />
-                            </List>
-                        </ScrollContainer>
-                    </IconTabFilter>      
-                </items>
-            </IconTabBar>
-        </content>
-	</Page>
-</mvc:View> -->
-
 <mvc:View
 	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadsDetail"
 	xmlns="sap.m"
@@ -278,7 +70,7 @@
                                 <form:formElements>
                                     <form:FormElement label="{i18n>leadDetailsContactPerson}">
                                         <form:fields>
-                                            <Input id="contactperson" value="{leadModel>/contacterson}" enabled="false" />
+                                            <Input id="contactperson" value="{leadModel>/contactperson}" enabled="false" />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadDetailsEmail}">
@@ -288,7 +80,7 @@
                                     </form:FormElement>  
                                     <form:FormElement label="{i18n>leadDetailsMobile}">
                                         <form:fields>
-                                            <Input id="mobileno" value="{leadModel>/mobileno}" enabled="false" />
+                                            <Input id="mobileno" value="{leadModel>/mobilep}" enabled="false" />
                                         </form:fields>
                                     </form:FormElement>  
                                 </form:formElements>
@@ -464,38 +256,6 @@
 					</table:columns>
 				</table:Table>
 			</Panel>
-                            <!-- <VBox fitContainer="true">
-                                <Table id="quotationtbl" 
-                                        inset="false"
-                                        sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
-                                        items="{
-                                        path: 'quotationModel>/modelData',
-                                        sorter: {
-                                            path: 'hatchername'
-                                        }
-                                    }">
-                                    <headerToolbar>
-                                        <Toolbar>
-                                            <content>
-                                                <Title text="" level="H2"/>
-                                                <ToolbarSpacer />
-                                            </content>
-                                        </Toolbar>
-                                    </headerToolbar>
-                                    <columns>
-                                        <Column><Text text ="Revision" /></Column>
-                                        <Column><Text text ="Drive" /></Column>
-                                    </columns>
-                                    <items>
-                                        <ColumnListItem>
-                                            <cells>
-                                            <ObjectIdentifier text="{quotationModel>revision}" />
-                                                <Text text="{quotationModel>drive}" />
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-                            </VBox> -->
                         </ScrollContainer>
                     </IconTabFilter>
 
