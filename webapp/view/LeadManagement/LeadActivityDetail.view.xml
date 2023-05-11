@@ -162,7 +162,12 @@
                             </form:FormElement> 
                             <form:FormElement label="{i18n>leadActivityProgress}">
                                 <form:fields>
-                                    <Input id="progress" valueLiveUpdate="true" value="{editLeadActivityModel>/progress}" required="true"/>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                        max="100" min="0" progress="true"
+                                        showAdvancedTooltip="true" value="{editLeadActivityModel>/progress}">
+                                        <ResponsiveScale id="rScaleWarningLevel"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
                                 </form:fields>
                             </form:FormElement> 
                             <form:FormElement label="{i18n>leadActivityType}">
