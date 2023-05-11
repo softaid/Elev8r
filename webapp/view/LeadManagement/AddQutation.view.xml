@@ -24,11 +24,12 @@
                         id="btnSave"
                         type="Emphasized"
                         press = "onSave"/>
+                    <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/>
                 </f:actions>
                 <f:navigationActions>
                     <Button
-                            icon="sap-icon://decline"
-                            type="Transparent" press="onCancel" />
+                        icon="sap-icon://decline"
+                        type="Transparent" press="onCancel" />
                 </f:navigationActions>
             </f:DynamicPageTitle>
         </f:title>
