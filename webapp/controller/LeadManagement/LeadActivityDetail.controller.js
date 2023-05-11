@@ -41,6 +41,11 @@ sap.ui.define([
 				this.getView().byId("btnDelete").setVisible(false);
 				this.getView().setModel(oModel, "editLeadActivityModel");
 			}
+
+			let editLeadActivityModel = this.getView().getModel("editLeadActivityModel");
+			console.log(editLeadActivityModel);
+			editLeadActivityModel.oData.progres = 0;
+			editLeadActivityModel.refresh();
 		},
 
 		getAllLeads : function(){

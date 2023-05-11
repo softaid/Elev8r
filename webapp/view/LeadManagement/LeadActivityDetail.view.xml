@@ -157,7 +157,13 @@
                             </form:FormElement> 
                             <form:FormElement label="{i18n>leadActivityAttachment}">
                                 <form:fields>
-                                    <Input id="attachment" valueLiveUpdate="true" value="{editLeadActivityModel>/attachment}" required="true"/>
+                                    <!-- <Input id="attachment" valueLiveUpdate="true" value="{editLeadActivityModel>/attachment}" required="true"/> -->
+                                    <u:FileUploader
+                                        id="fileUploader"
+                                        name="myFileUpload"
+                                        uploadUrl="upload/"
+                                        tooltip="Upload your file to the local server"
+                                        uploadComplete="handleUploadComplete"/>
                                 </form:fields>
                             </form:FormElement> 
                             <form:FormElement label="{i18n>leadActivityProgress}">
