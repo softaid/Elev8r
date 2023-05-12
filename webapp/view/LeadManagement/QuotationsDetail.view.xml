@@ -13,6 +13,7 @@
         <headerContent>
 			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewQutation"/>
             <Button icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editQutation"/>
+            <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/>
             <Button icon="sap-icon://delete" tooltip="{i18n>leadDetailsDeleteLead}" press="deleteQutation"/>
 		</headerContent>
         <content>

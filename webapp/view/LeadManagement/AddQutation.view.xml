@@ -24,7 +24,7 @@
                         id="btnSave"
                         type="Emphasized"
                         press = "onSave"/>
-                    <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/>
+                    
                 </f:actions>
                 <f:navigationActions>
                     <Button

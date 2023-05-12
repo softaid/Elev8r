@@ -684,7 +684,6 @@ sap.ui.define([
 
 			// oQutationModel.refresh();
 		},
-
 		onCancel: function () {
 			this.reset();
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
