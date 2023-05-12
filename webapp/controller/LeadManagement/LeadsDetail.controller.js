@@ -15,6 +15,7 @@ sap.ui.define([
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("leaddetails", "newLead", this.newLead, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+			this.bus.subscribe("converttoquote", "quoteConversion", this.quoteConversion, this);
 
 			this.handleRouteMatched(null);
 
@@ -205,6 +206,28 @@ sap.ui.define([
 					}
 				});
 			}
+		},
+
+		quoteConversion : function (sChannel, sEvent, oData) {
+
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
+
+		convertToQuote : function(){
+			var viewModel = this.getView().getModel("leadModel");
+			var model = { "id": viewModel.oData.id }
+			this.bus = sap.ui.getCore().getEventBus();
+
+			console.log(model);
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("converttoquote", "quoteConversion", { pagekey: "addqutation", viewModel: model });
+			}, 1000);
+
+			this.bus.publish("converttoquote", "quoteConversion", { pagekey: "addqutation", viewModel: model });
 		},
 
 		onCancel: function () {

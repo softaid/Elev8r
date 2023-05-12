@@ -35,7 +35,12 @@ sap.ui.define([
             deleteLead  : function(params, callback){
                 console.log(params);
                 commonService.runJQueryX("DELETE", "lead/" + params.id, null, callback, null);
-            }
+            },
+            
+            convertToQuote : function(params, callback){
+                console.log(params);
+                commonService.runJQueryX("GET", "lead/converttoquote/" + params.id, null, callback, null);
+            },
         };
     }
 );

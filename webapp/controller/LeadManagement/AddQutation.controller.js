@@ -8,7 +8,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice,Quotationservice) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,Quotationservice) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation", {
@@ -18,6 +18,7 @@ sap.ui.define([
 			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("qutationdetails", "newQutation", this.qutationdetail, this);
+			this.bus.subscribe("converttoquote", "quoteConversion", this.quoteConversion, this);
 
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
@@ -107,7 +108,7 @@ sap.ui.define([
 			commonFunction.getReferenceByType("RightOpening", "rightOpeningModel", this);
 
 			//bind all Leads
-			Leadservice.getAllLeads(function (data) {
+			leadService.getAllLeads(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
 				currentContext.getView().setModel(oModel, "LeadsMasterModel");
@@ -200,6 +201,36 @@ sap.ui.define([
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
+		quoteConversion : function(sChannel, sEvent, oData){
+			let selRow = oData.viewModel;
+			let oThis = this;
+
+			if (selRow != null) {
+
+				oThis.convertToQuote(selRow.id);
+
+			}
+
+			else {
+				var oModel = new JSONModel();
+				this.getView().setModel(oModel, "editQutationModel");
+			}
+		},
+
+		convertToQuote : function(id){
+			console.log("convert");
+			var oModel = new JSONModel();
+			if (id != undefined) {
+
+				leadService.convertToQuote({ id: id }, function (data) {
+					oModel.setData(data[0][0]);
+				});
+
+			} 
+
+			this.getView().setModel(oModel, "editQutationModel");
+			var oModel = this.getView().getModel("editQutationModel");
+		},
 
 		qutationdetail: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
@@ -238,7 +269,7 @@ sap.ui.define([
 
 			
            
-           Leadservice.getLeads({ id: leadid },function (data) {
+           leadService.getLeads({ id: leadid },function (data) {
                 var oLeadModel = new sap.ui.model.json.JSONModel();
                 if (data.length > 0) {
                     if (data[0].length > 0) {
@@ -520,13 +551,6 @@ sap.ui.define([
 			return isValid;
 		},
 
-		onPartyNameChange: function (oEvent) {
-			var inputValue = oEvent.mParameters.value;
-			if (inputValue != "")
-				this.getView().byId("txtPartyName").setValueState(sap.ui.core.ValueState.None);
-
-		},
-
 		onEmailChange: function (oEvent) {
 
 			var emailId = oEvent.mParameters.value
@@ -570,21 +594,11 @@ sap.ui.define([
 			}
 		},
 
-		onDecimalInputChange: function (oEvent) {
-			var inputValue = oEvent.mParameters.value;
-
-			if (inputValue != "")
-				commonFunction.isDecimal(this, "txtCreditLimit")
-			else
-				this.getView().byId("txtCreditLimit").setValueState(sap.ui.core.ValueState.None);
-		},
-
 		resourcebundle: function () {
 			var currentContext = this;
 			var oBundle = this.getModel("i18n").getResourceBundle()
 			return oBundle
 		},
-
 
 		onDelete: function () {
 
