@@ -87,7 +87,23 @@
                                     </form:FormElement>
                                     <form:FormElement label="Quotation ID">
                                         <form:fields>
-                                            <Input id="quotationid" valueLiveUpdate="true" value="{editQutationModel>/quotename}"  required="true" />
+                                            <Input id="quotationid" valueLiveUpdate="true" value="{editQutationModel>/quoteid}"  required="true" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Lead">
+                                        <form:fields>
+                                            <Select id="txtLead"
+                                                required="true" 
+                                                change="LeadChange"
+                                                selectedKey="{editQutationModel>/leadid}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'LeadsMasterModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{LeadsMasterModel>id}" text="{LeadsMasterModel>leadname}" />
+                                            </Select>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Quotation Name">
@@ -102,7 +118,7 @@
                                     </form:FormElement>  
                                     <form:FormElement label="{i18n>leadContactPerson}">
                                         <form:fields>
-                                            <Input id="contactPerson" editable="false" valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Win Probability">
@@ -243,12 +259,12 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadSiteAddress}">
                                         <form:fields>
-                                            <Input id="siteaddress" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/address}"/>
+                                            <Input id="siteaddress" maxLength="6" valueLiveUpdate="true" value="{editQutationModel>/address}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
                                         <form:fields>
-                                            <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="true"
+                                            <Select id="ddlCountry1" selectedKey="{editQutationModel>/countryid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -258,7 +274,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadState}">
                                         <form:fields>
-                                            <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="true"
+                                            <Select id="ddlState1" selectedKey="{editQutationModel>/stateid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -268,7 +284,7 @@
                                     </form:FormElement>                                
                                     <form:FormElement label="{i18n>leadCity}">
                                         <form:fields>
-                                            <Select id="ddlCity1" selectedKey="{editPartyModel>/cityid}" 
+                                            <Select id="ddlCity1" selectedKey="{editQutationModel>/cityid}" 
                                                 items="{
                                                     path: 'partyCityModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -278,52 +294,52 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPinCode}">
                                         <form:fields>
-                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/pincode}" change="onNumberInputChange"/>
+                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editQutationModel>/pincode}" change="onNumberInputChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadMobileP}">
                                         <form:fields>
-                                            <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadEmail}">
                                         <form:fields>
-                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editPartyModel>/email}" change="onEmailChange"  />
+                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editQutationModel>/email}" change="onEmailChange"  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadGSTN}">
                                         <form:fields>
-                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/gstn}"/>
+                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editQutationModel>/gstn}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPanNo}">
                                         <form:fields>
-                                            <Input id="panno" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/panno}"/>
+                                            <Input id="panno" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/panno}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Primary Contact">
                                         <form:fields>
-                                            <Input id="primarycontact" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="primarycontact" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Contact Person">
                                         <form:fields>
-                                            <Input id="contactperson" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="contactperson" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Designation">
                                         <form:fields>
-                                            <Input id="designation" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="designation" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mobile No. 1">
                                         <form:fields>
-                                            <Input id="mobileno1" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="mobileno1" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Email Official">
                                         <form:fields>
-                                            <Input id="officialemail" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="officialemail" maxLength="10" valueLiveUpdate="true" value="{editQutationModel>/mobilep}"/>
                                         </form:fields>
                                     </form:FormElement>
                                 </form:formElements>

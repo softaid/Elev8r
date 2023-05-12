@@ -26,8 +26,6 @@ sap.ui.define([
             deleteQuotation : function(Params, Callback){
                 commonService.runJQueryX("DELETE", "quotation/deletequotation/" + Params.id, null, Callback, null);
             },
-
-
         };
     }
 );
