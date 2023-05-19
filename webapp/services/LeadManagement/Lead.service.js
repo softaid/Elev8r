@@ -24,7 +24,6 @@ sap.ui.define([
             },
 
             saveLead: function(params, callback){
-                console.log("params",params);
                 commonService.runJQueryX("POST", "lead/" , params, callback, null);
             },
 

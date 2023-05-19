@@ -1,25 +1,25 @@
-<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Quotations" height="100%"
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Orders" height="100%"
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
     xmlns:u="sap.ui.unified">
-    <f:FlexibleColumnLayout  id="fclQuotation" backgroundDesign="Solid">
+    <f:FlexibleColumnLayout  id="fclOrder" backgroundDesign="Solid">
 		<f:beginColumnPages>
 		    <f:DynamicPage toggleHeaderOnTitleClick="false">
 			    <f:title>
 		    	    <f:DynamicPageTitle>
 				        <f:heading>
-					       <Title text="{i18n>quotationTitle}"/>
+					       <Title text="{i18n>orderTitle}"/>
 				        </f:heading>
 			        </f:DynamicPageTitle>
 		        </f:title>
 				<f:content>	
                         <VBox fitContainer="true">
-                        <Table id="tblQuotationMaster" 
+                        <Table id="tblOrderMaster" 
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
                                 items="{
-                                path: 'QuotationMasterModel>/modelData',
+                                path: 'orderMasterModel>/modelData',
                                 sorter: {
                                     path: 'hatchername'
                                 }
@@ -49,13 +49,13 @@
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
                                     <cells>
-                                    <ObjectIdentifier text="{QuotationMasterModel>id}" />  
-                                        <Text text="{QuotationMasterModel>quotename}" />
-                                        <Text text="{QuotationMasterModel>leadname}"/>
-                                        <Text text="{QuotationMasterModel>quotedate}"/>
-                                        <Text text="{QuotationMasterModel>leadstatus}"/>
-                                        <Text text="{QuotationMasterModel>quotecategory}"/> 
-                                        <Text text="{QuotationMasterModel>quotevalue}"/> 
+                                    <ObjectIdentifier text="{orderMasterModel>id}" />  
+                                        <Text text="{orderMasterModel>quotename}" />
+                                        <Text text="{orderMasterModel>leadname}"/>
+                                        <Text text="{orderMasterModel>quotedate}"/>
+                                        <Text text="{orderMasterModel>leadstatus}"/>
+                                        <Text text="{orderMasterModel>quotecategory}"/> 
+                                        <Text text="{orderMasterModel>quotevalue}"/> 
                                     </cells>
                                 </ColumnListItem>
                             </items>

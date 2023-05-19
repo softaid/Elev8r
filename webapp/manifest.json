@@ -197,6 +197,11 @@
 					"target": "contactmaster"
 				},
 				{
+					"pattern": "addcontact",
+					"name": "addcontact",
+					"target": "addcontact"
+				},
+				{
 					"pattern": "users",
 					"name": "users",
 					"target": "users"
@@ -240,6 +245,16 @@
 					"pattern": "quotations",
 					"name": "quotations",
 					"target": "quotations"
+				},
+				{
+					"pattern": "orders",
+					"name": "orders",
+					"target": "orders"
+				},
+				{
+					"pattern": "addorder",
+					"name": "addorder",
+					"target": "addorder"
 				},
 				{
 					"pattern": "leadreports",
@@ -427,6 +442,18 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
+				"orders" : {
+					"viewId": "orders",
+					"viewName": "LeadManagement/Orders",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"addorder" : {
+					"viewId": "addorder",
+					"viewName": "LeadManagement/AddOrder",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
 				"liftmaster" : {
 					"viewId" : "liftmaster",
 					"viewName" : "Masters/LiftMaster",
@@ -496,6 +523,12 @@
 				"contactmaster": {
 					"viewId": "contactmaster",
 					"viewName": "Masters/ContactMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"addcontact": {
+					"viewId": "addcontact",
+					"viewName": "Masters/AddContact",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

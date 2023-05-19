@@ -20,14 +20,18 @@ sap.ui.define([
             },
 
             saveContact : function(params, callback){
-                commonService.runJQueryX("POST", "contact/savecontact" , params, callback, null);
+                console.log(params);
+                commonService.runJQueryX("POST", "contact/" , params, callback, null);
             },
 
             deleteContact : function(Params, Callback){
                 commonService.runJQueryX("DELETE", "contact/deletecontact/" + Params.id, null, Callback, null);
             },
 
-
+            convertToLead : function(params, callback){
+                console.log(params);
+                commonService.runJQueryX("GET", "contact/converttolead/" + params.id, null, callback, null);
+            },
         };
     }
 );

@@ -15,6 +15,9 @@ sap.ui.define([
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("contactmaster", "setDetailPage", this.setDetailPage, this);
+			this.bus.subscribe("contactscreen", "handleContactList", this.handleContactList, this);
+			this.bus.subscribe("contactdetail", "handleContactDetails", this.handleContactDetails, this);
+			
 			this.oFlexibleColumnLayout = this.byId("fclContactMaster");
 
 			this.bus = sap.ui.getCore().getEventBus();
@@ -32,24 +35,16 @@ sap.ui.define([
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("contactModel");
-			var model = {
-				"contactid": viewModel.getProperty("id"),
-				"contactModel": viewModel.oModel.oData.modelData
-			}
+			var model = { "id": viewModel.getProperty("id") }
+			// var model = { "contactModel": viewModel.modelData };
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("contactmaster", "setDetailPage", { viewName: "ContactMasterDetail", viewModel: model });
-		},
+			// this.bus.publish("contactmaster", "setDetailPage", { viewName: "ContactMasterDetail", viewModel: model });
 
-		setDetailPage: function (channel, event, data) {
-			this.detailView = sap.ui.view({
-				viewName: "sap.ui.elev8rerp.componentcontainer.view.Masters." + data.viewName,
-				type: "XML"
-			});
-
-			this.detailView.setModel(data.viewModel, "viewModel");
-			this.oFlexibleColumnLayout.removeAllMidColumnPages();
-			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
-			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("contactscreen", "handleContactList", { pagekey: "addcontact", viewModel: model });
+			}, 1000);
+			this.bus.publish("contactscreen", "handleContactList", { pagekey: "addcontact", viewModel: model });
 		},
 
 		fnShortCut: function () {
@@ -81,14 +76,30 @@ sap.ui.define([
 			this.getView().byId("tblContact").getBinding("items").filter(oTableSearchState, "Application");
 		},
 
-
-
 		onAddNew: function () {
 
 			var viewModel = this.getView().getModel("contactModel").oData;
-			var model = { "contactModel": viewModel.modelData };
+			let count = (this.getView().getModel("contactModel").oData.modelData.length)-1;
+			let lastid = this.getView().getModel("contactModel").oData.modelData[count].id;
+			let model = {
+				nextid : lastid + 1
+			}
+			// var model = { "contactModel": viewModel.modelData };
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("contactmaster", "setDetailPage", { viewName: "ContactMasterDetail", viewModel: model });
+			// this.bus.publish("contactmaster", "setDetailPage", { viewName: "ContactMasterDetail", viewModel: model });
+
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("contactscreen", "handleContactList", { pagekey: "addcontact", viewModel: model });
+			}, 1000);
+			this.bus.publish("contactscreen", "handleContactList", { pagekey: "addcontact", viewModel: model });
+		},
+
+		handleContactList: function (sChannel, sEvent, oData) {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
 		},
 
 

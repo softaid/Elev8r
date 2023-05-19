@@ -26,6 +26,11 @@ sap.ui.define([
             deleteQuotation : function(Params, Callback){
                 commonService.runJQueryX("DELETE", "quotation/deletequotation/" + Params.id, null, Callback, null);
             },
+
+            convertToOrder : function(params, callback){
+                console.log(params);
+                commonService.runJQueryX("GET", "quotation/converttoorder/" + params.id, null, callback, null);
+            },
         };
     }
 );

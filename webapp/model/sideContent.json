@@ -137,6 +137,14 @@
 					"items": []
 				},
 				{
+					"title": "Orders",
+					"icon": "sap-icon://sales-quote",
+					"expanded": false,
+					"key": "orders",
+					"eid": [29],
+					"items": []
+				},
+				{
 					"title": "Reports",
 					"icon": "sap-icon://expense-report",
 					"expanded": false,
