@@ -19,6 +19,10 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "quotation/select/" + params.id, null, callback, null);
             },
 
+            getQuotationPDF : function(params, callback){
+                commonService.runJQueryX("GET", "quotation/converttopdf/" + params.id, null, callback, null);
+            },
+
             saveQuotation : function(params, callback){
                 commonService.runJQueryX("POST", "quotation/savequotation" , params, callback, null);
             },
