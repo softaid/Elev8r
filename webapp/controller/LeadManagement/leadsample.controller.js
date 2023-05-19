@@ -186,25 +186,24 @@ sap.ui.define([
 				stateid: null,
 				countryid: null,
 				pincode: null,
-				isdeleted: 0
+				isdeleted:0
 			}
 		},
 
-		handleLeadList: function (sChannel, sEvent, oData) {
+		handleLeadList : function(sChannel, sEvent, oData){
 			let selRow = oData.viewModel;
-			let editPartyModel = this.getView().getModel("editPartyModel");
+            let editPartyModel = this.getView().getModel("editPartyModel");
 			editPartyModel.oData.leadid = selRow.nextid;
 			editPartyModel.refresh();
 
-			if(selRow.id != undefined){
-				this.getView().byId("btnSave").setText("Update");
-			}else{
-				this.getView().byId("btnSave").setText("Save");
-			}
-
 		},
 
-		leaddetails: function (sChannel, sEvent, oData) {
+		onBeforeRendering: function () {
+			this.reset();
+		},
+
+
+		leaddetails: function(sChannel, sEvent, oData) {
 
 			let selRow = oData.viewModel;
 			let oThis = this;
@@ -221,7 +220,7 @@ sap.ui.define([
 
 			}
 
-			else {
+			else{
 				var oModel = new JSONModel();
 				this.getView().setModel(oModel, "editPartyModel");
 			}
@@ -229,64 +228,7 @@ sap.ui.define([
 		},
 
 
-		onBeforeRendering: function () {
-			var currentContext = this;
-			this.model = currentContext.getView().getModel("viewModel");
-		},
 
-		quoteConversion: function (sChannel, sEvent, oData) {
-			let selRow = oData.viewModel;
-			let oThis = this;
-
-			if (selRow != null) {
-
-				oThis.convertToQuote(selRow.id);
-
-			}
-
-			else {
-				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editQutationModel");
-			}
-		},
-
-		convertToQuote: function (id) {
-			console.log("convert");
-			var oModel = new JSONModel();
-			if (id != undefined) {
-
-				leadService.convertToQuote({ id: id }, function (data) {
-					oModel.setData(data[0][0]);
-				});
-
-			}
-
-			this.getView().setModel(oModel, "editQutationModel");
-			var oModel = this.getView().getModel("editQutationModel");
-		},
-
-		qutationdetail: function (sChannel, sEvent, oData) {
-			let selRow = oData.viewModel;
-			let oThis = this;
-
-			if (selRow != null) {
-
-				if (selRow.action == "view") {
-					oThis.getView().byId("btnSave").setEnabled(false);
-				} else {
-					oThis.getView().byId("btnSave").setEnabled(true);
-				}
-
-				oThis.bindQutationDetails(selRow.id);
-
-			}
-
-			else {
-				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editQutationModel");
-			}
-
-		},
 
 		bindLeadDetails: function (id) {
 			var currentContext = this;
@@ -328,11 +270,6 @@ sap.ui.define([
 			var oModel = this.getView().getModel("editPartyModel");
 		},
 
-
-
-
-
-
 		handleSelectionFinish: function (oEvent) {
 			var inputId = oEvent.mParameters.id;
 			var id = inputId.substring(inputId.lastIndexOf('-') + 1);
@@ -355,7 +292,6 @@ sap.ui.define([
 		handleSelectionChange: function () {
 			this.getView().byId("ddlMtxtModuleNameodule").setValueState(sap.ui.core.ValueState.None);
 		},
-
 
 		fnShortCut: function () {
 			var currentContext = this;
@@ -406,30 +342,25 @@ sap.ui.define([
 		},
 
 		onSave: function () {
-			//if (this.validateForm()) {
-			var currentContext = this;
-			var model = this.getView().getModel("editPartyModel").oData;
-			console.log("editQutationModel", model);
+			if (this.validateForm()) {
+				var currentContext = this;
+				var model = this.getView().getModel("editPartyModel").oData;
+				console.log("editPartyModel", model);
 
-
-			model["companyid"] = commonService.session("companyId");
-			model["leaddate"] = commonFunction.getDate(model.leaddate);
-			model["userid"] = commonService.session("userId");
-
-			Leadservice.saveLead(model, function (data) {
-
-				if (data.id > 0) {
+				model["companyid"] = commonService.session("companyId");
+				model["leaddate"] = commonFunction.getDate(model.leaddate);
+				model["userid"] = commonService.session("userId");
+				Leadservice.saveLead(model, function (data) {
+					console.log("---------data---------",data);
 					var message = model.id == null ? "Lead created successfully!" : "Lead edited successfully!";
 					currentContext.onCancel();
 					MessageToast.show(message);
+
 					currentContext.bus = sap.ui.getCore().getEventBus();
 					currentContext.bus.publish("loadLeadEditdata", "loadLeadEditdata");
-				}
-
-			});
-			//}
+				});
+			}
 			this.reset();
-
 		},
 
 		validateForm: function () {
@@ -547,34 +478,28 @@ sap.ui.define([
 
 			inputId = inputId.substring(inputId.lastIndexOf('-') + 1);
 
-			if (inputId == "txtMobileNo") {
+			// if (inputId == "txtMobileNo") {
 
-				if (inputValue != "")
-					commonFunction.isNumber(this, "txtMobileNo")
-				else
-					this.getView().byId("txtMobileNo").setValueState(sap.ui.core.ValueState.None);
+			// 	if (inputValue != "")
+			// 		commonFunction.isNumber(this, "txtMobileNo")
+			// 	else
+			// 		this.getView().byId("txtMobileNo").setValueState(sap.ui.core.ValueState.None);
 
-			}
-			else if (inputId == "txtPinCode") {
+			// }
+			 if (inputId == "txtPinCode") {
 
 				if (inputValue != "")
 					commonFunction.isNumber(this, "txtPinCode")
 				else
 					this.getView().byId("txtPinCode").setValueState(sap.ui.core.ValueState.None);
 			}
-			else if (inputId == "txtCreditPeriod") {
+			// else if (inputId == "txtCreditPeriod") {
 
-				if (inputValue != "")
-					commonFunction.isNumber(this, "txtCreditPeriod")
-				else
-					this.getView().byId("txtCreditPeriod").setValueState(sap.ui.core.ValueState.None);
-			}
-		},
-
-		resourcebundle: function () {
-			var currentContext = this;
-			var oBundle = this.getModel("i18n").getResourceBundle()
-			return oBundle
+			// 	if (inputValue != "")
+			// 		commonFunction.isNumber(this, "txtCreditPeriod")
+			// 	else
+			// 		this.getView().byId("txtCreditPeriod").setValueState(sap.ui.core.ValueState.None);
+			// }
 		},
 
 		onDecimalInputChange: function (oEvent) {
@@ -592,8 +517,11 @@ sap.ui.define([
 			return oBundle
 		},
 
+
 		onDelete: function () {
+
 			var currentContext = this;
+
 			if (this.model.id != undefined) {
 
 				var model = {
@@ -615,6 +543,7 @@ sap.ui.define([
 
 			}
 		},
+
 
 		reset: function () {
 			let oThis = this;
