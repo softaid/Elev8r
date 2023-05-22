@@ -219,11 +219,15 @@ sap.ui.define([
 
 		convertToQuote : function(id){
 			console.log("convert");
+			let quotationid = 0;
 			var oModel = new JSONModel();
 			if (id != undefined) {
 
 				leadService.convertToQuote({ id: id }, function (data) {
-					oModel.setData(data[0][0]);
+					if(data.length && data[0].length){
+						data[0][0].quotationid = parseInt(data[0][0].lastquoteid) + 1;
+						oModel.setData(data[0][0]);
+					}
 				});
 
 			} 
@@ -356,7 +360,8 @@ sap.ui.define([
 			if (id != undefined) {
 
 				Quotationservice.getQuotation({ id: id }, function (data) {
-					oModel.setData(data[0][0]);
+					data[0][0].withgst = data[0][0].withgst == 1 ? true : false;
+                    oModel.setData(data[0][0]);
 				});
 				this.getView().byId("btnSave").setText("Update");
 

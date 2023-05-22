@@ -165,14 +165,17 @@ sap.ui.define([
 
         handleContactList: function (sChannel, sEvent, oData) {
 
-			let selRow = oData.viewModel;
-			let oThis = this;
-			console.log(selRow);
-			if (selRow != null) {
-				oThis.bindContactDetails(selRow.id);
+			this.model = oData.viewModel;
+			
+			if (this.model.contactid > 1) {
+				this.bindContactDetails(this.model.id);
+			}else{
+				var oModel = new JSONModel();
+				oModel.setData(this.model);
+				this.getView().setModel(oModel, "editContactModel");
 			}
 
-			oThis.id = selRow.id;
+			this.id = this.model.id;
 		},
 
 		leadConversion : function (sChannel, sEvent, oData) {
@@ -201,7 +204,7 @@ sap.ui.define([
 			let selRow = oData.viewModel;
 			let oThis = this;
 
-			if (selRow != null) {
+			if (selRow.id != null) {
 
 				if (selRow.action == "view") {
 					oThis.getView().byId("btnSave").setEnabled(false);

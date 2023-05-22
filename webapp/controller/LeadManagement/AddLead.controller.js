@@ -6,8 +6,9 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice) {
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/Contact.service'
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice, contactService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead", {
@@ -229,64 +230,43 @@ sap.ui.define([
 
 		},
 
-
 		onBeforeRendering: function () {
 			var currentContext = this;
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
-		quoteConversion: function (sChannel, sEvent, oData) {
+		leadConversion: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
 
 			if (selRow != null) {
-
-				oThis.convertToQuote(selRow.id);
-
+				oThis.convertToLead(selRow.id);
 			}
 
 			else {
 				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editQutationModel");
+				this.getView().setModel(oModel, "editLeadModel");
 			}
 		},
 
-		convertToQuote: function (id) {
-			console.log("convert");
+		convertToLead: function (id) {
+			let leadid =0;
 			var oModel = new JSONModel();
 			if (id != undefined) {
-
-				leadService.convertToQuote({ id: id }, function (data) {
-					oModel.setData(data[0][0]);
+				contactService.convertToLead({ id: id }, function (data) {
+					if(data.length && data[0].length){
+						leadid = parseInt(data[0][0].lastleadid) + 1;
+						oModel.setData(data[0][0]);
+					}
 				});
-
 			}
 
-			this.getView().setModel(oModel, "editQutationModel");
-			var oModel = this.getView().getModel("editQutationModel");
-		},
+			console.log(oModel);
+			this.getView().setModel(oModel, "editLeadModel");
 
-		qutationdetail: function (sChannel, sEvent, oData) {
-			let selRow = oData.viewModel;
-			let oThis = this;
-
-			if (selRow != null) {
-
-				if (selRow.action == "view") {
-					oThis.getView().byId("btnSave").setEnabled(false);
-				} else {
-					oThis.getView().byId("btnSave").setEnabled(true);
-				}
-
-				oThis.bindQutationDetails(selRow.id);
-
-			}
-
-			else {
-				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editQutationModel");
-			}
-
+			let editLeadModel = this.getView().getModel("editLeadModel");
+			editLeadModel.oData.leadid = leadid;
+			editLeadModel.refresh();
 		},
 
 		bindLeadDetails: function (id) {
@@ -328,11 +308,6 @@ sap.ui.define([
 			this.getView().setModel(oModel, "editPartyModel");
 			var oModel = this.getView().getModel("editPartyModel");
 		},
-
-
-
-
-
 
 		handleSelectionFinish: function (oEvent) {
 			var inputId = oEvent.mParameters.id;

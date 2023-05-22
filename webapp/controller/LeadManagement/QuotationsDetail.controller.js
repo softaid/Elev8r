@@ -36,6 +36,7 @@ sap.ui.define([
 			// EventBus for New qutation
 			this.bus.subscribe("qutationdetails", "newQutation", this.newQutation, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+			this.bus.subscribe("converttoorder", "orderConversion", this.orderConversion, this);
 
 			this.handleRouteMatched(null);
 

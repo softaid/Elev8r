@@ -7,8 +7,9 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Order.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,orderService) {
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Order.service',
+	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service'
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,orderService, quotationService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddOrder", {
@@ -18,7 +19,7 @@ sap.ui.define([
 			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("orderdetails", "newOrder", this.orderDetail, this);
-			this.bus.subscribe("converttoquote", "orderConversion", this.orderConversion, this);
+			this.bus.subscribe("converttoorder", "orderConversion", this.orderConversion, this);
 
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
@@ -201,6 +202,41 @@ sap.ui.define([
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
+		orderConversion: function (sChannel, sEvent, oData) {
+			let selRow = oData.viewModel;
+			let oThis = this;
+			console.log(selRow);
+
+			if (selRow != null) {
+
+				oThis.convertToOrder(selRow.quoteid);
+
+			}
+
+			else {
+				var oModel = new JSONModel();
+				this.getView().setModel(oModel, "editOrderModel");
+			}
+		},
+
+		convertToOrder: function (id) {
+			console.log(id);
+			var oModel = new JSONModel();
+			if (id != undefined) {
+
+				quotationService.convertToOrder({ id: id }, function (data) {
+					if(data.length && data[0].length){
+						data[0][0].orderid = parseInt(data[0][0].lastorderid) + 1;
+						oModel.setData(data[0][0]);
+					}
+				});
+
+			}
+
+			this.getView().setModel(oModel, "editOrderModel");
+			var oModel = this.getView().getModel("editOrderModel");
+		},
+
 		orderDetail: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
@@ -213,7 +249,7 @@ sap.ui.define([
 					oThis.getView().byId("btnSave").setEnabled(true);
 				}
 
-				oThis.bindQutationDetails(selRow.id);
+				oThis.bindOrderDetails(selRow.id);
 
 			}
 
@@ -224,12 +260,12 @@ sap.ui.define([
 
 		},
 
-		bindQutationDetails: function (id) {
+		bindOrderDetails: function (id) {
 			var currentContext = this;
 			var oModel = new JSONModel();
 			if (id != undefined) {
 
-				orderService.getQuotation({ id: id }, function (data) {
+				orderService.getOrder({ id: id }, function (data) {
 					oModel.setData(data[0][0]);
 				});
 				this.getView().byId("btnSave").setText("Update");
@@ -320,10 +356,10 @@ sap.ui.define([
 				model["quotedate"] = commonFunction.getDate(model.quotedate);
 				model["userid"] = commonService.session("userId");
 
-				orderService.saveQuotation(model, function (data) {
+				orderService.saveOrder(model, function (data) {
 
 					if (data.id > 0) {
-							var message = model.id == null ? "Qutation created successfully!" : "Qutation edited successfully!";
+							var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
 							currentContext.onCancel();
 							MessageToast.show(message);
 							currentContext.bus = sap.ui.getCore().getEventBus();
@@ -576,7 +612,7 @@ sap.ui.define([
 		onCancel: function () {
 			this.reset();
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("quotations");
+			oRouter.navTo("orders");
 		}
 	});
 }, true);

@@ -79,10 +79,15 @@ sap.ui.define([
 		onAddNew: function () {
 
 			var viewModel = this.getView().getModel("contactModel").oData;
-			let count = (this.getView().getModel("contactModel").oData.modelData.length)-1;
-			let lastid = this.getView().getModel("contactModel").oData.modelData[count].id;
+			let count, nextid;
+			if(this.getView().getModel("contactModel").oData.modelData.length){
+				count = (this.getView().getModel("contactModel").oData.modelData.length)-1;
+				nextid = parseInt(this.getView().getModel("contactModel").oData.modelData[count].id) + 1;
+			}else{
+				nextid = 1;
+			}
 			let model = {
-				nextid : lastid + 1
+				contactid : nextid
 			}
 			// var model = { "contactModel": viewModel.modelData };
 			this.bus = sap.ui.getCore().getEventBus();

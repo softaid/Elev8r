@@ -67,6 +67,14 @@
                         <form:formContainers>
                             <form:FormContainer title="Contact Details" width="100%"> 
                                 <form:formElements>
+<<<<<<< HEAD
+                                    <form:FormElement label="Contact ID">
+                                        <form:fields>
+                                            <Input id="contactid" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/contactid}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+=======
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                     <form:FormElement label="Contact Type">
                                         <form:fields>
                                             <Select id="typeid" 

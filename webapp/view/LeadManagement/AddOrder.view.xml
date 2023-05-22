@@ -60,7 +60,11 @@
                                     <form:FormElement label="Quotation Type">
                                         <form:fields>
                                             <Select id="txtQutationType"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotetype}" 
                                                 forceSelection="true"
@@ -73,13 +77,26 @@
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
+<<<<<<< HEAD
+                                    <form:FormElement label="Date">
+=======
                                     <form:FormElement label="Quotation Date">
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                         <form:fields>
                                             <DatePicker id="createddate" width="100%" 
                                             placeholder="{config>/dateFormat/placeholder}"
                                             displayFormat="{config>/dateFormat/displayFormat}"
                                             value="{editOrderModel>/quotedate}"
                                             valueFormat="dd/MM/yyyy"
+<<<<<<< HEAD
+                                              
+                                            />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="ID">
+                                        <form:fields>
+                                            <Input id="quotationid" valueLiveUpdate="true" value="{editOrderModel>/orderid}"   />
+=======
                                             required="true"  
                                             />
                                         </form:fields>
@@ -87,12 +104,17 @@
                                     <form:FormElement label="Quotation ID">
                                         <form:fields>
                                             <Input id="quotationid" valueLiveUpdate="true" value="{editOrderModel>/quoteid}"  required="true" />
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Lead">
                                         <form:fields>
                                             <Select id="txtLead"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change="LeadChange"
                                                 selectedKey="{editOrderModel>/leadid}" 
                                                 forceSelection="true"
@@ -105,6 +127,21 @@
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
+<<<<<<< HEAD
+                                    <form:FormElement label="Name">
+                                        <form:fields>
+                                            <Input id="txtQutationName" valueLiveUpdate="true" value="{editOrderModel>/quotename}"   />
+                                        </form:fields>
+                                    </form:FormElement>   
+                                    <form:FormElement label="Description">
+                                        <form:fields>
+                                            <Input id="txtQutationDescription" valueLiveUpdate="true" value="{editOrderModel>/quotediscription}"   change="onPartyNameChange"/>
+                                        </form:fields>
+                                    </form:FormElement>  
+                                    <form:FormElement label="Contact Person">
+                                        <form:fields>
+                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editOrderModel>/contactperson}"   change="onPartyNameChange"/>
+=======
                                     <form:FormElement label="Quotation Name">
                                         <form:fields>
                                             <Input id="txtQutationName" valueLiveUpdate="true" value="{editOrderModel>/quotename}"  required="true" />
@@ -118,11 +155,16 @@
                                     <form:FormElement label="{i18n>leadContactPerson}">
                                         <form:fields>
                                             <Input id="contactPerson" valueLiveUpdate="true" value="{editOrderModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Win Probability">
                                         <form:fields>
+<<<<<<< HEAD
+                                            <!-- <Input id="progress" valueLiveUpdate="true" value="{editLeadActivityModel>/progress}" /> -->
+=======
                                             <!-- <Input id="progress" valueLiveUpdate="true" value="{editLeadActivityModel>/progress}" required="true"/> -->
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                             <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                                 max="100" min="0" progress="true"
                                                 showAdvancedTooltip="true" value="{editLeadActivityModel>/progress}">
@@ -131,10 +173,17 @@
                                             </Slider>
                                         </form:fields>
                                     </form:FormElement> 
+<<<<<<< HEAD
+                                    <form:FormElement label="Status">
+                                        <form:fields>
+                                            <Select id="txtstatus"
+                                                 
+=======
                                     <form:FormElement label="Quotation Status">
                                         <form:fields>
                                             <Select id="txtstatus"
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotestatusid}" 
                                                 forceSelection="true"
@@ -149,13 +198,21 @@
                                     </form:FormElement>
                                     <form:FormElement label="Quote Score">
                                         <form:fields>
+<<<<<<< HEAD
+                                            <Input id="quotescore" valueLiveUpdate="true" value="{editOrderModel>/quotevalue}"   change="onPartyNameChange"/>
+=======
                                             <Input id="quotescore" valueLiveUpdate="true" value="{editOrderModel>/quotevalue}"  required="true" change="onPartyNameChange"/>
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Lead Source">
                                         <form:fields>
                                             <Select id="leadsourceid"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 selectedKey="{editOrderModel>/leadsourceid}" 
                                                 forceSelection="true"
@@ -170,13 +227,21 @@
                                     </form:FormElement>
                                     <form:FormElement label="Quotation Value">
                                         <form:fields>
+<<<<<<< HEAD
+                                            <Input id="txtQutationValue" valueLiveUpdate="true" value="{editOrderModel>/quotevalue}"   change="onPartyNameChange"/>
+=======
                                             <Input id="txtQutationValue" valueLiveUpdate="true" value="{editOrderModel>/quotevalue}"  required="true" change="onPartyNameChange"/>
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Quote Stage">
                                         <form:fields>
                                             <Select id="stageid"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 editable="false"
                                                 selectedKey="{editOrderModel>/stageid}" 
@@ -193,7 +258,11 @@
                                     <form:FormElement label="{i18n>leadArchitect}">
                                         <form:fields>
                                             <Select id="landarchitectid"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 editable="false"
                                                 selectedKey="{editOrderModel>/architectidid}" 
@@ -210,7 +279,11 @@
                                     <form:FormElement label="{i18n>leadConsultant}">
                                         <form:fields>
                                             <Select id="landconsaltantid"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 editable="false"
                                                 selectedKey="{editOrderModel>/leadconsaltantid}" 
@@ -227,7 +300,11 @@
                                     <form:FormElement label="Category">
                                         <form:fields>
                                             <Select id="txtCategory"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotecategory}" 
                                                 forceSelection="true"
@@ -243,7 +320,11 @@
                                     <form:FormElement label="SubCategory">
                                         <form:fields>
                                             <Select id="txtSubCategory"
+<<<<<<< HEAD
+                                                 
+=======
                                                 required="true" 
+>>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotesubcategory}" 
                                                 forceSelection="true"
