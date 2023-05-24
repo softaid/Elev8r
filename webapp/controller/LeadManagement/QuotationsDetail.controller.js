@@ -13,11 +13,15 @@ sap.ui.define([
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.QuotationsDetail", {
 		onInit: function () {
 			var currentContext = this;
+			// Display Quote value in Words
+			this.nettotalinwords = "";
+			// Display Elev8r image 
 			this.imagepath = null;
 			this.toDataURL('../images/snehaelev8r.png', function (dataUrl) {
 				currentContext.imagepath = dataUrl;
 			});
 
+			// get all Company Details  
 			this.companyname = commonFunction.session("companyname");
 			this.companycontact = commonFunction.session("companycontact");
 			this.companyemail = commonFunction.session("companyemail");
@@ -25,56 +29,71 @@ sap.ui.define([
 			this.city = commonFunction.session("city");
 			this.pincode = commonFunction.session("pincode");
 
+			//All EventBus
 			this.bus = sap.ui.getCore().getEventBus();
+			// EventBus for detail page of qutation
 			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
+			// EventBus for New qutation
 			this.bus.subscribe("qutationdetails", "newQutation", this.newQutation, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			this.bus.subscribe("converttoorder", "orderConversion", this.orderConversion, this);
 
 			this.handleRouteMatched(null);
 
+			// Define all Required Models
+
+			//Define Model for Leads
 			var model = new JSONModel();
 			model.setData([]);
 			this.getView().setModel(model, "leadModel");
 
+			//Define Model for Stages
 			let stageModel = new JSONModel();
 			stageModel.setData({ modelData: [] });
 			this.getView().setModel(stageModel, "stageModel");
 
+			//Define Model for LeadsActivities
 			let activityModel = new JSONModel();
 			activityModel.setData({ modelData: [] });
 			this.getView().setModel(activityModel, "activityModel");
 
+			//Define Model for LiftDetails
 			let liftModel = new JSONModel();
 			liftModel.setData({ modelData: [] });
 			this.getView().setModel(liftModel, "liftModel");
 
+			//Define Model for Qutation
 			let quotationModel = new JSONModel();
 			quotationModel.setData({ modelData: [] });
 			this.getView().setModel(quotationModel, "quotationModel");
 
+			//Define Model for Main part of Detail screen
 			var quoteModel = new JSONModel();
 			quoteModel.setData([]);
 			this.getView().setModel(quoteModel, "quoteModel");
 
+			//Define Model for PDF QuoteData
 			var quotePDFModel = new JSONModel();
 			quotePDFModel.setData([]);
 			this.getView().setModel(quotePDFModel, "quotePDFModel");
 
+			//Define Model for PDF LiftData
 			var leadLiftPDFModel = new JSONModel();
 			leadLiftPDFModel.setData([]);
 			this.getView().setModel(leadLiftPDFModel, "leadLiftPDFModel");
 
+			//Define Model for PDF SaleData
 			var saleManagrPDFModel = new JSONModel();
 			saleManagrPDFModel.setData([]);
 			this.getView().setModel(saleManagrPDFModel, "saleManagrPDFModel");
 
-
+			//Define Model for Attachement
 			let attachmentModel = new JSONModel();
 			attachmentModel.setData({ modelData: [] });
 			this.getView().setModel(attachmentModel, "attachmentModel");
 		},
 
+		//Genrate 64bit image
 		toDataURL: function (url, callback) {
 			var xhr = new XMLHttpRequest();
 			xhr.onload = function () {
@@ -87,28 +106,35 @@ sap.ui.define([
 			xhr.open('GET', url);
 			xhr.responseType = 'blob';
 			xhr.send();
-			//}
 		},
 
 		handleRouteMatched: function (evt) {
-			// this.loadData();
+			//this.loadPDFData();
+
 		},
 
+		// Get particular Qutation Details  
 		handleQutationDetails: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
 			// this.loadPDFData();
 			console.log(selRow);
 			if (selRow != null) {
+				// Get all Data
 				oThis.loadData(selRow.id);
+				// Get PDF Data
+				this.loadPDFData(selRow.quotid);
+
 			}
 			oThis.id = selRow.id;
 		},
 
+		// Get Qutation with its revision
 		loadData: function (id) {
 			let oThis = this;
 			leadService.getLeadDetails({ id: id }, function (data) {
 				if (data.length) {
+					// Get all revisions for qutation
 					if (data[4].length) {
 						let aRowsCount = [];
 						let quotationModel = oThis.getView().getModel("quotationModel");
@@ -119,13 +145,14 @@ sap.ui.define([
 						aRowsCount.push({
 							rowsCount: data[4].length
 						});
-
+						// Generate Dynamic Qutation Revisions
 						let oRowsCount = new JSONModel();
 						oRowsCount.setData(aRowsCount[0]);
 						console.log("oRowsCount", oRowsCount);
 						oThis.getView().setModel(oRowsCount, "rowcount_model");
 					}
 
+					// Get Qutation master data
 					if (data[5].length) {
 						let quoteModel = oThis.getView().getModel("quoteModel");
 						quoteModel.setData(data[5][0]);
@@ -135,29 +162,37 @@ sap.ui.define([
 			})
 		},
 
-		orderConversion : function (sChannel, sEvent, oData) {
+		// Get all data related to PDF Model
+		loadPDFData: function (quotid) {
+			let oThis = this;
 
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			this.bus = sap.ui.getCore().getEventBus();
-			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
-			oRouter.navTo(oData.pagekey, true);
+			quotationService.getQuotationPDF({ id: quotid }, function (data) {
+				if (data.length) {
+					// Get Quote details for PDF
+					if (data[0].length) {
+						let quotePDFModel = oThis.getView().getModel("quotePDFModel");
+						quotePDFModel.setData(data[0][0]);
+						oThis.getView().setModel(quotePDFModel, "quotePDFModel");
+					}
+					// Get Lead and Lift Details for PDF
+					if (data[1].length) {
+						let leadLiftPDFModel = oThis.getView().getModel("leadLiftPDFModel");
+						leadLiftPDFModel.setData(data[1][0]);
+						oThis.getView().setModel(leadLiftPDFModel, "leadLiftPDFModel");
+					}
+					// Get Sales Details for PDF
+					if (data[2].length) {
+						let saleManagrPDFModel = oThis.getView().getModel("saleManagrPDFModel");
+						saleManagrPDFModel.setData(data[2][0]);
+						oThis.getView().setModel(saleManagrPDFModel, "saleManagrPDFModel");
+					}
+				}
+			})
+			// Conver Quote value in word Format
+			this.notowordChange();
 		},
 
-		convertToOrder : function(){
-			var viewModel = this.getView().getModel("quoteModel");
-			var model = { "quoteid": viewModel.oData.id }
-			this.bus = sap.ui.getCore().getEventBus();
-
-			console.log(model);
-			setTimeout(function () {
-				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("converttoorder", "orderConversion", { pagekey: "addorder", viewModel: model });
-			}, 1000);
-
-			this.bus.publish("converttoorder", "orderConversion", { pagekey: "addorder", viewModel: model });
-		},
-
-
+		//Navigate Add qutation screen
 		addNewQutation: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
@@ -167,17 +202,17 @@ sap.ui.define([
 			this.bus.publish("qutationdetails", "newQutation", { pagekey: "addqutation", viewModel: null });
 		},
 
+		//Function for New Qutation
 		newQutation: function (sChannel, sEvent, oData) {
-
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.bus = sap.ui.getCore().getEventBus();
 			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
 			oRouter.navTo(oData.pagekey, true);
 		},
 
+		//Edit Existing Qutation
 		editQutation: function (oEvent) {
 			var viewModel = this.getView().getModel("quoteModel");
-			console.log("---------viewModel-----------", viewModel);
 			var model = { "id": viewModel.oData.id }
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
@@ -189,11 +224,11 @@ sap.ui.define([
 		},
 
 		resourceBundle: function () {
-			var currentContext = this;
 			var oBundle = this.getModel("i18n").getResourceBundle()
 			return oBundle
 		},
 
+		// Delete Selcted qutations form list
 		deleteQutation: function () {
 			var currentContext = this;
 			var confirmMsg = currentContext.resourceBundle().getText("deleteMsg");
@@ -224,6 +259,36 @@ sap.ui.define([
 			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
 		},
 
+		//Function for conversion of no to words
+		createno: function (num) {
+			var a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+			var b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+			if ((num = num.toString()).length > 9)
+				return 'overflow';
+
+			var n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+			if (!n) return;
+
+			var str = '';
+			str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+			str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+			str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+			str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+			str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+			return str;
+
+		},
+
+		// Get value in no and convert it into words
+		notowordChange: function () {
+			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
+			var grandtotal = leadLiftPDFModel.oData.quotevalue;
+			var grandtotalfloor = Math.floor(grandtotal);
+			var text = this.createno(grandtotalfloor);
+			this.nettotalinwords = text;
+		},
+
 		/**
 	   * Generate PDF for Purchase request Scrren
 	   */
@@ -242,87 +307,25 @@ sap.ui.define([
 			headertable1 += "</body>";
 			headertable1 += "<script>";
 
-			// Add filters for purchase request
-			// let requestno = this.getView().byId('txtrequestno').getValue();
-			// let remark = this.getView().byId('remark').getValue();
-
-			// let podate = this.getView().byId("txtpodate").getValue();
-			// let duedate = this.getView().byId("txtduedate").getValue();
-			// let shipfromadderss = this.getView().byId('txtshipfromaddress').getValue();
-			// let delieryaddress = this.getView().byId('txtWarehouseAddress').getValue();
-
-			// let moduletype = this.getView().byId("setmoduleType").getSelectedItem();
-			// moduletype = moduletype.mProperties.text;
-
-			// let transactiontype = this.getView().byId("selGSTInvType").getSelectedItem();
-			// transactiontype = transactiontype.mProperties.text;
-
-			// let pono = this.getView().byId('txtPurchaseOrderNo').getValue();
-			// let poid = this.getView().byId('txtPurchaseOrderId').getValue();
-
-			// let createdby = this.getView().byId('txtcreatedby').getValue();
-			// let approvedby = this.getView().byId('txtapprovedby').getValue();
-
-			// let vendor = this.getView().byId('txtVendor').getValue();
-			// let totalcost = this.getView().byId('txtItemTotal').getValue();
-			// let discount = this.getView().byId('txtDiscount').getValue();
-			// let discountwithitemtotal = this.getView().byId('txtdicountwithitemToatl').getValue();
-			// let grandtotal1 = '';
-			// let grandtotal = this.getView().byId('txtGrandTotal').getValue();
-
-			let requestno = "PR001";
-			let remark = "Qutation";
-
-			let podate = "11/05/2023";
-			let duedate = "11/05/2023";
-			let shipfromadderss = "Pune";
-			let delieryaddress = "Mumbai";
-
-			let moduletype = "MR"
-			//moduletype = moduletype.mProperties.text;
-
-			let transactiontype = "Quote";
-			//transactiontype = transactiontype.mProperties.text;
-
-			let pono = "PO5008";
-			let poid = 4;
-
-			let createdby = "Pooja";
-			let approvedby = "Kamlakar";
-
-			let vendor = "Sai";
-			let totalcost = 2000;
-			let discount = 4;
-			let discountwithitemtotal = 2;
-			let grandtotal1 = '';
-			let grandtotal = 5000;
-
-
-
+			// FIRST PAGE OF PDF
 			// Add company details on PDF
 			var companyname = this.companyname;
-			var phone = this.companycontact;
 			var email = this.companyemail;
 			var city = this.city;
 			var address = "Pune";
 			var pincode = 413512;
+			var txtQuoteValue = this.nettotalinwords;
+			console.log("txtQuoteValue", txtQuoteValue);
+			// Quote Details
 			var quotePDFModel = this.getView().getModel("quotePDFModel");
+			// Leads and Lift Details
 			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
+			//Sales Manager Details
 			let saleManagrPDFModel = this.getView().getModel("saleManagrPDFModel");
-			console.log("------------quotePDFModel------------", quotePDFModel);
-			console.log("------------leadLiftPDFModel------------", leadLiftPDFModel);
-			console.log("------------saleManagrPDFModel------------", saleManagrPDFModel);
 
-
+			// Array for lift congigrations/Details
 			var array = [];
-
-			// array.push({
-			// 	TYPE: "RM Series",
-			// 	CAPACITY: "6 Passenger",
-			// 	SPEED: "0.63 M/s",
-			// });
-
-
+			//Availabls vaules are dynamic and other values are static need to discuss about static values
 			array.push({
 				name: "TYPE",
 				value: leadLiftPDFModel.oData.model,
@@ -436,8 +439,6 @@ sap.ui.define([
 
 			// Add PR grid on screen
 			var quoteModel = this.getView().getModel("quoteModel");
-			// var tbleModel = this.getView().getModel("tblModel").oData.modelData;
-
 			var tbleModel = this.getView().getModel("quoteModel").oData;
 			headertable1 += "html2canvas($('#tblCustomers')[0], {" +
 				"onrendered: function (canvas) {" +
@@ -456,11 +457,11 @@ sap.ui.define([
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:160, height:35,margin: [0, -30, 0, 0]}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'Neg. No" + "ELE/HYD/MAR/PRS/NE001" + "', style: 'subheader'},{text:'Dt. " + "04/03/2023" + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: ' " + "M/s. Padmavati Construction" + "', style: 'subheader'},";
-			headertable1 += "{text: '" + "Masjid Banda," + "', style: 'subheader'},";
-			headertable1 += "{text: '" + "Hyderabad - 500084" + "', style: 'subheader'},";
-			headertable1 += "{text: '" + "Contact No. 8886002959" + "', style: 'subheader'},";
+			headertable1 += "{columns: [{text:'Neg. No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text:'Dt. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: ' " + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},";
+			headertable1 += "{text: '" + leadLiftPDFModel.oData.address + "', style: 'subheader'},";
+			headertable1 += "{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},";
+			headertable1 += "{text: '" + "Contact No" + "-" + leadLiftPDFModel.oData.contactno + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -488,6 +489,8 @@ sap.ui.define([
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			// SECOND PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -504,8 +507,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['50%','50%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ ['M/s. Padmavati Construction','Masjid Banda,','Hyderabad - 500084','Contact No. 8886002959'] ] },{ columns: [ ['Neg No: ELE/HYD/MAR/PRS/NE001','Date: 04/03/2023','MODEL CODE: MR'] ] }],";
-
+			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "'},{text: '" + "Contact No - " + leadLiftPDFModel.oData.address + "'},{text: '" + leadLiftPDFModel.oData.city + "'},{text: '" + leadLiftPDFModel.oData.contactno + "'}]} ] },{ columns: [{stack:[{text: 'Neg No." + leadLiftPDFModel.oData.negno + "'},{text: 'Date." + leadLiftPDFModel.oData.quotedate + "'},{text: 'Model Code.  " + leadLiftPDFModel.oData.model + "'}] }] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
@@ -528,6 +530,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
+
+			// Thired PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -555,6 +559,7 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
+			//FOURTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -570,7 +575,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['50%','50%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ ['M/s. Padmavati Construction','Masjid Banda,','Hyderabad - 500084','Contact No. 8886002959'] ] },{ columns: [ ['Neg No: ELE/HYD/MAR/PRS/NE001','Date: 04/03/2023','MODEL CODE: MR'] ] }],";
+			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "'},{text: '" + "Contact No - " + leadLiftPDFModel.oData.address + "'},{text: '" + leadLiftPDFModel.oData.city + "'},{text: '" + leadLiftPDFModel.oData.contactno + "'}]} ] },{ columns: [{stack:[{text: 'Neg No." + leadLiftPDFModel.oData.negno + "'},{text: 'Date." + leadLiftPDFModel.oData.quotedate + "'},{text: 'Model Code.  " + leadLiftPDFModel.oData.model + "'}] }] }],";
 
 			headertable1 += "]";
 			headertable1 += "}";
@@ -582,12 +587,19 @@ sap.ui.define([
 			headertable1 += "widths: ['*','*','*'],";
 			headertable1 += " body: [";
 			headertable1 += "[ { columns: [ ['Lift Solution'] ] },{ columns: [ ['Unit'] ] },{ columns: [ ['Price'] ] }],";
-			headertable1 += "[ { columns: [ ['6P – 7S (C+G+5) - MR - S.S Car Panel - S.S Center','Opening Auto Power Door'] ] },{ columns: [ ['2 Units'] ] },{columns: [{text:'     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit) "  + "', style: 'subheader'}]}],";
-			headertable1 += "[ { columns: [ ['Lift Solution']] },{columns:[]},{columns:[]}],";
+			headertable1 += "[ { columns: [ ['6P – 7S (C+G+5) - MR - S.S Car Panel - S.S Center','Opening Auto Power Door'] ] },{ columns: [ ['2 Units'] ] },{columns: [{text:'     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit) " + "', style: 'subheader'}]}],";
+
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'In Words:     " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%', style: 'titlebold'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice.', style: 'titlebold'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
 			headertable1 += "{text: 'The price/s quoted herein is/are exclusive of all taxes, as currently applicable, whether levied by the Central Government or the State Government. In the event of any amendment or variation in the rate or methodology for charging the applicable taxes, and/or, should be any new levies imposed in respect of this contract, the entire burden of any additional levy shall be borne and payable by you on demand at any time, in addition to the price/s stated herein. ', style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'GST Registration Number -------------------------------------------------------------------------------------------------------------------------------------------', style: 'titlebold'},";
@@ -601,17 +613,11 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'ACCEPTED:-" + " " + "', style: 'titlebold'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'IN DUPLICATE ON:-" + " " + "', style: 'titlebold'},{text:'BY:-" + " " + "', style: 'subheaderbold'}]},";
-
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 
+			// FIFTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -655,15 +661,16 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'HDFC BANK', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'As a very special case and as per RBI norms, Only Rs 2, 00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 
+			// SIXTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -705,6 +712,8 @@ sap.ui.define([
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
+
+			// SEVENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -752,6 +761,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
+
+			// Eight PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -793,6 +804,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
+
+			// NINE PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -830,6 +843,7 @@ sap.ui.define([
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 
+			//TENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -861,6 +875,7 @@ sap.ui.define([
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 
+			// ELEVENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -893,9 +908,11 @@ sap.ui.define([
 			headertable1 += "{text: '23. If you cancel the contract and/or commit a breach of contract and or contract remains dormant for 26weeks from signing the contract, we shall be entitled to claim damages and/or compensation, including the costs of the materials and loss of profits/administrative expenses actual or at the rate of 10% of the value of the contract, whichever is higher.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 
+			// Twelth PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
@@ -932,10 +949,10 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Receiver Signature:-" + " " + "', style: 'subheader'},{text:'Authorized Signatory:-" + " " + "', style: 'subheaderone'}]},";
 
+			//Define Style For PDF Content
 			headertable1 += "]," +
 				"footer: function (currentPage, pageCount) {" +
 				"return {" +

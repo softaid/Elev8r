@@ -68,9 +68,10 @@ sap.ui.define([
         },
 
 		onListItemPress: function (oEvent) {
-			var viewModel = oEvent.getSource().getBindingContext("QuotationMasterModel");
+			var viewModel = oEvent.getSource().getBindingContext("QuotationMasterModel").getObject();
 			console.log("---------------viewModel-----------------",viewModel);
-			var model = { "id": viewModel.getProperty("leadid") }
+			//var model = { "id": viewModel.getProperty("leadid") }
+			var model = { "id": viewModel.leadid, "quotid": viewModel.id}
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
