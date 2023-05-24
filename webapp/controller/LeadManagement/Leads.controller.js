@@ -113,12 +113,18 @@ sap.ui.define([
 		},
 
 		onAddNew: function () {
-			this.bus = sap.ui.getCore().getEventBus();
-			let count = (this.getView().getModel("LeadsMasterModel").oData.modelData.length)-1;
-			let lastid = this.getView().getModel("LeadsMasterModel").oData.modelData[count].id
-			let model = {
-				nextid : lastid + 1
+			let count, nextid;
+			if(this.getView().getModel("LeadsMasterModel").oData.modelData.length){
+				count = (this.getView().getModel("LeadsMasterModel").oData.modelData.length)-1;
+				nextid = parseInt(this.getView().getModel("LeadsMasterModel").oData.modelData[count].id) + 1;
+			}else{
+				nextid = 1;
 			}
+			let model = {
+				leadid : nextid
+			}
+
+			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
 				this.bus.publish("leadscreen", "handleLeadList", { pagekey: "addlead", viewModel: model });

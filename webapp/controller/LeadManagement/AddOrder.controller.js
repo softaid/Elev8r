@@ -52,7 +52,7 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftCpcty", "leadCapacityModel", this);
 
 			// bind Machine dropdown
-			commonFunction.getReferenceByType("LftMachine", "MachineModel", this);
+			commonFunction.getReferenceByType("LftMchn", "MachineModel", this);
 
 			// bind Model dropdown
 			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
@@ -153,6 +153,7 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "editOrderModel");
 
+			this.getAllOrders();
 		},
 
 		getModelDefault: function () {
@@ -160,7 +161,7 @@ sap.ui.define([
 				id: null,
 				leadname: null,
 				companyname: null,
-				quotedate: commonFunction.getDateFromDB(new Date()),
+				orderdate: commonFunction.getDateFromDB(new Date()),
 				sourceid: null,
 				leadscategory: null,
 				stageid: null,
@@ -200,11 +201,28 @@ sap.ui.define([
 		onBeforeRendering: function () {
 			var currentContext = this;
 			this.model = currentContext.getView().getModel("viewModel");
+			currentContext.getAllOrders();
 		},
+
+		getAllOrders : function(){
+			let editOrderModel = this.getView().getModel("editOrderModel");
+			orderService.getAllOrders(function (data) {
+                if(data.length && data[0].length){
+                    let lastid = (data[0].length) - 1;
+					let nextid = (data[0][lastid].id) + 1;
+					editOrderModel.oData.orderid = nextid;
+					editOrderModel.refresh();
+                }else{
+                    editOrderModel.oData.orderid = 1;
+					editOrderModel.refresh();
+                }
+			});
+		},	
 
 		orderConversion: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
+			oThis.getAllOrders();
 			console.log(selRow);
 
 			if (selRow != null) {
@@ -353,7 +371,7 @@ sap.ui.define([
 				var model = this.getView().getModel("editOrderModel").oData;
 				console.log("editOrderModel", model);
 				model["companyid"] = commonService.session("companyId");
-				model["quotedate"] = commonFunction.getDate(model.quotedate);
+				model["orderdate"] = commonFunction.getDate(model.orderdate);
 				model["userid"] = commonService.session("userId");
 
 				orderService.saveOrder(model, function (data) {

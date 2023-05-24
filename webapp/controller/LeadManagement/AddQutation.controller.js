@@ -8,7 +8,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,Quotationservice) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,quotationService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation", {
@@ -51,7 +51,7 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftCpcty", "leadCapacityModel", this);
 
 			// bind Machine dropdown
-			commonFunction.getReferenceByType("LftMachine", "MachineModel", this);
+			commonFunction.getReferenceByType("LftMchn", "MachineModel", this);
 
 			// bind Model dropdown
 			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
@@ -152,6 +152,8 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "editQutationModel");
 
+			this.getAllQuotations();
+
 		},
 
 		getModelDefault: function () {
@@ -201,10 +203,25 @@ sap.ui.define([
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
+		getAllQuotations : function(){
+			let editQutationModel = this.getView().getModel("editQutationModel");
+			quotationService.getAllQuotations(function (data) {
+                if(data.length && data[0].length){
+                    let lastid = (data[0].length) - 1;
+					let nextid = (data[0][lastid].id) + 1;
+					editQutationModel.oData.quotationid = nextid;
+					editQutationModel.refresh();
+                }else{
+                    editQutationModel.oData.quotationid = 1;
+					editQutationModel.refresh();
+                }
+			});
+		},
+
 		quoteConversion : function(sChannel, sEvent, oData){
 			let selRow = oData.viewModel;
 			let oThis = this;
-
+			oThis.getAllQuotations();
 			if (selRow != null) {
 
 				oThis.convertToQuote(selRow.id);
@@ -359,7 +376,7 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			if (id != undefined) {
 
-				Quotationservice.getQuotation({ id: id }, function (data) {
+				quotationService.getQuotation({ id: id }, function (data) {
 					data[0][0].withgst = data[0][0].withgst == 1 ? true : false;
                     oModel.setData(data[0][0]);
 				});
@@ -451,7 +468,7 @@ sap.ui.define([
 				model["quotedate"] = commonFunction.getDate(model.quotedate);
 				model["userid"] = commonService.session("userId");
 
-				Quotationservice.saveQuotation(model, function (data) {
+				quotationService.saveQuotation(model, function (data) {
 
 					if (data.id > 0) {
 							var message = model.id == null ? "Qutation created successfully!" : "Qutation edited successfully!";

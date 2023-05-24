@@ -11,15 +11,16 @@
 	xmlns:layout="sap.ui.layout">
 	<Page class="pgDashboard" showHeader="true" title="Quotation Details">
         <headerContent>
-            <layout:VerticalLayout
+            <!-- <layout:VerticalLayout
             class="sapUiContentPadding"
             width="100%">
                 <layout:content>
                     <Link
-                        text="Convert to Order"
-                        press="convertToOrder" />
+                        text=""
+                        press="" />
                 </layout:content>
-            </layout:VerticalLayout>
+            </layout:VerticalLayout> -->
+            <Button text="Convert to Order" press="convertToOrder"/>
 			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewQutation"/>
             <Button icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editQutation"/>
             <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/>
