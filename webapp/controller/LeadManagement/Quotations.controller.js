@@ -58,51 +58,51 @@ sap.ui.define([
 			this.loadData();
 		},
 
-		
-		handleQutationDetails : function (sChannel, sEvent, oData) {
-            console.log("oData",oData);
-            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            this.bus = sap.ui.getCore().getEventBus();
-            oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
-            oRouter.navTo(oData.pagekey, true);
-        },
+
+		handleQutationDetails: function (sChannel, sEvent, oData) {
+			console.log("oData", oData);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("QuotationMasterModel").getObject();
-			console.log("---------------viewModel-----------------",viewModel);
+			console.log("---------------viewModel-----------------", viewModel);
 			//var model = { "id": viewModel.getProperty("leadid") }
-			var model = { "id": viewModel.leadid, "quotid": viewModel.id}
-			this.bus = sap.ui.getCore().getEventBus();
-			setTimeout(function () {
-                this.bus = sap.ui.getCore().getEventBus();
-                this.bus.publish("qutationdetail", "handleQutationDetails", { pagekey: "qutationdetail", viewModel:model });
-            }, 1000);
-            
-            this.bus.publish("qutationdetail", "handleQutationDetails", { pagekey: "qutationdetail", viewModel:model});
-		},
-		
-		onAddNew: function() {
+			var model = { "id": viewModel.leadid, "quotid": viewModel.id }
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel:null });
+				this.bus.publish("qutationdetail", "handleQutationDetails", { pagekey: "qutationdetail", viewModel: model });
 			}, 1000);
-			this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel:null});
+
+			this.bus.publish("qutationdetail", "handleQutationDetails", { pagekey: "qutationdetail", viewModel: model });
 		},
 
-			 /**
-         * Function to navigate to specified route.
-         * @param {*} sChannel 
-         * @param {*} sEvent 
-         * @param {*} oData 
-         */
-			 handleQutationList : function (sChannel, sEvent, oData) {
-				console.log("oData",oData);
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+		onAddNew: function () {
+			this.bus = sap.ui.getCore().getEventBus();
+			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
-				oRouter.navTo(oData.pagekey, true);
-			},
+				this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
+			}, 1000);
+			this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
+		},
+
+		/**
+	* Function to navigate to specified route.
+	* @param {*} sChannel 
+	* @param {*} sEvent 
+	* @param {*} oData 
+	*/
+		handleQutationList: function (sChannel, sEvent, oData) {
+			console.log("oData", oData);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
 
 		onSearch: function (oEvent) {
 			var oTableSearchState = [],
@@ -134,13 +134,13 @@ sap.ui.define([
 			var currentContext = this;
 			quotationService.getAllQuotations(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
-                if(data.length && data[0].length){
-                    oModel.setData({ modelData: data[0] });
-                    currentContext.getView().setModel(oModel, "QuotationMasterModel");
-                }else{
-                    oModel.setData({ modelData: [] });
-                    currentContext.getView().setModel(oModel, "QuotationMasterModel");
-                }
+				if (data.length && data[0].length) {
+					oModel.setData({ modelData: data[0] });
+					currentContext.getView().setModel(oModel, "QuotationMasterModel");
+				} else {
+					oModel.setData({ modelData: [] });
+					currentContext.getView().setModel(oModel, "QuotationMasterModel");
+				}
 				console.log("QuotationMasterModel", oModel);
 			});
 		},

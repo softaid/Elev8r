@@ -108,12 +108,12 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadScouterName}">
                                         <form:fields>
-                                            <Input id="scoutername" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/scoutername}"/>
+                                            <Input id="scoutername"  valueLiveUpdate="true" value="{editPartyModel>/scoutername}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadReference}">
                                         <form:fields>
-                                            <Input id="reference" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/reference}"/>
+                                            <Input id="reference"  valueLiveUpdate="true" value="{editPartyModel>/reference}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPreferedLead}">
@@ -161,7 +161,7 @@
                                     </form:FormElement>          
                                     <form:FormElement label="{i18n>leadSiteAddress}">
                                         <form:fields>
-                                            <Input id="siteaddress" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/address}"/>
+                                            <Input id="siteaddress"  valueLiveUpdate="true" value="{editPartyModel>/address}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
@@ -629,7 +629,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Win Probability">
                                     <form:fields>
-                                        <Input id="winprobability" type="number" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/winprobability}"  />
+                                        <Input id="winprobability" type="number"  valueLiveUpdate="true" value="{editPartyModel>/winprobability}"  />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Lead Value">

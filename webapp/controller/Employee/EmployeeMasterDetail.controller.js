@@ -75,8 +75,8 @@ sap.ui.define([
 				data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
 				oModel.setData(data[0][0]);
 
-				var roleModel = data[0][0].emproleids.split(',');
-				currentContext.getView().byId("ddlMtxtModuleNameodule").setSelectedKeys(roleModel);
+				//var roleModel = data[0][0].emproleids.split(',');
+			//	currentContext.getView().byId("ddlMtxtModuleNameodule").setSelectedKeys(roleModel);
 
 				currentContext.getView().setModel(oModel, "editemployeeModel");
 			});
@@ -122,8 +122,8 @@ sap.ui.define([
 
 		validateForm: function () {
 			var isValid = true;
-			if (!commonFunction.isChaonly(this, "txtName", "User name is required!"))
-				isValid = false;
+			// if (!commonFunction.isChaonly(this, "txtName", "User name is required!"))
+			// 	isValid = false;
 			if (!commonFunction.isNumber(this, "txtMobile", "Mobile is required!"))
 				isValid = false;
 			if (!commonFunction.isEmail(this, "txtEmail", "Email is required!"))
@@ -136,6 +136,7 @@ sap.ui.define([
 			if (this.validateForm()) {
 				var currentContext = this;
 				var model = this.getView().getModel("editemployeeModel").oData;
+				console.log("editemployeeModel",model);
 				var tempId = model["id"];
 
 				model["ledgerid"] = parseInt(model.ledgerid);
