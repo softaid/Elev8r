@@ -21,6 +21,7 @@ sap.ui.define([
             },
 
             saveEmployee: function (params, callback) {
+                console.log("----------params-----------",params);
                 commonService.runJQueryX("POST", "employee", params, callback, null);
             },
 

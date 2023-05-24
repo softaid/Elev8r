@@ -629,7 +629,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Win Probability">
                                     <form:fields>
-                                        <Input id="winprobability" type="number" maxLength="15" valueLiveUpdate="true" value="{editPartyModel>/winprobability}"  />
+                                        <Input id="winprobability" type="number"  valueLiveUpdate="true" value="{editPartyModel>/winprobability}"  />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Lead Value">
