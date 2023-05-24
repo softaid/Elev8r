@@ -18,9 +18,10 @@
                 </f:heading>
                 <f:actions>
                     <ToolbarSpacer/>
-                        <Link
+                        <!-- <Link
                             text="Convert to Lead"
-                            press="convertToLead" />
+                            press="convertToLead" /> -->
+                        <Button text="Convert to Lead" press="convertToLead"/>
                         <Button
                         text="{i18n>saveButtonText}"
                         id="btnSave"
@@ -67,14 +68,11 @@
                         <form:formContainers>
                             <form:FormContainer title="Contact Details" width="100%"> 
                                 <form:formElements>
-<<<<<<< HEAD
                                     <form:FormElement label="Contact ID">
                                         <form:fields>
-                                            <Input id="contactid" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/contactid}"/>
+                                            <Input id="contactid" editable="false" valueLiveUpdate="true" value="{editContactModel>/contactid}"/>
                                         </form:fields>
                                     </form:FormElement>
-=======
->>>>>>> 183379d1a88c97c1bf4a4aae336d0553ccf5c901
                                     <form:FormElement label="Contact Type">
                                         <form:fields>
                                             <Select id="typeid" 
@@ -83,15 +81,15 @@
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
-                                                    path: 'leadTypeModel>/modelData'
+                                                    path: 'leadCntTypeModel>/modelData'
                                                 }">
-                                                <core:Item key="{leadTypeModel>id}" text="{leadTypeModel>description}" />
+                                                <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Contact Name">
                                         <form:fields>
-                                            <Input id="contactname" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/contactname}"/>
+                                            <Input id="contactname" valueLiveUpdate="true" value="{editContactModel>/contactname}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Date">
@@ -104,7 +102,7 @@
                                             />
                                         </form:fields>
                                     </form:FormElement> 
-                                    <form:FormElement label="Company ID">
+                                    <form:FormElement label="Contact Company ID">
                                         <form:fields>
                                             <Input id="companyid" valueLiveUpdate="true" value="{editContactModel>/contactcompanyid}" change=""/>
                                         </form:fields>
@@ -159,7 +157,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadSiteAddress}">
                                         <form:fields>
-                                            <Input id="siteaddress" maxLength="6" valueLiveUpdate="true" value="{editContactModel>/waddress}"/>
+                                            <Input id="siteaddress" valueLiveUpdate="true" value="{editContactModel>/waddress}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
@@ -199,7 +197,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="Residential Address">
                                         <form:fields>
-                                            <Input id="residentialaddress" maxLength="6" valueLiveUpdate="true" value="{editContactModel>/residentialaddress}"/>
+                                            <Input id="residentialaddress" valueLiveUpdate="true" value="{editContactModel>/residentialaddress}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Country(R)">
@@ -249,27 +247,27 @@
                                     </form:FormElement> -->
                                     <form:FormElement label="Official Email1">
                                         <form:fields>
-                                            <Input id="email1" valueLiveUpdate="true" value="{editContactModel>/email}" change="onEmailChange"  />
+                                            <Input id="email1" valueLiveUpdate="true" value="{editContactModel>/email}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <!-- <form:FormElement label="Official Email2">
                                         <form:fields>
-                                            <Input id="email2" valueLiveUpdate="true" value="{editContactModel>/email}" change="onEmailChange"  />
+                                            <Input id="email2" valueLiveUpdate="true" value="{editContactModel>/email}" change=""  />
                                         </form:fields>
                                     </form:FormElement> -->
                                     <form:FormElement label="Branches in city1">
                                         <form:fields>
-                                            <Input id="branch1" valueLiveUpdate="true" value="{editContactModel>/branch1}" change="onEmailChange"  />
+                                            <Input id="branch1" valueLiveUpdate="true" value="{editContactModel>/branch1}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Branches in city2">
                                         <form:fields>
-                                            <Input id="branch2" valueLiveUpdate="true" value="{editContactModel>/branch2}" change="onEmailChange"  />
+                                            <Input id="branch2" valueLiveUpdate="true" value="{editContactModel>/branch2}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Branches in city3">
                                         <form:fields>
-                                            <Input id="branch3" valueLiveUpdate="true" value="{editContactModel>/branch3}" change="onEmailChange"  />
+                                            <Input id="branch3" valueLiveUpdate="true" value="{editContactModel>/branch3}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="GSTN">
@@ -310,72 +308,72 @@
                                 <form:formElements>
                                     <form:FormElement label="Facebook">
                                         <form:fields>
-                                            <Input id="facebook" valueLiveUpdate="true" value="{editContactModel>/linkfacebook}" change="onEmailChange"  />
+                                            <Input id="facebook" valueLiveUpdate="true" value="{editContactModel>/linkfacebook}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="LinkedIN">
                                         <form:fields>
-                                            <Input id="linkedin" maxLength="15" valueLiveUpdate="true" value="{editContactModel>/linklinkedin}"/>
+                                            <Input id="linkedin" valueLiveUpdate="true" value="{editContactModel>/linklinkedin}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="YouTube">
                                         <form:fields>
-                                            <Input id="twitter" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/linkyoutube}"/>
+                                            <Input id="twitter" valueLiveUpdate="true" value="{editContactModel>/linkyoutube}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Instagram">
                                         <form:fields>
-                                            <Input id="instagram" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/linkinstagram}"/>
+                                            <Input id="instagram" valueLiveUpdate="true" value="{editContactModel>/linkinstagram}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Notes">
                                         <form:fields>
-                                            <Input id="remark" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/remark}"/>
+                                            <Input id="remark" valueLiveUpdate="true" value="{editContactModel>/remark}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Contact Source1">
                                         <form:fields>
-                                            <Input id="source1" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/contactsourceone}"/>
+                                            <Input id="source1" valueLiveUpdate="true" value="{editContactModel>/contactsourceone}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Contact Source2">
                                         <form:fields>
-                                            <Input id="source2" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/contactsourcetwo}"/>
+                                            <Input id="source2" valueLiveUpdate="true" value="{editContactModel>/contactsourcetwo}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Sneha Sales Contact">
                                         <form:fields>
-                                            <Input id="salescontact" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/salecontact}"/>
+                                            <Input id="salescontact" valueLiveUpdate="true" value="{editContactModel>/salecontact}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Sneha NI Contact">
                                         <form:fields>
-                                            <Input id="nicontact" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/nicontact}"/>
+                                            <Input id="nicontact" valueLiveUpdate="true" value="{editContactModel>/nicontact}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Sneha EI Contact">
                                         <form:fields>
-                                            <Input id="eicontact" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/eicontact}"/>
+                                            <Input id="eicontact" valueLiveUpdate="true" value="{editContactModel>/eicontact}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Email(P)">
                                         <form:fields>
-                                            <Input id="emailp" valueLiveUpdate="true" value="{editContactModel>/emailp}" change="onEmailChange"  />
+                                            <Input id="emailp" valueLiveUpdate="true" value="{editContactModel>/emailp}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Email(W)">
                                         <form:fields>
-                                            <Input id="emailw" valueLiveUpdate="true" value="{editContactModel>/emailw}" change="onEmailChange"  />
+                                            <Input id="emailw" valueLiveUpdate="true" value="{editContactModel>/emailw}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Contact Reference">
                                         <form:fields>
-                                            <Input id="contactreference" valueLiveUpdate="true" value="{editContactModel>/contactreference}" change="onEmailChange"  />
+                                            <Input id="contactreference" valueLiveUpdate="true" value="{editContactModel>/contactreference}" change=""  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Designation">
                                         <form:fields>
-                                            <Input id="designation" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/panno}"/>
+                                            <Input id="designation" valueLiveUpdate="true" value="{editContactModel>/designation}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="DOB">
@@ -400,17 +398,17 @@
                                     </form:FormElement> 
                                     <form:FormElement label="Social Link1">
                                         <form:fields>
-                                            <Input id="sociallink1" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/sociallink1}"/>
+                                            <Input id="sociallink1" valueLiveUpdate="true" value="{editContactModel>/sociallink1}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Social Link2">
                                         <form:fields>
-                                            <Input id="sociallink2" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/sociallink2}"/>
+                                            <Input id="sociallink2" valueLiveUpdate="true" value="{editContactModel>/sociallink2}"/>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement label="Designation">
+                                    <form:FormElement label="Social Link3">
                                         <form:fields>
-                                            <Input id="sociallink3" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/sociallink3}"/>
+                                            <Input id="sociallink3" valueLiveUpdate="true" value="{editContactModel>/sociallink3}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mobile(P)">
@@ -422,8 +420,7 @@
                                         <form:fields>
                                             <Input id="mobilew" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/mobilew}"/>
                                         </form:fields>
-                                    </form:FormElement>
-                                    
+                                    </form:FormElement>                                    
                                 </form:formElements>      
                             </form:FormContainer>
                         </form:formContainers>

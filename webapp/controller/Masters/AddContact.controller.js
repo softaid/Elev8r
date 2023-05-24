@@ -99,13 +99,14 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "editContactModel");
 
+			this.getAllContacts();
 		},
 
 		getModelDefault: function () {
 			return {
 				id: null,
                 contacttypeid : null,
-                date : null,
+                date : commonFunction.getDateFromDB(new Date()),
                 contactcompanyid : null, 
                 companyname : null, 
                 buisnesscardone : null, 
@@ -163,11 +164,26 @@ sap.ui.define([
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
+		getAllContacts : function(){
+			let editContactModel = this.getView().getModel("editContactModel");
+			contactService.getAllContacts(function (data) {
+				if(data.length && data[0].length){
+					let lastid = (data[0].length) - 1;
+					let nextid = (data[0][lastid].id) + 1;
+					editContactModel.oData.contactid = nextid;
+					editContactModel.refresh();
+				}else{
+					editContactModel.oData.contactid = 1;
+					editContactModel.refresh();
+				}
+			});
+		},
+
         handleContactList: function (sChannel, sEvent, oData) {
 
 			this.model = oData.viewModel;
 			
-			if (this.model.contactid > 1) {
+			if (this.model.id != undefined) {
 				this.bindContactDetails(this.model.id);
 			}else{
 				var oModel = new JSONModel();
@@ -260,12 +276,14 @@ sap.ui.define([
 		},
 
 		onSave: function () {
-			//if (this.validateForm()) {
+			// if (this.validateForm()) {
 				var currentContext = this;
 				var model = this.getView().getModel("editContactModel").oData;
 				console.log("editContactModel", model);
 				model["companyid"] = commonService.session("companyId");
 				model["date"] = commonFunction.getDate(model.date);
+				model["DOB"] = commonFunction.getDate(model.DOB);
+				model["DOM"] = commonFunction.getDate(model.DOM);
 				model["userid"] = commonService.session("userId");
 
 				contactService.saveContact(model, function (data) {
@@ -273,116 +291,41 @@ sap.ui.define([
 					if (data.id > 0) {
 							var message = model.id == null ? "Contact created successfully!" : "Contact edited successfully!";
 							currentContext.onCancel();
+							currentContext.reset();
 							MessageToast.show(message);
 							currentContext.bus = sap.ui.getCore().getEventBus();
 							currentContext.bus.publish("loaddata", "loadData");
 					}
 
 				});
-			//}
-			this.reset();
-
+			// }
 		},
 
 		validateForm: function () {
 			var isValid = true;
-			var source = this.getView().byId("sourceid").getSelectedKey();
-			var pipeline = this.getView().byId("txtStageid").getSelectedKey();
+			var email1 = this.getView().byId("email1").getValue();
+			var emailp = this.getView().byId("emailp").getValue();
+			var emailw = this.getView().byId("emailw").getValue();
 
-			var location = this.getView().byId("leadlocationid").getSelectedKey();
-			var status = this.getView().byId("leadstatusid").getSelectedKey();
-
-			var category = this.getView().byId("categoryid").getSelectedKey();
-
-			var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
-
-			var emailId = this.getView().byId("txtEmailId").getValue();
-			var phoneNo = this.getView().byId("txtPhoneNo").getValue();
-
-			if (!commonFunction.isRequired(this, "txtPartyName", "Please enter lead name."))
-				isValid = false;
-
-			if (!commonFunction.isRequired(this, "contactPerson", "Please enter contact person name."))
-				isValid = false;
-
-			if (emailId != "") {
-				if (!commonFunction.isEmail(this, "txtEmailId"))
-					isValid = false;
-			} else if (!commonFunction.isRequired(this, "txtEmailId", "Please enter email ID."))
-				isValid = false;
-
-			else {
-				this.getView().byId("txtEmailId").setValueState(sap.ui.core.ValueState.None);
+			if(email1 != ""){
+				commonFunction.isEmail(this, "email1");
+				isValid = false
+			}else{
+				this.getView().byId("email1").setValueState(sap.ui.core.ValueState.None)
 			}
-
-
-			if (phoneNo != "") {
-				if (!commonFunction.isNumber(this, "txtPhoneNo"))
-					isValid = false;
+			if(emailp != ""){
+				commonFunction.isEmail(this, "emailp");
+				isValid = false
+			}else{
+				this.getView().byId("emailp").setValueState(sap.ui.core.ValueState.None)
 			}
-			else if (!commonFunction.isRequired(this, "txtPhoneNo", "Please enter phone no."))
-				isValid = false;
-
-			else {
-				this.getView().byId("txtPhoneNo").setValueState(sap.ui.core.ValueState.None);
+			if(emailw != ""){
+				commonFunction.isEmail(this, "emailw");
+				isValid = false
+			}else{
+				this.getView().byId("emailw").setValueState(sap.ui.core.ValueState.None)
 			}
-
-
-			// check atleast one source is selected
-
-			if (pipeline.length == 0) {
-				this.getView().byId("txtStageid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one Stage.");
-
-				isValid = false;
-			}
-
-			if (source.length == 0) {
-				this.getView().byId("sourceid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one source.");
-
-				isValid = false;
-			}
-
-			if (typeoflift.length == 0) {
-				this.getView().byId("typeofliftid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one lift Type.");
-
-				isValid = false;
-			}
-
-			if (location.length == 0) {
-				this.getView().byId("leadlocationid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one location.");
-
-				isValid = false;
-			}
-			if (status.length == 0) {
-				this.getView().byId("leadstatusid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one status.");
-
-				isValid = false;
-			}
-			if (category.length == 0) {
-				this.getView().byId("categoryid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one category.");
-
-				isValid = false;
-			}
-
 			return isValid;
-		},
-
-		onEmailChange: function (oEvent) {
-
-			var emailId = oEvent.mParameters.value
-
-			if (emailId != "") {
-				commonFunction.isEmail(this, "txtEmailId")
-			}
-			else {
-				this.getView().byId("txtEmailId").setValueState(sap.ui.core.ValueState.None)
-			}
 		},
 
 		onNumberInputChange: function (oEvent) {
@@ -457,7 +400,7 @@ sap.ui.define([
 		onCancel: function () {
 			this.reset();
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("contacts");
+			oRouter.navTo("contactmaster");
 		}
 	});
 }, true);

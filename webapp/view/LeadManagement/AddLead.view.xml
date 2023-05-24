@@ -108,12 +108,12 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadScouterName}">
                                         <form:fields>
-                                            <Input id="scoutername" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/scoutername}"/>
+                                            <Input id="scoutername" valueLiveUpdate="true" value="{editPartyModel>/scoutername}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadReference}">
                                         <form:fields>
-                                            <Input id="reference" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/reference}"/>
+                                            <Input id="reference" valueLiveUpdate="true" value="{editPartyModel>/reference}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPreferedLead}">
@@ -161,7 +161,7 @@
                                     </form:FormElement>          
                                     <form:FormElement label="{i18n>leadSiteAddress}">
                                         <form:fields>
-                                            <Input id="siteaddress" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/address}"/>
+                                            <Input id="siteaddress" valueLiveUpdate="true" value="{editPartyModel>/address}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
@@ -201,7 +201,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadMobileP}">
                                         <form:fields>
-                                            <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobilep}"/>
+                                            <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editPartyModel>/mobileno}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadEmail}">
@@ -282,7 +282,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadnooflift}">
                                     <form:fields>
-                                        <Input id="txtnooflifts" type="number" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}"   change="onPartyNameChange"/>
+                                        <Input id="txtnooflifts" type="number" valueLiveUpdate="true" value="{editPartyModel>/nooflifts}" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>  
                                 <form:FormElement label="{i18n>leadcapacity}">

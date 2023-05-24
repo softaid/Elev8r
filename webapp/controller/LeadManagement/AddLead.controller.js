@@ -53,7 +53,7 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftCpcty", "leadCapacityModel", this);
 
 			// bind Machine dropdown
-			commonFunction.getReferenceByType("LftMachine", "MachineModel", this);
+			commonFunction.getReferenceByType("LftMchn", "MachineModel", this);
 
 			// bind Model dropdown
 			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
@@ -146,6 +146,7 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "editPartyModel");
 
+			this.getAllLeads();
 		},
 
 		getModelDefault: function () {
@@ -192,6 +193,21 @@ sap.ui.define([
 			}
 		},
 
+		getAllLeads : function(){
+			let editPartyModel = this.getView().getModel("editPartyModel");
+			Leadservice.getAllLeads(function (data) {
+				if(data.length && data[0].length){
+					let lastid = (data[0].length) - 1;
+					let nextid = (data[0][lastid].id) + 1;
+					editPartyModel.oData.leadid = nextid;
+					editPartyModel.refresh();
+				}else{
+					editPartyModel.oData.leadid = 1;
+					editPartyModel.refresh();
+				}
+			});
+		},
+
 		handleLeadList: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let editPartyModel = this.getView().getModel("editPartyModel");
@@ -203,6 +219,18 @@ sap.ui.define([
 			}else{
 				this.getView().byId("btnSave").setText("Save");
 			}
+
+			// this.model = oData.viewModel;
+			
+			// if (this.model.leadid > 1) {
+			// 	this.bindLeadDetails(this.model.id);
+			// }else{
+			// 	var oModel = new JSONModel();
+			// 	oModel.setData(this.model);
+			// 	this.getView().setModel(oModel, "editPartyModel");
+			// }
+
+			// this.id = this.model.id;
 
 		},
 
@@ -238,7 +266,7 @@ sap.ui.define([
 		leadConversion: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
-
+			oThis.getAllQuotations();
 			if (selRow != null) {
 				oThis.convertToLead(selRow.id);
 			}
@@ -385,7 +413,7 @@ sap.ui.define([
 			//if (this.validateForm()) {
 			var currentContext = this;
 			var model = this.getView().getModel("editPartyModel").oData;
-			console.log("editQutationModel", model);
+			console.log("model", model);
 
 
 			model["companyid"] = commonService.session("companyId");

@@ -14,12 +14,13 @@
             <layout:VerticalLayout
             class="sapUiContentPadding"
             width="100%">
-                <layout:content>
+                <!-- <layout:content>
                     <Link
-                        text="{i18n>leadDetailsConverttoQuote}"
-                        press="convertToQuote" />
-                </layout:content>
+                        text=""
+                        press="" />
+                </layout:content> -->
             </layout:VerticalLayout>
+            <Button text="{i18n>leadDetailsConverttoQuote}" press="convertToQuote"/>
 			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewLead"/>
             <Button icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editLead"/>
             <Button icon="sap-icon://delete" tooltip="{i18n>leadDetailsDeleteLead}" press="deleteLead"/>

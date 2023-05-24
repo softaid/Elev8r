@@ -22,24 +22,24 @@ xmlns:l="sap.ui.layout">
 							type="Transparent"
 					        tooltip="{i18n>addLead}"
 							press = "addLead"/>
-							<Button
+							<!-- <Button
 							icon="sap-icon://activities"
 							tooltip="{i18n>allLeadActivity}"
 							id="addleadactivity"
 							type="Transparent"
-							press = "addLeadActivity"/>
+							press = "addLeadActivity"/> -->
 							<Button
 							icon="sap-icon://sales-quote"
 							tooltip="{i18n>addQuotation}"
 							id="addquotation"
 							type="Transparent"
 							press = "addQuotation"/>
-							<Button
+							<!-- <Button
 							icon="sap-icon://workflow-tasks"
 							tooltip="{i18n>addProject}"
 							id="addproject"
 							type="Transparent"
-							press = "addProject"/>
+							press = "addProject"/> -->
 						</f:actions>
 
 						<!-- <f:actions>

@@ -97,7 +97,7 @@ sap.ui.define([
 		handleQutationDetails: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
-			this.loadPDFData();
+			// this.loadPDFData();
 			console.log(selRow);
 			if (selRow != null) {
 				oThis.loadData(selRow.id);

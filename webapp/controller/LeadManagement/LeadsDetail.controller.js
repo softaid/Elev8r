@@ -15,7 +15,7 @@ sap.ui.define([
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("leaddetails", "newLead", this.newLead, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
-			this.bus.subscribe("converttoquote]", "quoteConversion", this.quoteConversion, this);
+			this.bus.subscribe("converttoquote", "quoteConversion", this.quoteConversion, this);
 
 			this.handleRouteMatched(null);
 

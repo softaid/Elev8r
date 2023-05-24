@@ -58,7 +58,7 @@
                                 <form:formElements>
                                     <form:FormElement label="ID">
                                         <form:fields>
-                                            <Input id="quotationid" valueLiveUpdate="true" value="{editQutationModel>/quotationid}"  required="true" />
+                                            <Input id="quotationid" editable="false" valueLiveUpdate="true" value="{editQutationModel>/quotationid}"  required="true" />
                                         </form:fields>
                                     </form:FormElement> 
                                     <form:FormElement label="Quotation Name">
@@ -204,7 +204,7 @@
                                         <Select id="sourceid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/sourceid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -221,7 +221,7 @@
                                         <Select id="categoryid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/leadscategory}" 
                                             forceSelection="true"
                                             width="500px"
@@ -238,7 +238,7 @@
                                         <Select id="txtStageid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/stageid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -252,37 +252,37 @@
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadContactPerson}">
                                     <form:fields>
-                                        <Input id="contactPerson" editable="false" valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="contactPerson"  valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>   
                                 <form:FormElement label="Mr Width">
                                     <form:fields>
-                                        <Input id="txtmrwidth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
+                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Depth">
                                     <form:fields>
-                                        <Input id="txtmrdepth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
+                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Height">
                                     <form:fields>
-                                        <Input id="txtmrheight" editable="false" valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
+                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadsalerep}">
                                     <form:fields>
-                                        <Input id="txtsalesrep" editable="false" valueLiveUpdate="true" value="{editQutationModel>/salesrep}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="txtsalesrep"  valueLiveUpdate="true" value="{editQutationModel>/salesrep}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>   
                                 <form:FormElement label="Lead Value">
                                     <form:fields>
-                                        <Input id="txtLeadValue" editable="false" maxLength="15" valueLiveUpdate="true" value="{editQutationModel>/leadvalue}" required="true" />
+                                        <Input id="txtLeadValue"  valueLiveUpdate="true" value="{editQutationModel>/leadvalue}" required="true" />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Lead Score">
                                     <form:fields>
-                                        <Input id="txtLeadScore" editable="false" maxLength="15" valueLiveUpdate="true" value="{editQutationModel>/leadscore}" required="true" />
+                                        <Input id="txtLeadScore"  valueLiveUpdate="true" value="{editQutationModel>/leadscore}" required="true" />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadStatus}">
@@ -290,7 +290,7 @@
                                         <Select id="leadstatusid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/leadstatus}" 
                                             forceSelection="true"
                                             width="500px"
@@ -304,7 +304,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Description">
                                     <form:fields>
-                                        <Input id="txtdiscription"  editable="false" valueLiveUpdate="true" value="{editQutationModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="txtdiscription"   valueLiveUpdate="true" value="{editQutationModel>/leaddescription}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>   
                                 <form:FormElement label="{i18n>leadlocation}">
@@ -312,7 +312,7 @@
                                         <Select id="leadlocationid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/locationid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -326,7 +326,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Over Head">
                                     <form:fields>
-                                        <Input id="txtoverhead" editable="false"  valueLiveUpdate="true" value="{editQutationModel>/overhead}"/>
+                                        <Input id="txtoverhead"  valueLiveUpdate="true" value="{editQutationModel>/overhead}"/>
                                     </form:fields>
                                 </form:FormElement>
                             </form:formElements>
@@ -360,7 +360,7 @@
                                         <Select id="typeofliftid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/typeoflift}" 
                                             forceSelection="true"
                                             width="500px"
@@ -377,7 +377,7 @@
                                         <Select id="capacityid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/capacityid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -394,7 +394,7 @@
                                         <Select id="modelid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/modelid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -411,7 +411,7 @@
                                         <Select id="driveid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/driveid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -428,7 +428,7 @@
                                         <Select id="machineid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/machineid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -445,7 +445,7 @@
                                         <Select id="controlid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/controlid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -462,7 +462,7 @@
                                         <Select id="operationid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/operationid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -479,7 +479,7 @@
                                         <Select id="speedid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/speedid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -496,7 +496,7 @@
                                         <Select id="typesofdoorid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/typeofdoorid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -510,27 +510,27 @@
                                 </form:FormElement>
                                 <form:FormElement label="Stop">
                                     <form:fields>
-                                        <Input id="txtstopid" editable="false"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}"/>
+                                        <Input id="txtstopid"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Floor Marking">
                                     <form:fields>
-                                        <Input id="txtfloormarking" editable="false"  valueLiveUpdate="true" value="{editQutationModel>/floormarking}"/>
+                                        <Input id="txtfloormarking"  valueLiveUpdate="true" value="{editQutationModel>/floormarking}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Shaft Width">
                                     <form:fields>
-                                        <Input id="txtshaftwidth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/shaftwidth}"/>
+                                        <Input id="txtshaftwidth"  valueLiveUpdate="true" value="{editQutationModel>/shaftwidth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Shaft Depth">
                                     <form:fields>
-                                        <Input id="txtshaftdepth" editable="false"  valueLiveUpdate="true" value="{editQutationModel>/shaftdepth}"/>
+                                        <Input id="txtshaftdepth"  valueLiveUpdate="true" value="{editQutationModel>/shaftdepth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Depth">
                                     <form:fields>
-                                        <Input id="txtcardepth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/cardepth}"/>
+                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Left Opening">
@@ -538,7 +538,7 @@
                                         <Select id="txtLeftOpening"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/leftopening}" 
                                             forceSelection="true"
                                             width="500px"
@@ -555,7 +555,7 @@
                                         <Select id="txtRightOpening"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/rightopening}" 
                                             forceSelection="true"
                                             width="500px"
@@ -572,7 +572,7 @@
                                         <Select id="landingdoorsid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/landingdoorid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -589,7 +589,7 @@
                                         <Select id="leadcarid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/cardoorid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -606,7 +606,7 @@
                                         <Select id="landingfloorsid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/lowestfloorid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -623,7 +623,7 @@
                                         <Select id="landingcwdpositionid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/cwtpositionid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -640,7 +640,7 @@
                                         <Select id="landingfloorid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/floorheaightid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -657,7 +657,7 @@
                                         <Select id="landarchitectid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/architectidid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -674,7 +674,7 @@
                                         <Select id="landconsaltantid"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/leadconsaltantid}" 
                                             forceSelection="true"
                                             width="500px"
@@ -688,7 +688,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadnooflift}">
                                     <form:fields>
-                                        <Input id="txtnooflifts" editable="false" valueLiveUpdate="true" value="{editQutationModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
+                                        <Input id="txtnooflifts"  valueLiveUpdate="true" value="{editQutationModel>/nooflifts}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>  
                                 <form:FormElement label="All Opening Same Side">
@@ -696,7 +696,7 @@
                                         <Select id="txtallopeningsameside"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/allopeningsameside}" 
                                             forceSelection="true"
                                             width="500px"
@@ -713,7 +713,7 @@
                                         <Select id="txtFrontOpening"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/frontopening}" 
                                             forceSelection="true"
                                             width="500px"
@@ -730,7 +730,7 @@
                                         <Select id="txtbackopening"
                                             required="true" 
                                             change=""
-                                            editable="false"
+                                            
                                             selectedKey="{editQutationModel>/backopening}" 
                                             forceSelection="true"
                                             width="500px"
@@ -744,32 +744,32 @@
                                 </form:FormElement>
                                 <form:FormElement label="Car Width">
                                     <form:fields>
-                                        <Input id="txtcarwidth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/carwidth}"/>
+                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Height">
                                     <form:fields>
-                                        <Input id="txtcarheight" editable="false" valueLiveUpdate="true" value="{editQutationModel>/carheight}"/>
+                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Door Width">
                                     <form:fields>
-                                        <Input id="txtdoorwidth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/doorwidth}"/>
+                                        <Input id="txtdoorwidth"  valueLiveUpdate="true" value="{editQutationModel>/doorwidth}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Door Height">
                                     <form:fields>
-                                        <Input id="txtdoorheight" editable="false" valueLiveUpdate="true" value="{editQutationModel>/doorheight}"/>
+                                        <Input id="txtdoorheight"  valueLiveUpdate="true" value="{editQutationModel>/doorheight}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Travel">
                                     <form:fields>
-                                        <Input id="txttravel" editable="false" valueLiveUpdate="true" value="{editQutationModel>/travel}"/>
+                                        <Input id="txttravel"  valueLiveUpdate="true" value="{editQutationModel>/travel}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Pit Depth">
                                     <form:fields>
-                                        <Input id="txtpitdepth" editable="false" valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"/>
+                                        <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"/>
                                     </form:fields>
                                 </form:FormElement>
                             </form:formElements>
