@@ -582,79 +582,79 @@ sap.ui.define([
 
 		},
 
-		// onUserNamePress: function (oEvent) {
+		onUserNamePress: function (oEvent) {
 
-		// 	let oThis = this;
-		// 	let oBundle = oThis.getModel("i18n").getResourceBundle();
-		// 	let oToolPage = oThis.getView().byId("app");
-		// 	let gRoute = oThis.getRouter();
-		// 	let navBtn = oThis.getView().byId("sideNavigationToggleButton");
+			let oThis = this;
+			let oBundle = oThis.getModel("i18n").getResourceBundle();
+			let oToolPage = oThis.getView().byId("app");
+			let gRoute = oThis.getRouter();
+			let navBtn = oThis.getView().byId("sideNavigationToggleButton");
 
-		// 	// close message popover
-		// 	let oMessagePopover = oThis.byId("errorMessagePopover");
+			// close message popover
+			let oMessagePopover = oThis.byId("errorMessagePopover");
 			
-		// 	if (oMessagePopover && oMessagePopover.isOpen()) {
-		// 		oMessagePopover.destroy();
-		// 	}
+			if (oMessagePopover && oMessagePopover.isOpen()) {
+				oMessagePopover.destroy();
+			}
 
-		// 	let fnHandleUserMenuItemPress = function (oEvent) {
-		// 		MessageToast.show(oEvent.getSource().getText() + " was pressed");
-		// 	};
+			let fnHandleUserMenuItemPress = function (oEvent) {
+				MessageToast.show(oEvent.getSource().getText() + " was pressed");
+			};
 
-		// 	let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
-		// 	let fnLogoutPress = function (oEvent) {
-		// 		MessageToast.show("Please Wait..", { duration: 1500, my: "center top", at: "center top" });
-		// 		commonService.userLogout(function (data) {
-		// 			if (data[0][0].accesstoken == null) {
-		// 				// Clear currentSession Session
-		// 				MYSAP.SessionManager.clearSession('currentSession');
-		// 				localStorage.removeItem('currentSession');
+			let fnLogoutPress = function (oEvent) {
+				MessageToast.show("Please Wait..", { duration: 1500, my: "center top", at: "center top" });
+				commonService.userLogout(function (data) {
+					if (data[0][0].accesstoken == null) {
+						// Clear currentSession Session
+						MYSAP.SessionManager.clearSession('currentSession');
+						localStorage.removeItem('currentSession');
 
-		// 				// Sent to login screen prior to session destroy 
-		// 				//login page name property passesd instead of blank value for logout issue now navigation done successfully
-		// 				oRouter.getTargets().display("login", {});
-		// 				oRouter.navTo("login", true);
-		// 			}
-		// 		})	
+						// Sent to login screen prior to session destroy 
+						//login page name property passesd instead of blank value for logout issue now navigation done successfully
+						oRouter.getTargets().display("login", {});
+						oRouter.navTo("login", true);
+					}
+				})	
 
-		// 	};
+			};
 
-		// 	let fnCompanySettingPress = function (oEvent) {
-		// 		oRouter.getTargets().display("chome", {});
-		// 		oRouter.navTo("chome", true);
-		// 	};
+			let fnCompanySettingPress = function (oEvent) {
+				oRouter.getTargets().display("chome", {});
+				oRouter.navTo("chome", true);
+			};
 
-		// 	let oActionSheet = new ActionSheet(this.getView().createId("userMessageActionSheet"), {
-		// 		title: oBundle.getText("userHeaderTitle"),
-		// 		showCancelButton: false,
-		// 		buttons: [
-		// 			new Button({
-		// 				text: 'User Settings',
-		// 				type: sap.m.ButtonType.Transparent
-		// 			}),
-		// 			new Button({
-		// 				text: 'Company Setting',
-		// 				type: sap.m.ButtonType.Transparent,
-		// 				press: fnCompanySettingPress
-		// 			}),
-		// 			new Button({
-		// 				text: 'Logout',
-		// 				type: sap.m.ButtonType.Transparent,
-		// 				press: fnLogoutPress
-		// 			})
-		// 		],
-		// 		afterClose: function () {
-		// 			oActionSheet.destroy();
-		// 		}
-		// 	});
+			let oActionSheet = new ActionSheet(this.getView().createId("userMessageActionSheet"), {
+				title: oBundle.getText("userHeaderTitle"),
+				showCancelButton: false,
+				buttons: [
+					new Button({
+						text: 'User Settings',
+						type: sap.m.ButtonType.Transparent
+					}),
+					new Button({
+						text: 'Company Setting',
+						type: sap.m.ButtonType.Transparent,
+						press: fnCompanySettingPress
+					}),
+					new Button({
+						text: 'Logout',
+						type: sap.m.ButtonType.Transparent,
+						press: fnLogoutPress
+					})
+				],
+				afterClose: function () {
+					oActionSheet.destroy();
+				}
+			});
 
-		// 	// forward compact/cozy style into dialog
-		// 	jQuery.sap.syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oActionSheet);
+			// forward compact/cozy style into dialog
+			jQuery.sap.syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oActionSheet);
 			
-		// 	oActionSheet.openBy(oEvent.getSource());
+			oActionSheet.openBy(oEvent.getSource());
 
-		// },
+		},
 
 		fnLogoutPress : function (oEvent) {
 			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);

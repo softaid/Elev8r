@@ -35,7 +35,7 @@ sap.ui.define([
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("contactModel");
-			var model = { "id": viewModel.getProperty("id") }
+			var model = { "id": viewModel.getProperty("id"),}
 			// var model = { "contactModel": viewModel.modelData };
 			this.bus = sap.ui.getCore().getEventBus();
 			// this.bus.publish("contactmaster", "setDetailPage", { viewName: "ContactMasterDetail", viewModel: model });
@@ -79,9 +79,16 @@ sap.ui.define([
 		onAddNew: function () {
 
 			var viewModel = this.getView().getModel("contactModel").oData;
-			
+
+			let count, nextid;
+			if(this.getView().getModel("contactModel").oData.modelData.length){
+				count = (this.getView().getModel("contactModel").oData.modelData.length)-1;
+				nextid = parseInt(this.getView().getModel("contactModel").oData.modelData[count].id) + 1;
+			}else{
+				nextid = 1;
+			}
 			let model = {
-				id : viewModel.id
+				leadid : nextid
 			}
 			// var model = { "contactModel": viewModel.modelData };
 			this.bus = sap.ui.getCore().getEventBus();

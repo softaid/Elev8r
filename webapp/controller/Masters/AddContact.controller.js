@@ -148,8 +148,8 @@ sap.ui.define([
                 designation : null, 
                 emailp : null,
                 emailw : null, 
-                DOB : null,
-                DOM : null,
+                DOB : commonFunction.getDateFromDB(new Date()),
+                DOM : commonFunction.getDateFromDB(new Date()),
                 sociallink1 : null, 
                 sociallink2 : null, 
                 sociallink3 : null, 
@@ -182,14 +182,27 @@ sap.ui.define([
         handleContactList: function (sChannel, sEvent, oData) {
 
 			this.model = oData.viewModel;
-			
-			if (this.model.id != undefined) {
+
+			if(this.model.id != undefined){
+				this.getView().byId("btnSave").setText("Update");
+				this.getView().byId("convertBtn").setVisible(true);
+				
 				this.bindContactDetails(this.model.id);
 			}else{
-				var oModel = new JSONModel();
-				oModel.setData(this.model);
-				this.getView().setModel(oModel, "editContactModel");
+				this.getView().byId("btnSave").setText("Save");
+				this.getView().byId("convertBtn").setVisible(false);
+				let selRow = oData.viewModel;
+				let editPartyModel = this.getView().getModel("editContactModel");
+				editPartyModel.oData.contactid = selRow.nextid;
+				editPartyModel.refresh();
 			}
+			
+			// if (this.model.id != undefined) {
+			// }else{
+			// 	var oModel = new JSONModel();
+			// 	oModel.setData(this.model);
+			// 	this.getView().setModel(oModel, "editContactModel");
+			// }
 
 			this.id = this.model.id;
 		},

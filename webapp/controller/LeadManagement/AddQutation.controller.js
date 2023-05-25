@@ -266,14 +266,9 @@ sap.ui.define([
 				}
 
 				oThis.bindQutationDetails(selRow.id);
-
+			}else {
+				oThis.getAllQuotations();
 			}
-
-			else {
-				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editQutationModel");
-			}
-
 		},
 
 		LeadChange: function () {
