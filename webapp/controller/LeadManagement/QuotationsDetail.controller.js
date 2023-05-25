@@ -162,6 +162,29 @@ sap.ui.define([
 			})
 		},
 
+		orderConversion: function (sChannel, sEvent, oData) {
+
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
+
+		convertToOrder: function () {
+			var viewModel = this.getView().getModel("quoteModel");
+			var model = { "quoteid": viewModel.oData.id }
+			this.bus = sap.ui.getCore().getEventBus();
+
+			console.log(model);
+			setTimeout(function () {
+				this.bus = sap.ui.getCore().getEventBus();
+				this.bus.publish("converttoorder", "orderConversion", { pagekey: "addorder", viewModel: model });
+			}, 1000);
+
+			this.bus.publish("converttoorder", "orderConversion", { pagekey: "addorder", viewModel: model });
+		},
+
+
 		// Get all data related to PDF Model
 		loadPDFData: function (quotid) {
 			let oThis = this;

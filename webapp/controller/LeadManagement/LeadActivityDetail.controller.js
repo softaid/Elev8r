@@ -30,18 +30,18 @@ sap.ui.define([
 
 		onBeforeRendering: function () {
 			this.model = this.getView().getModel("viewModel");
+			var oModel = new JSONModel();
+
 			if (this.model != undefined) {
 				this.getLeadActivity(this.model.id);
 				this.getView().byId("btnDelete").setVisible(true);
 			}
 			else {
-
-				var oModel = new JSONModel();
 				oModel.setData({ id: null, isactive: true });
 				this.getView().byId("btnDelete").setVisible(false);
-				this.getView().setModel(oModel, "editLeadActivityModel");
 			}
-
+			
+			this.getView().setModel(oModel, "editLeadActivityModel");
 			let editLeadActivityModel = this.getView().getModel("editLeadActivityModel");
 			console.log(editLeadActivityModel);
 			editLeadActivityModel.oData.progres = 0;

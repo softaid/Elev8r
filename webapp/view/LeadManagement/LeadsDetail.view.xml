@@ -81,7 +81,7 @@
                                     </form:FormElement>  
                                     <form:FormElement label="{i18n>leadDetailsMobile}">
                                         <form:fields>
-                                            <Input id="mobileno" value="{leadModel>/mobilep}" enabled="false" />
+                                            <Input id="mobileno" value="{leadModel>/mobileno}" enabled="false" />
                                         </form:fields>
                                     </form:FormElement>  
                                 </form:formElements>
