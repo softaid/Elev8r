@@ -249,11 +249,11 @@ sap.ui.define([
 
 				oThis.bindLeadDetails(selRow.id);
 
-			}
+			}else {
+				// var oModel = new JSONModel();
+				// this.getView().setModel(oModel, "editPartyModel");
 
-			else {
-				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editPartyModel");
+				oThis.getAllLeads();
 			}
 
 		},
@@ -266,35 +266,28 @@ sap.ui.define([
 		leadConversion: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
-			oThis.getAllQuotations();
+			oThis.getAllLeads();
 			if (selRow != null) {
 				oThis.convertToLead(selRow.id);
 			}
 
 			else {
 				var oModel = new JSONModel();
-				this.getView().setModel(oModel, "editLeadModel");
+				this.getView().setModel(oModel, "editPartyModel");
 			}
 		},
 
 		convertToLead: function (id) {
-			let leadid =0;
+			let oThis = this;
 			var oModel = new JSONModel();
 			if (id != undefined) {
 				contactService.convertToLead({ id: id }, function (data) {
 					if(data.length && data[0].length){
-						leadid = parseInt(data[0][0].lastleadid) + 1;
 						oModel.setData(data[0][0]);
+						oThis.getView().setModel(oModel, "editPartyModel");
 					}
 				});
 			}
-
-			console.log(oModel);
-			this.getView().setModel(oModel, "editLeadModel");
-
-			let editLeadModel = this.getView().getModel("editLeadModel");
-			editLeadModel.oData.leadid = leadid;
-			editLeadModel.refresh();
 		},
 
 		bindLeadDetails: function (id) {

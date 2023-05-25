@@ -280,9 +280,9 @@
                                         <Input id="txtLeadValue"  valueLiveUpdate="true" value="{editQutationModel>/leadvalue}" required="true" />
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Lead Score">
+                                <form:FormElement label="Quote Score">
                                     <form:fields>
-                                        <Input id="txtLeadScore"  valueLiveUpdate="true" value="{editQutationModel>/leadscore}" required="true" />
+                                        <Input id="txtLeadScore"  valueLiveUpdate="true" value="{editQutationModel>/quotescore}" required="true" />
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadStatus}">
