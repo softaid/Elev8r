@@ -62,8 +62,24 @@ sap.ui.define([
 
 			this.oFlexibleColumnLayout = this.byId("fclCommonDashboard");
 			this.gePandL();
-			// this.getData();
+			this.getData();
 		},
+
+		getTotalLeadsDetail: function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("leads", true);
+		},
+
+		getLeadActivitiesDetail: function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("leadactivities", true);
+		},
+
+		getProjectDetail: function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("project", true);
+		},
+
 
 		onTabSelect: function (oControlEvent) {
 			var key = oControlEvent.getParameters().key;

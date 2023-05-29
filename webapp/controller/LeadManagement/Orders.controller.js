@@ -15,7 +15,7 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			// this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("orderscreen", "handleOrderList", this.handleOrderList, this);
-			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
+			this.bus.subscribe("orderdetail", "handleOrderDetails", this.handleOrderDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
 
@@ -59,7 +59,7 @@ sap.ui.define([
 		},
 
 		
-		handleQutationDetails : function (sChannel, sEvent, oData) {
+		handleOrderDetails : function (sChannel, sEvent, oData) {
             console.log("oData",oData);
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             this.bus = sap.ui.getCore().getEventBus();
@@ -68,24 +68,26 @@ sap.ui.define([
         },
 
 		onListItemPress: function (oEvent) {
-			var viewModel = oEvent.getSource().getBindingContext("orderMasterModel");
-			var model = { "id": viewModel.getProperty("quotationid") }
+			var viewModel = oEvent.getSource().getBindingContext("orderMasterModel").getObject();
+			console.log("---------------viewModel-----------------", viewModel);
+			var model = { "id": viewModel.id }
+
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
-                this.bus.publish("orderscreen", "handleOrderList", { pagekey: "addorder", viewModel:model });
+                this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "addorder", viewModel:model });
             }, 1000);
             
-            this.bus.publish("orderscreen", "handleOrderList", { pagekey: "addorder", viewModel:model });
+            this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "addorder", viewModel:model });
 		},
 		
 		onAddNew: function() {
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("orderscreen", "handleOrderList", { pagekey: "addorder", viewModel:null });
+				this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "addorder", viewModel:null });
 			}, 1000);
-			this.bus.publish("orderscreen", "handleOrderList", { pagekey: "addorder", viewModel:null});
+			this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "addorder", viewModel:null});
 		},
 
 			 /**

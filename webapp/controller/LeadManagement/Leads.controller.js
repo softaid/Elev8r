@@ -17,6 +17,7 @@ sap.ui.define([
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			this.afilters = [];
+			this.bus.subscribe("commondashboard", "redirectToPage", this.redirectToPage, this);
 			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);

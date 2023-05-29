@@ -160,13 +160,18 @@
                                     <form:FormElement label="Quotation Value">
                                         <form:fields>
                                             <Input id="txtQutationValue" valueLiveUpdate="true" value="{editQutationModel>/quotevalue}" required="true" change="onPartyNameChange"/>
-                                            <Switch  state="{editQutationModel>/withgst}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                          
+                                        </form:fields>
+                                    </form:FormElement> 
+                                      <form:FormElement label="GST">
+                                        <form:fields>
+                                              <Switch state="{editQutationModel>/withgst}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Switch>
                                         </form:fields>
-                                    </form:FormElement> 
+                                    </form:FormElement>  
                                     <form:FormElement label="Quotation Description">
                                         <form:fields>
                                             <Input id="txtQutationDescription" valueLiveUpdate="true" value="{editQutationModel>/quotediscription}"  required="true" change="onPartyNameChange"/>
@@ -772,6 +777,31 @@
                                         <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"/>
                                     </form:fields>
                                 </form:FormElement>
+                                 <form:FormElement label="Remark 1">
+                                        <form:fields>
+                                            <Input id="remark1" value="{quoteModel>/quotename}" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Remark 2">
+                                        <form:fields>
+                                            <Input id="remark2" value="{quoteModel>/quotename}" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Remark 3">
+                                        <form:fields>
+                                            <Input id="remark3" value="{quoteModel>/quotename}" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Remark 4">
+                                        <form:fields>
+                                            <Input id="remark4" value="{quoteModel>/quotename}" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Remark 5">
+                                        <form:fields>
+                                            <Input id="remark5" value="{quoteModel>/quotename}" />
+                                        </form:fields>
+                                    </form:FormElement>
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>

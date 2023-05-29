@@ -63,24 +63,24 @@ xmlns:l="sap.ui.layout">
 				<f:content>
 					<Page class="pgDashboard" showHeader="false" id="contentDashboard">
 						<content>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="redirectTo('addlead')">
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="getTotalLeadsDetail">
 								<TileContent footer="">
-									<NumericContent truncateValueTo="20" value="30" valueColor="Good" withMargin="false" />
+									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/leadcount}" valueColor="Good" withMargin="false" />
 								</TileContent>
 							</GenericTile>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Live Projects" press="get_Purchase_invoice">
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Live Projects" press="getProjectDetail">
 								<TileContent footer="">
-									<NumericContent truncateValueTo="20" value="10" valueColor="Good" withMargin="false" />
+									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/activitycountnotclosed}" valueColor="Good" withMargin="false" />
 								</TileContent>
 							</GenericTile>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Activities" press="get_revenue_press">
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Activities" press="getLeadActivitiesDetail">
 								<TileContent footer="">
-									<NumericContent truncateValueTo="20" value="20" valueColor="Good" withMargin="false" />
+									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/activitycountclosed}" valueColor="Good" withMargin="false" />
 								</TileContent>
 							</GenericTile>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Overdue Activities" press="get_expenses_press">
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Overdue Activities" press="getLeadActivitiesDetail">
 								<TileContent unit="" footer="">
-									<NumericContent truncateValueTo="20" value="5" valueColor="Error" withMargin="false" />
+									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/projectcount}" valueColor="Error" withMargin="false" />
 								</TileContent>
 							</GenericTile>
 						</content>		
