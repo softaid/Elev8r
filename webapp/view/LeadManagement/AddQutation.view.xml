@@ -776,6 +776,57 @@
                         </form:FormContainer>
                     </form:formContainers>
                 </form:Form>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="Additional Details" width="100%">
+					        <form:formElements>
+                                <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="contactPerson"  valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>   
+                                <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
             </VBox>
 		</f:content>
 	</f:DynamicPage>
