@@ -18,7 +18,8 @@ sap.ui.define([
 
 			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("orderdetails", "newOrder", this.orderDetail, this);
+			this.bus.subscribe("orderscreen", "newOrder", this.orderDetail, this);
+			this.bus.subscribe("orderdetail", "handleOrderDetails", this.handleOrderDetails, this);
 			this.bus.subscribe("converttoorder", "orderConversion", this.orderConversion, this);
 
 			// bind Source dropdown
@@ -255,7 +256,7 @@ sap.ui.define([
 			var oModel = this.getView().getModel("editOrderModel");
 		},
 
-		orderDetail: function (sChannel, sEvent, oData) {
+		handleOrderDetails: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
 

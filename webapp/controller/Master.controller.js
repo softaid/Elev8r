@@ -22,14 +22,13 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/SessionManager',
-	'jquery.sap.storage'
+	'jquery.sap.storage',
 ], function (BaseController, jQuery, Fragment, Controller, JSONModel, ResponsivePopover,
 	MessagePopover, ActionSheet, Button, Link, Bar, VerticalLayout, NotificationListItem,
 	MessagePopoverItem, CustomData, MessageToast, Device, XNavigationListItem, Filter, commonFunction, commonService, manageruserService) {
 
 	"use strict";
-
-	let _navigationKeys = ["home", "dailyTransaction", "settings", "breederlocation"];
+	var _navigationKeys = ["home", "dailyTransaction", "settings", "breederlocation"];
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Master", {
 
@@ -46,8 +45,7 @@ sap.ui.define([
 			});
 			this.getView().setModel(dateTimeModel);
 			console.log(this.getView().setModel(dateTimeModel));
-
-			let currentContext = this;
+			var currentContext = this;
 			if (commonFunction.session("userId") != null)
 				this.getUserPermissions();
 			else {
@@ -64,14 +62,14 @@ sap.ui.define([
 
 			// Transaction Notification cached in browser
 			commonService.getTransactionNotificationAll(function (data) {
-				let oModel = currentContext.getView().getModel("notificationsTemplateModel");
+				var oModel = currentContext.getView().getModel("notificationsTemplateModel");
 				oModel.oData.modelData = data[0];
 				oModel.refresh();
 			});
 
 			// Notification Placeholders cached in browser
 			commonService.getNotificationCreatedFor({ userid: commonFunction.session("userId") }, function (data) {
-				let oModel = currentContext.getView().getModel("notificationCreatedForModel");
+				var oModel = currentContext.getView().getModel("notificationCreatedForModel");
 				oModel.oData.modelData = data[0];
 				oModel.refresh();
 			});
@@ -88,19 +86,19 @@ sap.ui.define([
 				}
 			}.bind(this));
 
-			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.attachRouteMatched(this.routeMatched, this);
 
 			this.sUserid = commonFunction.session("userId");
 
 			this.oSF = this.getView().byId("searchField");
 
-			let sKey = this.getRouter()._oRouter._prevMatchedRequest
+			var sKey = this.getRouter()._oRouter._prevMatchedRequest
 			this.getRouter().getTargets().display(sKey, {});
 			this.getRouter().navTo(sKey);
 			// this.getUserKeyshortcut();
 
-			let count = 0;
+			var count = 0;
 			setInterval(function () {
 				$('body').mousemove(function (evt) {
 					count = 0;
@@ -111,24 +109,25 @@ sap.ui.define([
 				count++;
 				if (count > 20) {
 					if (MYSAP.SessionManager.getSession("currentSession") != null) {
-						commonService.userLogout(function (data) {
-							if (data.length > 0) {
-								if (data[0][0].accesstoken == null) {
-									// Clear currentSession Session
-									MYSAP.SessionManager.clearSession('currentSession');
-									localStorage.removeItem('currentSession');
+					commonService.userLogout(function(data){
+					if(data.length>0){
+					if(data[0][0].accesstoken == null){
+						// Clear currentSession Session
+						MYSAP.SessionManager.clearSession('currentSession');
+						localStorage.removeItem('currentSession');
 
-									// Sent to login screen prior to session destroy
-									oRouter.getTargets().display("login", {});
-									oRouter.navTo("login", true);
-								}
-							}
-						})
+						// Sent to login screen prior to session destroy
+						oRouter.getTargets().display("", {});
+						oRouter.navTo("", true);
 					}
+				     }
+				})
+			          }
 				}
 			}, 60000);
+			
+		window.setTimeout(this.defaultfunction(), 5000);
 
-			window.setTimeout(this.defaultfunction(), 5000);
 
 		},
 
@@ -146,7 +145,7 @@ sap.ui.define([
 
 				}
 				else {
-					let returnValue = undefined;
+					var returnValue = undefined;
 					commonService.userLogout(function (data) {
 						if (data.length > 0) {
 							if (data[0][0].accesstoken == null) {
@@ -164,15 +163,15 @@ sap.ui.define([
 		},
 
 		getUserKeyshortcut: function () {
-			let currentContext = this;
+			var currentContext = this;
 			$('body').keydown(function (evt) {
-				let keydata = evt.key;
-				if (evt.key == 'F1' || evt.key == 'F2' || evt.key == 'F3' || evt.key == 'F4' || evt.key == 'F5' || evt.key == 'F7' || evt.key == 'F8' || evt.key == 'F9' || evt.key == 'F10' || evt.key == 'F11' || evt.key == 'F12') {
+				var keydata = evt.key;
+				if (evt.key == 'F1' || evt.key == 'F2' || evt.key == 'F3' || evt.key == 'F4'|| 		evt.key == 'F5' || evt.key == 'F7' || 	evt.key == 'F8'||evt.key == 'F9' || 	evt.key == 'F10' || evt.key == 'F11' || evt.key == 'F12'){
 					jQuery('body').ready(function ($) {
 						evt.preventDefault();
 						commonService.getRolewisePageKey({ roleids: commonFunction.session("roleIds") }, function (data) {
 							if (data) {
-								for (let i = 0; i < data[0].length; i++) {
+								for (var i = 0; i < data[0].length; i++) {
 									if (keydata == data[0][i].key) {
 										currentContext.getRouter().getTargets().display(data[0][i].pagekey, {});
 										currentContext.getRouter().navTo(data[0][i].pagekey);
@@ -190,10 +189,10 @@ sap.ui.define([
 		routeMatched: function (oEvent) {
 			// https://tutel.me/c/programming/questions/42325406/how+can+i+get+current+route
 
-			let oParameters = oEvent.getParameters();
-			let sRouteName = oParameters.name; // Yay! Our route name!
-			let oApplicationModel = this.getView().getModel("applicationModel");
-			oApplicationModel.setProperty("/routeName", sRouteName);
+			var oParameters = oEvent.getParameters();
+			var sRouteName = oParameters.name; // Yay! Our route name!
+			var oModel = this.getView().getModel("applicationModel");
+			oModel.setProperty("/routeName", sRouteName);
 
 			// Session exists but page key removed, then go to home
 			if (MYSAP.SessionManager.getSession("currentSession") != null && sRouteName == "login") {
@@ -202,7 +201,7 @@ sap.ui.define([
 			}
 
 			this.userName = commonFunction.session("userName");
-			let oModel = new sap.ui.model.json.JSONModel();
+			var oModel = new sap.ui.model.json.JSONModel();
 			oModel.setData({
 				username: commonFunction.session("userName"),
 				companyname: commonFunction.session("companyname"),
@@ -225,7 +224,7 @@ sap.ui.define([
 			// First time popup data call
 			this.getNotificationHistoryPopupList(3); // limited list
 
-			let currentContext = this;
+			var currentContext = this;
 			// Call notification data on every 20 seconds
 			setInterval(function () {
 				currentContext.getNotificationHistoryPopupList(3);
@@ -236,9 +235,9 @@ sap.ui.define([
 		},
 
 		getNotificationHistoryPopupList: function (limit) {
-			let currentContext = this;
+			var currentContext = this;
 			commonService.getNotificationHistoryPopupList({ limit: limit }, function (data) {
-				let oModel = currentContext.getView().getModel("notificationPopupModel");
+				var oModel = currentContext.getView().getModel("notificationPopupModel");
 				oModel.oData.modelData = data[0];
 				oModel.refresh();
 
@@ -254,13 +253,13 @@ sap.ui.define([
 			this.readNotifications(oData.id, this);
 
 			// Redirect to transaction
-			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.getTargets().display(oData.pagekey, { id: oData.transactionid });
 			oRouter.navTo(oData.pagekey, true);
 		},
 
 		readNotifications: function (id, currentContext) {
-			let model = { "userid": commonService.session("userId"), "notificationids": id.toString() }
+			var model = { "userid": commonService.session("userId"), "notificationids": id.toString() }
 			commonService.readNotifications(model, function (data) {
 				if (data) {
 					currentContext.bus = sap.ui.getCore().getEventBus();
@@ -272,10 +271,10 @@ sap.ui.define([
 
 		getUserPermissions: function () {
 
-			let currentContext = this;
+			var currentContext = this;
 
-			let oNavigationList = this.byId('oNavigationList');
-			let oFixedNavigationList = this.byId('oFixedNavigationList');
+			var oNavigationList = this.byId('oNavigationList');
+			var oFixedNavigationList = this.byId('oFixedNavigationList');
 
 			if (oNavigationList)
 				oNavigationList.removeAllItems();
@@ -284,11 +283,11 @@ sap.ui.define([
 
 			manageruserService.getUserPermissions({ id: commonFunction.session("userId") }, function (data) {
 
-				let oModel = new sap.ui.model.json.JSONModel();
-				let oeModel = new sap.ui.model.json.JSONModel();
+				var oModel = new sap.ui.model.json.JSONModel();
+				var oeModel = new sap.ui.model.json.JSONModel();
 
 				if (data.length > 0) {
-					let filteredData = $.grep(data[0],
+					var filteredData = $.grep(data[0],
 						function (elementOfArray, indexInArra) {
 							return elementOfArray.pk != null
 						});
@@ -297,19 +296,19 @@ sap.ui.define([
 					// Entity Model
 					oeModel.setData({ modelData: data[0] });
 					currentContext.getView().setModel(oeModel, "userEntityModel");
-					let pageData = data[0];
+					var pageData = data[0];
 
 					setTimeout(function () {
 
-						let oModel = currentContext.getView().getModel("applicationModel");
+						var oModel = currentContext.getView().getModel("applicationModel");
 						if (oModel != null) {
-							let found = false;
-							let routeName = oModel.oData.routeName;
+							var found = false;
+							var routeName = oModel.oData.routeName;
 							if (["home", "dashboard"].indexOf(routeName) > -1) {
 								found = true;
 							} else {
-								for (const element of data[0]) {
-									if (element.pk == routeName) {
+								for (var i = 0; i < data[0].length; i++) {
+									if (data[0][i].pk == routeName) {
 										found = true;
 										break;
 									}
@@ -338,17 +337,17 @@ sap.ui.define([
 		},
 
 		createTreeJson: function (arr) {
-			let tree = [],
+			var tree = [],
 				mappedArr = {},
 				arrElem,
 				mappedElem;
 
-			for (let i = 0, len = arr.length; i < len; i++) {
+			for (var i = 0, len = arr.length; i < len; i++) {
 				arrElem = arr[i];
 				mappedArr[arrElem.e] = arrElem;
 				mappedArr[arrElem.e]['entity'] = [];
 			}
-			for (let e in mappedArr) {
+			for (var e in mappedArr) {
 				if (mappedArr.hasOwnProperty(e)) {
 					mappedElem = mappedArr[e];
 					if (mappedElem.pr) {
@@ -369,13 +368,13 @@ sap.ui.define([
 
 		checkIsExists: function (arrEle, arrParm) {
 			if (arrEle.eid != undefined) {
-				let found = false;
+				var found = false;
 
 				if (arrEle.eid.length > 0 && arrEle.eid[0] == "0")
 					return true;
 
-				for (const element of arrEle.eid) {
-					if (arrParm.indexOf(element) > -1) {
+				for (var i = 0; i < arrEle.eid.length; i++) {
+					if (arrParm.indexOf(arrEle.eid[i]) > -1) {
 						found = true;
 						break;
 					}
@@ -388,15 +387,15 @@ sap.ui.define([
 
 		ifEidCheckIsExists: function (arrEle, arrParm) {
 
-			let islocal = true
+			var islocal = true
 			if (islocal) {
 				return true;
 			}
 
 			if (arrEle.eid != undefined) {
-				let found = false;
-				for (const element of arrEle.eid) {
-					if (arrParm.indexOf(element) > -1) {
+				var found = false;
+				for (var i = 0; i < arrEle.eid.length; i++) {
+					if (arrParm.indexOf(arrEle.eid[i]) > -1) {
 						found = true;
 						break;
 					}
@@ -408,21 +407,21 @@ sap.ui.define([
 		},
 
 		initSideNavigation: function (menusData) {
-			let oSideNavigation = this.byId('oSideNavigation');
-			let oNavigationList = this.byId('oNavigationList');
-			let oFixedNavigationList = this.byId('oFixedNavigationList');
-			let oModelSideNav = new JSONModel("model/sideContent.json");
-			let currentContext = this;
+			var oSideNavigation = this.byId('oSideNavigation');
+			var oNavigationList = this.byId('oNavigationList');
+			var oFixedNavigationList = this.byId('oFixedNavigationList');
+			var oModelSideNav = new JSONModel("model/sideContent.json");
+			var currentContext = this;
 
 			oModelSideNav.attachRequestCompleted(function (oEvent) {
 
-				let navigation = oModelSideNav.getData("/")["navigation"];
-				let fixednavigation = oModelSideNav.getData("/")["fixedNavigation"];
+				var navigation = oModelSideNav.getData("/")["navigation"];
+				var fixednavigation = oModelSideNav.getData("/")["fixedNavigation"];
 
-				let arrParm = [];
+				var arrParm = [];
 				if (menusData) {
-					for (const element of menusData) {
-						arrParm.push(element.e);
+					for (var i = 0; i < menusData.length; i++) {
+						arrParm.push(menusData[i].e);
 					}
 				}
 
@@ -430,89 +429,67 @@ sap.ui.define([
 
 
 				if (navigation instanceof Array) {
-					for (const element of navigation) {
-						let itemI = element;
+					for (var i = 0; i < navigation.length; i++) {
+						var itemI = navigation[i];
 
 						if (currentContext.checkIsExists(itemI, arrParm)) {
 
-							let oNavI = new XNavigationListItem("", {
+							var oNavI = new XNavigationListItem("", {
 								text: itemI["title"],
 								icon: itemI["icon"],
 								key: itemI["key"],
-								expanded: itemI["expanded"],
+								expanded: itemI["expanded"]
 							});
 
-							console.log("oNavI", oNavI);
+							for (var j = 0; j < itemI["items"].length; j++) {
+								var itemJ = itemI["items"][j];
 
-							if (itemI["items"].length > 0) {
+								if (currentContext.checkIsExists(itemJ, arrParm)) {
 
-								for (const element of itemI["items"]) {
+									var oNavJ = new XNavigationListItem("", {
+										text: itemJ["title"],
+										icon: itemJ["icon"],
+										key: itemJ["key"],
+										expanded: itemJ["expanded"],
+									});
 
-									let itemJ = element;
+									for (var k = 0; k < itemJ["items"].length; k++) {
+										var itemK = itemJ["items"][k];
 
-									if (currentContext.checkIsExists(itemJ, arrParm)) {
+										if (currentContext.checkIsExists(itemK, arrParm)) {
 
-										let oNavJ = new XNavigationListItem("", {
-											text: itemJ["title"],
-											icon: itemJ["icon"],
-											key: itemJ["key"],
-											expanded: itemJ["expanded"],
-										});
+											var oNavK = new XNavigationListItem("", {
+												text: itemK["title"],
+												icon: itemK["icon"],
+												key: itemK["key"],
+												expanded: itemK["expanded"]
+											});
 
-										if (itemJ["items"].length > 0) {
+											for (var l = 0; l < itemK["items"].length; l++) {
+												var itemL = itemK["items"][l];
 
-											for (let k = 0; k < itemJ["items"].length; k++) {
-												let itemK = itemJ["items"][k];
+												if (currentContext.checkIsExists(itemL, arrParm)) {
 
-												if (currentContext.checkIsExists(itemK, arrParm)) {
-
-													let oNavK = new XNavigationListItem("", {
-														text: itemK["title"],
-														icon: itemK["icon"],
-														key: itemK["key"],
-														expanded: itemK["expanded"]
+													var oNavL = new XNavigationListItem("", {
+														text: itemL["title"],
+														icon: itemL["icon"],
+														key: itemL["key"],
+														expanded: itemL["expanded"]
 													});
 
-													if (itemK["items"].length > 0) {
-
-														for (let l = 0; l < itemK["items"].length; l++) {
-
-															let itemL = itemK["items"][l];
-
-															if (currentContext.checkIsExists(itemL, arrParm)) {
-
-																let oNavL = new XNavigationListItem("", {
-																	text: itemL["title"],
-																	icon: itemL["icon"],
-																	key: itemL["key"],
-																	expanded: itemL["expanded"]
-																});
-
-																oNavK.addItem(oNavL);
-
-															}
-
-														}
-
-													}
-
-													oNavJ.addItem(oNavK);
-
+													oNavK.addItem(oNavL);
 												}
-
 											}
 
+											oNavJ.addItem(oNavK);
 										}
-
-										oNavI.addItem(oNavJ);
 									}
 
+									oNavI.addItem(oNavJ);
 								}
 
 							}
-
 							oNavigationList.addItem(oNavI);
-
 						}
 
 
@@ -521,30 +498,27 @@ sap.ui.define([
 				}
 
 				if (fixednavigation instanceof Array) {
+					for (var i = 0; i < fixednavigation.length; i++) {
+						var itemI = fixednavigation[i];
 
-					for (const oFixedNavItem of fixednavigation) {
+						if (currentContext.ifEidCheckIsExists(itemI, arrParm)) {
 
-						if (currentContext.ifEidCheckIsExists(oFixedNavItem, arrParm)) {
-
-							let oNavI = new XNavigationListItem("", {
-								text: oFixedNavItem["title"],
-								icon: oFixedNavItem["icon"],
-								key: oFixedNavItem["key"],
-								expanded: oFixedNavItem["expanded"]
+							var oNavI = new XNavigationListItem("", {
+								text: itemI["title"],
+								icon: itemI["icon"],
+								key: itemI["key"],
+								expanded: itemI["expanded"]
 							});
 
 							oFixedNavigationList.addItem(oNavI);
 						}
-
 						oSideNavigation.setFixedItem(oFixedNavigationList);
-
 					}
-
 				}
-
 			});
-
 		},
+
+
 
 		/**
 		 * Convenience method for accessing the router.
@@ -552,109 +526,104 @@ sap.ui.define([
 		 * @param {sap.ui.base.Event} oEvent The item select event
 		 */
 		onItemSelect: function (oEvent) {
+			//  sap.ui.core.BusyIndicator.show();
 
-			let oThis = this;
-			let oItem = oEvent.getParameter('item');
-			let sKey = oItem.getKey();
+			var oItem = oEvent.getParameter('item');
+			var sKey = oItem.getKey();
 
+			// if the device is phone, collaps the navigation side of the app to give more space
 			if (Device.system.phone) {
-				oThis.onSideNavButtonPress();
+				this.onSideNavButtonPress();
 			}
 
 			if (sKey != "") {
-				oThis.getRouter().getTargets().display(sKey, {});
-				oThis.getRouter().navTo(sKey);
+				this.getRouter().getTargets().display(sKey, {});
+				this.getRouter().navTo(sKey);
 			}
-			
 		},
 
 		clearAllonLogout: function () {
 
-			let oModel = currentContext.getView().getModel("userEntityModel");
+			var oModel = currentContext.getView().getModel("userEntityModel");
 			oModel.oData.modelData = [];
 			oModel.refresh();
 
-			let oNavigationList = this.byId('oNavigationList');
-			let oFixedNavigationList = this.byId('oFixedNavigationList');
-
+			var oNavigationList = this.byId('oNavigationList');
+			var oFixedNavigationList = this.byId('oFixedNavigationList');
 			oNavigationList.removeAllItems();
 			oFixedNavigationList.removeAllItems();
-
 		},
 
-		onUserNamePress: function (oEvent) {
+		// onUserNamePress: function (oEvent) {
+		// 	var oBundle = this.getModel("i18n").getResourceBundle();
+		// 	var oToolPage = this.getView().byId("app");
+		// 	var gRoute = this.getRouter();
+		// 	var navBtn = this.getView().byId("sideNavigationToggleButton");
 
-			let oThis = this;
-			let oBundle = oThis.getModel("i18n").getResourceBundle();
-			let oToolPage = oThis.getView().byId("app");
-			let gRoute = oThis.getRouter();
-			let navBtn = oThis.getView().byId("sideNavigationToggleButton");
+		// 	// close message popover
+		// 	var oMessagePopover = this.byId("errorMessagePopover");
+		// 	if (oMessagePopover && oMessagePopover.isOpen()) {
+		// 		oMessagePopover.destroy();
+		// 	}
+		// 	var fnHandleUserMenuItemPress = function (oEvent) {
+		// 		MessageToast.show(oEvent.getSource().getText() + " was pressed");
+		// 	};
+		// 	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
-			// close message popover
-			let oMessagePopover = oThis.byId("errorMessagePopover");
+		// 	var fnLogoutPress = function (oEvent) {
+
+		// 		MessageToast.show("Please Wait..", { duration: 1500, my: "center top", at: "center top" });
+		// 		 commonService.userLogout(function(data){
+		// 			if(data[0][0].accesstoken == null){
+		// 				// Clear currentSession Session
+		// 				MYSAP.SessionManager.clearSession('currentSession');
+		// 				localStorage.removeItem('currentSession');
+
+		// 				// Sent to login screen prior to session destroy
+		// 				oRouter.getTargets().display("", {});
+		// 				oRouter.navTo("", true);
+		// 			}
+		// 		})
+				
+		// 	};
+
+		// 	var fnCompanySettingPress = function (oEvent) {
+		// 		// MYSAP.SessionManager.setSession('currentSession', session);
+		// 		oRouter.getTargets().display("chome", {});
+		// 		oRouter.navTo("chome", true);
+		// 	};
+
 			
-			if (oMessagePopover && oMessagePopover.isOpen()) {
-				oMessagePopover.destroy();
-			}
 
-			let fnHandleUserMenuItemPress = function (oEvent) {
-				MessageToast.show(oEvent.getSource().getText() + " was pressed");
-			};
+		// 	var oActionSheet = new ActionSheet(this.getView().createId("userMessageActionSheet"), {
+		// 		title: oBundle.getText("userHeaderTitle"),
+		// 		showCancelButton: false,
+		// 		buttons: [
+		// 			new Button({
+		// 				text: 'User Settings',
+		// 				type: sap.m.ButtonType.Transparent
+		// 			}),
+		// 			new Button({
+		// 				text: 'Company Setting',
+		// 				type: sap.m.ButtonType.Transparent,
+		// 				press: fnCompanySettingPress
+		// 			}),
+		// 			new Button({
+		// 				text: 'Logout',
+		// 				type: sap.m.ButtonType.Transparent,
+		// 				press: fnLogoutPress
+		// 			})
+		// 		],
+		// 		afterClose: function () {
+		// 			oActionSheet.destroy();
+		// 		}
+		// 	});
 
-			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+		// 	// forward compact/cozy style into dialog
+		// 	jQuery.sap.syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oActionSheet);
+		// 	oActionSheet.openBy(oEvent.getSource());
+		// },
 
-			let fnLogoutPress = function (oEvent) {
-				MessageToast.show("Please Wait..", { duration: 1500, my: "center top", at: "center top" });
-				commonService.userLogout(function (data) {
-					if (data[0][0].accesstoken == null) {
-						// Clear currentSession Session
-						MYSAP.SessionManager.clearSession('currentSession');
-						localStorage.removeItem('currentSession');
-
-						// Sent to login screen prior to session destroy 
-						//login page name property passesd instead of blank value for logout issue now navigation done successfully
-						oRouter.getTargets().display("login", {});
-						oRouter.navTo("login", true);
-					}
-				})	
-
-			};
-
-			let fnCompanySettingPress = function (oEvent) {
-				oRouter.getTargets().display("chome", {});
-				oRouter.navTo("chome", true);
-			};
-
-			let oActionSheet = new ActionSheet(this.getView().createId("userMessageActionSheet"), {
-				title: oBundle.getText("userHeaderTitle"),
-				showCancelButton: false,
-				buttons: [
-					new Button({
-						text: 'User Settings',
-						type: sap.m.ButtonType.Transparent
-					}),
-					new Button({
-						text: 'Company Setting',
-						type: sap.m.ButtonType.Transparent,
-						press: fnCompanySettingPress
-					}),
-					new Button({
-						text: 'Logout',
-						type: sap.m.ButtonType.Transparent,
-						press: fnLogoutPress
-					})
-				],
-				afterClose: function () {
-					oActionSheet.destroy();
-				}
-			});
-
-			// forward compact/cozy style into dialog
-			jQuery.sap.syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oActionSheet);
-			
-			oActionSheet.openBy(oEvent.getSource());
-
-		},
 
 		fnLogoutPress : function (oEvent) {
 			let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -675,48 +644,36 @@ sap.ui.define([
 		},
 
 		onAppPress: function () {
-
-			let oThis = this;
-			let oToolPage = oThis.getView().byId("app");
-			let bSideExpanded = oToolPage.getSideExpanded();
-			
-			oThis._setToggleButtonTooltip(bSideExpanded);
+			var oToolPage = this.getView().byId("app");
+			var bSideExpanded = oToolPage.getSideExpanded();
+			this._setToggleButtonTooltip(bSideExpanded);
 			oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
-			
-			let oRouter = sap.ui.core.UIComponent.getRouterFor(oThis);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.getTargets().display("home", {});
 			oRouter.navTo("home", true);
-			oThis.getView().byId("sideNavigationToggleButton").setVisible(true)
-
+			this.getView().byId("sideNavigationToggleButton").setVisible(true)
 		},
 
 		onSideNavButtonPress: function () {
-
-			let oThis = this;
-			let oToolPage = oThis.byId("app");
-			let bSideExpanded = oToolPage.getSideExpanded();
-			
-			oThis._setToggleButtonTooltip(bSideExpanded);
-			
+			var oToolPage = this.byId("app");
+			var bSideExpanded = oToolPage.getSideExpanded();
+			this._setToggleButtonTooltip(bSideExpanded);
 			oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
-
 		},
 
 		_setToggleButtonTooltip: function (bSideExpanded) {
-
-			let oThis = this;
-			let oToggleButton = oThis.byId('sideNavigationToggleButton');
-
-			oToggleButton.setTooltip((bSideExpanded) ? 'Large Size Navigation' : 'Small Size Navigation');
-
+			var oToggleButton = this.byId('sideNavigationToggleButton');
+			if (bSideExpanded) {
+				oToggleButton.setTooltip('Large Size Navigation');
+			} else {
+				oToggleButton.setTooltip('Small Size Navigation');
+			}
 		},
 
 		// Errors Pressed
 		onMessagePopoverPress: function (oEvent) {
-
 			if (!this.byId("errorMessagePopover")) {
-
-				let oMessagePopover = new MessagePopover(this.getView().createId("errorMessagePopover"), {
+				var oMessagePopover = new MessagePopover(this.getView().createId("errorMessagePopover"), {
 					placement: sap.m.VerticalPlacementType.Bottom,
 					items: {
 						path: 'alerts>/alerts/errors',
@@ -726,15 +683,11 @@ sap.ui.define([
 						oMessagePopover.destroy();
 					}
 				});
-
 				this.byId("app").addDependent(oMessagePopover);
-
 				// forward compact/cozy style into dialog
 				jQuery.sap.syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oMessagePopover);
 				oMessagePopover.openBy(oEvent.getSource());
-
 			}
-
 		},
 
 		/**
@@ -743,14 +696,14 @@ sap.ui.define([
 		 * @public
 		 */
 		onNotificationPress: function (oEvent) {
-			let currentContext = this;
-			let oBundle = this.getModel("i18n").getResourceBundle();
+			var currentContext = this;
+			var oBundle = this.getModel("i18n").getResourceBundle();
 			// close message popover
-			let oMessagePopover = this.byId("errorMessagePopover");
+			var oMessagePopover = this.byId("errorMessagePopover");
 			if (oMessagePopover && oMessagePopover.isOpen()) {
 				oMessagePopover.destroy();
 			}
-			let oButton = new Button({
+			var oButton = new Button({
 				text: oBundle.getText("notificationButtonText"),
 				press: function () {
 					currentContext.getRouter().getTargets().display("notifications", {});
@@ -761,7 +714,7 @@ sap.ui.define([
 				}
 			});
 
-			let oNotificationPopover = new ResponsivePopover(this.getView().createId("notificationMessagePopover"), {
+			var oNotificationPopover = new ResponsivePopover(this.getView().createId("notificationMessagePopover"), {
 				title: oBundle.getText("Notifications"),
 				contentWidth: "300px",
 				endButton: oButton,
@@ -790,8 +743,8 @@ sap.ui.define([
 		 */
 		_createNotification: function (sId, oBindingContext) {
 
-			let oBindingObject = oBindingContext.getObject();
-			let oNotificationItem = new NotificationListItem({
+			var oBindingObject = oBindingContext.getObject();
+			var oNotificationItem = new NotificationListItem({
 				title: oBindingObject.title,
 				description: oBindingObject.description,
 				priority: oBindingObject.priority,
@@ -815,15 +768,15 @@ sap.ui.define([
 		},
 
 		_createError: function (sId, oBindingContext) {
-			let oBindingObject = oBindingContext.getObject();
-			let oLink = new Link("moreDetailsLink", {
+			var oBindingObject = oBindingContext.getObject();
+			var oLink = new Link("moreDetailsLink", {
 				text: "Go to page >>",
 				press: function () {
 					MessageToast.show("More Details was pressed");
 				}
 			});
 
-			let oMessageItem = new MessagePopoverItem({
+			var oMessageItem = new MessagePopoverItem({
 				title: oBindingObject.title,
 				subtitle: oBindingObject.subTitle,
 				description: oBindingObject.description,
@@ -844,27 +797,20 @@ sap.ui.define([
 		},
 
 		onSearch: function (event) {
-
-			let item = event.getParameter("suggestionItem");
-
+			var item = event.getParameter("suggestionItem");
 			if (item) {
 
-				let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.getTargets().display(item.getKey(), {});
 				oRouter.navTo(item.getKey(), true);
 
 				sap.m.MessageToast.show("search for: " + item.getText());
-
 			}
-
 		},
 
 		onSuggest: function (event) {
-
-			let oThis = this;
-			let value = event.getParameter("suggestValue");
-			let filters = [];
-
+			var value = event.getParameter("suggestValue");
+			var filters = [];
 			if (value) {
 				filters = [
 					new sap.ui.model.Filter([
@@ -874,28 +820,25 @@ sap.ui.define([
 					], false)
 				];
 			}
-
-			oThis.getView().byId("searchField").getBinding("suggestionItems").filter(filters);
-			oThis.getView().byId("searchField").suggest();
-
+			this.getView().byId("searchField").getBinding("suggestionItems").filter(filters);
+			this.getView().byId("searchField").suggest();
 		},
 
+
 		onGlobalSearch: function (oEvent) {
-
-			let oThis = this;
-			let aFilters = [];
-			let sQuery = oEvent.getSource().getValue();
-
+			// add filter for search
+			var aFilters = [];
+			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
 				aFilters = [new Filter("text", sap.ui.model.FilterOperator.Contains, sQuery)];
+				// aFilters.push(filter);
 			}
 
-			let list = oThis.byId("oNavigationList");
-			let binding = list.getBinding("items");
+			// update list binding
+			var list = this.byId("oNavigationList");
+			var binding = list.getBinding("items");
 			binding.filter(aFilters, "Application");
-
 		}
-
 	});
-
 });
+
