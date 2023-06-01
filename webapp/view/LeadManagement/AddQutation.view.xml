@@ -777,31 +777,36 @@
                                         <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"/>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement label="Completion Days">
+                                    <form:fields>
+                                        <Input id="remark5" value="{quoteModel>/completiondays}" />
+                                    </form:fields>
+                                </form:FormElement>
                                  <form:FormElement label="Remark 1">
-                                        <form:fields>
-                                            <Input id="remark1" value="{quoteModel>/quotename}" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                     <form:FormElement label="Remark 2">
-                                        <form:fields>
-                                            <Input id="remark2" value="{quoteModel>/quotename}" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                     <form:FormElement label="Remark 3">
-                                        <form:fields>
-                                            <Input id="remark3" value="{quoteModel>/quotename}" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                     <form:FormElement label="Remark 4">
-                                        <form:fields>
-                                            <Input id="remark4" value="{quoteModel>/quotename}" />
-                                        </form:fields>
-                                    </form:FormElement>
-                                     <form:FormElement label="Remark 5">
-                                        <form:fields>
-                                            <Input id="remark5" value="{quoteModel>/quotename}" />
-                                        </form:fields>
-                                    </form:FormElement>
+                                    <form:fields>
+                                        <Input id="remark1" value="{quoteModel>/remark1}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                    <form:FormElement label="Remark 2">
+                                    <form:fields>
+                                        <Input id="remark2" value="{quoteModel>/remark2}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                    <form:FormElement label="Remark 3">
+                                    <form:fields>
+                                        <Input id="remark3" value="{quoteModel>/remrk3}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                    <form:FormElement label="Remark 4">
+                                    <form:fields>
+                                        <Input id="remark4" value="{quoteModel>/remrk4}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark 5">
+                                    <form:fields>
+                                        <Input id="remark5" value="{quoteModel>/remark5}" />
+                                    </form:fields>
+                                </form:FormElement>
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>

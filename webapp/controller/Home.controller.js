@@ -198,7 +198,8 @@ sap.ui.define([
 					MessageToast.show(msg);
 				}
 				else{
-					dashBoard_oModel.setData(data[0][0]);
+					console.log(data);
+						dashBoard_oModel.setData(data[0][0]);
 				}
 				currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
 			})
@@ -216,12 +217,13 @@ sap.ui.define([
 				currentContext.getView().setModel(moduleAccessoModel, "moduleAccessoModel");
 				
 				// If data is not get from database  then handle Empty data condition
-				if (moduleData.length === 0 && moduleData.trim().length === 0)
+				if (!moduleData.length)
 					{
 						console.log("ModuleData is not available");
 					}
 				else
 					{
+						console.log(moduleData);
 						for (var i = 0; i < moduleData[0].length; i++) {
 							modulearray.push({
 								id: id++,
