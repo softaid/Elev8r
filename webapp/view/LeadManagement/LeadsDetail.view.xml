@@ -196,6 +196,7 @@
 							<Label text=" " />
 							<table:template>
 								<Text text="Revision:  {quotationModel>Sequence_no}" wrapping="true" />
+                                <Text text="Revision:  {quotationModel>Sequence_no}" wrapping="true" />
 							</table:template>
 						</table:Column>
 						<table:Column hAlign="End" width="10%">

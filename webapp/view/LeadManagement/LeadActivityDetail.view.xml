@@ -181,6 +181,8 @@
                                     </Slider>
                                 </form:fields>
                             </form:FormElement> 
+
+                            
                             <form:FormElement label="{i18n>leadActivityType}">
                                 <form:fields>
                                     <Select id="type"

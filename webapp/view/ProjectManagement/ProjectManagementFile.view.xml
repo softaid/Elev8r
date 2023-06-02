@@ -1,0 +1,318 @@
+<!-- <core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile" height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:u="sap.ui.unified">
+    
+        
+    <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle enableScrolling="true">
+				        <f:heading>
+					       <Title text="Project Managament"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                        <VBox fitContainer="true">
+                        
+                            <ScrollContainer
+                                height="auto"
+                                width="auto"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                              
+                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px" growing="true" growingScrollToLoad="true"
+                                    rows="{ path: 'quotationModel>/modelData' }" selectionMode="None"
+                                    visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed">
+                                    <table:columns>
+                                        <table:Column width="2%">
+                                            <Label text=" " />
+                                            <table:template>
+                                            <VBOX>
+                                            <Text text="Order No:  {quotationModel>Sequence_no}" wrapping="true" />
+                                            <Text text="Order Name: {quotationModel>Sequence_no}" wrapping="true" />
+                                            <Text text="Model: {quotationModel>Sequence_no}" wrapping="true" />
+                                            </VBOX>
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                          <Label text="NI ENG - SALES ENG" />
+                                            <table:template>
+                                            <VBOX>
+                                            <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                        <table:Column hAlign="End" width="6%">
+                                            <Label text="% Complete"/>
+                                            <table:template>
+                                             <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Plan Days - COMP DAYS" />
+                                            <table:template>
+                                                <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="ORDER DATE - PLAN COMP DATE - ACTUAL COMP DATE" />
+                                            <table:template>
+                                                <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="FINANCE - Advance Credited" />
+                                            <table:template>
+                                            <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Site Checked" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request1" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request2" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                               
+                                 </ScrollContainer>
+
+                        </VBox> 
+                    </f:content>				
+			    </f:DynamicPage>
+		    </f:beginColumnPages>
+	    </f:FlexibleColumnLayout>
+</core:View> -->
+
+
+
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    height="100%">
+	<Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding">
+		<content>
+			<table:Table
+				rows="{/ProductCollection}"
+				selectionMode="MultiToggle"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Products"/>
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column width="11rem">
+						<Label text="Product Name" />
+						<table:template>
+							<Text text="{Name}" wrapping="false" />
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+						<Label text="Product Id" />
+						<table:template>
+							<Input value="{ProductId}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="6rem" hAlign="End">
+						<Label text="Quantity" />
+						<table:template>
+							<Label text="{Quantity}" />
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+						<Label text="Status" />
+						<table:template>
+							<ObjectStatus text="{Status}" state="{
+								path: 'Available',
+								formatter: '.formatAvailableToObjectState'
+							}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+						<Label text="Price" />
+						<table:template>
+							<u:Currency value="{Price}" currency="{CurrencyCode}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<Label text="Supplier" />
+						<table:template>
+							<ComboBox value="{SupplierName}" items="{/Suppliers}">
+								<c:Item text="{Name}"/>
+							</ComboBox>
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+						<Label text="Image" />
+						<table:template>
+							<m:Link text="Show Image" href="{ProductPicUrl}" target="_blank"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+						<Label text="Details" />
+						<table:template>
+							<Button text="Show Details" press="handleDetailsPress"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+						<Label text="Heavy Weight" />
+						<table:template>
+							<CheckBox selected="{
+								path: 'Heavy',
+								type: 'sap.ui.model.type.String'
+							}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<Label text="Main Category" />
+						<table:template>
+							<Select selectedKey="{Category}" items="{/Categories}">
+								<c:Item text="{Name}" key="{Name}"/>
+							</Select>
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<Label text="Additional Categories" />
+						<table:template>
+							<MultiInput
+								tokenUpdate="updateMultipleSelection"
+								value="{AdditionalCategory}"
+								tokens="{AdditionalCategoriesSelection}"
+								suggestionItems="{
+									path: '/Categories',
+									sorter: { path: 'Name' }
+								}"
+								showValueHelp="false"
+								>
+								<tokens>
+									<Token key="{Key}" text="{Name}"/>
+								</tokens>
+								<suggestionItems>
+									<c:Item key="{ProductId}" text="{Name}" />
+								</suggestionItems>
+							</MultiInput>
+						</table:template>
+					</table:Column>
+					<table:Column width="6rem" hAlign="Center">
+						<Label text="Status" />
+						<table:template>
+							<c:Icon src="{
+								path: 'Available',
+								formatter: '.formatAvailableToIcon'
+							}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem" hAlign="Center">
+						<Label text="Delivery Date" />
+						<table:template>
+							<DatePicker value="{
+								path: 'DeliveryDate',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {source: {pattern: 'timestamp'}}
+							}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</content>
+	</Page>
+</mvc:View>

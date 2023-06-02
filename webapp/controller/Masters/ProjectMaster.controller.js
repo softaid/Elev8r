@@ -29,6 +29,12 @@ sap.ui.define([
 
             var currentContext = this;
 
+            var oVisModel = new JSONModel({
+                row: "true",
+                row2: "true"
+            });
+            this.setModel(oVisModel, "visModel");
+
             currentContext.getReferenceTypeByMaster();
         },
 
@@ -64,6 +70,9 @@ sap.ui.define([
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
                 "defaultvalue": viewModel.getProperty("defaultvalue"),
+                "projectper": viewModel.getProperty("projectper"),
+                "stageper": viewModel.getProperty("stageper"),
+                "row1": "true",
             }
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "ProjectMasterDetail", viewModel: model });
@@ -98,11 +107,32 @@ sap.ui.define([
 
         //lazy loading of view on tab select        
         onTabSelect: function (oControlEvent) {
+            
             var key = oControlEvent.getParameters().key;
             var text = oControlEvent.getParameters().selectedItem.mProperties.text;
             var item = oControlEvent.getParameter("item");
             var isViewRendered = item.getContent().length > 0;
             var pModel = this.getView().getModel("projectMasterModel");
+            // var masterDetailModel = this.getView().getModel("masterDetailModel");
+            // masterDetailModel = {
+            //     "row1": "true",
+            // }
+            console.log(pModel.oData.typecode);
+          
+
+            if(pModel.oData.typecode !="ProMilestones")
+            {
+                var masterDetailModel = this.getView().getModel("masterDetailModel").oData.modelData;
+                for(let i = 0; i < masterDetailModel.length; i++){
+                        masterDetailModel[i].row1 = true;
+                }
+            //     // this.getView().getModel("masterDetailModel").setProperty("/row1", "false");
+            //     console.log(masterDetailModel);
+
+            //    this.getView().getModel("masterDetailModel").setProperty("/row1", "false");
+
+            //     console.log(masterDetailModel);
+            }
 
             pModel.oData.typecode = key;
             pModel.oData.typename = text;
@@ -112,6 +142,10 @@ sap.ui.define([
             this.loadData("", "", pModel.oData);
 
             this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
+        },
+
+        rowFunction : function(item, index){
+            console.log(item);
         },
 
         loadData1: function (sChannel, sEvent, oData) {
@@ -130,9 +164,11 @@ sap.ui.define([
                     }
                     oModel.setData({ modelData: data[0] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
+                    console.log("masterDetailModel",oModel);
                 }else{
                     oModel.setData({ modelData: [] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
+                    console.log("masterDetailModel1",oModel);
                 }
             });
         },
@@ -721,13 +757,8 @@ sap.ui.define([
                     };
                 }
                 saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), ReportTitle + ".xlsx");
-
-
             }
         },
-
-
-
 
     });
 });

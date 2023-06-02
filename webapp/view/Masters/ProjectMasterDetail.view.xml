@@ -91,6 +91,26 @@
                                         </Switch>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement label="Projct Per">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                        max="100" min="0" progress="true"
+                                        showAdvancedTooltip="true" value="{editMasterModel>/projectper}">
+                                        <ResponsiveScale id="rScaleWarningLevel"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement> 
+                             <form:FormElement label="Stage Per">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevelOne"
+                                        max="100" min="0" progress="true"
+                                        showAdvancedTooltip="true" value="{editMasterModel>/stageper}">
+                                        <ResponsiveScale id="rScaleWarningLevelOne"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement> 
                                   <form:FormElement label="{i18n>Default}">
                                     <form:fields>
                                         <Switch  state="{editMasterModel>/defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >

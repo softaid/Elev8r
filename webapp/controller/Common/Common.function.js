@@ -591,6 +591,15 @@ sap.ui.define([
             });
         },
 
+        getReferenceWithAll: function (typeCode, modelName, currentContext) {
+
+            commonService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
+                var selectModel = new sap.ui.model.json.JSONModel();
+                selectModel.setData({modelData: [{id:"All",description:"Select All"},...data[0]]});
+                currentContext.getView().setModel(selectModel, modelName);
+            });
+        },
+
          // get reference types
          getReferenceByType: function (typeCode,modelName, currentContext) {
             masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
@@ -1560,41 +1569,19 @@ sap.ui.define([
 
         },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         isEmail: function (currentContext, inputId) {
             var ctrl = currentContext.getView().byId(inputId);
 
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!re.test(ctrl.getValue())) {
-                ctrl.setValueState(sap.ui.core.ValueState.Error)
-                    .setValueStateText("Enter Valid Email Id.");
-
+                ctrl.setValueState(sap.ui.core.ValueState.Error).setValueStateText("Enter Valid Email Id.");
                 return false;
             }
             else {
                 ctrl.setValueState(sap.ui.core.ValueState.None);
+                return true;
             }
 
-            return true;
         },
 
         isNumber: function (currentContext, inputId) {
@@ -1604,14 +1591,31 @@ sap.ui.define([
             var re = /^\d+$/;
 
             if (!re.test(ctrl.getValue())) {
-                ctrl.setValueState(sap.ui.core.ValueState.Error)
-                    .setValueStateText("Enter valid number.");
+                ctrl.setValueState(sap.ui.core.ValueState.Error).setValueStateText("Enter valid number.");
 
                 return false;
             }
 
             return true;
         },
+
+        isNumberWithMessage: function (currentContext, inputId,message,length) {
+            var ctrl = currentContext.getView().byId(inputId);
+            ctrl.setValueState(sap.ui.core.ValueState.None);
+
+            var re = /^\d+$/;
+
+            if (re.test(ctrl.getValue())&&((ctrl.getValue()).length==length)) {
+                ctrl.setValueState(sap.ui.core.ValueState.None);
+                return true;
+            }
+            else{
+                ctrl.setValueState(sap.ui.core.ValueState.Error).setValueStateText(message);
+                return false;
+            }
+
+          },
+
 
         isNumberGreaterThanZero: function (currentContext, inputId) {
             var ctrl = currentContext.getView().byId(inputId);
