@@ -8,7 +8,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Contact.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,contactService) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService, contactService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddContact", {
@@ -19,7 +19,7 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("contactdetails", "newContact", this.contactdetail, this);
 			this.bus.subscribe("converttolead", "leadConversion", this.leadConversion, this);
-            this.bus.subscribe("contactscreen", "handleContactList", this.handleContactList, this);
+			this.bus.subscribe("contactscreen", "handleContactList", this.handleContactList, this);
 
 			// bind Source dropdown
 			commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
@@ -89,7 +89,17 @@ sap.ui.define([
 			commonService.getAllCities(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
+
 				oModel.setSizeLimit(data[0].length);
+
+				let rCityModel = new sap.ui.model.json.JSONModel();
+				rCityModel.setData({ modelData: data[0] });
+
+				let wCityModel = new sap.ui.model.json.JSONModel();
+				wCityModel.setData({ modelData: data[0] });
+
+				currentContext.getView().setModel(rCityModel, "rCityModel");
+				currentContext.getView().setModel(wCityModel, "wCityModel");
 				currentContext.getView().setModel(oModel, "partyCityModel");
 
 			});
@@ -105,57 +115,57 @@ sap.ui.define([
 		getModelDefault: function () {
 			return {
 				id: null,
-                contacttypeid : null,
-                date : commonFunction.getDateFromDB(new Date()),
-                contactcompanyid : null, 
-                companyname : null, 
-                buisnesscardone : null, 
-                buisnesscardtwo : null, 
-                buisnesscardthree : null, 
-                contactcategoryid : null, 
-                contactsubcategoryid : null, 
-                waddress : null,
-                wcityid : null,
-                wstateid : null, 
-                wcountryid : null, 
-                wpincode : null,
-                residentialaddress : null, 
-                rcityid : null,
-                rstateid : null, 
-                rcountryid : null, 
-                rpincode : null,
-                phoneno : null, 
-                email : null, 
-                contactperson : null, 
-                linkedtocompany : null, 
-                buscard : null,
-                branch : null, 
-                gstno : null, 
-                panno : null, 
-                linkfacebook : null, 
-                limkinstagram : null, 
-                linkyoutube : null, 
-                linklinkedin : null, 
-                remark : null,
-                contactsourceone : null, 
-                contactsourcetwo : null, 
-                salecontact : null,
-                nicontact : null,
-                eicontact : null, 
-                contact : null,
-                mobilep : null, 
-                mobilew : null, 
-                designation : null, 
-                emailp : null,
-                emailw : null, 
-                DOB : commonFunction.getDateFromDB(new Date()),
-                DOM : commonFunction.getDateFromDB(new Date()),
-                sociallink1 : null, 
-                sociallink2 : null, 
-                sociallink3 : null, 
-                contactreference : null, 
-                companyid : null,
-                contactname : null
+				contacttypeid: null,
+				date: commonFunction.getDateFromDB(new Date()),
+				contactcompanyid: null,
+				companyname: null,
+				buisnesscardone: null,
+				buisnesscardtwo: null,
+				buisnesscardthree: null,
+				contactcategoryid: null,
+				contactsubcategoryid: null,
+				waddress: null,
+				wcityid: null,
+				wstateid: null,
+				wcountryid: null,
+				wpincode: null,
+				residentialaddress: null,
+				rcityid: null,
+				rstateid: null,
+				rcountryid: null,
+				rpincode: null,
+				phoneno: null,
+				email: null,
+				contactperson: null,
+				linkedtocompany: null,
+				buscard: null,
+				branch: null,
+				gstno: null,
+				panno: null,
+				linkfacebook: null,
+				limkinstagram: null,
+				linkyoutube: null,
+				linklinkedin: null,
+				remark: null,
+				contactsourceone: null,
+				contactsourcetwo: null,
+				salecontact: null,
+				nicontact: null,
+				eicontact: null,
+				contact: null,
+				mobilep: null,
+				mobilew: null,
+				designation: null,
+				emailp: null,
+				emailw: null,
+				DOB: commonFunction.getDateFromDB(new Date()),
+				DOM: commonFunction.getDateFromDB(new Date()),
+				sociallink1: null,
+				sociallink2: null,
+				sociallink3: null,
+				contactreference: null,
+				companyid: null,
+				contactname: null
 			}
 		},
 
@@ -164,31 +174,31 @@ sap.ui.define([
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
-		getAllContacts : function(){
+		getAllContacts: function () {
 			let editContactModel = this.getView().getModel("editContactModel");
 			contactService.getAllContacts(function (data) {
-				if(data.length && data[0].length){
+				if (data.length && data[0].length) {
 					let lastid = (data[0].length) - 1;
 					let nextid = (data[0][lastid].id) + 1;
 					editContactModel.oData.contactid = nextid;
 					editContactModel.refresh();
-				}else{
+				} else {
 					editContactModel.oData.contactid = 1;
 					editContactModel.refresh();
 				}
 			});
 		},
 
-        handleContactList: function (sChannel, sEvent, oData) {
+		handleContactList: function (sChannel, sEvent, oData) {
 
 			this.model = oData.viewModel;
 
-			if(this.model.id != undefined){
+			if (this.model.id != undefined) {
 				this.getView().byId("btnSave").setText("Update");
 				this.getView().byId("convertBtn").setVisible(true);
-				
+
 				this.bindContactDetails(this.model.id);
-			}else{
+			} else {
 				this.getView().byId("btnSave").setText("Save");
 				this.getView().byId("convertBtn").setVisible(false);
 				let selRow = oData.viewModel;
@@ -196,7 +206,7 @@ sap.ui.define([
 				editPartyModel.oData.contactid = selRow.nextid;
 				editPartyModel.refresh();
 			}
-			
+
 			// if (this.model.id != undefined) {
 			// }else{
 			// 	var oModel = new JSONModel();
@@ -207,7 +217,7 @@ sap.ui.define([
 			this.id = this.model.id;
 		},
 
-		leadConversion : function (sChannel, sEvent, oData) {
+		leadConversion: function (sChannel, sEvent, oData) {
 
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.bus = sap.ui.getCore().getEventBus();
@@ -215,7 +225,7 @@ sap.ui.define([
 			oRouter.navTo(oData.pagekey, true);
 		},
 
-		convertToLead : function(){
+		convertToLead: function () {
 			var viewModel = this.getView().getModel("editContactModel");
 			var model = { "id": viewModel.oData.id }
 			this.bus = sap.ui.getCore().getEventBus();
@@ -262,7 +272,7 @@ sap.ui.define([
 				});
 				this.getView().byId("btnSave").setText("Update");
 
-			} 
+			}
 
 			this.getView().setModel(oModel, "editContactModel");
 			var oModel = this.getView().getModel("editContactModel");
@@ -289,7 +299,7 @@ sap.ui.define([
 		},
 
 		onSave: function () {
-			// if (this.validateForm()) {
+			if (this.validateForm() == true) {
 				var currentContext = this;
 				var model = this.getView().getModel("editContactModel").oData;
 				console.log("editContactModel", model);
@@ -302,42 +312,74 @@ sap.ui.define([
 				contactService.saveContact(model, function (data) {
 
 					if (data.id > 0) {
-							var message = model.id == null ? "Contact created successfully!" : "Contact edited successfully!";
-							currentContext.onCancel();
-							currentContext.reset();
-							MessageToast.show(message);
-							currentContext.bus = sap.ui.getCore().getEventBus();
-							currentContext.bus.publish("loaddata", "loadData");
+						var message = model.id == null ? "Contact created successfully!" : "Contact edited successfully!";
+						currentContext.onCancel();
+						// currentContext.reset();
+						MessageToast.show(message);
+						currentContext.bus = sap.ui.getCore().getEventBus();
+						currentContext.bus.publish("loaddata", "loadData");
 					}
 
 				});
-			// }
+			}
 		},
 
 		validateForm: function () {
-			var isValid = true;
 			var email1 = this.getView().byId("email1").getValue();
 			var emailp = this.getView().byId("emailp").getValue();
 			var emailw = this.getView().byId("emailw").getValue();
+			var isValid = true;
+			let array=[];
+			if (!commonFunction.isNumberWithMessage(this, "txtPinCode1", "correct pin is required!", 6)) {
+				array.push(false);
+			}
+			 if (!commonFunction.isNumberWithMessage(this, "PinCodeR", "correct pin is required!", 6)) {
+				array.push(false);
+			}
+			 if (email1 != "" && commonFunction.isEmail(this, "email1")) {
+				array.push(false);
+			}	
+			 if (emailp != "" && commonFunction.isEmail(this, "emailp")) {
+				array.push(false);
+			}
+			 if (emailw != "" && commonFunction.isEmail(this, "emailw")) {
+				array.push(false);
+			}
+			 if (!commonFunction.isNumberWithMessage(this, "mobile1", "correct mobile no. is required!", 10)) {
+				array.push(false);
+			}
+	         if (!commonFunction.isNumberWithMessage(this, "salescontact", "correct mobile no. is required!", 10)) {
+				array.push(false);
+			}
+			 if (!commonFunction.isNumberWithMessage(this, "nicontact",  "correct mobile no. is required!", 10)) {
+				array.push(false);
+			}
+			 if (!commonFunction.isNumberWithMessage(this, "eicontact", "correct mobile no. is required!", 10)) {
+				array.push(false);
+			}
+			 if (!commonFunction.isNumberWithMessage(this, "mobilep", "correct mobile no. is required!", 10)) {
+				array.push(false);
+			}
+			 if (!commonFunction.isNumberWithMessage(this, "mobilew", "correct mobile no. is required!", 10)) {
+				array.push(false);
+			}
+			if (this.getView().byId("source1").getValue().length==0) {
+				this.getView().byId("source1").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Contact Source required");
+				array.push(false);
+			} 
+			else{
+				this.getView().byId("source1").setValueState(sap.ui.core.ValueState.None);
+			}
+			if (this.getView().byId("source2").getValue().length==0) {
+				this.getView().byId("source2").setValueState(sap.ui.core.ValueState.Error).setValueStateText("Contact Source required");
+				array.push(false);
+			} 
+			else{
+				this.getView().byId("source2").setValueState(sap.ui.core.ValueState.None)
+			}
 
-			if(email1 != ""){
-				commonFunction.isEmail(this, "email1");
-				isValid = false
-			}else{
-				this.getView().byId("email1").setValueState(sap.ui.core.ValueState.None)
-			}
-			if(emailp != ""){
-				commonFunction.isEmail(this, "emailp");
-				isValid = false
-			}else{
-				this.getView().byId("emailp").setValueState(sap.ui.core.ValueState.None)
-			}
-			if(emailw != ""){
-				commonFunction.isEmail(this, "emailw");
-				isValid = false
-			}else{
-				this.getView().byId("emailw").setValueState(sap.ui.core.ValueState.None)
-			}
+			isValid=(array.length>0)?false:true;
+
 			return isValid;
 		},
 
@@ -351,7 +393,7 @@ sap.ui.define([
 			if (inputId == "txtMobileNo") {
 
 				if (inputValue != "")
-					commonFunction.isNumber(this, "txtMobileNo")
+					commonFunction.isNumber(this, inputId)
 				else
 					this.getView().byId("txtMobileNo").setValueState(sap.ui.core.ValueState.None);
 
@@ -359,14 +401,14 @@ sap.ui.define([
 			else if (inputId == "txtPinCode") {
 
 				if (inputValue != "")
-					commonFunction.isNumber(this, "txtPinCode")
+					commonFunction.isNumber(this, inputId)
 				else
 					this.getView().byId("txtPinCode").setValueState(sap.ui.core.ValueState.None);
 			}
 			else if (inputId == "txtCreditPeriod") {
 
 				if (inputValue != "")
-					commonFunction.isNumber(this, "txtCreditPeriod")
+					commonFunction.isNumber(this, inputId)
 				else
 					this.getView().byId("txtCreditPeriod").setValueState(sap.ui.core.ValueState.None);
 			}
@@ -376,6 +418,39 @@ sap.ui.define([
 			var currentContext = this;
 			var oBundle = this.getModel("i18n").getResourceBundle()
 			return oBundle
+		},
+
+		onSiteStateChange: function () {
+			var currentContext = this;
+			let stateId = this.getView().getModel("editContactModel").oData.wstateid;
+			let model = this.getView().getModel("partyCityModel").oData.modelData;
+
+			let cityarray = [];
+			model.map((a) => {
+				if (a.stateid == stateId) {
+					cityarray.push(a);
+				}
+			});
+			this.getView().getModel("wCityModel").oData.modelData = cityarray;
+			this.getView().getModel("wCityModel").refresh();
+
+
+		},
+		onResidentialStateChange: function () {
+			var currentContext = this;
+			let stateId = this.getView().getModel("editContactModel").oData.rstateid;
+			let model = this.getView().getModel("partyCityModel").oData.modelData;
+
+			let cityarray = [];
+			model.map((a) => {
+				if (a.stateid == stateId) {
+					cityarray.push(a);
+				}
+			});
+			this.getView().getModel("rCityModel").oData.modelData = cityarray;
+			this.getView().getModel("rCityModel").refresh();
+
+
 		},
 
 		onDelete: function () {

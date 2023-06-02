@@ -28,7 +28,6 @@ sap.ui.define([
                 commonService.runJQueryX("DELETE", "projectactivity/deleteprojectactivity/" + params.id, null, callback, null);
             },
 
-
         };
     }
 );

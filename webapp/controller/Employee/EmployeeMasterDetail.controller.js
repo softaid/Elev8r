@@ -18,7 +18,8 @@ sap.ui.define([
 
 		formatter: formatter,
 		onInit: function () {
-			commonFunction.getReference("EmpRole", "roleModel", this);
+
+			commonFunction.getReferenceWithAll("EmpRole", "roleModel", this);
 
 			this.fnShortCut();
 		},
@@ -70,13 +71,20 @@ sap.ui.define([
 
 		loadEmpolyeeData: function (id) {
 			var currentContext = this;
+			
 			employeeService.getEmployee({ id: id }, function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
 				oModel.setData(data[0][0]);
 
-				//var roleModel = data[0][0].emproleids.split(',');
-			//	currentContext.getView().byId("ddlMtxtModuleNameodule").setSelectedKeys(roleModel);
+				var emproleid = data[0][0].emproleids.split(',');
+                  
+				// total employee types avaliable
+				let totalRole=currentContext.getView().getModel("roleModel").oData.modelData;
+
+                //condition to check whether all employee role is selected or specific  employee role is selected
+				(emproleid.length)==((totalRole.length)-1)?currentContext.getView().byId("emprole").setSelectedKeys(["All",...emproleid]):currentContext.getView().byId("emprole").setSelectedKeys(emproleid);
+
 
 				currentContext.getView().setModel(oModel, "editemployeeModel");
 			});
@@ -201,6 +209,60 @@ sap.ui.define([
 			}
 		},
 
+		handleSelectionChange: function (oEvent) {
+            var changedItem = oEvent.getParameter("changedItem");
+            var isSelected = oEvent.getParameter("selected");
+            var state = "Selected";
+			var oItems = oEvent.oSource.mAggregations.items;
+
+            if (!isSelected) {
+                state = "Deselected"
+            }
+
+            //Check if "Selected All is selected
+            if (changedItem.mProperties.key == "All") {
+                var oName, res;
+
+                //If it is Selected
+                if (state == "Selected") {
+
+                    var oItems = oEvent.oSource.mAggregations.items;
+                    for (var i = 0; i < oItems.length; i++) {
+                        if (i == 0) {
+                            oName = oItems[i].mProperties.key;
+                        } else {
+                            oName = oName + ',' + oItems[i].mProperties.key;
+                        } //If i == 0									
+                    } //End of For Loop
+
+                    res = oName.split(",");
+                    oEvent.oSource.setSelectedKeys(res);
+
+                } else {
+                    res = null;
+                    oEvent.oSource.setSelectedKeys(res);
+                }
+
+            }
+			
+        },
+		
+		handleSelectionFinish: function (oEvt) {
+			let model = this.getView().getModel("roleModel").getData();
+			// model.modelData.unshift({ "id": "All", "description": "Select All" });
+            let selectedItems = oEvt.getParameter("selectedItems");
+            let emproleids= [];
+            for (var i = 0; i < selectedItems.length; i++) {
+                emproleids.push(selectedItems[i].getProperty("key"));
+            }
+            if (emproleids[0] == "All") {
+
+                 emproleids.shift();
+            }
+
+			this.getView().getModel("editemployeeModel").oData.emproleids = emproleids.join(",");
+
+        },
 
 
 	});
