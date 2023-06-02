@@ -298,7 +298,7 @@ sap.ui.define([
 			str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
 			str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
 			str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-			str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+			str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
 			return str;
 
 		},
@@ -472,8 +472,8 @@ sap.ui.define([
 				"pageMargins: [ 40, 20, 40, 60 ]," +
 				"content: [";
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -515,8 +515,8 @@ sap.ui.define([
 
 			// SECOND PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -556,8 +556,8 @@ sap.ui.define([
 
 			// Thired PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -584,8 +584,8 @@ sap.ui.define([
 
 			//FOURTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -642,8 +642,8 @@ sap.ui.define([
 
 			// FIFTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -695,8 +695,8 @@ sap.ui.define([
 
 			// SIXTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -738,8 +738,8 @@ sap.ui.define([
 
 			// SEVENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -787,8 +787,8 @@ sap.ui.define([
 
 			// Eight PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -830,8 +830,8 @@ sap.ui.define([
 
 			// NINE PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -868,8 +868,8 @@ sap.ui.define([
 
 			//TENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -900,8 +900,8 @@ sap.ui.define([
 
 			// ELEVENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
@@ -937,8 +937,8 @@ sap.ui.define([
 
 			// Twelth PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "Jubilee Gardens,Kondapur," + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";

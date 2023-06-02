@@ -27,7 +27,7 @@
                             <items>
                                 <IconTabFilter text="{masterModel>typename}" key="{masterModel>typecode}">
                                     <VBox fitContainer="true">
-                                        <Table id="projectactivityTbl"
+                                        <Table 
                                             inset="false" 
                                             items="{
                                                         path: 'masterDetailModel>/modelData',
@@ -48,6 +48,14 @@
                                                 <Column><Text text ="{i18n>projectDescription}" /></Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Active}" /></Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Default}" /></Column>
+                                                <!-- <Column visible="{masterDetailModel>visible}" minScreenWidth=""
+                                                demandPopin="false"><Text text ="Project Per" /></Column> -->
+                                                <Column id="row1" visible="{masterDetailModel>row1}" minScreenWidth=""
+                                                demandPopin="false"><Text text ="Project Per" /></Column>
+                                                <!-- <Column  visible="{visModel>/row1}" minScreenWidth=""
+                                                demandPopin="false"><Text text ="Stage Per"/></Column> -->
+                                                <!-- <Column><Text text ="Stage Per" /></Column> -->
+                                                <Column><Text text ="Stage Per" /></Column>
                                             </columns>
                                             <items>
                                                 <ColumnListItem type="Navigation" press="onListItemPress">
@@ -64,6 +72,8 @@
                                                                 <FlexItemData growFactor="1" />
                                                             </layoutData>
                                                         </Switch>
+                                                        <Text text="{masterDetailModel>projectper}"/>
+                                                        <Text text="{masterDetailModel>stageper}"/>
                                                     </cells>
                                                 </ColumnListItem>
                                             </items>
