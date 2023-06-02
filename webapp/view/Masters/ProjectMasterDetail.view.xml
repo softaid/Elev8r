@@ -18,22 +18,22 @@
                     <Title text="{editMasterModel>/typename}"/>
                 </f:heading>
                 <f:actions>
-						<ToolbarSpacer/>
-						 <Button
-							text="{i18n>saveButtonText}"
-                            type="Emphasized"
-                            press="onSave" id="btnSave"/>
-						<Button
-							text="{i18n>deleteButtonText}"
-							type="Emphasized"
-                            press="onDelete"
-							id= "btnDelete"/>						
-					</f:actions>
-					<f:navigationActions>
-						<Button
-								icon="sap-icon://decline"
-								type="Transparent" press="onCancel" />
-					</f:navigationActions>
+                    <ToolbarSpacer/>
+                        <Button
+                        text="{i18n>saveButtonText}"
+                        type="Emphasized"
+                        press="onSave" id="btnSave"/>
+                    <Button
+                        text="{i18n>deleteButtonText}"
+                        type="Emphasized"
+                        press="onDelete"
+                        id= "btnDelete"/>						
+                </f:actions>
+                <f:navigationActions>
+                    <Button
+                        icon="sap-icon://decline"
+                        type="Transparent" press="onCancel" />
+                </f:navigationActions>
             </f:DynamicPageTitle>
         </f:title>
         <f:content>	
@@ -61,22 +61,22 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
-                               <form:FormElement id="projecttype" label="Project Type">
-                                <form:fields>
-                                    <Select id="project"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{editMasterModel>/parentid}" 
-                                        forceSelection="false"
-                                        width="500px"
-                                        items="{
-                                            path: 'projectModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{projectModel>id}" text="{projectModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
+                                <form:FormElement id="projecttype" label="Project Type">
+                                    <form:fields>
+                                        <Select id="project"
+                                            required="true" 
+                                            change=""
+                                            selectedKey="{editMasterModel>/parentid}" 
+                                            forceSelection="false"
+                                            width="500px"
+                                            items="{
+                                                path: 'projectModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{projectModel>id}" text="{projectModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadDescription}">
                                     <form:fields>
                                         <Input id="description" value="{editMasterModel>/description}"/>
