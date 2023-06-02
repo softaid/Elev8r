@@ -202,6 +202,8 @@ sap.ui.define([
 						let leadLiftPDFModel = oThis.getView().getModel("leadLiftPDFModel");
 						leadLiftPDFModel.setData(data[1][0]);
 						oThis.getView().setModel(leadLiftPDFModel, "leadLiftPDFModel");
+						console.log("leadLiftPDFModel",leadLiftPDFModel);
+
 					}
 					// Get Sales Details for PDF
 					if (data[2].length) {
