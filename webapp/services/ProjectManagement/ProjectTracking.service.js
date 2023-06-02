@@ -27,6 +27,9 @@ sap.ui.define([
             deleteProjectTracking : function(params, callback){
                 commonService.runJQueryX("DELETE", "projecttracking/deleteprojecttracking/" + params.id, null, callback, null);
             },
+            getAllProject: function(callback){
+                commonService.runJQueryX("GET", "project/searchprojectdetails/" + commonService.session("companyId"), null, callback, null);
+            },
 
 
         };

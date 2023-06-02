@@ -277,6 +277,11 @@
 					"target": "projectactivities"
 				},
 				{
+					"pattern": "projectactivitiesAdd",
+					"name": "projectactivitiesAdd",
+					"target": "projectactivitiesAdd"
+				},
+				{
 					"pattern": "projectctivities",
 					"name": "projectctivities",
 					"target": "projectctivities"
@@ -486,6 +491,12 @@
 				"project" : {
 					"viewId": "project",
 					"viewName": "ProjectManagement/Project",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectactivitiesAdd" : {
+					"viewId": "projectactivitiesAdd",
+					"viewName": "ProjectManagement/ProjectActivityAdd",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

@@ -114,17 +114,17 @@
                                     </form:FormElement> 
                                     <form:FormElement label="Business Card1">
                                         <form:fields>
-                                            <Input id="businesscardone" valueLiveUpdate="true" value="{editContactModel>/businesscardone}" change=""/>
+                                            <Input id="businesscardone" valueLiveUpdate="true" value="{editContactModel>/buisnesscardone}" change=""/>
                                         </form:fields>
                                     </form:FormElement> 
                                     <form:FormElement label="Business Card2">
                                         <form:fields>
-                                            <Input id="businesscardtwo" valueLiveUpdate="true" value="{editContactModel>/businesscardtwo}" change=""/>
+                                            <Input id="businesscardtwo" valueLiveUpdate="true" value="{editContactModel>/buisnesscardtwo}" change=""/>
                                         </form:fields>
                                     </form:FormElement> 
                                     <form:FormElement label="Business Card3">
                                         <form:fields>
-                                            <Input id="businesscardthree" valueLiveUpdate="true" value="{editContactModel>/businesscardthree}" change=""/>
+                                            <Input id="businesscardthree" valueLiveUpdate="true" value="{editContactModel>/buisnesscardthree}" change=""/>
                                         </form:fields>
                                     </form:FormElement> 
                                     <form:FormElement label="Contact Category">
@@ -175,7 +175,7 @@
                                             <Select id="ddlState1" selectedKey="{editContactModel>/wstateid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
-                                                }" change="onStatusChange">
+                                                }" change="onSiteStateChange">
                                                 <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
                                             </Select>
                                         </form:fields>
@@ -184,9 +184,9 @@
                                         <form:fields>
                                             <Select id="ddlCity1" selectedKey="{editContactModel>/wcityid}" 
                                                 items="{
-                                                    path: 'partyCityModel>/modelData'                                                    
-                                                }" change="onStatusChange">
-                                                <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
+                                                    path: 'wCityModel>/modelData'                                                    
+                                                }" change="">
+                                                <core:Item key="{wCityModel>id}" text="{wCityModel>cityname}" />                                            
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
@@ -215,7 +215,7 @@
                                             <Select id="ddlStater" selectedKey="{editContactModel>/rstateid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
-                                                }" change="onStatusChange">
+                                                }" change="onResidentialStateChange">
                                                 <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
                                             </Select>
                                         </form:fields>
@@ -224,15 +224,15 @@
                                         <form:fields>
                                             <Select id="ddlCityr" selectedKey="{editContactModel>/rcityid}" 
                                                 items="{
-                                                    path: 'partyCityModel>/modelData'                                                    
-                                                }" change="onStatusChange">
-                                                <core:Item key="{partyCityModel>id}" text="{partyCityModel>cityname}" />                                            
+                                                    path: 'rCityModel>/modelData'                                                    
+                                                }" change="">
+                                                <core:Item key="{rCityModel>id}" text="{rCityModel>cityname}" />                                            
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="PinCode(R)">
                                         <form:fields>
-                                            <Input id="PinCodeR" type="number" maxLength="6" valueLiveUpdate="true" value="{editContactModel>/rpincode}" change="onNumberInputChange"/>
+                                            <Input id="PinCodeR" maxLength="6" valueLiveUpdate="true" value="{editContactModel>/rpincode}" change="onNumberInputChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mobile1">
@@ -272,7 +272,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="GSTN">
                                         <form:fields>
-                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editContactModel>/gstn}"/>
+                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editContactModel>/gstno}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="PanNo">
