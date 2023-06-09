@@ -16,5 +16,9 @@ sap.ui.define([
             getProject : function(param,callback){
                 commonService.runJQueryX("GET", "elevproject/selectproject/" + param.id, null, callback, null);
             },
+
+            getAllProjectsDetail : function(callback){
+                commonService.runJQueryX("GET", "elevproject/projectsdetail/" + commonService.session("companyId"), null, callback, null);
+            },
         }
     })
