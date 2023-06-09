@@ -141,6 +141,8 @@ sap.ui.define([
 			// }
 		},
 
+
+
 		onCancel: function () {
 			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leadactivities--fclLeadActivity");
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
