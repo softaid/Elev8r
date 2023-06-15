@@ -55,7 +55,10 @@ sap.ui.define([
 			model.setData({});
 			this.getView().setModel(model, "managerRoleModel");
 
-
+			
+			var model = new JSONModel();
+			model.setData({});
+			this.getView().setModel(model, "DepartmentModel");
 
 
 			this.flag = false;
@@ -63,7 +66,9 @@ sap.ui.define([
 			this.bomArr = [];
 			this.bomDetailArr = [];
 			this.getAllProject();
-			this.getRole()
+			this.getRole();
+			this.getAllDepartment();
+			
 
 			// commonFunction.getFeedMillSettingData(this, 726);
 		},
@@ -135,13 +140,11 @@ sap.ui.define([
 			oDayHistory.projectid = projectModel.id;
 			oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
 			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
+			oDayHistory.isstarted=oDayHistory.actualstartdate!= null?true:false;
+
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "ProjectActivityAddDetail", viewModel: oDayHistory });
-
-			// {   	this.getView().byId("add").setEnabled(false);
-			// 	MessageBox.error("Bom is saved");
-			// }
 
 		},
 
@@ -214,19 +217,68 @@ sap.ui.define([
 			});
 		},
 
+		// get all department
+		getAllDepartment: function () {
+			var currentContext = this;
+			Projectservice.getAllDepartment(function (data) {
+				var oModel = currentContext.getView().getModel("DepartmentModel");
+				oModel.setData(data[0]);
+				oModel.refresh();
+			});
+		},
+
 		// get project stage and show in table
 		getProjectdetail: function (projectid) {
 			var currentContext = this;
 			Projectservice.getProjectdetail({ id: projectid }, function (data) {
 				console.log("data", data);
 				data[0].map(function (value, index) {
+
 					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0][index].actualstartdate == null ? null:currentContext.dateFormatter( data[0][index].actualstartdate);
+					data[0][index].actualenddate = data[0][index].actualenddate == null ? null:currentContext.dateFormatter( data[0][index].actualenddate);
+
 				});
 				var tblModel = currentContext.getView().getModel("tblModel");
 				tblModel.setData(data[0]);
 				tblModel.refresh();
 
 			});
+		},
+
+
+		dateFormatter:function( date){
+			const inputDateTime= date == null? new Date():new Date(date);
+			const options = {
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit',
+				second: '2-digit',
+				hour12: false,
+				timeZone: 'Asia/Kolkata'
+			};
+			const indianTime = inputDateTime.toLocaleString('en-IN', options).replace(/\//g, '-').replace(',', '');
+
+			const [datePart, timePart] = indianTime.split(' ');
+
+			// Split the date and time parts
+			const [day, month, year] = datePart.split('-');
+			const [hour, minute, second] = timePart.split(':');
+
+			// Reformat the date
+			const formattedDate = `${year}-${month}-${day}`;
+
+			// Reformat the time
+			const formattedTime = `${hour}:${minute}:${second}`;
+
+			// Combine the date and time
+			const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+		return formattedDateTime;
+
+
 		},
 
 
@@ -366,12 +418,20 @@ sap.ui.define([
 
 			let model = new JSONModel();
 			model.setData({ ...data.viewModel });
+
 			// this.getView().setModel(model, "tblModel");
 
+			this.detailView.setModel(model, "ProjectDetailModel");
 			this.detailView.setModel(model, "DetailModel");
+
 			this.oFlexibleColumnLayout.removeAllMidColumnPages();
 			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
+			let DetailModeldata=this.getView().getModel("DetailModel").getData();
+
+			
+
+
 		},
 
 
@@ -536,6 +596,41 @@ sap.ui.define([
 			// DetailModel.refresh();
 
 		},
+
+
+		onDragStart: function (event) {
+			// Get the dragged item
+			var listItem = event.getParameter("target");
+		
+			// Set the dragged data
+			event.getParameter("dragSession").setComplexData("draggedRow", {
+				listItem: listItem,
+				model: listItem.getBindingContext("tblModel").getObject()
+			});
+		},
+		
+		onDrop: function (event) {
+			// Get the dragged item data
+			var draggedData = event.getParameter("dragSession").getComplexData("draggedRow");
+		
+			// Get the drop target
+			var dropPosition = event.getParameter("dropPosition");
+			var dropIndex = event.getParameter("dropControl").indexOfItem(event.getParameter("droppedControl"));
+		
+			// Update the table model based on the drop position
+			var tableModel = this.getView().getModel("tblModel");
+			var tableData = tableModel.getProperty("/");
+			tableData.splice(dropIndex, 0, draggedData.model);
+			tableModel.setProperty("/", tableData);
+		
+			// Remove the dragged row from the source position
+			var sourceIndex = event.getParameter("dragSession").getComplexData("draggedRow").listItem.getIndex();
+			event.getParameter("dragSession").getComplexData("draggedRow").listItem.getParent().removeItem(sourceIndex);
+		
+			// Update the binding context for the dragged item
+			draggedData.listItem.setBindingContext(tableModel.createBindingContext("/" + dropIndex));
+		},
+		
 
 		handleSelectionFinish: function (oEvt) {
 

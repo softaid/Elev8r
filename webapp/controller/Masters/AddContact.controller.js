@@ -434,8 +434,8 @@ sap.ui.define([
 			this.getView().getModel("wCityModel").oData.modelData = cityarray;
 			this.getView().getModel("wCityModel").refresh();
 
-
 		},
+		
 		onResidentialStateChange: function () {
 			var currentContext = this;
 			let stateId = this.getView().getModel("editContactModel").oData.rstateid;
