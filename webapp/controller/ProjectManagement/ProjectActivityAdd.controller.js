@@ -4,19 +4,23 @@ sap.ui.define([
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
-	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter,Projectservice, xlsx,MessageToast) {
+	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
+	'sap/m/MessageToast',
+	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
+
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivity", {
+		formatter: formatter,
 
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-			
-			this.bus.subscribe("billofmaterial", this.setDetailPage, this);
-			this.bus.subscribe("billofmaterial", "handleBillOfMaterialList", this.handleBillOfMaterialList, this);
 
-			this.bus.subscribe("activityFragement", "activityFragement", this.activityFragement, this);
+			this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
+			this.bus.subscribe("billofmaterial", "handleBillOfMaterialList", this.handleBillOfMaterialList, this);
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial", this.onAddbillofmaterial, this);
 
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial1", this.onAddbillofmaterial1, this);
@@ -32,21 +36,39 @@ sap.ui.define([
 
 			// set empty model to view		
 			var model = new JSONModel();
-			model.setData({ });
+			model.setData({});
 			this.getView().setModel(model, "tblModel");
 
 			var model = new JSONModel();
-			model.setData({ });
+			model.setData({});
 			this.getView().setModel(model, "projectList");
 
+			var model = new JSONModel();
+			model.setData({});
+			this.getView().setModel(model, "DetailModel");
+
+			var model = new JSONModel();
+			model.setData({});
+			this.getView().setModel(model, "engRoleModel");
+
+			var model = new JSONModel();
+			model.setData({});
+			this.getView().setModel(model, "managerRoleModel");
 
 			
+			var model = new JSONModel();
+			model.setData({});
+			this.getView().setModel(model, "DepartmentModel");
+
 
 			this.flag = false;
-			
+
 			this.bomArr = [];
 			this.bomDetailArr = [];
-			this.getAllProject()
+			this.getAllProject();
+			this.getRole();
+			this.getAllDepartment();
+			
 
 			// commonFunction.getFeedMillSettingData(this, 726);
 		},
@@ -66,12 +88,12 @@ sap.ui.define([
 			}
 		},
 
-		handleBillOfMaterialList: function(sChannel, sEvent, oData) {
+		handleBillOfMaterialList: function (sChannel, sEvent, oData) {
 
 			let selRow = oData.viewModel;
 			let oThis = this;
 
-			if(selRow != null)  {
+			if (selRow != null) {
 
 				if (selRow.action == "view") {
 					oThis.getView().byId("btnSave").setEnabled(false);
@@ -87,120 +109,13 @@ sap.ui.define([
 
 		},
 
-		onAfterRendering: function(){
+		onAfterRendering: function () {
 			jQuery.sap.delayedCall(1000, this, function () {
-                this.getView().byId("btnList").focus();
-            });
-
-		},
-
-		fnShortCuts:function(){
-			var currentContext = this;
-			$(document).keydown(function(event){
-				if (event.keyCode== 83 && (event.ctrlKey)){
-					event.preventDefault();
-					jQuery(document).ready(function($) {
-						currentContext.onSave()
-					})
-				}
-				if (event.keyCode== 67 && (event.ctrlKey)){
-					event.preventDefault();
-                jQuery(document).ready(function($) {
-                    currentContext.resetModel()
-                })
-				}
-			 })
-            
-        },
-
-		
-
-		itemgroupSelect: function () {
-			var itemgroupid = this.getView().byId("txtItemGroup").getSelectedKey();
-			commonFunction.getItemsByItemGroups(itemgroupid, this, "itemList");
-		},
-		//Dialog for item
-		handleItemValueHelp: function (oEvent) {
-			var sInputValue = oEvent.getSource().getValue();
-
-			this.inputId = oEvent.getSource().getId();
-			// create value help dialog
-			// if (!this._valueHelpDialog) {
-			this._valueHelpDialog = sap.ui.xmlfragment(
-				"sap.ui.poultryerp.componentcontainer.fragmentview.Common.ItemDialog",
-				this
-			);
-			this.getView().addDependent(this._valueHelpDialog);
-			// }
-			this._valueHelpDialog.open(sInputValue);
-		},
-
-		_handleItemSearch: function (oEvent) {
-			var sValue = oEvent.getParameter("value");
-			var columns = ['itemcode', 'itemname'];
-			var oFilter = new sap.ui.model.Filter(columns.map(function (colName) {
-				return new sap.ui.model.Filter(colName, sap.ui.model.FilterOperator.Contains, sValue);
-			}),
-				false);  // false for OR condition
-			var oBinding = oEvent.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
-		},
-
-		onItemDialogClose: function (oEvent) {
-			var currentContext = this;
-			var aContexts = oEvent.getParameter("selectedContexts");
-
-			// if(aContexts != undefined){
-			var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
-			var oModel = currentContext.getView().getModel("billofmaterialModel");
-
-			//update existing model to set locationid
-			oModel.oData.itemid = selRow[0].id;
-			oModel.oData.itemname = selRow[0].itemname;
-			oModel.oData.itemunitname = selRow[0].itemunitname;
-			oModel.oData.unitid = selRow[0].itemunitid;
-
-
-			this.getBOMByItemid(selRow[0].id);
-			oModel.refresh();
-
-
-
-		},
-
-		getBOMByItemid: function (itemid) {
-			var currentContext = this;
-			var bomCode = this.getView().byId('textbmcode').getValue();
-			billofMaterialService.getBomByItemid({ itemid: itemid, bomcode: bomCode }, function (data) {
-
-				if (data[0].length > 0) {
-					currentContext.bindBillOfMaterial(data[0][0].bomid);
-				}
-
-				//
+				this.getView().byId("btnList").focus();
 			});
 
-
 		},
-		itemTotal: function () {
-			var oModel = this.getView().getModel("billofmaterialModel");
-			var tblModel = this.getView().getModel("tblModel").oData.modelData;
 
-			var basicCost = 0;
-			var itemcost = 0;
-			var itemtotalqty = 0;
-			for (var i = 0; i < tblModel.length; i++) {
-
-				basicCost = tblModel[i].quantity * tblModel[i].unitcost;
-				itemcost += parseFloat(basicCost);
-				itemtotalqty += parseFloat(tblModel[i].quantity)
-				// oModel.oData.unitcost += parseInt(basicCost);
-			}
-			var unitcost = parseFloat(itemcost / oModel.oData.quantity).toFixed(4);
-			oModel.oData.unitcost = unitcost;
-			oModel.oData.itemtotalqty = parseFloat(itemtotalqty).toFixed(3);
-			oModel.refresh();
-		},
 
 
 		onExit: function () {
@@ -208,125 +123,28 @@ sap.ui.define([
 				this._oDialog.destroy();
 			}
 		},
-		onAddbillofmaterial: function (sChannel, sEvent, oData) {
-			var validModel = this.getView().getModel("tblModel").oData.modelData;
-			var planedqty = this.getView().byId('quantity').getValue();
-			var totalitemQty = this.totalQty();
 
-			var jsonStr = oData.data;
-
-			var oModel = this.getView().getModel("tblModel");
-
-			var flag = true
-			if (jsonStr["index"] == null) {
-				for (var i = 0; i < validModel.length; i++) {
-					if (validModel[i].itemid == jsonStr.itemid) {
-						flag = false;
-						MessageBox.error("Item already exist!");
-						break;
-					}
-				}
-			}
-
-			if (flag) {
-
-				if (jsonStr["index"] == null) { //add new shed pen
-					// push new record in object
-					jsonStr["rowstatus"] = "New";
-					oModel.oData.modelData.push(jsonStr);
-
-				}
-				if (jsonStr["index"] != null) { //update existing shed pen
-					var tableData = oModel.getData();
-
-					// Replace the record in the array
-					jsonStr["rowstatus"] = "Edited";
-					tableData.modelData.splice(jsonStr["index"], 1, jsonStr);
-				}
-				oModel.refresh();
-				this.itemTotal();
-			}
-
-		},
-
-		onAddbillofmaterial1: function (sChannel, sEvent, oData) {
-			var validModel = this.getView().getModel("tblModel").oData.modelData;
-			var planedqty = this.getView().byId('quantity').getValue();
-			var totalitemQty = this.totalQty();
-
-			var jsonStr = oData.data;
-
-			var oModel = this.getView().getModel("tblModel");
-
-			var flag = true
-			if (jsonStr["index"] == null) {
-				for (var i = 0; i < validModel.length; i++) {
-					if (validModel[i].itemid == jsonStr.itemid) {
-						flag = false;
-						MessageBox.error("Item already exist!");
-						break;
-					}
-				}
-			}
-
-			if (flag) {
-
-				if (jsonStr["index"] == null) { //add new shed pen
-					// push new record in object
-					jsonStr["rowstatus"] = "New";
-					oModel.oData.modelData.push(jsonStr);
-
-				}
-				if (jsonStr["index"] != null) { //update existing shed pen
-					var tableData = oModel.getData();
-
-					// Replace the record in the array
-					jsonStr["rowstatus"] = "Edited";
-					tableData.modelData.splice(jsonStr["index"], 1, jsonStr);
-				}
-				oModel.refresh();
-				this.itemTotal();
-			}
-
-		},
-		qtyValidation:function(){
-			var totalitemQty = this.totalQty();
-			var planedqty = this.getView().byId('quantity').getValue();
-			if (planedqty != parseFloat(totalitemQty)){
-				MessageBox.error("BOM quantity and total item quantity should be equal!");
-				return false;
-				
-			}else{
-				return true;
-			
-			}
-		},
-		totalQty: function () {
-			var childModel = this.getView().getModel("tblModel").oData.modelData;
-
-			var totalitemQty = 0;
-			for (var i = 0; i < childModel.length; i++) {
-				totalitemQty += parseFloat(childModel[i].quantity);
-			}
-			return totalitemQty.toFixed(3)
-		},
 
 
 		onAddNewRow: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("billofmaterial", { viewName: "BillOfMaterialDetail" });
+			let projectModel = this.getView().getModel("projectModel").getData();
+
+			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "ProjectActivityAddDetail", viewModel: { projectid: projectModel.id } });
 		},
 
 		onListItemPress: function (oEvent) {
+			console.log(oEvent);
 			let oDayHistory = oEvent.getSource().getBindingContext("tblModel").getObject();
-		
-		
+			let projectModel = this.getView().getModel("projectModel").getData();
+			oDayHistory.projectid = projectModel.id;
+			oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
+			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
+			oDayHistory.isstarted=oDayHistory.actualstartdate!= null?true:false;
+
+
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("activityFragement","activityFragement", { viewName: "BillOfMaterialDetail", viewModel: oDayHistory});
-	
-		{   	this.getView().byId("add").setEnabled(false);
-			MessageBox.error("Bom is saved");
-		}
+			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "ProjectActivityAddDetail", viewModel: oDayHistory });
 
 		},
 
@@ -348,32 +166,43 @@ sap.ui.define([
 			this._oDialog.open();
 			// this.bindBillOfMaterial();
 		},
+       
+		// function call to get manager and engineer
+		getRole: function () {
+			let role = [{ "id": 1, "discription": "eng" }, { "id": 1, "discription": "manager" }];
+			let currentContext = this;
+			role.map(function (role, index) {
+				ManageUserService.getUserByRole({ roleid: role.id }, function (data) {
+					let field = role.discription;
+					console.log(data);
+					let oroleModel = currentContext.getView().getModel(`${field}RoleModel`);
+					oroleModel.setData(data[0]);
+				})
+			})
 
-		handleprojectSearch: function (oEvent) {
-			var sValue = oEvent.getParameter("value");
-			var columns = ['itemname'];
-			var oFilter = new sap.ui.model.Filter(columns.map(function (colName) {
-				return new sap.ui.model.Filter(colName, sap.ui.model.FilterOperator.Contains, sValue);
-			}),
-				false);  // false for OR condition
-			var oBinding = oEvent.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
 		},
 
 		// function call on close the project fragement 
 		handleProjectFragementClose: function (oEvent) {
-			var currentContext = this;
+			let currentContext=this;
+			
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts != undefined) {
 				var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
 
-				Projectservice.getProject({id:selRow[0].id},function(data){
-                    console.log(data[0])
+				Projectservice.getProject({ id: selRow[0].id }, function (data) {
+					console.log(data[0])
+					data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
 					currentContext.getView().getModel("projectModel").setData(data[0][0]);
-					currentContext.getProjectdetail(data[0][0].id);
+				data[0][0].niengineer!=null?currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]):"data not available";
+				data[0][0].nimanager!=null?currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]):"data not available";
+				currentContext.getProjectdetail(data[0][0].id);
+
 				});
 
-			} else {
+			}
+
+			else {
 
 			}
 		},
@@ -382,49 +211,76 @@ sap.ui.define([
 		getAllProject: function () {
 			var currentContext = this;
 			Projectservice.getAllProjects(function (data) {
-	
 				var oModel = currentContext.getView().getModel("projectList");
 				oModel.setData(data[0]);
 				oModel.refresh();
 			});
 		},
 
-        // get project stage and show in table
+		// get all department
+		getAllDepartment: function () {
+			var currentContext = this;
+			Projectservice.getAllDepartment(function (data) {
+				var oModel = currentContext.getView().getModel("DepartmentModel");
+				oModel.setData(data[0]);
+				oModel.refresh();
+			});
+		},
+
+		// get project stage and show in table
 		getProjectdetail: function (projectid) {
 			var currentContext = this;
 			Projectservice.getProjectdetail({ id: projectid }, function (data) {
-				console.log("data",data)
+				console.log("data", data);
+				data[0].map(function (value, index) {
+
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0][index].actualstartdate == null ? null:currentContext.dateFormatter( data[0][index].actualstartdate);
+					data[0][index].actualenddate = data[0][index].actualenddate == null ? null:currentContext.dateFormatter( data[0][index].actualenddate);
+
+				});
 				var tblModel = currentContext.getView().getModel("tblModel");
 				tblModel.setData(data[0]);
 				tblModel.refresh();
 
-
-				// var oModel = new sap.ui.model.json.JSONModel();
-
-				// var map = {}, node, roots = [], i;
-				// 	if(data[1].length>0){
-				// for (i = 0; i < data[1].length; i += 1) {
-				// 	map[data[1][i].itemid] = i; // initialize the map
-				// 	data[1][i].children = []; // initialize the children
-				// }
-				// for (i = 0; i < data[1].length; i += 1) {
-				// 	node = data[1][i];
-				// 	if (node.parentid !== null) {
-				// 		// if you have dangling branches check that map[node.parentId] exists
-				// 		data[1][map[node.parentid]].children.push(node);
-				// 	} else {
-				// 		roots.push(node);
-				// 	}
-				// }
-
-				// oModel.setData({ modelData: roots });
-				// currentContext.getView().setModel(oModel, "bomTreeModel");
-				// 	}
-
-				// currentContext.itemTotal();
-				// //
 			});
 		},
+
+
+		dateFormatter:function( date){
+			const inputDateTime= date == null? new Date():new Date(date);
+			const options = {
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit',
+				second: '2-digit',
+				hour12: false,
+				timeZone: 'Asia/Kolkata'
+			};
+			const indianTime = inputDateTime.toLocaleString('en-IN', options).replace(/\//g, '-').replace(',', '');
+
+			const [datePart, timePart] = indianTime.split(' ');
+
+			// Split the date and time parts
+			const [day, month, year] = datePart.split('-');
+			const [hour, minute, second] = timePart.split(':');
+
+			// Reformat the date
+			const formattedDate = `${year}-${month}-${day}`;
+
+			// Reformat the time
+			const formattedTime = `${hour}:${minute}:${second}`;
+
+			// Combine the date and time
+			const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+		return formattedDateTime;
+
+
+		},
+
 
 		resourceBundle: function () {
 			var currentContext = this;
@@ -435,43 +291,41 @@ sap.ui.define([
 
 		onSave: function () {
 			var currentContext = this;
-			if (this.validateForm()) {
-				var parentModel = this.getView().getModel("billofmaterialModel").oData;
-				var childModel = this.getView().getModel("tblModel").oData.modelData;
-				if(this.flag)
-				parentModel["id"] = null;
-				parentModel["bomdate"] = commonFunction.getDate(parentModel.bomdate);
-				parentModel["companyid"] = commonService.session("companyId");
-				parentModel["userid"] = commonService.session("userId");
-				parentModel["bomno"] = this.getView().byId('txtbomno').getValue();
+			let parentModel = this.getView().getModel("projectModel").oData;
+			let tableModel = this.getView().getModel("tblModel").oData;
 
-				billofMaterialService.saveBillOfMaterial(parentModel, function (data) {
+			parentModel["companyid"] = commonService.session("companyId");
+			parentModel["userid"] = commonService.session("userId");
+			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
+			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
 
-					if (data.id > 0) {
-						var bomid = data.id;
-						var parentid = parentModel.itemid;
-						// insert/edit record in child table 
-						for (var i = 0; i < childModel.length; i++) {
-							if(currentContext.flag)
-							childModel[i]["id"] = null;	
-							childModel[i]["bomid"] = bomid;
-							//  }
-							childModel[i]["companyid"] = commonService.session("companyId");
-							childModel[i]["userid"] = commonService.session("userId");
-							childModel[i]["parentid"] = parentid;
-							billofMaterialService.saveBillOfMaterialDetail(childModel[i], function (data) {
-								var Savemsg = currentContext.resourceBundle().getText("feedMillBOMSaveMag");
-								MessageToast.show(Savemsg);
-								currentContext.loadData();
-							})
-						}
-					}
+			Projectservice.saveProject(parentModel, function (data) {
+
+				MessageToast.show("Project  update sucessfully");
+
+				tableModel.map(function (oModel, index) {
+					oModel["companyid"] = commonService.session("companyId");
+					oModel["userid"] = commonService.session("userId");
+
+					oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
+					oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
+					// oModel.isactive = oModel.isactive===true?1:0;
+					// oModel.isstd = oModel.isstd===true?1:0;
+
+					Projectservice.saveProjectActivityDetail(oModel, function (data) {
+						MessageToast.show("Project details update sucessfully");
+
+					});
+
 				})
 
 
+
+
 				currentContext.resetModel();
-				this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
-			}
+				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
+				// }
+			})
 		},
 
 		validateForm: function () {
@@ -497,26 +351,26 @@ sap.ui.define([
 			if (!commonFunction.isSelectRequired(this, "txtCreatedBy", "Created by is required !"))
 				isValid = false;
 
-			if(!this.qtyValidation())
+			if (!this.qtyValidation())
 				isValid = false;
 
 			var cnt = 0;
 
-			for(var i = 0; i < childModel.length; i++){
-				for(var j = 0; j < this.bomDetailArr.length; j++){
-					if((childModel[i].itemid == this.bomDetailArr[j].itemid) && (childModel[i].quantity == this.bomDetailArr[j].quantity)){
-						cnt ++;
+			for (var i = 0; i < childModel.length; i++) {
+				for (var j = 0; j < this.bomDetailArr.length; j++) {
+					if ((childModel[i].itemid == this.bomDetailArr[j].itemid) && (childModel[i].quantity == this.bomDetailArr[j].quantity)) {
+						cnt++;
 					}
 				}
 			}
 
-			if(parentModel.bomcode != this.bomArr.bomcode){
-				if(cnt == childModel.length && cnt == this.bomDetailArr.length && parentModel.itemid == this.bomArr.itemid){
+			if (parentModel.bomcode != this.bomArr.bomcode) {
+				if (cnt == childModel.length && cnt == this.bomDetailArr.length && parentModel.itemid == this.bomArr.itemid) {
 					MessageBox.error("Same items with same quantity are not allowd for multiple BOM!");
 
 					isValid = false;
-				}				
-			}else{
+				}
+			} else {
 				MessageBox.error("BOM code should be unique!");
 
 				isValid = false;
@@ -541,71 +395,260 @@ sap.ui.define([
 		resetModel: function () {
 
 			var emptyModel = this.getModelDefault();
-			var model = this.getView().getModel("billofmaterialModel");
-			model.setData(emptyModel);
+			var model = this.getView().getModel("projectModel");
+			model.setData({});
+			this.getView().byId("eng").setSelectedKeys([]);
+			this.getView().byId("manager").setSelectedKeys([]);
+
 
 			var tableModel = this.getView().getModel("tblModel");
-			tableModel.setData({ modelData: [] });
+			tableModel.setData({});
 
-			this.loadData();
+			// this.loadData();
 
-			//get itemgroup
-			commonFunction.getItemGroups(this, "itemGroupModel");
-
-			commonFunction.getNewDocSeries("BOM", this);
 		},
 
 
 		setDetailPage: function (channel, event, data) {
 
 			this.detailView = sap.ui.view({
-				viewName: "sap.ui.poultryerp.componentcontainer.view.FeedMill.Master." + data.viewName,
+				viewName: "sap.ui.elev8rerp.componentcontainer.view.ProjectManagement." + data.viewName,
 				type: "XML"
 			});
 
-			this.detailView.setModel(data.viewModel, "viewModel");
+			let model = new JSONModel();
+			model.setData({ ...data.viewModel });
+
+			// this.getView().setModel(model, "tblModel");
+
+			this.detailView.setModel(model, "ProjectDetailModel");
+			this.detailView.setModel(model, "DetailModel");
+
 			this.oFlexibleColumnLayout.removeAllMidColumnPages();
 			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
-		},
+			let DetailModeldata=this.getView().getModel("DetailModel").getData();
 
-		onDeletebillofmaterial: function (sChannel, sEvent, oData) {
-
-			var oModel = this.getView().getModel("tblModel");
-			var tableData = oModel.getData();
-			// Find the index of the object via id
-			var index = tableData.modelData
-				.map(function (pen) { return pen.id; })
-				.indexOf(oData.data.id);
-
-			// delete record in the array
-			tableData.modelData.splice(index, 1);
-			oModel.refresh();
-
-		},
-
-		onCopyPaste : function(){
-			var oModel = this.getView().getModel("billofmaterialModel");
-			var tblModel = this.getView().getModel("tblModel");
-			var transactionid = oModel.oData.id;
-			var itemgroupid = oModel.oData.itemgroupid;
-
-			this.bomArr = oModel.oData;
-			this.bomDetailArr = tblModel.oData.modelData;
-
-			this.resetModel();
-
-			this.bindBillOfMaterial(transactionid);
-
-			this.bindtable(transactionid);
-
-			commonFunction.getItemsByItemGroups(itemgroupid, this, "itemList");
-
-			commonFunction.getNewDocSeries("BOM", this);
 			
-			this.flag = true;
 
-			this.getView().byId("btnDuplicate").setVisible(false);
+
+		},
+
+
+		// function for calculate end date or completion day
+		dayCalculation: async function (oEvent) {
+
+			let oThis = this;
+			let DetailModel = oThis.getView().getModel("projectModel");
+			let ItemConsumptiondata = DetailModel.oData;
+			if (oEvent.mParameters.id == "componentcontainer---projectactivitiesAdd--txtenddate") {
+				var parts = ItemConsumptiondata.startdate.split('/');
+				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
+
+				parts = ItemConsumptiondata.enddate.split('/');
+				let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
+
+				ItemConsumptiondata.completiondays = parseInt((enddate - startdate) / (86400 * 1000));// Days
+			}
+			else {
+
+				var endDate = new Date(commonFunction.getDate(ItemConsumptiondata.startdate));
+				endDate.setDate(endDate.getDate() + ((parseInt(ItemConsumptiondata.completiondays)) - 1));
+
+				let originalDate = new Date(endDate);
+				let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+				let enddate = dateFormatter.format(originalDate);
+
+				ItemConsumptiondata.enddate = enddate;
+			}
+
+			DetailModel.refresh();
+
+		},
+		// function for calculate end date or completion day
+		onclick: async function (oEvent) {
+
+			let oThis = this;
+			let DetailModel = oThis.getView().getModel("tblModel");
+			let completiondays = parseFloat(oThis.getView().getModel("projectModel").oData.completiondays);
+
+			let ItemConsumptiondata = DetailModel.oData;
+			let result = [];
+			let sum = 0;
+			let startdate = oThis.getView().getModel("projectModel").oData.startdate;
+			{
+				let endDate = new Date(commonFunction.getDate(startdate));
+				endDate.setDate(endDate.getDate() - 1);
+
+				let originalDate = new Date(endDate);
+				let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+				let enddate = dateFormatter.format(originalDate);
+				startdate = enddate;
+			}
+
+			let stagedaycompletion = 0;
+
+			let validate = ItemConsumptiondata.some(function (element, index) {
+				// Condition to break the loop
+				if (element.isactive == 1) {
+					if (element.projectweightage != null) {
+						result.push({
+							stagesequence: index,
+							projectweightage: element.projectweightage,
+							stagedaycompletion: parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))).toFixed(1)),
+							completiondays: parseFloat((((completiondays / 100) * parseFloat(element.projectweightage))).toFixed(1))
+						});
+						ItemConsumptiondata[index].completiondays = result[(result.length) - 1].completiondays;
+
+						stagedaycompletion = parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))).toFixed(1));
+					}
+					else {
+						MessageToast.show(`projectweightage of stage  ${element.stagename} is not defined`);
+						return false;
+					}
+				}
+
+			});
+			let validate1 = result.some(function (element, index) {
+				sum = sum + parseFloat(element.projectweightage);
+			});
+
+			if (sum != 100) {
+				sum > 100 ? MessageToast.show(`projectweightage of stage is greater than 100% `) : MessageToast.show(`projectweightage of stage is less than 100% `);
+				return false;
+			}
+
+
+			let validate3 = result.some(function (element, index) {
+
+
+
+				if (index != 0) {
+					{
+						let endDate = new Date(commonFunction.getDate(startdate));
+						endDate.setDate(endDate.getDate() + Math.ceil(element.stagedaycompletion));
+
+						let originalDate = new Date(endDate);
+						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+						let enddate = dateFormatter.format(originalDate);
+
+						ItemConsumptiondata[element.stagesequence].enddate = enddate;
+						result[index].enddate = enddate;
+
+					}
+
+
+					if ((Number.isInteger(result[index - 1].stagedaycompletion))) {
+						let StartDate = new Date(commonFunction.getDate(result[index - 1].enddate));
+						StartDate.setDate(StartDate.getDate() + 1);
+						let originalDate = new Date(StartDate);
+						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+						StartDate = dateFormatter.format(originalDate);
+
+						ItemConsumptiondata[element.stagesequence].startdate = StartDate;
+						result[index].startdate = StartDate;
+					}
+
+					else {
+
+						ItemConsumptiondata[element.stagesequence].startdate = (result[index - 1].enddate);
+						result[index].startdate = (result[index - 1].enddate);
+
+
+					}
+				}
+
+				else {
+					if (element.completiondays > 1) {
+						let endDate = new Date(commonFunction.getDate(startdate));
+						endDate.setDate(endDate.getDate() + Math.ceil(element.stagedaycompletion));
+
+						let originalDate = new Date(endDate);
+						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+						let enddate = dateFormatter.format(originalDate);
+
+						ItemConsumptiondata[element.stagesequence].enddate = enddate;
+						result[index].enddate = enddate;
+
+					}
+					else {
+						ItemConsumptiondata[element.stagesequence].enddate = oThis.getView().getModel("projectModel").oData.startdate;
+						result[index].enddate = oThis.getView().getModel("projectModel").oData.startdate;
+
+					}
+
+
+					ItemConsumptiondata[element.stagesequence].startdate = oThis.getView().getModel("projectModel").oData.startdate;
+					result[index].startdate = oThis.getView().getModel("projectModel").oData.startdate;
+
+
+				}
+				DetailModel.refresh();
+
+			})
+			// else {
+			// 	ItemConsumptiondata[element.stagesequence].startdate = startdate;
+
+			// }
+
+			// });
+
+			// DetailModel.refresh();
+
+		},
+
+
+		onDragStart: function (event) {
+			// Get the dragged item
+			var listItem = event.getParameter("target");
+		
+			// Set the dragged data
+			event.getParameter("dragSession").setComplexData("draggedRow", {
+				listItem: listItem,
+				model: listItem.getBindingContext("tblModel").getObject()
+			});
+		},
+		
+		onDrop: function (event) {
+			// Get the dragged item data
+			var draggedData = event.getParameter("dragSession").getComplexData("draggedRow");
+		
+			// Get the drop target
+			var dropPosition = event.getParameter("dropPosition");
+			var dropIndex = event.getParameter("dropControl").indexOfItem(event.getParameter("droppedControl"));
+		
+			// Update the table model based on the drop position
+			var tableModel = this.getView().getModel("tblModel");
+			var tableData = tableModel.getProperty("/");
+			tableData.splice(dropIndex, 0, draggedData.model);
+			tableModel.setProperty("/", tableData);
+		
+			// Remove the dragged row from the source position
+			var sourceIndex = event.getParameter("dragSession").getComplexData("draggedRow").listItem.getIndex();
+			event.getParameter("dragSession").getComplexData("draggedRow").listItem.getParent().removeItem(sourceIndex);
+		
+			// Update the binding context for the dragged item
+			draggedData.listItem.setBindingContext(tableModel.createBindingContext("/" + dropIndex));
+		},
+		
+
+		handleSelectionFinish: function (oEvt) {
+
+			let oprojectModel = this.getView().getModel("projectModel");
+			let oprojectModeldata = oprojectModel.oData;
+			let selectedItems = oEvt.getParameter("selectedItems");
+			let roleids = [];
+
+			for (var i = 0; i < selectedItems.length; i++) {
+				roleids.push(selectedItems[i].getProperty("key"));
+			}
+			if (oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--eng") {
+				oprojectModeldata.niengineer = roleids.join(",");
+			}
+			else {
+				oprojectModeldata.nimanager = roleids.join(",");
+			}
+
 		},
 	});
 }, true);

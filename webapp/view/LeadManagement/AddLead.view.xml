@@ -179,7 +179,7 @@
                                             <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
-                                                }" change="onStatusChange">
+                                                }" change="onSiteStateChange">
                                                 <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
                                             </Select>
                                         </form:fields>

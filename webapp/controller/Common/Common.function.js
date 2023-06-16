@@ -1599,6 +1599,21 @@ sap.ui.define([
             return true;
         },
 
+        isNumbermessage: function (currentContext, inputId,message) {
+            var ctrl = currentContext.getView().byId(inputId);
+            ctrl.setValueState(sap.ui.core.ValueState.None);
+
+            var re = /^\d+$/;
+
+            if (!re.test(ctrl.getValue())) {
+                ctrl.setValueState(sap.ui.core.ValueState.Error).setValueStateText(message);
+
+                return false;
+            }
+
+            return true;
+        },
+
         isNumberWithMessage: function (currentContext, inputId,message,length) {
             var ctrl = currentContext.getView().byId(inputId);
             ctrl.setValueState(sap.ui.core.ValueState.None);

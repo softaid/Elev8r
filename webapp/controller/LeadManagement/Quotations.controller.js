@@ -16,7 +16,7 @@ sap.ui.define([
 			// this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("qutationcreen", "handleQutationList", this.handleQutationList, this);
 			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
-			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+			this.bus.subscribe("loadQuotationData", "loadQuotationData", this.loadQuotationData, this);
 			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
 
 			this.handleRouteMatched(null);
@@ -55,7 +55,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.loadData();
+			this.loadQuotationData();
 		},
 
 
@@ -130,7 +130,7 @@ sap.ui.define([
 			oBinding.sort(oSorter);
 		},
 
-		loadData: function () {
+		loadQuotationData: function () {
 			var currentContext = this;
 			quotationService.getAllQuotations(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
