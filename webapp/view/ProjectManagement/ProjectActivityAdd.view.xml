@@ -3,6 +3,7 @@
     xmlns:f="sap.f"
     xmlns:form="sap.ui.layout.form" 
     xmlns:core="sap.ui.core"
+	xmlns:dnd="sap.ui.core.dnd"
    xmlns:k= "jQuery.sap.ui.event.keyCodes"
          xmlns:tnt="sap.tnt">
  <f:FlexibleColumnLayout  id="fclBillOfMaterial" backgroundDesign="Solid">
@@ -28,7 +29,7 @@
                         </form:title>
                         <form:layout>
                             <form:ResponsiveGridLayout
-                                labelSpanXL="4"
+                             labelSpanXL="4"
                                 labelSpanL="4"
                                 labelSpanM="4"
                                 labelSpanS="12"
@@ -40,7 +41,7 @@
                                 columnsXL="3"
                                 columnsL="2"
                                 columnsM="2"
-                                singleContainerFullSize="false" />
+                            singleContainerFullSize="false" />
                         </form:layout>
                         <form:formContainers>
                             <form:FormContainer title="">
@@ -159,7 +160,7 @@
                 <IconTabFilter text="{i18n>feedMillBillOfMaterialLabelTabBillOfMaterialList}">
                                     <VBox fitContainer="true">
                                    
-                        <Table id="tblBillOfMaterial" width="100%" mode="None"  backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                        <Table id="tblBillOfMaterial" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
                             path: 'tblModel>/',
                                 sorter: {
                                     path: 'id'
@@ -208,6 +209,7 @@
                                 </cells>
                             </ColumnListItem>
                         </items>
+                        
                     </Table>
 
                         </VBox>   
@@ -284,4 +286,4 @@
 
 
 
- 
+

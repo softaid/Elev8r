@@ -652,15 +652,15 @@ sap.ui.define(
 
 				validateForm: function () {
 					var isValid = true;
-					// var source = this.getView().byId("sourceid").getSelectedKey();
-					// var pipeline = this.getView().byId("txtStageid").getSelectedKey();
+					var source = this.getView().byId("sourceid").getSelectedKey();
+					var pipeline = this.getView().byId("txtStageid").getSelectedKey();
 
-					// var location = this.getView().byId("leadlocationid").getSelectedKey();
-					// var status = this.getView().byId("leadstatusid").getSelectedKey();
+					var location = this.getView().byId("leadlocationid").getSelectedKey();
+					var leadStatus = this.getView().byId("leadstatusid").getSelectedKey();
 
-					// var category = this.getView().byId("categoryid").getSelectedKey();
+					var category = this.getView().byId("categoryid").getSelectedKey();
 
-					// var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
+					var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
 
 					// var emailId = this.getView().byId("txtEmailId").getValue();
 					// var phoneNo = this.getView().byId("txtPhoneNo").getValue();
@@ -669,8 +669,6 @@ sap.ui.define(
 
 					let leadValue = this.getView().byId("txtLeadValue").getValue();
 
-					// var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
-					// var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
 
 
         if(quotevalue!=null){
@@ -688,20 +686,20 @@ sap.ui.define(
 					// if (
 					// 	!commonFunction.isRequired(
 					// 		this,
-					// 		"txtPartyName",
+					// 		"txtLead",
 					// 		"Please enter lead name."
 					// 	)
 					// )
 					// 	isValid = false;
 
-					// if (
-					// 	!commonFunction.isRequired(
-					// 		this,
-					// 		"contactPerson",
-					// 		"Please enter contact person name."
-					// 	)
-					// )
-					// 	isValid = false;
+					if (
+						!commonFunction.isRequired(
+							this,
+							"contactPerson",
+							"Please enter contact person name."
+						)
+					)
+						isValid = false;
 
 					// if (emailId != "") {
 					// 	if (!commonFunction.isEmail(this, "txtEmailId")) isValid = false;
@@ -735,59 +733,59 @@ sap.ui.define(
 					// 		.setValueState(sap.ui.core.ValueState.None);
 					// }
 
-					// // check atleast one source is selected
+					// check atleast one source is selected
 
-					// if (pipeline.length == 0) {
-					// 	this.getView()
-					// 		.byId("txtStageid")
-					// 		.setValueState(sap.ui.core.ValueState.Error)
-					// 		.setValueStateText("Please select atleast one Stage.");
+					if (pipeline.length == 0) {
+						this.getView()
+							.byId("txtStageid")
+							.setValueState(sap.ui.core.ValueState.Error)
+							.setValueStateText("Please select atleast one Stage.");
 
-					// 	isValid = false;
-					// }
+						isValid = false;
+					}
 
-					// if (source.length == 0) {
-					// 	this.getView()
-					// 		.byId("sourceid")
-					// 		.setValueState(sap.ui.core.ValueState.Error)
-					// 		.setValueStateText("Please select atleast one source.");
+					if (source.length == 0) {
+						this.getView()
+							.byId("sourceid")
+							.setValueState(sap.ui.core.ValueState.Error)
+							.setValueStateText("Please select atleast one source.");
 
-					// 	isValid = false;
-					// }
+						isValid = false;
+					}
 
-					// if (typeoflift.length == 0) {
-					// 	this.getView()
-					// 		.byId("typeofliftid")
-					// 		.setValueState(sap.ui.core.ValueState.Error)
-					// 		.setValueStateText("Please select atleast one lift Type.");
+					if (typeoflift.length == 0) {
+						this.getView()
+							.byId("typeofliftid")
+							.setValueState(sap.ui.core.ValueState.Error)
+							.setValueStateText("Please select atleast one lift Type.");
 
-					// 	isValid = false;
-					// }
+						isValid = false;
+					}
 
-					// if (location.length == 0) {
-					// 	this.getView()
-					// 		.byId("leadlocationid")
-					// 		.setValueState(sap.ui.core.ValueState.Error)
-					// 		.setValueStateText("Please select atleast one location.");
+					if (location.length == 0) {
+						this.getView()
+							.byId("leadlocationid")
+							.setValueState(sap.ui.core.ValueState.Error)
+							.setValueStateText("Please select atleast one location.");
 
-					// 	isValid = false;
-					// }
-					// if (status.length == 0) {
-					// 	this.getView()
-					// 		.byId("leadstatusid")
-					// 		.setValueState(sap.ui.core.ValueState.Error)
-					// 		.setValueStateText("Please select atleast one status.");
+						isValid = false;
+					}
+					if (leadStatus.length == 0) {
+						this.getView()
+							.byId("leadstatusid")
+							.setValueState(sap.ui.core.ValueState.Error)
+							.setValueStateText("Please select atleast one status.");
 
-					// 	isValid = false;
-					// }
-					// if (category.length == 0) {
-					// 	this.getView()
-					// 		.byId("categoryid")
-					// 		.setValueState(sap.ui.core.ValueState.Error)
-					// 		.setValueStateText("Please select atleast one category.");
+						isValid = false;
+					}
+					if (category.length == 0) {
+						this.getView()
+							.byId("categoryid")
+							.setValueState(sap.ui.core.ValueState.Error)
+							.setValueStateText("Please select atleast one category.");
 
-					// 	isValid = false;
-					// }
+						isValid = false;
+					}
 
 					return isValid;
 				},

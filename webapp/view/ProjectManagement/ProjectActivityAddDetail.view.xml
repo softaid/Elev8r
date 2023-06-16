@@ -66,6 +66,23 @@
                                         <Input id="Stage" value="{DetailModel>/stagename}"/>
                                     </form:fields>
                                 </form:FormElement>
+
+                                  <form:FormElement id="projecttype" label="Department">
+                                <form:fields>
+                                    <Select id="project"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{DetailModel>/departmentid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'DepartmentModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{DepartmentModel>id}" text="{DepartmentModel>department}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
                                 <form:FormElement label="Start Date">
                                     <form:fields>
                                     <DatePicker id="startDate" width="100%" 
@@ -93,7 +110,35 @@
                                     <form:fields>
                                         <Input id="completionDay" value="{DetailModel>/completiondays}" change="dayCalculation"/>
                                     </form:fields>
-                                </form:FormElement> <form:FormElement label="Stage %">
+                                </form:FormElement> 
+                                  <form:FormElement label=" Actual Start Date">
+                                    <form:fields>
+                                    <DatePicker id="ActualstartDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{DetailModel>/actualstartdate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="false" />
+                                        </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label=" Actual End Date">
+                                        <form:fields>
+                                    <DatePicker id="actualendDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{DetailModel>/actualenddate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="false"/>
+                                        </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label=" Actual Completion Day">
+                                    <form:fields>
+                                        <Input id="actualcompletionDay" value="{DetailModel>/actualcompletiondays}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Stage %">
                                     <form:fields>
                                         <Input id="StagePercent" value="{DetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
@@ -121,6 +166,26 @@
                                             </Switch>
                                         </form:fields>
                                     </form:FormElement>
+                                      <form:FormElement label="Is Started">
+                                       <form:fields>
+                                            <Switch  state="{DetailModel>/isstarted}" id="isstart"
+                                            change="isstartchange" customTextOn="Yes" customTextOff="No">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement>
+                                      <form:FormElement label="stage Per">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                        max="100" min="0" progress="true" change="onsliderchange"
+                                        showAdvancedTooltip="true" value="{DetailModel>/completionper}">
+                                        <ResponsiveScale id="rScaleWarningLevel"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement> 
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>
