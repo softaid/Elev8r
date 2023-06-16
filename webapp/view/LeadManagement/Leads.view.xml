@@ -138,7 +138,12 @@
                                     <cells>
                                     <ObjectIdentifier  id="leadid" text="{LeadsMasterModel>id}"/>
                                         <Text text="{LeadsMasterModel>leadtype}" />
-                                        <Text text="{LeadsMasterModel>leadscategory}" />
+                                        <ObjectStatus xmlns="sap.m"
+                                            state="{= ${ToSupplier/Address/City} === 'Berlin' ? 'Error' : undefined}"
+                                            text="{ToSupplier/Address/City}"
+                                            inverted="true"
+                                            />
+                                                                                    <Text text="{LeadsMasterModel>leadscategory}" />
                                         <Text text="{LeadsMasterModel>leadname}" />
                                         <Text text="{LeadsMasterModel>sourcename}"/>
                                         <Text text="{LeadsMasterModel>leadstatus}"/>

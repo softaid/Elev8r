@@ -187,15 +187,17 @@
 		showHeader="false"
 		enableScrolling="false"
 		class="sapUiContentPadding">
-		<content>
+		<!-- <content>
 			<table:Table
+                id= "MyTableId"
 				rows="{ path: 'quotationModel>/modelData' }"
-				visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed"
-				paste="onPaste"
+                enableSelectAll="false"
+                selectionMode="MultiToggle"
+				visibleRowCount="{rowcount_model>/rowsCount}"
 				ariaLabelledBy="title">
 				<table:extension>
 					<OverflowToolbar style="Clear">
-						<Title id="title" text="Products"/>
+						<Title id="title" text="Projects"/>
 					</OverflowToolbar>
 				</table:extension>
 				<table:columns>
@@ -1103,6 +1105,27 @@
 					</table:Column>
 				</table:columns>
 			</table:Table>
-		</content>
+		</content> -->
+
+        <Panel id ="pnlPrjMgnttable" width="auto">
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Project Management"/>
+                    <ToolbarSpacer />
+                     <MenuButton text="Download Data" width="100%"  align="right">
+                        <menu>
+                            <Menu itemSelected="onMenuAction" >
+                                <items>
+                                    <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                    <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF" />
+                                </items>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                </Toolbar>
+            </headerToolbar>
+            <content>
+            </content>
+        </Panel>
 	</Page>
 </mvc:View>
