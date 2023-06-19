@@ -401,17 +401,15 @@ sap.ui.define([
 								oColumns.setTemplate(oRow[oTableColumn.columnId]);
 							}
 							// Create a JSON model and set the data
-							// var oModel = new sap.ui.model.json.JSONModel();
-							// oModel.setData(oTableColumn);
+							var oModel = new sap.ui.model.json.JSONModel();
+							oModel.setData(oTableColumn);
 
-							//console.log("--------------oModel-------------", oModel);
+							console.log("--------------oModel-------------", oModel);
 
 
 							// Set the model on the template
 							oColumns.getTemplate().setModel(oModel);
 							oTable.addColumn(oColumns);
-
-							//console.log("-------------oColumns--------------",oColumns);
 						}
 
 						console.log("oColumns", oColumns);
@@ -427,7 +425,6 @@ sap.ui.define([
 						oTable.setModel(oModel);
 					
 						oTable.bindRows("/rows");
-						console.log("------oTable.bindRows---------",oTable.bindRows("/rows"));
 						var pnlPrjMgnttable = oThis.getView().byId("pnlPrjMgnttable");
 						pnlPrjMgnttable.addContent(oTable);
 						console.log("-----------------oTable----------------------",oTable);

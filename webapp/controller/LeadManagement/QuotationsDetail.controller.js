@@ -361,7 +361,7 @@ sap.ui.define([
 			},
 				{
 					name: "RISE (M) (Approximately)",
-					value: "19 mts",
+					value: leadLiftPDFModel.oData.travel,
 				},
 				{
 					name: "STOPS",
@@ -398,7 +398,7 @@ sap.ui.define([
 
 				{
 					name: "CAR PANEL",
-					value: "S.S Car Panel",
+					value: leadLiftPDFModel.oData.carpanel
 				},
 				{
 					name: "CAR DOOR",
@@ -410,16 +410,16 @@ sap.ui.define([
 				},
 				{
 					name: "FALSE CEILING",
-					value: "S.S False Ceiling",
+					value: leadLiftPDFModel.oData.falseceiling,
 				},
 
 				{
 					name: "VENTILATION",
-					value: "Cross Flow Fan",
+					value: leadLiftPDFModel.oData.ventilation,
 				},
 				{
 					name: "FLOORING",
-					value: "PVC Mat",
+					value: leadLiftPDFModel.oData.flooring,
 				},
 				{
 					name: "C.O.P",
@@ -428,7 +428,7 @@ sap.ui.define([
 
 				{
 					name: "CAR POSITION INDICATOR",
-					value: "Dot matrix (LED) Scrolling Display",
+					value: leadLiftPDFModel.oData.carpositionindicator,
 				},
 				{
 					name: "MACHINE",
@@ -436,19 +436,19 @@ sap.ui.define([
 				},
 				{
 					name: "TRACTION MEDIA",
-					value: "Usha Martin Rope",
+					value: leadLiftPDFModel.oData.tractionmedia,
 				},
 				{
 					name: "TYPE OF OPERATION",
-					value: "Full Collective",
+					value: leadLiftPDFModel.oData.operation,
 				},
 				{
 					name: "MAIN POWER SYSTEM",
-					value: "415 Volts ( 3 Phase, 50 Hz, AC Current)",
+					value: leadLiftPDFModel.oData.mainpowersystem,
 				},
 				{
 					name: "AUXILARY SUPPLY SYSTEM",
-					value: "220/230 Volts, Single Phase 50 Hz, AC Current",
+					value: leadLiftPDFModel.oData.auxilarysupplysystem,
 				},
 
 
@@ -629,7 +629,7 @@ sap.ui.define([
 			headertable1 += "[ { columns: [ {text:'Lift Solution" + " " + "', style: 'subheader'} ] },{ columns: [ {text:'Unit" + " " + "', style: 'subheader'} ] },{ columns: [ {text:'Price" + " " + "', style: 'subheader'} ] }],";
 			//headertable1 += "{columns: [{text:'" + leadLiftPDFModel.oData.modeldetails + "', style: 'subheader'},{text:'Opening Auto Power Door" + " " + "', style: 'subheader'}]},";
 			//headertable1 += "[ { columns: [ ['6P – 7S (C+G+5) - MR - S.S Car Panel - S.S Center','Opening Auto Power Door'] ] },{ columns: [ ['1 Units'] ] },{columns: [{text:'     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit) " + "', style: 'subheader'}]}],";
-			headertable1 += "[ { columns: [ [{text:'" + leadLiftPDFModel.oData.modeldetails + "', style: 'title'},{text:'Opening Auto Power Door" + " " + "', style: 'title'}] ] },{ columns: [ {text:'1 Units" + " " + "', style: 'subheader'} ] },{columns: [{text:'     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit) " + "', style: 'title'}]}],";
+			headertable1 += "[ { columns: [ [{text:'" + leadLiftPDFModel.oData.modeldetails + "', style: 'title'},{text:'" + " " + "', style: 'title'}] ] },{ columns: [ {text:'" + leadLiftPDFModel.oData.unit + "', style: 'subheader'} ] },{columns: [{text:'     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit) " + "', style: 'title'}]}],";
 			
 			
 			//headertable1 += "[ { columns: [ [{text:'" + leadLiftPDFModel.oData.modeldetails + "', style: 'title'}] ] }],";
