@@ -21,6 +21,9 @@ sap.ui.define([
 			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			
+			this.bus.subscribe("loadQuotationData", "loadQuotationData", this.loadQuotationData, this);
+			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
+
 			this.handleRouteMatched(null);
 
 			jQuery.sap.delayedCall(1000, this, function () {
@@ -55,7 +58,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.loadData();
+			this.loadQuotationData();
 		},
 
 		// Function for display Type wise quotations
@@ -173,7 +176,7 @@ sap.ui.define([
 			oBinding.sort(oSorter);
 		},
 
-		loadData: function () {
+		loadQuotationData: function () {
 			var currentContext = this;
 			quotationService.getAllQuotations(function (data) {
 				var oModel = new JSONModel();

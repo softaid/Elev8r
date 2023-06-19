@@ -138,7 +138,9 @@ sap.ui.define([
 				oModel.setData({ modelData: data[0] });
 				oModel.setSizeLimit(data[0].length);
 				currentContext.getView().setModel(oModel, "partyCityModel");
-
+				let Model = new sap.ui.model.json.JSONModel();
+				currentContext.getView().setModel(Model, "cityModel");
+				currentContext.getView().getModel("cityModel").oData=data[0];
 			});
 
 			var emptyModel = this.getModelDefault();
@@ -517,6 +519,26 @@ sap.ui.define([
 			}
 
 			return isValid;
+		},
+
+		onSiteStateChange: function () {
+			var currentContext = this;
+			let stateId = this.getView().getModel("editPartyModel").oData.stateid;
+
+			let model = this.getView().getModel("partyCityModel").oData.modelData;
+
+			let cityModel=this.getView().getModel("cityModel").oData;
+
+
+			let cityarray = [];
+			cityModel.map((a) => {
+				if (a.stateid == stateId) {
+					cityarray.push(a);
+				}
+			});
+			this.getView().getModel("partyCityModel").oData.modelData = cityarray;
+			this.getView().getModel("partyCityModel").refresh();
+
 		},
 
 		onPartyNameChange: function (oEvent) {

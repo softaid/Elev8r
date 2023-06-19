@@ -7,92 +7,44 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService ,commonFunction,MessageToast) {
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAddDetail", {
 		onInit: function () {
 
-			// this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
-
-			// commonFunction.getItemList(this);
-			// commonFunction.getReference("BOMType", "materialTypeList", this);
-			// this.fnShortCut();
-			// commonFunction.getFeedMillSettingData(this, 726);
+			//this.handleRouteMatched(null);
 
 		},
 
-		//Dialog for item
-		handleItemValueHelp: function (oEvent) {
-			var sInputValue = oEvent.getSource().getValue();
+		onBeforeRendering: function () {
 
-			this.inputId = oEvent.getSource().getId();
-			// create value help dialog
-			// if (!this._valueHelpDialog) {
-			this._valueHelpDialog = sap.ui.xmlfragment(
-				"sap.ui.poultryerp.componentcontainer.fragmentview.Common.ItemDialog",
-				this
-			);
-			this.getView().addDependent(this._valueHelpDialog);
-			// }
-			this._valueHelpDialog.open(sInputValue);
-		},
+			this.model = this.getView().getModel("ProjectDetailModel");
+			
+			// convert Date to required formate
+			// this.model.oData.actualstartdate = this.model.oData.actualstartdate == null ? null:this.dateFormatter( this.model.oData.actualstartdate);
 
-		_handleItemSearch: function (oEvent) {
-			var sValue = oEvent.getParameter("value");
-			var columns = ['itemcode', 'itemname'];
-			var oFilter = new sap.ui.model.Filter(columns.map(function (colName) {
-				return new sap.ui.model.Filter(colName, sap.ui.model.FilterOperator.Contains, sValue);
-			}),
-				false);  // false for OR condition
-			var oBinding = oEvent.getSource().getBinding("items");
-			oBinding.filter([oFilter]);
-		},
+				// convert Date to required formate
+			// this.model.oData.actualenddate = this.model.oData.actualenddate == null ? null:this.dateFormatter( this.model.oData.actualenddate);
 
-		onItemDialogClose: function (oEvent) {
-			var inputId = this.byId(this.inputId).sId;
-			inputId = inputId.substring(inputId.lastIndexOf('-') + 1);
-			var currentContext = this;
-			var aContexts = oEvent.getParameter("selectedContexts");
+			var oModel = new JSONModel();
 
-			// if(aContexts != undefined){
-			var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
-			var oModel = currentContext.getView().getModel("editbillofmaterialModel");
+			if (this.model != undefined) {
 
+				this.getView().setModel(this.model, "DetailModel");
 
-			oModel.refresh();
-
-			if (inputId == "txtitemname") {
-				this.getLastPurchaseCost(selRow[0].id, selRow[0].unitcost);
-				oModel.oData.itemid = selRow[0].id;
-				oModel.oData.itemname = selRow[0].itemname;
-				// oModel.oData.unitcost = selRow[0].unitcost;
-				oModel.oData.itemunitname = selRow[0].unitname;
-				oModel.oData.unitid = selRow[0].itemunitid;
 			}
 
-			oModel.refresh();
+			let DetailModeldata = this.getView().getModel("DetailModel").oData;
+			// enable disable fields on the basis of condition
+			this.getView().byId("isstart").setEnabled(DetailModeldata.actualstartdate == null);
+			DetailModeldata.isstarted = DetailModeldata.actualstartdate != null ? true : false;
+			this.getView().byId("inpWarningLevel").setEnabled(DetailModeldata.isstarted == true);
+			this.getView().byId("inpWarningLevel").setEnabled(DetailModeldata.completionper !=100 );
+
+			this.getView().getModel("DetailModel").refresh()
 		},
 
-
-		getLastPurchaseCost: function (itemid, unitcost) {
-			var currentContext = this;
-			billofMaterialService.getItemLastPucrchaseCost({ itemid: itemid }, function (data) {
-				var oModel = currentContext.getView().getModel("editbillofmaterialModel");
-				if (data.length > 0) {
-					if (data[0].length > 0) {
-						oModel.oData.unitcost = data[0][0].lastpurchaseprice;
-
-					} else {
-						oModel.oData.unitcost = unitcost;
-					}
-				}
-
-				oModel.refresh();
-			});
-
-
-		},
 
 
 		onSave: function () {
@@ -101,27 +53,26 @@ sap.ui.define([
 			let oModel = this.getView().getModel("DetailModel").oData;
 			oModel["companyid"] = commonService.session("companyId");
 			oModel["userid"] = commonService.session("userId");
-		
-			oModel.startdate=(oModel.startdate != null)?commonFunction.getDate(oModel.startdate):oModel.startdate;
-			oModel.enddate=(oModel.enddate!=null)?commonFunction.getDate(oModel.enddate):oModel.enddate;
-			oModel.isactive = oModel.isactive===true?1:0;
-			oModel.isstd = oModel.isstd===true?1:0;
+
+			oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
+			oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
+			oModel.isactive = oModel.isactive === true ? 1 : 0;
+			oModel.isstd = oModel.isstd === true ? 1 : 0;
 
 			Projectservice.saveProjectActivityDetail(oModel, function (data) {
 
 				Projectservice.getProjectdetail({ id: oModel.projectid }, function (data) {
-					console.log("data",data);
-					data[0].map(function(value,index){
-						data[0][index].activestatus=value.isactive==1?"Active":"InActive";
+					console.log("data", data);
+					data[0].map(function (value, index) {
+						data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
 					});
 					let tblModel = currentContext.getView().getModel("tblModel");
 					tblModel.setData(data[0]);
 					tblModel.refresh();
 					currentContext.onCancel();
-
 				})
 			});
-      
+
 		},
 
 		validateForm: function () {
@@ -166,10 +117,87 @@ sap.ui.define([
 				oModel.setData(data[0]);
 				oModel.refresh();
 			});
-		
+
+		},
+         
+		// function call select stage starting toggle yes
+		isstartchange: function () {
+			let DetailModeldata = this.getView().getModel("DetailModel");
+			console.log(DetailModeldata.oData.isstarted);
+			this.getView().byId("inpWarningLevel").setEnabled(DetailModeldata.oData.isstarted == true);
+			console.log(DetailModeldata);
+
+			DetailModeldata.oData.isstarted == true ? DetailModeldata.oData.completionper = 0 : "null";
+			console.log(DetailModeldata);
+
+
+			DetailModeldata.oData.actualstartdate = this.dateFormatter(null);
+			DetailModeldata.refresh();
+
+			console.log(DetailModeldata);
+
 		},
 
+		dateFormatter:function( date){
 
+
+			const inputDateTime= date == null? new Date():new Date(date);
+			const options = {
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit',
+				second: '2-digit',
+				hour12: false,
+				timeZone: 'Asia/Kolkata'
+			};
+			const indianTime = inputDateTime.toLocaleString('en-IN', options).replace(/\//g, '-').replace(',', '');
+
+			const [datePart, timePart] = indianTime.split(' ');
+
+			// Split the date and time parts
+			const [day, month, year] = datePart.split('-');
+			const [hour, minute, second] = timePart.split(':');
+
+			// Reformat the date
+			const formattedDate = `${year}-${month}-${day}`;
+
+			// Reformat the time
+			const formattedTime = `${hour}:${minute}:${second}`;
+
+			// Combine the date and time
+			const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+		return formattedDateTime;
+
+
+		},
+
+		// function call on stage percentage change
+		onsliderchange: function () {
+			let currentContext = this;
+			let oModel = this.getView().getModel("DetailModel").oData;
+			oModel.actualenddate = null;
+			oModel.Actualcompletiondays = null;
+
+			if (oModel.completionper == 100) {
+				
+				oModel.actualenddate = this.dateFormatter(null);
+
+				const date1 = new Date(oModel.actualenddate);
+				const date2 = new Date('2023-06-10 23:23:38');
+
+				const diffTime = Math.abs(date2 - date1);
+
+				// Convert the time difference to days
+				oModel.actualcompletiondays = (diffTime / (1000 * 60 * 60 * 24)).toFixed(1);
+
+			}
+
+			this.getView().getModel("DetailModel").refresh();
+
+		},
 
 		// function for calculate end date or completion day
 		dayCalculation: async function (oEvent) {
@@ -177,7 +205,7 @@ sap.ui.define([
 			let oThis = this;
 			let DetailModel = oThis.getView().getModel("DetailModel");
 			let ItemConsumptiondata = DetailModel.oData;
-			if (oEvent.mParameters.id.match("endDate")!=null) {
+			if (oEvent.mParameters.id.match("endDate") != null) {
 				var parts = ItemConsumptiondata.startdate.split('/');
 				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
 
@@ -186,15 +214,15 @@ sap.ui.define([
 
 				ItemConsumptiondata.completiondays = parseInt((enddate - startdate) / (86400 * 1000));// Days
 			}
-			else{
+			else {
 				var endDate = new Date(commonFunction.getDate(ItemConsumptiondata.startdate));
-			    endDate.setDate(endDate.getDate() + parseInt(ItemConsumptiondata.completiondays));
+				endDate.setDate(endDate.getDate() + parseInt(ItemConsumptiondata.completiondays));
 
-			 let originalDate = new Date(endDate);
-             let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
-             let enddate = dateFormatter.format(originalDate);
+				let originalDate = new Date(endDate);
+				let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
+				let enddate = dateFormatter.format(originalDate);
 
-			ItemConsumptiondata.enddate = enddate;
+				ItemConsumptiondata.enddate = enddate;
 
 			}
 
@@ -202,7 +230,7 @@ sap.ui.define([
 
 		},
 
-		
+
 
 		onCancel: function () {
 			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectactivitiesAdd--fclBillOfMaterial");
