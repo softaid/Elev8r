@@ -186,10 +186,10 @@ sap.ui.define([
 
 
 		// Get all data related to PDF Model
-		loadPDFData: function (quotid) {
+		loadPDFData: async function (quotid) {
 			let oThis = this;
 
-			quotationService.getQuotationPDF({ id: quotid }, function (data) {
+			await quotationService.getQuotationPDF({ id: quotid }, function (data) {
 				if (data.length) {
 					// Get Quote details for PDF
 					if (data[0].length) {
@@ -213,8 +213,7 @@ sap.ui.define([
 					}
 				}
 			})
-			// Conver Quote value in word Format
-			this.notowordChange();
+			
 		},
 
 		//Navigate Add qutation screen
@@ -301,6 +300,8 @@ sap.ui.define([
 			str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
 			str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
 			str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
+
+			console.log(str);
 			return str;
 
 		},
@@ -309,6 +310,7 @@ sap.ui.define([
 		notowordChange: function () {
 			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
 			var grandtotal = leadLiftPDFModel.oData.quotevalue;
+			console.log("grandtotal : ",grandtotal);
 			var grandtotalfloor = Math.floor(grandtotal);
 			var text = this.createno(grandtotalfloor);
 			this.nettotalinwords = text;
@@ -318,6 +320,9 @@ sap.ui.define([
 	   * Generate PDF for Purchase request Scrren
 	   */
 		onPdfExport: function () {
+			// Conver Quote value in word Format
+			this.notowordChange();
+			
 			var fullHtml = "";
 			var headertable1 = "";
 			headertable1 += "<!DOCTYPE html> <html> <head> <title>" + "Quotation" + "</title>" +
