@@ -2,13 +2,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
+    'sap/ui/elev8rerp/componentcontainer/services/projectManagement/Project.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/ProjectTracking.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/projectManagement/Project.service',
 	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast) {
-
+], function (JSONModel, BaseController, Sorter, projectService, leadService, ProjectTracking, xlsx, projectService, MessageToast) {
+	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile", {
 
@@ -26,15 +27,30 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "partyModel");
 
+			let rowcount_model = new JSONModel();
+			rowcount_model.setData([]);
+			this.getView().setModel(rowcount_model, "rowcount_model");
 			var quotationModel = new JSONModel();
 			quotationModel.setData({ modelData: [] });
 			this.getView().setModel(quotationModel, "quotationModel");
 
-			this.loadDataOne();
+			let rowModel = new JSONModel();
+			rowModel.setData({modelData : []});
+			this.getView().setModel(rowModel, "rowModel");
+
+            var projectMgntModel = new JSONModel();
+			projectMgntModel.setData({ modelData: [] });
+			this.getView().setModel(projectMgntModel, "projectMgntModel");
+
+			this.getProjectCount();
+			this.getAllProjectsDetail();
 
 			var model = new JSONModel();
 			model.setData(emptyModel);
 			this.fnShortCut();
+		},
+
+		getProjectCount : async function(){
 
 			this.bindTable();
 
@@ -63,12 +79,15 @@ sap.ui.define([
 			// })
 		},
 
-		loadDataOne: function () {
-			debugger;
+		loadDataOne: async function () {
 			let oThis = this;
-			leadService.getLeadDetails({ id: 51 }, function (data) {
+			// let rowModel = oThis.getView().getModel("rowModel");
+			let oRowsCount = oThis.getView().getModel("rowcount_model");
+			await projectService.getAllProjects(function (data) {
 				if (data.length) {
-					if (data[4].length) {
+					if (data[0].length) {
+
+						console.log(data[0].length);
 						let aRowsCount = [];
 						let quotationModel = oThis.getView().getModel("quotationModel");
 						quotationModel.setData({ modelData: data[4] });
@@ -76,18 +95,151 @@ sap.ui.define([
 						console.log("quotationModel", quotationModel);
 
 						aRowsCount.push({
-							rowsCount: data[4].length
+							rowsCount: data[0].length
 						});
+	
 
 						let oRowsCount = new JSONModel();
 						oRowsCount.setData(aRowsCount[0]);
-						console.log("oRowsCount", oRowsCount);
 						oThis.getView().setModel(oRowsCount, "rowcount_model");
+
+						// rowModel.setData({modelData : data[0]});
+						// oThis.getView().setModel(rowModel, "rowModel");
+					}
+				}
+			});
+		},
+
+        getAllProjectsDetail: async function () {
+			
+			let oThis = this;
+			// var pnlPrjMgnttable = oThis.getView().byId("pnlPrjMgnttable");
+            // pnlPrjMgnttable.destroyContent();
+
+			let rowcount_model = this.getView().getModel("rowcount_model");
+
+			await projectService.getAllProjectsDetail(function (data) {
+				if (data.length) {
+					if (data[0].length) {
+						console.log(data[0]);
+						// let projectMgntModel = oThis.getView().getModel("projectMgntModel");
+						// projectMgntModel.setData({ modelData: data[0] });
+						// oThis.getView().setModel(projectMgntModel, "projectMgntModel")
+						// console.log("projectMgntModel",projectMgntModel);
+
+						// oThis.setTable();
+
+						var keys = [];
+
+						Object.keys(data[0][0]).forEach(function (key) {
+							keys.push(key);
+						});
+
+						var arr = [];
+						for (var i = 0; i < keys.length; i++) {
+							arr.push({ columnId: keys[i] })
+						}
+
+						var oModel = new JSONModel();
+
+						oModel.setData({
+							columns: arr,
+							rows: data[0]
+						});
+
+						var oTable = new sap.ui.table.Table({
+							showNoData: true,
+							columnHeaderHeight: 10,
+							visibleRowCount: data[0].length,
+							selectionMode: sap.ui.table.SelectionMode.None
+
+						});
+						oTable.setModel(oModel);
+						oTable.bindColumns("/columns", function (index, context) {
+							console.log("context : ",context);
+							var sColumnId = context.getObject().columnId;
+							
+							return new sap.ui.table.Column({
+								id: sColumnId,
+								label: sColumnId,
+								template: sColumnId,
+							});
+						});
+						oTable.bindRows("/rows");
+
+						var pnlPrjMgnttable = oThis.getView().byId("pnlPrjMgnttable");
+						pnlPrjMgnttable.addContent(oTable);
+
 					}
 				}
 			})
 		},
 
+		setTable : function(){
+
+			var pnlPrjMgnttable = this.getView().byId("pnlPrjMgnttable");
+            pnlPrjMgnttable.destroyContent();
+
+			let columnModel = this.getView().getModel("projectMgntModel");
+			let rowModel = this.getView().getModel("rowModel");
+			let rowcount_model = this.getView().getModel("rowcount_model");
+
+			let columnData = [];
+			let rowData = [];
+
+			// columnData.push({
+			// 	// "Department" : "No. of Jobs",
+			// 	Stage : "No. of Jobs"
+			// })
+
+			for(let i = 0; i < columnModel.oData.modelData.length; i++){
+				columnData.push({
+					// "Department" : "Finance",
+					Stage : columnModel.oData.modelData[i].stagename
+				});
+			}
+
+
+			// for(let j = 0; j < rowModel.oData.modelData.length; j++){
+			// 	rowData.push({
+			// 		OrderNo : rowModel.oData.modelData[j].id,
+			// 		OrderName : rowModel.oData.modelData[j].quotename,
+			// 		Model : rowModel.oData.modelData[j].model
+			// 	})
+			// }
+
+			let tblModel = new JSONModel();
+			console.log("columnModel : ",columnModel);
+			tblModel.setData({
+				columns : columnData,
+				rows : columnModel
+			});
+
+			let oTable = new sap.ui.table.Table({
+				showNoData: true,
+				columnHeaderHeight: 10,
+				visibleRowCount: rowcount_model.oData.rowsCount,
+				selectionMode: sap.ui.table.SelectionMode.None
+			})
+
+			oTable.setModel(tblModel);
+
+			oTable.bindColumns("/columns", function(sId, oContext){
+				let columnName = oContext.getObject().Stage;
+				return new sap.ui.table.Column({
+					label : columnName,
+					template : columnName
+				});
+			});
+
+			oTable.bindRows("/rows");
+
+			console.log("oTable : ", oTable);
+
+			var pnlPrjMgnttable = this.getView().byId("pnlPrjMgnttable");
+            pnlPrjMgnttable.addContent(oTable);
+			
+		},
 
 		getModelDefault: function () {
 			return {
@@ -249,17 +401,15 @@ sap.ui.define([
 								oColumns.setTemplate(oRow[oTableColumn.columnId]);
 							}
 							// Create a JSON model and set the data
-							// var oModel = new sap.ui.model.json.JSONModel();
-							// oModel.setData(oTableColumn);
+							var oModel = new sap.ui.model.json.JSONModel();
+							oModel.setData(oTableColumn);
 
-							//console.log("--------------oModel-------------", oModel);
+							console.log("--------------oModel-------------", oModel);
 
 
 							// Set the model on the template
 							oColumns.getTemplate().setModel(oModel);
 							oTable.addColumn(oColumns);
-
-							//console.log("-------------oColumns--------------",oColumns);
 						}
 
 						console.log("oColumns", oColumns);
@@ -275,7 +425,6 @@ sap.ui.define([
 						oTable.setModel(oModel);
 					
 						oTable.bindRows("/rows");
-						console.log("------oTable.bindRows---------",oTable.bindRows("/rows"));
 						var pnlPrjMgnttable = oThis.getView().byId("pnlPrjMgnttable");
 						pnlPrjMgnttable.addContent(oTable);
 						console.log("-----------------oTable----------------------",oTable);

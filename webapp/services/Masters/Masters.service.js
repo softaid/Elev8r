@@ -53,6 +53,10 @@ sap.ui.define([
             deleteReference : function(params, callback){
                 commonService.runJQueryX("DELETE", "leadmaster/" + params.id, null, callback, null);
             },
+
+            getAllDepartments : function(callback){
+                commonService.runJQueryX("GET", "department/search/" + commonService.session("companyId"), null, callback, null);
+            }
             
         };
     }

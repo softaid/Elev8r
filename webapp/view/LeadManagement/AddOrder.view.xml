@@ -111,6 +111,20 @@
                                         <form:fields>
                                             <Input id="txtQutationDescription" valueLiveUpdate="true" value="{editOrderModel>/quotediscription}" change="onPartyNameChange"/>
                                         </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Status">
+                                        <form:fields>
+                                            <Select id="statusid"                                                 
+                                                selectedKey="{editOrderModel>/status}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'statusModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{statusModel>id}" text="{statusModel>description}" />
+                                            </Select>
+                                        </form:fields>
                                     </form:FormElement>  
                                     <form:FormElement label="Contact Person">
                                         <form:fields>
@@ -128,21 +142,6 @@
                                             </Slider>
                                         </form:fields>
                                     </form:FormElement> 
-                                    <form:FormElement label="Status">
-                                        <form:fields>
-                                            <Select id="txtstatus"                                                 
-                                                change=""
-                                                selectedKey="{editOrderModel>/quotestatusid}" 
-                                                forceSelection="true"
-                                                width="500px"
-                                                items="{
-                                                    path: 'QuoteStatusModel>/modelData',
-                                                    sorter: { path: 'id' }
-                                                }">
-                                                <core:Item key="{QuoteStatusModel>id}" text="{QuoteStatusModel>description}" />
-                                            </Select>
-                                        </form:fields>
-                                    </form:FormElement>
                                     <form:FormElement label="Quote Score">
                                         <form:fields>
                                             <Input id="quotescore" valueLiveUpdate="true" value="{editOrderModel>/quotescore}"   change="onPartyNameChange"/>

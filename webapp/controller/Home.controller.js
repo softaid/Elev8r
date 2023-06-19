@@ -61,7 +61,6 @@ sap.ui.define([
 			}.bind(this));
 
 			this.oFlexibleColumnLayout = this.byId("fclCommonDashboard");
-			this.gePandL();
 			this.getData();
 		},
 
@@ -80,77 +79,8 @@ sap.ui.define([
 			oRouter.navTo("project", true);
 		},
 
-
-		onTabSelect: function (oControlEvent) {
-			var key = oControlEvent.getParameters().key;
-			var item = oControlEvent.getParameter("item");
-			var isViewRendered = item.getContent().length > 0;
-			//lazy loading of view
-			if (!isViewRendered) {
-				if (key === "Common_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashboardCommonSetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-				else if (key === "Processing_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashboardProcessingSetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-				else if (key === "CBF_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashboardCBFSetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-				else if (key === "Feedmill_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashboardFeedMillSetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-				else if (key === "CommericalLayer_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashboardLayerSetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-				else if (key === "Hatchery_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashBoardHatcherySetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-				else if (key === "Breeder_Setting") {
-					var view = new sap.ui.view({
-						viewName: "sap.ui.elev8rerp.componentcontainer.view.Common.DashboardBreederSetting",
-						type: "XML",
-					});
-					item.addContent(view);
-				}
-			}
-			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
-		},
-
-
 		onBeforeRendering: function () {
 			// this.gePandL();
-		},
-
-		gePandL: function () {
-			var model = new JSONModel();
-			model.setData([]);
-			this.getView().setModel(model, "tblOvDueModel");
-			google.charts.load('current', { 'packages': ['corechart'] });
-			google.charts.setOnLoadCallback(this.drawBarColors);
 		},
 
 		drawBarColors: function () {
@@ -198,7 +128,10 @@ sap.ui.define([
 					MessageToast.show(msg);
 				}
 				else{
-					dashBoard_oModel.setData(data[0][0]);
+					if(data.success){
+						console.log(data);
+						dashBoard_oModel.setData(data[0][0]);
+					}
 				}
 				currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
 			})
@@ -216,12 +149,13 @@ sap.ui.define([
 				currentContext.getView().setModel(moduleAccessoModel, "moduleAccessoModel");
 				
 				// If data is not get from database  then handle Empty data condition
-				if (moduleData.length === 0 && moduleData.trim().length === 0)
+				if (!moduleData.length)
 					{
 						console.log("ModuleData is not available");
 					}
 				else
 					{
+						console.log(moduleData);
 						for (var i = 0; i < moduleData[0].length; i++) {
 							modulearray.push({
 								id: id++,
@@ -235,24 +169,6 @@ sap.ui.define([
 				currentContext.getView().setModel(oModel, "moduleModel");
 			})
 
-		},
-
-		on_Over_Due_Detail: function () {
-			this.bus = sap.ui.getCore().getEventBus();
-			setTimeout(function () {
-				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("commondashboard", "redirectToPage", { pagekey: "salesinvoiceoverdue" });
-			}, 1000);
-			this.bus.publish("commondashboard", "redirectToPage", { pagekey: "salesinvoiceoverdue" });
-		},
-
-		get_Purchase_invoice: function () {
-			this.bus = sap.ui.getCore().getEventBus();
-			setTimeout(function () {
-				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("commondashboard", "redirectToPage", { pagekey: "purchaseinvoiceoverdue" });
-			}, 1000);
-			this.bus.publish("commondashboard", "redirectToPage", { pagekey: "purchaseinvoiceoverdue" });
 		},
 
 		redirectToPage: function (sChannel, sEvent, oData) {

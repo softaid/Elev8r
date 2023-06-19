@@ -97,17 +97,42 @@ sap.ui.define([
 			// bind AllOpeningSameSide dropdown
 			commonFunction.getReferenceByType("AllOpeningSameSide", "openingSameSideModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind frontopening dropdown
 			commonFunction.getReferenceByType("FrontOpening", "frontOpeningModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind backopening dropdown
 			commonFunction.getReferenceByType("BackOpening", "backOpeningModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind leftopening dropdown
 			commonFunction.getReferenceByType("LeftOpening", "leftOpeningModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind rightopening dropdown
 			commonFunction.getReferenceByType("RightOpening", "rightOpeningModel", this);
+
+			// bind car panel dropdown
+			commonFunction.getReferenceByType("CarPanel", "carPanelModel", this);
+
+			// bind false ceiling dropdown
+			commonFunction.getReferenceByType("FlsCel", "falseCeilingModel", this);
+
+			// bind ventilation dropdown
+			commonFunction.getReferenceByType("Ventilation", "ventilationModel", this);
+
+			// bind Floring dropdown
+			commonFunction.getReferenceByType("Floring", "flooringModel", this);
+
+			// bind car position indicator dropdown
+			commonFunction.getReferenceByType("CrPsnIndcr", "carPositionIndicatorModel", this);
+
+			// bind traction media dropdown
+			commonFunction.getReferenceByType("TrcMedia", "tractionMediaModel", this);
+
+			// bind main power system dropdown
+			commonFunction.getReferenceByType("MnPwrSys", "mainPowerSystemModel", this);
+
+			// bind auxilary supply system dropdown
+			commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
+
 
 			//bind all locations
 			locationService.getAllLocations(function (data) {
@@ -299,7 +324,7 @@ sap.ui.define([
 
 				Leadservice.getLeads({ id: id }, function (data) {
 					console.log(data[0][0]);
-					data[0][0].preferedlead=data[0][0].preferedlead==1?true:false;
+					data[0][0].preferedlead = data[0][0].preferedlead == 1 ? true : false;
 					oModel.setData(data[0][0]);
 					var addresses = data[1];
 

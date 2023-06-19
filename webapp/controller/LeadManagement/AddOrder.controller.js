@@ -97,17 +97,20 @@ sap.ui.define([
 			// bind AllOpeningSameSide dropdown
 			commonFunction.getReferenceByType("AllOpeningSameSide", "openingSameSideModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind front Opening dropdown
 			commonFunction.getReferenceByType("FrontOpening", "frontOpeningModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind back opening dropdown
 			commonFunction.getReferenceByType("BackOpening", "backOpeningModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind left opening dropdown
 			commonFunction.getReferenceByType("LeftOpening", "leftOpeningModel", this);
 
-			// bind AllOpeningSameSide dropdown
+			// bind right opening dropdown
 			commonFunction.getReferenceByType("RightOpening", "rightOpeningModel", this);
+
+			// bind order status dropdown
+			commonFunction.getReferenceByType("OrdSts", "statusModel", this);
 
 			//bind all Leads
 			leadService.getAllLeads(function (data) {
@@ -374,6 +377,7 @@ sap.ui.define([
 				model["companyid"] = commonService.session("companyId");
 				model["orderdate"] = commonFunction.getDate(model.orderdate);
 				model["userid"] = commonService.session("userId");
+				model["status"] = currentContext.getView().byId("statusid").getSelectedItem().mProperties.text;
 
 				orderService.saveOrder(model, function (data) {
 
