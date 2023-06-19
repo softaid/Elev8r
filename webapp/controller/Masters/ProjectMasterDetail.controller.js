@@ -27,13 +27,20 @@ sap.ui.define([
 			var oModel = new JSONModel();
             console.log("this.model",this.model);
              // bind Pipeline dropdown
-			commonFunction.getReferenceByType("ProjType", "projectModel", this);
+			commonFunction.getReferenceStages("ProMilestones", "parentStageModel", this);
+
+            // get all departments
+            commonFunction.getAllDepartments("departmentModel", this);
+
+            this.getView().byId("parentStageEle").setVisible(false);
 
             if(this.model.typecode == "ProMilestones"){
-                this.getView().byId("projecttype").setVisible(true);
+                this.getView().byId("departmentEle").setVisible(true);
+                this.getView().byId("switchEle").setVisible(true);
             }
             else{
-                this.getView().byId("projecttype").setVisible(false);
+                this.getView().byId("departmentEle").setVisible(false);
+                this.getView().byId("switchEle").setVisible(false);
             }
             
             if (this.model.id != null) {    
@@ -50,7 +57,7 @@ sap.ui.define([
                 oModel.setData(this.model);
 				currentContext.getView().byId("btnSave").setText("Save");
 				this.flag = 1;
-                (this.model.typecode == "ProMilestones") ? this.getView().byId("projecttype").setVisible(true): this.getView().byId("projecttype").setVisible(false);
+                (this.model.typecode == "ProMilestones") ? this.getView().byId("switchEle").setVisible(true): this.getView().byId("switchEle").setVisible(false);
 			}
              
 			
@@ -69,6 +76,15 @@ sap.ui.define([
 			var oBundle = this.getModel("i18n").getResourceBundle()
 			return oBundle
 		},
+
+        getSwitchValue : function(oEvent){
+            let parentState = oEvent.mParameters.state;
+            if(parentState){
+                this.getView().byId("parentStageEle").setVisible(true);
+            }else{
+                this.getView().byId("parentStageEle").setVisible(false);
+            }
+        },
 
         validateForm: function () {
 			var isValid = true;

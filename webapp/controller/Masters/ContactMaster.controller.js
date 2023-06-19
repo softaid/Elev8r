@@ -14,6 +14,7 @@ sap.ui.define([
 
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
+			this.afilters = [];
 			this.bus.subscribe("contactmaster", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("contactscreen", "handleContactList", this.handleContactList, this);
 			this.bus.subscribe("contactdetail", "handleContactDetails", this.handleContactDetails, this);
@@ -22,6 +23,17 @@ sap.ui.define([
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+
+			// bind CntType dropdown
+			commonFunction.getReferenceByTypeForFilter("CntType", "contactTypeModel", this);
+
+			// bind CntCtgry dropdown
+			commonFunction.getReferenceByTypeForFilter("CntCtgry", "cntCategoryModel", this);
+
+			let contactModel = new JSONModel();
+			contactModel.setData({modelData : []});
+			this.getView().setModel(contactModel,"contactModel");
+
 			this.loadData();
 			this.fnShortCut();
 		},
@@ -32,6 +44,54 @@ sap.ui.define([
 			});
 
 		},
+
+		// Function for display Type wise Leads
+		onContactType: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'contacttype';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				this.afilters = [];
+			}
+			// if (sQuery == "All") {
+			// 	let i = this.afilters.length;
+			// 	while (i--) {
+			// 		if (this.afilters[i].sPath == "contacttype") {
+			// 			this.afilters.splice(i, 1);
+			// 		}
+			// 	}
+			// }
+			var list = this.getView().byId("tblContact");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
+		// Function for display categorywise contacts
+		onContactCategory: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'contactcategory';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				let i = this.afilters.length;
+				while (i--) {
+					if (this.afilters[i].sPath == "contactcategory") {
+						this.afilters.splice(i, 1);
+					}
+				}
+			}
+			var list = this.getView().byId("tblContact");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("contactModel");

@@ -259,22 +259,7 @@
                                     <form:fields>
                                         <Input id="contactPerson"  valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
-                                </form:FormElement>   
-                                <form:FormElement label="Mr Width">
-                                    <form:fields>
-                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Mr Depth">
-                                    <form:fields>
-                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Mr Height">
-                                    <form:fields>
-                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
-                                    </form:fields>
-                                </form:FormElement>
+                                </form:FormElement>  
                                 <form:FormElement label="{i18n>leadsalerep}">
                                     <form:fields>
                                         <Input id="txtsalesrep"  valueLiveUpdate="true" value="{editQutationModel>/salesrep}"  required="true" change="onPartyNameChange"/>
@@ -532,6 +517,21 @@
                                     <form:fields>
                                         <Input id="txtshaftdepth"  valueLiveUpdate="true" value="{editQutationModel>/shaftdepth}"/>
                                     </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Mr Width">
+                                    <form:fields>
+                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Mr Depth">
+                                    <form:fields>
+                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Mr Height">
+                                    <form:fields>
+                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
+                                    </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Depth">
                                     <form:fields>
@@ -779,7 +779,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Completion Days">
                                     <form:fields>
-                                        <Input id="remark5" value="{quoteModel>/completiondays}" />
+                                        <Input id="completiondays" value="{quoteModel>/completiondays}" />
                                     </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="Remark 1">
@@ -833,17 +833,17 @@
                     <form:formContainers>
                         <form:FormContainer title="Additional Details" width="100%">
 					        <form:formElements>
-                                <form:FormElement label="">
+                                <!-- <form:FormElement label="">
                                     <form:fields>
                                         <Input id="contactPerson"  valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="true" change="onPartyNameChange"/>
                                     </form:fields>
-                                </form:FormElement>   
-                                <form:FormElement label="">
+                                </form:FormElement>    -->
+                                <!-- <form:FormElement label="">
                                     <form:fields>
                                         <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
                                     </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="">
+                                </form:FormElement> -->
+                                <!-- <form:FormElement label="">
                                     <form:fields>
                                         <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
                                     </form:fields>
@@ -857,7 +857,7 @@
                                     <form:fields>
                                         <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
                                     </form:fields>
-                                </form:FormElement>
+                                </form:FormElement> -->
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>

@@ -1,0 +1,131 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAddDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Activity Details"/>
+                </f:heading>
+                <f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="{i18n>saveButtonText}"
+                            type="Emphasized"
+                            press="onSave" id="btnSave"/>
+						<Button
+							text="{i18n>deleteButtonText}"
+							type="Emphasized"
+                            press="onDelete"
+							id= "btnDelete"/>						
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>	
+            <VBox fitContainer="true">
+                <form:Form editable="true">
+                    <form:title>
+                        <core:Title text="" />
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="2"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:formElements>
+                                 <form:FormElement label="Stage Name">
+                                    <form:fields>
+                                        <Input id="Stage" value="{DetailModel>/stagename}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Start Date">
+                                    <form:fields>
+                                    <DatePicker id="startDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{DetailModel>/startdate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="true" />
+                                        </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="End Date">
+                                        <form:fields>
+                                    <DatePicker id="endDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{DetailModel>/enddate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="true"
+                                                change="dayCalculation"/>
+                                        </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="Completion Day">
+                                    <form:fields>
+                                        <Input id="completionDay" value="{DetailModel>/completiondays}" change="dayCalculation"/>
+                                    </form:fields>
+                                </form:FormElement> <form:FormElement label="Stage %">
+                                    <form:fields>
+                                        <Input id="StagePercent" value="{DetailModel>/stagecompletionpercentage}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Project %">
+                                    <form:fields>
+                                <Input id="projectPercent" value="{DetailModel>/projectweightage}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+                                       <form:fields>
+                                            <Switch  state="{DetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement>
+                                      <form:FormElement label="Is Standard">
+                                       <form:fields>
+                                            <Switch  state="{DetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:content>				
+	</f:DynamicPage>
+</mvc:View>

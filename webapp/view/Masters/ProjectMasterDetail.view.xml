@@ -61,19 +61,42 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
-                                <form:FormElement id="projecttype" label="Project Type">
+                                <form:FormElement label="Is Parent" id="switchEle">
                                     <form:fields>
-                                        <Select id="project"
-                                            required="true" 
+                                        <Switch state="{editMasterModel>/isparent}" id="isparent" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" change="getSwitchValue">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="parentStageEle" label="Parent Stage">
+                                    <form:fields>
+                                        <Select id="parentstage"
                                             change=""
                                             selectedKey="{editMasterModel>/parentid}" 
                                             forceSelection="false"
                                             width="500px"
                                             items="{
-                                                path: 'projectModel>/modelData',
+                                                path: 'parentStageModel>/modelData',
                                                 sorter: { path: 'id' }
                                             }">
-                                            <core:Item key="{projectModel>id}" text="{projectModel>description}" />
+                                            <core:Item key="{parentStageModel>id}" text="{parentStageModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="departmentEle" label="Department">
+                                    <form:fields>
+                                        <Select id="departmentid"
+                                            change=""
+                                            selectedKey="{editMasterModel>/departmentid}" 
+                                            forceSelection="false"
+                                            width="500px"
+                                            items="{
+                                                path: 'departmentModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{departmentModel>id}" text="{departmentModel>department}" />
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>

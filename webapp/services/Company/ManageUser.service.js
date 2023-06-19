@@ -31,6 +31,10 @@ sap.ui.define([
             deleteUser: function (params, callback) {
                 commonService.runJQueryX("DELETE", "manageuser/" + params.id, null, callback, null);
             },
+
+            getUserByRole : function(params,callback){
+                commonService.runJQueryX("GET", "manageuser/usersrole/" + commonService.session("companyId")+"/"+params.roleid , null, callback, null);
+            },
         };
     }
 );

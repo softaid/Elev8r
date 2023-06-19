@@ -297,6 +297,7 @@ sap.ui.define([
 
 				Leadservice.getLeads({ id: id }, function (data) {
 					console.log(data[0][0]);
+					data[0][0].preferedlead = data[0][0].preferedlead == 1 ? true : false;
 					oModel.setData(data[0][0]);
 					var addresses = data[1];
 

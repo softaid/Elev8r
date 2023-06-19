@@ -612,6 +612,30 @@ sap.ui.define([
             });
         },
 
+        getReferenceStages : function(typeCode,modelName, currentContext) {
+            masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
+                if(data.length && data[0].length){
+                    for(let i = 0; i < data[0].length; i++){
+                        if(data[0][i].parentid == null){
+                            var selectModel = new sap.ui.model.json.JSONModel();
+                            selectModel.setData({ modelData: data[0] });
+                            currentContext.getView().setModel(selectModel, modelName);
+                        }
+                    }
+                }
+            });
+        },
+
+        getAllDepartments : function(modelName, currentContext) {
+            masterService.getAllDepartments(function (data) {
+                if(data.length && data[0].length){
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(selectModel, modelName);
+                }
+            });
+        },
+
           // get reference types
           getReferenceByTypeForFilter: function (typeCode,modelName, currentContext) {
             masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {

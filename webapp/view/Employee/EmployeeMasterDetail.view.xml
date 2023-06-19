@@ -72,9 +72,16 @@
                             </form:FormElement>
                             <form:FormElement label="{i18n>employeeMasterLabelMobileNo}">
                                 <form:fields>
-                                    <Input id="txtMobile" valueLiveUpdate="true" value="{editemployeeModel>/mobileno}" change = "cahegeData" required="true"/>
+                                    <Input id="txtMobile" type="number" maxLength="10"  valueLiveUpdate="true" value="{editemployeeModel>/mobileno}"
+                                     change="cahegeData"/>
                                 </form:fields>
                             </form:FormElement>
+
+                               <form:FormElement label="{i18n>leadPinCode}">
+                                        <form:fields>
+                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/pincode}" change="onNumberInputChange"/>
+                                        </form:fields>
+                                    </form:FormElement>
 
                              <form:FormElement label="{i18n>employeeMasterLabelActive}">
                                 <form:fields>
@@ -87,12 +94,12 @@
 
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement label="Employee Role">
+                            <!-- <form:FormElement label="Employee Role">
                                 <form:fields>
                                     <Select id="emprole"
                                         required="true" 
                                         change=""
-                                        selectedKey="{editemployeeModel>/roleid}" 
+                                        selectedKey="{editemployeeModel>/emproleids}" 
                                         forceSelection="false"
                                         width="500px"
                                         items="{
@@ -102,7 +109,22 @@
                                         <core:Item key="{roleModel>id}" text="{roleModel>description}" />
                                     </Select>
                                 </form:fields>
-                            </form:FormElement> 
+                            </form:FormElement>  -->
+                                  <form:FormElement label="Employee Role">
+                                            <form:fields>
+                                                <MultiComboBox id="emprole"
+                                                    required="true" 
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'roleModel>/modelData',
+                                                           sorter: { path: 'id' }
+                                                           }">
+                                                    <core:Item key="{roleModel>id}" text="{roleModel>description}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
                         </form:formElements>
                     </form:FormContainer>
                 </form:formContainers>

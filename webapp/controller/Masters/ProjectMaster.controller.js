@@ -27,6 +27,10 @@ sap.ui.define([
             projectMasterModel.setData(emptyModel);
             this.getView().setModel(projectMasterModel, "projectMasterModel");
 
+            var visibleModel = new JSONModel();
+            visibleModel.setData(emptyModel);
+            this.getView().setModel(visibleModel, "visibleModel");
+
             var currentContext = this;
 
             var oVisModel = new JSONModel({
@@ -40,19 +44,28 @@ sap.ui.define([
 
         getReferenceTypeByMaster: function () {
             var currentContext = this;
-            masterService.getReferenceTypeByMaster({master : 'ProjectMaster'},function (data) {
+
+            // this.getView().byId("FtotalFeedEle").setVisible(true)
+            // var visibleModel = currentContext.getView().getModel("visibleModel").oData;
+
+            // visibleModel.visible =true;
+            // console.log("visibleModel",visibleModel);
+
+
+            masterService.getReferenceTypeByMaster({ master: 'ProjectMaster' }, function (data) {
                 console.log(data);
-                if(data.length && data[0].length){
+                if (data.length && data[0].length) {
                     var oModel = new sap.ui.model.json.JSONModel();
                     oModel.setData({ modelData: data[0] });
                     currentContext.getView().setModel(oModel, "masterModel");
                 }
-                
+
                 var pModel = currentContext.getView().getModel("projectMasterModel");
                 pModel.oData.masterid = data[0][0].id;
                 pModel.oData.master = data[0][0].master;
                 pModel.oData.typename = data[0][0].typename;
                 pModel.oData.typecode = data[0][0].typecode;
+
                 pModel.refresh();
 
                 currentContext.loadData("", "", pModel.oData);
@@ -60,13 +73,13 @@ sap.ui.define([
             });
         },
 
-        
+
         onListItemPress: function (oEvent) {
 
             var viewModel = oEvent.getSource().getBindingContext("masterDetailModel");
             var model = {
                 "id": viewModel.getProperty("id"),
-                "typecode":viewModel.getProperty("typecode"),
+                "typecode": viewModel.getProperty("typecode"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
                 "defaultvalue": viewModel.getProperty("defaultvalue"),
@@ -107,36 +120,36 @@ sap.ui.define([
 
         //lazy loading of view on tab select        
         onTabSelect: function (oControlEvent) {
-            
+
             var key = oControlEvent.getParameters().key;
             var text = oControlEvent.getParameters().selectedItem.mProperties.text;
             var item = oControlEvent.getParameter("item");
             var isViewRendered = item.getContent().length > 0;
             var pModel = this.getView().getModel("projectMasterModel");
-            // var masterDetailModel = this.getView().getModel("masterDetailModel");
-            // masterDetailModel = {
-            //     "row1": "true",
-            // }
+
+            let oVisibleModel = this.getView().getModel("visibleModel");
+            let oVisibleModelData = oVisibleModel.getData();
+
+            oVisibleModelData.visible = (key === "ProMilestones");
             console.log(pModel.oData.typecode);
-          
+            var oTable = this.byId("table");
+            // var oColumn2 = oTable.getColumns()[1]; // Get the second column (index 1)
 
-            if(pModel.oData.typecode !="ProMilestones")
-            {
+            // oColumn2.setVisible(false);
+
+
+            if (pModel.oData.typecode != "ProMilestones") {
                 var masterDetailModel = this.getView().getModel("masterDetailModel").oData.modelData;
-                for(let i = 0; i < masterDetailModel.length; i++){
-                        masterDetailModel[i].row1 = true;
+                for (let i = 0; i < masterDetailModel.length; i++) {
+                    masterDetailModel[i].row1 = true;
                 }
-            //     // this.getView().getModel("masterDetailModel").setProperty("/row1", "false");
-            //     console.log(masterDetailModel);
 
-            //    this.getView().getModel("masterDetailModel").setProperty("/row1", "false");
-
-            //     console.log(masterDetailModel);
             }
 
             pModel.oData.typecode = key;
             pModel.oData.typename = text;
-
+            oVisibleModel.refresh();
+            console.log(oVisibleModelData);
             pModel.refresh();
 
             this.loadData("", "", pModel.oData);
@@ -144,7 +157,7 @@ sap.ui.define([
             this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
         },
 
-        rowFunction : function(item, index){
+        rowFunction: function (item, index) {
             console.log(item);
         },
 
@@ -157,31 +170,31 @@ sap.ui.define([
 
             masterService.getReferenceByTypeCode({ typecode: oData.typecode }, function (data) {
                 var oModel = new sap.ui.model.json.JSONModel();
-                if(data.length && data[0].length){
-                    for(let i = 0; i < data[0].length;  i++){  
+                if (data.length && data[0].length) {
+                    for (let i = 0; i < data[0].length; i++) {
                         data[0][i].active = data[0][i].active == 1 ? true : false;
                         data[0][i].defaultvalue = data[0][i].defaultvalue == 1 ? true : false;
                     }
                     oModel.setData({ modelData: data[0] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
-                    console.log("masterDetailModel",oModel);
-                }else{
+                    console.log("masterDetailModel", oModel);
+                } else {
                     oModel.setData({ modelData: [] });
                     currentContext.getView().setModel(oModel, "masterDetailModel");
-                    console.log("masterDetailModel1",oModel);
+                    console.log("masterDetailModel1", oModel);
                 }
             });
         },
 
         onAddIconPress: function (oEvent) {
-            
+
             var oModel = this.getView().getModel("projectMasterModel");
 
-            console.log("projectMasterModel : ",oModel);
+            console.log("projectMasterModel : ", oModel);
             var model = {
                 id: null,
                 typecode: oModel.oData.typecode,
-                typename : oModel.oData.typename,
+                typename: oModel.oData.typename,
                 description: oModel.oData.description,
                 active: true,
                 defaultvalue: true
@@ -448,7 +461,7 @@ sap.ui.define([
                             for (var i = 0; result.ledgeropeningbalance.length > i; i++) {
                                 var parray = result.ledgeropeningbalance[i];
 
-                                if (typeof (parray.ledgerid) == "number" && typeof (parray.openingbalance) == "number" && typeof (parray.transactiontypeid) == "number" && typeof new Date(parray.openingbalancedate) == "object" && (((parray.transactiontypeid) == 1321) || ((parray.transactiontypeid) == 1322))&& typeof (parray.branchid) == "number") {
+                                if (typeof (parray.ledgerid) == "number" && typeof (parray.openingbalance) == "number" && typeof (parray.transactiontypeid) == "number" && typeof new Date(parray.openingbalancedate) == "object" && (((parray.transactiontypeid) == 1321) || ((parray.transactiontypeid) == 1322)) && typeof (parray.branchid) == "number") {
                                 } else {
                                     if (typeof ((parray.ledgerid)) != "number") {
                                         result.ledgeropeningbalance[i].ledgerid = "Invalid Ledger Id"
@@ -465,7 +478,7 @@ sap.ui.define([
                                     else if (typeof (parray.branchid) != "number") {
                                         result.ledgeropeningbalance[i].transactiontypeid = "Please insert valid branchid"
                                     }
-                                    
+
                                     MessageToast.show("Please insert valid sheet.");
                                     currentContext.getView().byId("btnUploadData").setVisible(false);
                                 }
@@ -654,13 +667,13 @@ sap.ui.define([
 
             var currentContext = this;
             commonService.getLedgerList(function (data) {
-                currentContext.fnJSONToXLSXConvertor("ledgeropeningbalance",data[0])
+                currentContext.fnJSONToXLSXConvertor("ledgeropeningbalance", data[0])
             });
         },
 
-        
+
         // for dowload xlsx file
-        fnJSONToXLSXConvertor: function (ReportTitle,JSONData) {
+        fnJSONToXLSXConvertor: function (ReportTitle, JSONData) {
             // get model for ledger list
             // var JSONData = this.getView().getModel("ledgerList").oData.modelData;
             var aData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
@@ -673,7 +686,7 @@ sap.ui.define([
                 aFinalXlsxData = [];
                 var des_aFinalXlsxData = [];
                 // Below array for  header data
-                aXlsxHeaderData.push( "ledgerid","ledgername","openingbalancedate", "branchid", "openingbalance", "transactiontypeid")
+                aXlsxHeaderData.push("ledgerid", "ledgername", "openingbalancedate", "branchid", "openingbalance", "transactiontypeid")
 
                 des_aFinalXlsxData.push(["Column Name", "Description"], ["openingbalancedate", "Date"], ["branchid", "Identification Number of Branch from Branch Master"], ["openingbalance", "Amount"], ["transactiontypeid", "1321 - Credit, 1322 - Debit"]);
                 // Adding column header data in final XLSX data

@@ -4,8 +4,9 @@ sap.ui.define([
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
-	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, quotationService, xlsx, MessageToast) {
+	'sap/m/MessageToast',
+	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+], function (JSONModel, BaseController, Sorter, quotationService, xlsx, MessageToast, commonFunction) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Quotations", {
@@ -13,26 +14,25 @@ sap.ui.define([
 		onInit: function () {
 
 			this.bus = sap.ui.getCore().getEventBus();
-			// this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
+
+			this.afilters = [];
+
 			this.bus.subscribe("qutationcreen", "handleQutationList", this.handleQutationList, this);
 			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
-			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
-
+			
 			this.handleRouteMatched(null);
 
-			var model = new JSONModel();
-			var emptyModel = this.getModelDefault();
-			model.setData(emptyModel);
-			this.getView().setModel(model, "partyModel");
-
-			var model = new JSONModel();
-			model.setData(emptyModel);
-			this.getView().setModel(model, "subledgerModel");
 			jQuery.sap.delayedCall(1000, this, function () {
 				this.getView().byId("onSearchId").focus();
 			});
 			this.fnShortCut();
+
+			// bind Quote Type dropdown  
+			commonFunction.getReferenceByTypeForFilter("QuoteType", "quoteTypeModel", this);
+
+			// bind Lead dropdown quote category
+			commonFunction.getReferenceByTypeForFilter("QuoteCategory", "quoteCategoryModel", this);
 		},
 
 		getModelDefault: function () {
@@ -58,9 +58,54 @@ sap.ui.define([
 			this.loadData();
 		},
 
+		// Function for display Type wise quotations
+		onQuoteType: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'quotetype';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				this.afilters = [];
+			}
+			// if (sQuery == "All") {
+			// 	let i = this.afilters.length;
+			// 	while (i--) {
+			// 		if (this.afilters[i].sPath == "quotetype") {
+			// 			this.afilters.splice(i, 1);
+			// 		}
+			// 	}
+			// }
+			var list = this.getView().byId("tblQuotationMaster");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
+
+		// Function for display categorywise quotations
+		onQuoteCategory: function (oEvent) {
+			let filterText = oEvent.getSource().mProperties.text.split("(");
+			var sQuery = filterText[0];
+			var contains = sap.ui.model.FilterOperator.EQ;
+			var columns = 'quotecategory';
+
+			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			if (sQuery == "All") {
+				let i = this.afilters.length;
+				while (i--) {
+					if (this.afilters[i].sPath == "quotecategory") {
+						this.afilters.splice(i, 1);
+					}
+				}
+			}
+			var list = this.getView().byId("tblQuotationMaster");
+			var binding = list.getBinding("items");
+
+			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+		},
 
 		handleQutationDetails: function (sChannel, sEvent, oData) {
-			console.log("oData", oData);
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.bus = sap.ui.getCore().getEventBus();
 			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
@@ -69,8 +114,7 @@ sap.ui.define([
 
 		onListItemPress: function (oEvent) {
 			var viewModel = oEvent.getSource().getBindingContext("QuotationMasterModel").getObject();
-			console.log("---------------viewModel-----------------", viewModel);
-			//var model = { "id": viewModel.getProperty("leadid") }
+			
 			var model = { "id": viewModel.leadid, "quotid": viewModel.id }
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
@@ -91,13 +135,12 @@ sap.ui.define([
 		},
 
 		/**
-	* Function to navigate to specified route.
-	* @param {*} sChannel 
-	* @param {*} sEvent 
-	* @param {*} oData 
-	*/
+		* Function to navigate to specified route.
+		* @param {*} sChannel 
+		* @param {*} sEvent 
+		* @param {*} oData 
+		*/
 		handleQutationList: function (sChannel, sEvent, oData) {
-			console.log("oData", oData);
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.bus = sap.ui.getCore().getEventBus();
 			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
@@ -133,7 +176,7 @@ sap.ui.define([
 		loadData: function () {
 			var currentContext = this;
 			quotationService.getAllQuotations(function (data) {
-				var oModel = new sap.ui.model.json.JSONModel();
+				var oModel = new JSONModel();
 				if (data.length && data[0].length) {
 					oModel.setData({ modelData: data[0] });
 					currentContext.getView().setModel(oModel, "QuotationMasterModel");
@@ -141,7 +184,6 @@ sap.ui.define([
 					oModel.setData({ modelData: [] });
 					currentContext.getView().setModel(oModel, "QuotationMasterModel");
 				}
-				console.log("QuotationMasterModel", oModel);
 			});
 		},
 
@@ -149,5 +191,4 @@ sap.ui.define([
 			this.bus.unsubscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
 		}
 	});
-
 }, true);

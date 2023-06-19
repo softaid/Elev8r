@@ -76,7 +76,7 @@ sap.ui.define([
 				var oModel = new sap.ui.model.json.JSONModel();
 				data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
 				oModel.setData(data[0][0]);
-
+                if(data[0][0].emproleids!=null){
 				var emproleid = data[0][0].emproleids.split(',');
                   
 				// total employee types avaliable
@@ -84,7 +84,11 @@ sap.ui.define([
 
                 //condition to check whether all employee role is selected or specific  employee role is selected
 				(emproleid.length)==((totalRole.length)-1)?currentContext.getView().byId("emprole").setSelectedKeys(["All",...emproleid]):currentContext.getView().byId("emprole").setSelectedKeys(emproleid);
-
+				}
+				else
+				{
+					currentContext.getView().byId("emprole").setSelectedKeys([])
+				}
 
 				currentContext.getView().setModel(oModel, "editemployeeModel");
 			});

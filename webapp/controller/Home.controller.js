@@ -128,8 +128,10 @@ sap.ui.define([
 					MessageToast.show(msg);
 				}
 				else{
-					console.log(data);
+					if(data.success){
+						console.log(data);
 						dashBoard_oModel.setData(data[0][0]);
+					}
 				}
 				currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
 			})

@@ -20,5 +20,18 @@ sap.ui.define([
             getAllProjectsDetail : function(callback){
                 commonService.runJQueryX("GET", "elevproject/projectsdetail/" + commonService.session("companyId"), null, callback, null);
             },
+            saveProject : function(params,callback){
+                commonService.runJQueryX("POST", "elevproject/saveproject/", params,callback, null);
+            },
+            saveProjectActivityDetail: function(params,callback){
+                commonService.runJQueryX("POST", "elevproject/saveprojectdetail/",params, callback, null);
+            },
+            deleteProjectActivityDetail : function(params,callback){
+                commonService.runJQueryX("DELETE", "elevproject/deleteprojectdetail/"+params.id, null, callback, null);
+            },
+
+            getProjectList : function(params, callback){
+                commonService.runJQueryX("GET", "project/projectlist/" + params.leadid, null, callback, null);
+            }
         }
     })

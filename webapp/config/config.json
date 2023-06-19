@@ -7,8 +7,8 @@
 	},
 
 	"webapi" : {
-		"url" : "http://staging.poultryos.com:7200/",
-		"docurl" : "http://staging.poultryos.com:7200/documentImage/"
+		"url" : "http://staging.poultryos.com:7500/",
+		"docurl" : "http://staging.poultryos.com:7500/documentImage/"
 	}
 }
 
