@@ -919,7 +919,6 @@
                                     </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="Remark 1">
-<<<<<<< HEAD
                                     <form:fields>
                                         <Input id="remark1" value="{quoteModel>/remark1}" />
                                     </form:fields>
@@ -995,7 +994,6 @@
                                         <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
                                     </form:fields>
                                 </form:FormElement> -->
-=======
                                         <form:fields>
                                             <Input id="remark1" value="{editQutationModel>/remark1}" />
                                         </form:fields>
@@ -1020,7 +1018,6 @@
                                             <Input id="remark5" value="{editQutationModel>/remark5}" />
                                         </form:fields>
                                     </form:FormElement>
->>>>>>> 9ffc4ac69624a9453540ce3eaed633dbb348a179
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>
