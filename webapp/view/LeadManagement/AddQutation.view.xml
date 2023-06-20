@@ -72,7 +72,7 @@
                                                 required="false" 
                                                 change=""
                                                 selectedKey="{editQutationModel>/quotecategory}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'QuoteCategoryModel>/modelData',
@@ -147,7 +147,7 @@
                                                 required="false" 
                                                 change="LeadChange"
                                                 selectedKey="{editQutationModel>/leadid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'LeadsMasterModel>/modelData',
@@ -211,7 +211,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/sourceid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadSourceModel>/modelData',
@@ -228,7 +228,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/leadscategory}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadCategoryModel>/modelData',
@@ -245,7 +245,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/stageid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'stageModel>/modelData',
@@ -282,7 +282,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/leadstatus}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadStatusModel>/modelData',
@@ -304,7 +304,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/locationid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'locationModel>/modelData',
@@ -352,7 +352,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/typeoflift}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'liftTypeModel>/modelData',
@@ -369,7 +369,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/capacityid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadCapacityModel>/modelData',
@@ -386,7 +386,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/modelid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadmodelModel>/modelData',
@@ -403,7 +403,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/driveid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadDriveModel>/modelData',
@@ -420,7 +420,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/machineid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'MachineModel>/modelData',
@@ -437,7 +437,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/controlid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadControlModel>/modelData',
@@ -454,7 +454,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/operationid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadOperationModel>/modelData',
@@ -471,7 +471,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/speedid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadSpeedModel>/modelData',
@@ -488,7 +488,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/typeofdoorid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadDoorTypeModel>/modelData',
@@ -545,7 +545,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/leftopening}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leftOpeningModel>/modelData',
@@ -562,7 +562,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/rightopening}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'rightOpeningModel>/modelData',
@@ -579,7 +579,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/landingdoorid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'landingDoorModel>/modelData',
@@ -596,7 +596,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/cardoorid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'CarDoorModel>/modelData',
@@ -613,7 +613,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/lowestfloorid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'LowestFloorModel>/modelData',
@@ -630,7 +630,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/cwtpositionid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'CWTPositionModel>/modelData',
@@ -647,7 +647,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/floorheaightid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'standaredFloorHeightModel>/modelData',
@@ -664,7 +664,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/carpanelid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'carPanelModel>/modelData',
@@ -681,7 +681,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/falseceilingid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'falseCeilingModel>/modelData',
@@ -698,7 +698,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/ventilationid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'ventilationModel>/modelData',
@@ -715,7 +715,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/flooringid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'flooringModel>/modelData',
@@ -732,7 +732,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/carpositionindicatorid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'carPositionIndicatorModel>/modelData',
@@ -749,7 +749,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/tractionmediaid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'tractionMediaModel>/modelData',
@@ -765,8 +765,8 @@
                                             required="false" 
                                             change=""
                                             
-                                            selectedKey="{editQutationModel>/mainPowerSystemModel}" 
-                                            forceSelection="true"
+                                            selectedKey="{editQutationModel>/mainpowersystemid}" 
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'mainPowerSystemModel>/modelData',
@@ -783,7 +783,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/auxilarysupplysystemid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'auxilarySupplySystemModel>/modelData',
@@ -800,7 +800,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/architectidid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadCntCategoryModel>/modelData',
@@ -817,7 +817,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/leadconsaltantid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'leadCntTypeModel>/modelData',
@@ -839,7 +839,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/allopeningsameside}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'openingSameSideModel>/modelData',
@@ -856,7 +856,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/frontopening}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'frontOpeningModel>/modelData',
@@ -873,7 +873,7 @@
                                             change=""
                                             
                                             selectedKey="{editQutationModel>/backopening}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'backOpeningModel>/modelData',
@@ -915,7 +915,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Completion Days">
                                     <form:fields>
-                                        <Input id="completiondays" value="{quoteModel>/completiondays}" />
+                                        <Input id="completiondays" value="{editQutationModel>/completiondays}" />
                                     </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="Remark 1">
