@@ -67,7 +67,7 @@
                                             <Select id="txtQutationType"                                                 
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotetype}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'quoteTypeModel>/modelData',
@@ -92,7 +92,7 @@
                                             <Select id="txtLead"                                                 
                                                 change="LeadChange"
                                                 selectedKey="{editOrderModel>/leadid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'LeadsMasterModel>/modelData',
@@ -116,7 +116,7 @@
                                         <form:fields>
                                             <Select id="statusid"                                                 
                                                 selectedKey="{editOrderModel>/status}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'statusModel>/modelData',
@@ -152,7 +152,7 @@
                                             <Select id="leadsourceid"
                                                 change=""
                                                 selectedKey="{editOrderModel>/leadsourceid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'QuoteStatusModel>/modelData',
@@ -173,7 +173,7 @@
                                                 change=""
                                                 
                                                 selectedKey="{editOrderModel>/stageid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'stageModel>/modelData',
@@ -189,7 +189,7 @@
                                                 change=""
                                                 
                                                 selectedKey="{editOrderModel>/architectidid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadCntCategoryModel>/modelData',
@@ -204,7 +204,7 @@
                                             <Select id="landconsaltantid"
                                                     change=""    
                                                 selectedKey="{editOrderModel>/leadconsaltantid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadCntTypeModel>/modelData',
@@ -219,7 +219,7 @@
                                             <Select id="txtCategory"
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotecategory}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'QuoteCategoryModel>/modelData',
@@ -234,7 +234,7 @@
                                             <Select id="txtSubCategory"
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotesubcategory}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'QuoteSubCategoryModel>/modelData',
@@ -251,7 +251,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
                                         <form:fields>
-                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="true"
+                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="false"
                                                 items="{
                                                     path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -261,7 +261,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadState}">
                                         <form:fields>
-                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="true"
+                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="false"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -385,7 +385,7 @@
                                             <Select id="typeofliftid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/typeoflift}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'liftTypeModel>/modelData'                                                
@@ -404,7 +404,7 @@
                                             <Select id="capacityid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/capacityid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadCapacityModel>/modelData'                                                
@@ -418,7 +418,7 @@
                                             <Select id="modelid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/modelid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadmodelModel>/modelData'                                                
@@ -432,7 +432,7 @@
                                             <Select id="driveid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/driveid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadDriveModel>/modelData'                                                
@@ -446,7 +446,7 @@
                                             <Select id="machineid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/machineid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'MachineModel>/modelData'                                                
@@ -460,7 +460,7 @@
                                             <Select id="controlid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/controlid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadControlModel>/modelData'                                                
@@ -474,7 +474,7 @@
                                             <Select id="operationid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/operationid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadOperationModel>/modelData'                                                
@@ -488,7 +488,7 @@
                                             <Select id="groupcontrolid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/groupcontrolid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadGroupControlModel>/modelData'                                                
@@ -502,7 +502,7 @@
                                             <Select id="speedid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/speedid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadSpeedModel>/modelData'                                                
@@ -516,7 +516,7 @@
                                             <Select id="typesofdoorid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/typeofdoorid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leadDoorTypeModel>/modelData'                                                
@@ -530,7 +530,7 @@
                                             <Select id="landingdoorsid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/landingdoorid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'landingDoorModel>/modelData'                                                
@@ -544,7 +544,7 @@
                                             <Select id="leadcarid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/cardoorid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'CarDoorModel>/modelData'                                                
@@ -558,7 +558,7 @@
                                             <Select id="landingfloorid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/floorheaightid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'standaredFloorHeightModel>/modelData'                                                
@@ -577,7 +577,7 @@
                                             <Select id="landingfloorsid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/lowestfloorid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'LowestFloorModel>/modelData'                                                
@@ -591,7 +591,7 @@
                                             <Select id="landingcwdpositionid"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/cwtpositionid}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'CWTPositionModel>/modelData'                                                
@@ -610,7 +610,7 @@
                                         <Select id="txtallopeningsameside"                                         
                                             change=""
                                             selectedKey="{editOrderModel>/allopeningsameside}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
                                             width="500px"
                                             items="{
                                                 path: 'openingSameSideModel>/modelData'                                            
@@ -624,7 +624,7 @@
                                             <Select id="txtFrontOpening"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/frontopening}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'frontOpeningModel>/modelData'                                                
@@ -638,7 +638,7 @@
                                             <Select id="txtbackopening"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/backopening}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'backOpeningModel>/modelData'                                                
@@ -652,7 +652,7 @@
                                             <Select id="txtLeftOpening"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/leftopening}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'leftOpeningModel>/modelData'                                                
@@ -666,7 +666,7 @@
                                             <Select id="txtRightOpening"                                             
                                                 change=""
                                                 selectedKey="{editOrderModel>/rightopening}" 
-                                                forceSelection="true"
+                                                forceSelection="false"
                                                 width="500px"
                                                 items="{
                                                     path: 'rightOpeningModel>/modelData'                                                
