@@ -136,7 +136,7 @@
                                             <!-- <Input id="progress" valueLiveUpdate="true" value="{editLeadActivityModel>/progress}" /> -->
                                             <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                                 max="100" min="0" progress="true"
-                                                showAdvancedTooltip="true" value="{editLeadActivityModel>/progress}">
+                                                showAdvancedTooltip="true" value="{editOrderModel>/winprobability}">
                                                 <ResponsiveScale id="rScaleWarningLevel"
                                                     tickmarksBetweenLabels="20" />
                                             </Slider>
@@ -246,7 +246,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadSiteAddress}">
                                         <form:fields>
-                                            <Input id="siteaddress" valueLiveUpdate="true" value="{editOrderModel>/address}"/>
+                                            <Input id="siteaddress" valueLiveUpdate="true" value="{editOrderModel>/siteaddress}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">

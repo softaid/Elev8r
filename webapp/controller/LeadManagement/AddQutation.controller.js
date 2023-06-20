@@ -648,7 +648,7 @@ sap.ui.define(
 					if (this.validateForm()) {
 					var currentContext = this;
 					var model = this.getView().getModel("editQutationModel").oData;
-
+					let QuoteModel = this.getView().getModel("locationModel").oData;
 					console.log("editQutationModel", model);
 					model["companyid"] = commonService.session("companyId");
 					model["quotedate"] = commonFunction.getDate(model.quotedate);
