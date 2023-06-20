@@ -96,13 +96,13 @@ sap.ui.define([
          * @param {*} sEvent 
          * @param {*} oData 
          */
-			 handleOrderList : function (sChannel, sEvent, oData) {
-				console.log("oData",oData);
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				this.bus = sap.ui.getCore().getEventBus();
-				oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
-				oRouter.navTo(oData.pagekey, true);
-			},
+		handleOrderList : function (sChannel, sEvent, oData) {
+			console.log("oData",oData);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
 
 		onSearch: function (oEvent) {
 			var oTableSearchState = [],
