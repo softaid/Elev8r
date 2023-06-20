@@ -55,7 +55,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.loadData();
+			this.loadOrderData();
 		},
 
 		
