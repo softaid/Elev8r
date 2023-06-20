@@ -16,7 +16,7 @@ sap.ui.define([
 
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-			this.afilters = [];
+			this.afiltersArr = [];
 			this.bus.subscribe("commondashboard", "redirectToPage", this.redirectToPage, this);
 			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
 			this.bus.subscribe("leaddetail", "handleLeadDetails", this.handleLeadDetails, this);
@@ -62,7 +62,7 @@ sap.ui.define([
 			// bind Stage dropdown
 			commonFunction.getReferenceByTypeForFilter("Stage", "stageModel", this);
 
-			this.getView().byId("deleteicon").setVisible(false);
+			// this.getView().byId("deleteicon").setVisible(false);
 
 		},
 
@@ -90,7 +90,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.getView().byId("btnUploadData").setVisible(false);
+			// this.getView().byId("btnUploadData").setVisible(false);
 			this.loadData();
 		},
 
@@ -169,13 +169,13 @@ sap.ui.define([
 			var contains = sap.ui.model.FilterOperator.EQ;
 			var columns = 'leadstatus';
 
-			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			this.afiltersArr.push(new sap.ui.model.Filter(columns, contains, sQuery));
 			if (sQuery == "All") {
-				this.afilters = [];
+				this.afiltersArr = [];
 			}
 			var list = this.getView().byId("tblPartyMaster");
 			var binding = list.getBinding("items");
-			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+			binding.filter(new sap.ui.model.Filter({ filters: this.afiltersArr, and: true | false }));
 		},
 
 		// Function for display Type wise Leads
@@ -185,19 +185,19 @@ sap.ui.define([
 			var contains = sap.ui.model.FilterOperator.EQ;
 			var columns = 'leadtype';
 
-			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			this.afiltersArr.push(new sap.ui.model.Filter(columns, contains, sQuery));
 			if (sQuery == "All") {
-				let i = this.afilters.length;
+				let i = this.afiltersArr.length;
 				while (i--) {
-					if (this.afilters[i].sPath == "leadtype") {
-						this.afilters.splice(i, 1);
+					if (this.afiltersArr[i].sPath == "leadtype") {
+						this.afiltersArr.splice(i, 1);
 					}
 				}
 			}
 			var list = this.getView().byId("tblPartyMaster");
 			var binding = list.getBinding("items");
 
-			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+			binding.filter(new sap.ui.model.Filter({ filters: this.afiltersArr, and: true | false }));
 		},
 
 		// Function for display Type wise Leads
@@ -207,19 +207,19 @@ sap.ui.define([
 			var contains = sap.ui.model.FilterOperator.EQ;
 			var columns = 'leadscategory';
 
-			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			this.afiltersArr.push(new sap.ui.model.Filter(columns, contains, sQuery));
 			if (sQuery == "All") {
-				let i = this.afilters.length;
+				let i = this.afiltersArr.length;
 				while (i--) {
-					if (this.afilters[i].sPath == "leadscategory") {
-						this.afilters.splice(i, 1);
+					if (this.afiltersArr[i].sPath == "leadscategory") {
+						this.afiltersArr.splice(i, 1);
 					}
 				}
 			}
 			var list = this.getView().byId("tblPartyMaster");
 			var binding = list.getBinding("items");
 
-			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+			binding.filter(new sap.ui.model.Filter({ filters: this.afiltersArr, and: true | false }));
 		},
 
 		// Function for display Type wise Leads
@@ -229,19 +229,19 @@ sap.ui.define([
 			var contains = sap.ui.model.FilterOperator.EQ;
 			var columns = 'sourcename';
 
-			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			this.afiltersArr.push(new sap.ui.model.Filter(columns, contains, sQuery));
 			if (sQuery == "All") {
-				let i = this.afilters.length;
+				let i = this.afiltersArr.length;
 				while (i--) {
-					if (this.afilters[i].sPath == "sourcename") {
-						this.afilters.splice(i, 1);
+					if (this.afiltersArr[i].sPath == "sourcename") {
+						this.afiltersArr.splice(i, 1);
 					}
 				}
 			}
 			var list = this.getView().byId("tblPartyMaster");
 			var binding = list.getBinding("items");
 
-			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+			binding.filter(new sap.ui.model.Filter({ filters: this.afiltersArr, and: true | false }));
 		},
 
 		// Function for display Type wise Leads
@@ -251,19 +251,19 @@ sap.ui.define([
 			var contains = sap.ui.model.FilterOperator.EQ;
 			var columns = 'stagename';
 
-			this.afilters.push(new sap.ui.model.Filter(columns, contains, sQuery));
+			this.afiltersArr.push(new sap.ui.model.Filter(columns, contains, sQuery));
 			if (sQuery == "All") {
-				let i = this.afilters.length;
+				let i = this.afiltersArr.length;
 				while (i--) {
-					if (this.afilters[i].sPath == "stagename") {
-						this.afilters.splice(i, 1);
+					if (this.afiltersArr[i].sPath == "stagename") {
+						this.afiltersArr.splice(i, 1);
 					}
 				}
 			}
 			var list = this.getView().byId("tblPartyMaster");
 			var binding = list.getBinding("items");
 
-			binding.filter(new sap.ui.model.Filter({ filters: this.afilters, and: true | false }));
+			binding.filter(new sap.ui.model.Filter({ filters: this.afiltersArr, and: true | false }));
 		},
 
 		resourceBundle: function () {

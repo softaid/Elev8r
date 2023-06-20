@@ -386,7 +386,7 @@ sap.ui.define([
 							currentContext.onCancel();
 							MessageToast.show(message);
 							currentContext.bus = sap.ui.getCore().getEventBus();
-							currentContext.bus.publish("loaddata", "loadData");
+							currentContext.bus.publish("loadorderdata", "loadOrderData");
 					}
 
 				});

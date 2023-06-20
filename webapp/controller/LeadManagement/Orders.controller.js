@@ -16,7 +16,7 @@ sap.ui.define([
 			// this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("orderscreen", "handleOrderList", this.handleOrderList, this);
 			this.bus.subscribe("orderdetail", "handleOrderDetails", this.handleOrderDetails, this);
-			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+			this.bus.subscribe("loadorderdata", "loadOrderData", this.loadOrderData, this);
 			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
 
 			this.handleRouteMatched(null);
@@ -130,7 +130,7 @@ sap.ui.define([
 			oBinding.sort(oSorter);
 		},
 
-		loadData: function () {
+		loadOrderData: function () {
 			var currentContext = this;
 			orderService.getAllOrders(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
