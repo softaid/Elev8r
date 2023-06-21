@@ -264,11 +264,6 @@
                                     <form:fields>
                                         <Input id="txtsalesrep"  valueLiveUpdate="true" value="{editQutationModel>/salesrep}"  required="false" change="onPartyNameChange"/>
                                     </form:fields>
-                                </form:FormElement>   
-                                <form:FormElement label="Lead Value">
-                                    <form:fields>
-                                        <Input id="txtLeadValue"  valueLiveUpdate="true" value="{editQutationModel>/leadvalue}" required="false" />
-                                    </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Quote Score">
                                     <form:fields>

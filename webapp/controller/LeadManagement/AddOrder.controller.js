@@ -112,6 +112,30 @@ sap.ui.define([
 			// bind order status dropdown
 			commonFunction.getReferenceByType("OrdSts", "statusModel", this);
 
+			// bind car panel dropdown
+			commonFunction.getReferenceByType("CarPanel", "carPanelModel", this);
+
+			// bind false ceiling dropdown
+			commonFunction.getReferenceByType("FlsCel", "falseCeilingModel", this);
+
+			// bind ventilation dropdown
+			commonFunction.getReferenceByType("Ventilation", "ventilationModel", this);
+
+			// bind Floring dropdown
+			commonFunction.getReferenceByType("Floring", "flooringModel", this);
+
+			// bind car position indicator dropdown
+			commonFunction.getReferenceByType("CrPsnIndcr", "carPositionIndicatorModel", this);
+
+			// bind traction media dropdown
+			commonFunction.getReferenceByType("TrcMedia", "tractionMediaModel", this);
+
+			// bind main power system dropdown
+			commonFunction.getReferenceByType("MnPwrSys", "mainPowerSystemModel", this);
+
+			// bind auxilary supply system dropdown
+			commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
+
 			//bind all Leads
 			leadService.getAllLeads(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();

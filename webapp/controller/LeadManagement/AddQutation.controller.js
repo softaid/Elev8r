@@ -691,8 +691,6 @@ sap.ui.define(
 
 					let quotevalue = this.getView().byId("txtQutationValue").getValue();
 
-					let leadValue = this.getView().byId("txtLeadValue").getValue();
-
 
 
         if(quotevalue!=null){
@@ -707,14 +705,6 @@ sap.ui.define(
 			}
 		}
 
-					// if (
-					// 	!commonFunction.isRequired(
-					// 		this,
-					// 		"txtLead",
-					// 		"Please enter lead name."
-					// 	)
-					// )
-					// 	isValid = false;
 
 					if (
 						!commonFunction.isRequired(
