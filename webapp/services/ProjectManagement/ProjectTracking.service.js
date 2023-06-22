@@ -30,8 +30,6 @@ sap.ui.define([
             getAllProject: function(callback){
                 commonService.runJQueryX("GET", "project/searchprojectdetails/" + commonService.session("companyId"), null, callback, null);
             },
-
-
         };
     }
 );

@@ -2,10 +2,10 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
-	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/ProjectTracking.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter,ProjectTracking, xlsx,MessageToast) {
+], function (JSONModel, BaseController, Sorter,projectService, xlsx,MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.Project", {
@@ -65,7 +65,7 @@ sap.ui.define([
 		},
 
 		onListItemPress: function (oEvent) {
-			var viewModel = oEvent.getSource().getBindingContext("PActivityMasterModel");
+			var viewModel = oEvent.getSource().getBindingContext("projectModel");
 			var model = { "id": viewModel.getProperty("id") }
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.publish("activitymaster", "setDetailPage", { viewName: "ProjectDetail", viewModel: model });
@@ -104,11 +104,11 @@ sap.ui.define([
 
 		loadData: function () {
 			var currentContext = this;
-			ProjectTracking.getAllProjectTracking(function (data) {
+			projectService.getAllProjects(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: data[0] });
-				currentContext.getView().setModel(oModel, "PActivityMasterModel");
-                console.log("PActivityMasterModel",oModel);
+				currentContext.getView().setModel(oModel, "projectModel");
+                console.log("projectModel",oModel);
 			});
 		},
 

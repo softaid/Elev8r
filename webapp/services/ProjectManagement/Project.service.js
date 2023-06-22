@@ -42,6 +42,10 @@ sap.ui.define([
                 commonService.runJQueryX("DELETE", "elevproject/deleteprojectdetail/"+params.id, null, callback, null);
             },
 
+            getProjectList : function(params, callback){
+                commonService.runJQueryX("GET", "project/projectlist/" + params.leadid, null, callback, null);
+            }, 
+            
             getAllDepartment : function(callback){
                 commonService.runJQueryX("GET", "department/search/" + commonService.session("companyId"), null, callback, null);
             },

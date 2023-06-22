@@ -179,33 +179,57 @@ sap.ui.define(
 						this
 					);
 
-					// bind AllOpeningSameSide dropdown
+					// bind frontopening dropdown
 					commonFunction.getReferenceByType(
 						"FrontOpening",
 						"frontOpeningModel",
 						this
 					);
 
-					// bind AllOpeningSameSide dropdown
+					// bind backopening dropdown
 					commonFunction.getReferenceByType(
 						"BackOpening",
 						"backOpeningModel",
 						this
 					);
 
-					// bind AllOpeningSameSide dropdown
+					// bind leftopening dropdown
 					commonFunction.getReferenceByType(
 						"LeftOpening",
 						"leftOpeningModel",
 						this
 					);
 
-					// bind AllOpeningSameSide dropdown
+					// bind rightopening dropdown
 					commonFunction.getReferenceByType(
 						"RightOpening",
 						"rightOpeningModel",
 						this
 					);
+
+					// bind car panel dropdown
+					commonFunction.getReferenceByType("CarPanel", "carPanelModel", this);
+
+					// bind false ceiling dropdown
+					commonFunction.getReferenceByType("FlsCel", "falseCeilingModel", this);
+
+					// bind ventilation dropdown
+					commonFunction.getReferenceByType("Ventilation", "ventilationModel", this);
+
+					// bind Floring dropdown
+					commonFunction.getReferenceByType("Floring", "flooringModel", this);
+
+					// bind car position indicator dropdown
+					commonFunction.getReferenceByType("CrPsnIndcr", "carPositionIndicatorModel", this);
+
+					// bind traction media dropdown
+					commonFunction.getReferenceByType("TrcMedia", "tractionMediaModel", this);
+
+					// bind main power system dropdown
+					commonFunction.getReferenceByType("MnPwrSys", "mainPowerSystemModel", this);
+
+					// bind auxilary supply system dropdown
+					commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
 
 					//bind all Leads
 					leadService.getAllLeads(function (data) {
@@ -624,7 +648,7 @@ sap.ui.define(
 					if (this.validateForm()) {
 					var currentContext = this;
 					var model = this.getView().getModel("editQutationModel").oData;
-
+					let QuoteModel = this.getView().getModel("locationModel").oData;
 					console.log("editQutationModel", model);
 					model["companyid"] = commonService.session("companyId");
 					model["quotedate"] = commonFunction.getDate(model.quotedate);
@@ -667,8 +691,6 @@ sap.ui.define(
 
 					let quotevalue = this.getView().byId("txtQutationValue").getValue();
 
-					let leadValue = this.getView().byId("txtLeadValue").getValue();
-
 
 
         if(quotevalue!=null){
@@ -677,20 +699,6 @@ sap.ui.define(
 			}
 		}
 
-		if(leadValue!=null){
-			 if (!commonFunction.isNumbermessage(this, "txtLeadScore", "please enter correct quote  score!")) {
-				isValid = false;
-			}
-		}
-
-					// if (
-					// 	!commonFunction.isRequired(
-					// 		this,
-					// 		"txtLead",
-					// 		"Please enter lead name."
-					// 	)
-					// )
-					// 	isValid = false;
 
 					if (
 						!commonFunction.isRequired(

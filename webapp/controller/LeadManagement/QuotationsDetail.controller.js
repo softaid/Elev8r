@@ -186,10 +186,10 @@ sap.ui.define([
 
 
 		// Get all data related to PDF Model
-		loadPDFData: function (quotid) {
+		loadPDFData: async function (quotid) {
 			let oThis = this;
 
-			quotationService.getQuotationPDF({ id: quotid }, function (data) {
+			await quotationService.getQuotationPDF({ id: quotid }, function (data) {
 				if (data.length) {
 					// Get Quote details for PDF
 					if (data[0].length) {
@@ -213,8 +213,7 @@ sap.ui.define([
 					}
 				}
 			})
-			// Conver Quote value in word Format
-			this.notowordChange();
+			
 		},
 
 		//Navigate Add qutation screen
@@ -301,6 +300,8 @@ sap.ui.define([
 			str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
 			str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
 			str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
+
+			console.log(str);
 			return str;
 
 		},
@@ -309,6 +310,7 @@ sap.ui.define([
 		notowordChange: function () {
 			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
 			var grandtotal = leadLiftPDFModel.oData.quotevalue;
+			console.log("grandtotal : ",grandtotal);
 			var grandtotalfloor = Math.floor(grandtotal);
 			var text = this.createno(grandtotalfloor);
 			this.nettotalinwords = text;
@@ -318,6 +320,9 @@ sap.ui.define([
 	   * Generate PDF for Purchase request Scrren
 	   */
 		onPdfExport: function () {
+			// Conver Quote value in word Format
+			this.notowordChange();
+			
 			var fullHtml = "";
 			var headertable1 = "";
 			headertable1 += "<!DOCTYPE html> <html> <head> <title>" + "Quotation" + "</title>" +
@@ -640,7 +645,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text:'In Words:     " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
+			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
@@ -687,9 +692,9 @@ sap.ui.define([
 			headertable1 += " body: [";
 			
 			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [{text:'10%" + " " + "', style: 'subheaderformargine'} ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['10%'] ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['10%'] ] }],";
-			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['10%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['60%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['25%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['5%'] ] }],";
 			// headertable1 += "[ { columns: [ ['For request of mechanical material',' ',' '] ] },{ columns: [ ['60%'] ] }],";
 			// headertable1 += "[ { columns: [ ['For request of electrical material',' ',' '] ] },{ columns: [ ['25%'] ] }],";
 			// headertable1 += "[ { columns: [ ['On customer Handover',' ',' '] ] },{ columns: [ ['5%'] ] }],";
@@ -714,11 +719,23 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'HDFC BANK', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'As a very special case and as per RBI norms, Only Rs 2, 00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{text: 'As a very special case and as per RBI norms, Only Rs 2, 00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			// headertable1 += "]";
+			// headertable1 += "}";
+			// headertable1 += "},";
+			// headertable1 += "{ style: 'tableExample5',";
+			// headertable1 += " table: {";
+			// headertable1 += "widths: ['100%'],";
+			// headertable1 += " body: [";
+			// headertable1 += "[ { columns: [ [{text:'In Words:     " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
+			// headertable1 += "]";
+			// headertable1 += "}";
+			// headertable1 += "},";
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheader'},{text:'Customer Signature" + " " + "', style: 'subheaderone'}]},";

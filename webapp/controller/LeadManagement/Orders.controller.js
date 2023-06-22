@@ -16,7 +16,7 @@ sap.ui.define([
 			// this.bus.subscribe("quotationmaster", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("orderscreen", "handleOrderList", this.handleOrderList, this);
 			this.bus.subscribe("orderdetail", "handleOrderDetails", this.handleOrderDetails, this);
-			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
+			this.bus.subscribe("loadorderdata", "loadOrderData", this.loadOrderData, this);
 			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
 
 			this.handleRouteMatched(null);
@@ -55,7 +55,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (evt) {
-			this.loadData();
+			this.loadOrderData();
 		},
 
 		
@@ -96,13 +96,13 @@ sap.ui.define([
          * @param {*} sEvent 
          * @param {*} oData 
          */
-			 handleOrderList : function (sChannel, sEvent, oData) {
-				console.log("oData",oData);
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				this.bus = sap.ui.getCore().getEventBus();
-				oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
-				oRouter.navTo(oData.pagekey, true);
-			},
+		handleOrderList : function (sChannel, sEvent, oData) {
+			console.log("oData",oData);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.bus = sap.ui.getCore().getEventBus();
+			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
+			oRouter.navTo(oData.pagekey, true);
+		},
 
 		onSearch: function (oEvent) {
 			var oTableSearchState = [],
@@ -130,7 +130,7 @@ sap.ui.define([
 			oBinding.sort(oSorter);
 		},
 
-		loadData: function () {
+		loadOrderData: function () {
 			var currentContext = this;
 			orderService.getAllOrders(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
