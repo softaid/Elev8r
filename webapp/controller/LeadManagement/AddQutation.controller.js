@@ -679,7 +679,7 @@ sap.ui.define(
 					var source = this.getView().byId("sourceid").getSelectedKey();
 					var pipeline = this.getView().byId("txtStageid").getSelectedKey();
 
-					var location = this.getView().byId("leadlocationid").getSelectedKey();
+					var location = this.getView().byId("leadlocationid").getValue();
 					var leadStatus = this.getView().byId("leadstatusid").getSelectedKey();
 
 					var category = this.getView().byId("categoryid").getSelectedKey();
@@ -790,7 +790,7 @@ sap.ui.define(
 						this.getView()
 							.byId("leadlocationid")
 							.setValueState(sap.ui.core.ValueState.Error)
-							.setValueStateText("Please select atleast one location.");
+							.setValueStateText("Please  enter side address.");
 
 						isValid = false;
 					}

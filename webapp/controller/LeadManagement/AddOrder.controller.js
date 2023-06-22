@@ -9,7 +9,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Order.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService,orderService, quotationService) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, leadService, orderService, quotationService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddOrder", {
@@ -112,6 +112,33 @@ sap.ui.define([
 			// bind order status dropdown
 			commonFunction.getReferenceByType("OrdSts", "statusModel", this);
 
+			// bind car panel dropdown
+			commonFunction.getReferenceByType("CarPanel", "carPanelModel", this);
+
+			// bind false ceiling dropdown
+			commonFunction.getReferenceByType("FlsCel", "falseCeilingModel", this);
+
+			// bind ventilation dropdown
+			commonFunction.getReferenceByType("Ventilation", "ventilationModel", this);
+
+			// bind Floring dropdown
+			commonFunction.getReferenceByType("Floring", "flooringModel", this);
+
+			// bind car position indicator dropdown
+			commonFunction.getReferenceByType("CrPsnIndcr", "carPositionIndicatorModel", this);
+
+			// bind traction media dropdown
+			commonFunction.getReferenceByType("TrcMedia", "tractionMediaModel", this);
+
+			// bind main power system dropdown
+			commonFunction.getReferenceByType("MnPwrSys", "mainPowerSystemModel", this);
+
+			// bind auxilary supply system dropdown
+			commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
+
+			// bind Group control 
+			commonFunction.getReferenceByType("LftGrpCtrl", "leadGroupControlModel", this);
+
 			//bind all Leads
 			leadService.getAllLeads(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -208,20 +235,20 @@ sap.ui.define([
 			currentContext.getAllOrders();
 		},
 
-		getAllOrders : function(){
+		getAllOrders: function () {
 			let editOrderModel = this.getView().getModel("editOrderModel");
 			orderService.getAllOrders(function (data) {
-                if(data.length && data[0].length){
-                    let lastid = (data[0].length) - 1;
+				if (data.length && data[0].length) {
+					let lastid = (data[0].length) - 1;
 					let nextid = (data[0][lastid].id) + 1;
 					editOrderModel.oData.orderid = nextid;
 					editOrderModel.refresh();
-                }else{
-                    editOrderModel.oData.orderid = 1;
+				} else {
+					editOrderModel.oData.orderid = 1;
 					editOrderModel.refresh();
-                }
+				}
 			});
-		},	
+		},
 
 		orderConversion: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
@@ -247,7 +274,7 @@ sap.ui.define([
 			if (id != undefined) {
 
 				quotationService.convertToOrder({ id: id }, function (data) {
-					if(data.length && data[0].length){
+					if (data.length && data[0].length) {
 						data[0][0].orderid = parseInt(data[0][0].lastorderid) + 1;
 						oModel.setData(data[0][0]);
 					}
@@ -292,7 +319,7 @@ sap.ui.define([
 				});
 				this.getView().byId("btnSave").setText("Update");
 
-			} 
+			}
 
 			this.getView().setModel(oModel, "editOrderModel");
 			var oModel = this.getView().getModel("editOrderModel");
@@ -371,25 +398,25 @@ sap.ui.define([
 
 		onSave: function () {
 			//if (this.validateForm()) {
-				var currentContext = this;
-				var model = this.getView().getModel("editOrderModel").oData;
-				console.log("editOrderModel", model);
-				model["companyid"] = commonService.session("companyId");
-				model["orderdate"] = commonFunction.getDate(model.orderdate);
-				model["userid"] = commonService.session("userId");
-				model["status"] = currentContext.getView().byId("statusid").getSelectedItem().mProperties.text;
+			var currentContext = this;
+			var model = this.getView().getModel("editOrderModel").oData;
+			console.log("editOrderModel", model);
+			model["companyid"] = commonService.session("companyId");
+			model["orderdate"] = commonFunction.getDate(model.orderdate);
+			model["userid"] = commonService.session("userId");
+			model["status"] = currentContext.getView().byId("statusid").getSelectedItem().mProperties.text;
 
-				orderService.saveOrder(model, function (data) {
+			orderService.saveOrder(model, function (data) {
 
-					if (data.id > 0) {
-							var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
-							currentContext.onCancel();
-							MessageToast.show(message);
-							currentContext.bus = sap.ui.getCore().getEventBus();
-							currentContext.bus.publish("loadorderdata", "loadOrderData");
-					}
+				if (data.id > 0) {
+					var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
+					currentContext.onCancel();
+					MessageToast.show(message);
+					currentContext.bus = sap.ui.getCore().getEventBus();
+					currentContext.bus.publish("loadorderdata", "loadOrderData");
+				}
 
-				});
+			});
 			//}
 			this.reset();
 
@@ -568,7 +595,7 @@ sap.ui.define([
 
 			// let oQutationModel = oThis.getView().getModel("editOrderModel");
 			// console.log("---------------After Save oLeadDetailnModel---------------",oQutationModel);
-			
+
 			//     oQutationModel.oData.leadname = "",
 			// 	oQutationModel.oData.companyname = "",
 			// 	oQutationModel.oData.quotedate = "",
@@ -627,7 +654,7 @@ sap.ui.define([
 			// 	oQutationModel.oData.mrdepth = "0",
 			// 	oQutationModel.oData.mrheight = "0",
 			// 	oQutationModel.oData.companyname = "",
-			
+
 
 			// oQutationModel.refresh();
 		},

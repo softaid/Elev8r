@@ -99,7 +99,7 @@
                                                 required="false" 
                                                 change=""
                                                 selectedKey="{editQutationModel>/quotestatusid}" 
-                                                forceSelection="false"
+                                                forceSelection="true"
                                                 width="500px"
                                                 items="{
                                                     path: 'QuoteStatusModel>/modelData',
@@ -115,7 +115,7 @@
                                                 required="false" 
                                                 change=""
                                                 selectedKey="{editQutationModel>/quotetype}" 
-                                                forceSelection="false"
+                                                forceSelection="true"
                                                 width="500px"
                                                 items="{
                                                     path: 'quoteTypeModel>/modelData',
@@ -131,7 +131,7 @@
                                                 required="false" 
                                                 change=""
                                                 selectedKey="{editQutationModel>/quotesubcategory}" 
-                                                forceSelection="false"
+                                                forceSelection="true"
                                                 width="500px"
                                                 items="{
                                                     path: 'QuoteSubCategoryModel>/modelData',
@@ -163,7 +163,7 @@
                                           
                                         </form:fields>
                                     </form:FormElement> 
-                                      <form:FormElement label="GST">
+                                      <form:FormElement label=" With GST">
                                         <form:fields>
                                               <Switch state="{editQutationModel>/withgst}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
                                                 <layoutData>
@@ -297,7 +297,7 @@
                                         <Input id="txtdiscription"   valueLiveUpdate="true" value="{editQutationModel>/leaddescription}"  required="false" change="onPartyNameChange"/>
                                     </form:fields>
                                 </form:FormElement>   
-                                <form:FormElement label="{i18n>leadlocation}">
+                                <!-- <form:FormElement label="{i18n>leadlocation}">
                                     <form:fields>
                                         <Select id="leadlocationid"
                                             required="false" 
@@ -313,10 +313,15 @@
                                             <core:Item key="{locationModel>id}" text="{locationModel>locationname}" />
                                         </Select>
                                     </form:fields>
+                                </form:FormElement> -->
+                                  <form:FormElement label="{i18n>leadlocation}">
+                                         <form:fields>
+                                        <Input id="leadlocationid"  valueLiveUpdate="true" value="{editQutationModel>/siteaddress}" />
+                                    </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Over Head">
                                     <form:fields>
-                                        <Input id="txtoverhead"  valueLiveUpdate="true" value="{editQutationModel>/overhead}"/>
+                                        <Input id="txtoverhead"  valueLiveUpdate="true" value="{editQutationModel>/overhead}" />
                                     </form:fields>
                                 </form:FormElement>
                             </form:formElements>
@@ -510,32 +515,37 @@
                                 </form:FormElement>
                                 <form:FormElement label="Shaft Width">
                                     <form:fields>
-                                        <Input id="txtshaftwidth"  valueLiveUpdate="true" value="{editQutationModel>/shaftwidth}"/>
+                                        <Input id="txtshaftwidth"  valueLiveUpdate="true" value="{editQutationModel>/shaftwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Shaft Depth">
                                     <form:fields>
-                                        <Input id="txtshaftdepth"  valueLiveUpdate="true" value="{editQutationModel>/shaftdepth}"/>
+                                        <Input id="txtshaftdepth"  valueLiveUpdate="true" value="{editQutationModel>/shaftdepth}"
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement> 
                                 <form:FormElement label="Mr Width">
                                     <form:fields>
-                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"/>
+                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Depth">
                                     <form:fields>
-                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"/>
+                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Height">
                                     <form:fields>
-                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}"/>
+                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}" 
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Depth">
                                     <form:fields>
-                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}"/>
+                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}" 
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadLandingDoors}">
@@ -885,37 +895,40 @@
                                 </form:FormElement>
                                 <form:FormElement label="Car Width">
                                     <form:fields>
-                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}"/>
+                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Height">
                                     <form:fields>
-                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}"/>
+                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Door Width">
                                     <form:fields>
-                                        <Input id="txtdoorwidth"  valueLiveUpdate="true" value="{editQutationModel>/doorwidth}"/>
+                                        <Input id="txtdoorwidth"  valueLiveUpdate="true" value="{editQutationModel>/doorwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Door Height">
                                     <form:fields>
-                                        <Input id="txtdoorheight"  valueLiveUpdate="true" value="{editQutationModel>/doorheight}"/>
+                                        <Input id="txtdoorheight"  valueLiveUpdate="true" value="{editQutationModel>/doorheight}"
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Travel">
                                     <form:fields>
-                                        <Input id="txttravel"  valueLiveUpdate="true" value="{editQutationModel>/travel}"/>
+                                        <Input id="txttravel"  valueLiveUpdate="true" value="{editQutationModel>/travel}"  description=" "/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Pit Depth">
                                     <form:fields>
-                                        <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"/>
+                                        <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Completion Days">
                                     <form:fields>
-                                        <Input id="completiondays" value="{quoteModel>/completiondays}" />
+                                        <Input id="completiondays" value="{editQutationModel>/completiondays}" 
+                                        description="Days"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Remark 1">
