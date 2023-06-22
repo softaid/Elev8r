@@ -699,12 +699,6 @@ sap.ui.define(
 			}
 		}
 
-		if(leadValue!=null){
-			 if (!commonFunction.isNumbermessage(this, "txtLeadScore", "please enter correct quote  score!")) {
-				isValid = false;
-			}
-		}
-
 
 					if (
 						!commonFunction.isRequired(
