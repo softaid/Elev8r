@@ -149,11 +149,11 @@
                                         <form:fields>
                                             <Select id="subcategoryid"
                                                 change=""
-                                                selectedKey="{editPartyModel>/leadsubcategory}" 
+                                                selectedKey="{editPartyModel>/leadsubcategoryid}" 
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
-                                                    path: 'leadSubCategoryModel>/modelData'                                                    
+                                                    path:'leadSubCategoryModel>/modelData'                                                    
                                                 }">
                                                 <core:Item key="{leadSubCategoryModel>id}" text="{leadSubCategoryModel>description}" />
                                             </Select>
@@ -166,7 +166,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
                                         <form:fields>
-                                            <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="true"
+                                            <Select id="ddlCountry1" selectedKey="{editPartyModel>/countryid}" forceSelection="false"
                                                 items="{
                                                     path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -176,7 +176,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadState}">
                                         <form:fields>
-                                            <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="true"
+                                            <Select id="ddlState1" selectedKey="{editPartyModel>/stateid}" forceSelection="false"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onSiteStateChange">
@@ -700,72 +700,72 @@
                                 </form:FormElement>
                                 <form:FormElement label="Shaft Width">
                                     <form:fields>
-                                        <Input id="txtshaftwidth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/shaftwidth}"/>
+                                        <Input id="txtshaftwidth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/shaftwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Shaft Depth">
                                     <form:fields>
-                                        <Input id="txtshaftdepth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/shaftdepth}"/>
+                                        <Input id="txtshaftdepth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/shaftdepth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Depth">
                                     <form:fields>
-                                        <Input id="txtcardepth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/cardepth}"/>
+                                        <Input id="txtcardepth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/cardepth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Width">
                                     <form:fields>
-                                        <Input id="txtcarwidth" type="number" valueLiveUpdate="true" value="{editPartyModel>/carwidth}"/>
+                                        <Input id="txtcarwidth" type="number" valueLiveUpdate="true" value="{editPartyModel>/carwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Height">
                                     <form:fields>
-                                        <Input id="txtcarheight" type="number" valueLiveUpdate="true" value="{editPartyModel>/carheight}"/>
+                                        <Input id="txtcarheight" type="number" valueLiveUpdate="true" value="{editPartyModel>/carheight}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>                                    
                                 <form:FormElement label="Door Width">
                                     <form:fields>
-                                        <Input id="txtdoorwidth" type="number" valueLiveUpdate="true" value="{editPartyModel>/doorwidth}"/>
+                                        <Input id="txtdoorwidth" type="number" valueLiveUpdate="true" value="{editPartyModel>/doorwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                     <form:FormElement label="Door Height">
                                     <form:fields>
-                                        <Input id="txtdoorheight" type="number" valueLiveUpdate="true" value="{editPartyModel>/doorheight}"/>
+                                        <Input id="txtdoorheight" type="number" valueLiveUpdate="true" value="{editPartyModel>/doorheight}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Travel">
                                     <form:fields>
-                                        <Input id="txttravel" type="number" valueLiveUpdate="true" value="{editPartyModel>/travel}"/>
+                                        <Input id="txttravel" type="number" valueLiveUpdate="true" value="{editPartyModel>/travel}" description=" "/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Pit Depth">
                                     <form:fields>
-                                        <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editPartyModel>/pitdepth}"/>
+                                        <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editPartyModel>/pitdepth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                     <form:FormElement label="Over Head">
                                     <form:fields>
-                                        <Input id="txtoverhead" type="number" valueLiveUpdate="true" value="{editPartyModel>/overhead}"/>
+                                        <Input id="txtoverhead" type="number" valueLiveUpdate="true" value="{editPartyModel>/overhead}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Width">
                                     <form:fields>
-                                        <Input id="txtmrwidth" type="number" valueLiveUpdate="true" value="{editPartyModel>/mrwidth}"/>
+                                        <Input id="txtmrwidth" type="number" valueLiveUpdate="true" value="{editPartyModel>/mrwidth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Height">
                                     <form:fields>
-                                        <Input id="txtmrheight" type="number" valueLiveUpdate="true" value="{editPartyModel>/mrheight}"/>
+                                        <Input id="txtmrheight" type="number" valueLiveUpdate="true" value="{editPartyModel>/mrheight}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Mr Depth">
                                     <form:fields>
-                                        <Input id="txtmrdepth" type="number" valueLiveUpdate="true" value="{editPartyModel>/mrdepth}"/>
+                                        <Input id="txtmrdepth" type="number" valueLiveUpdate="true" value="{editPartyModel>/mrdepth}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Win Probability">
                                     <form:fields>
-                                        <Input id="winprobability" type="number"  valueLiveUpdate="true" value="{editPartyModel>/winprobability}"  />
+                                        <Input id="winprobability" type="number"  valueLiveUpdate="true" value="{editPartyModel>/winprobability}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Lead Value">

@@ -155,10 +155,10 @@
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
-                                                    path: 'QuoteStatusModel>/modelData',
+                                                    path: 'leadSourceModel>/modelData',
                                                     sorter: { path: 'id' }
                                                 }">
-                                                <core:Item key="{QuoteStatusModel>id}" text="{QuoteStatusModel>description}" />
+                                                <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
@@ -167,7 +167,7 @@
                                             <Input id="txtQutationValue" valueLiveUpdate="true" value="{editOrderModel>/quotevalue}" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement label="Quote Stage">
+                                    <!-- <form:FormElement label="Quote Stage">
                                         <form:fields>
                                             <Select id="stageid"   
                                                 change=""
@@ -182,7 +182,7 @@
                                                 <core:Item key="{stageModel>id}" text="{stageModel>description}" />
                                             </Select>
                                         </form:fields>
-                                    </form:FormElement>
+                                    </form:FormElement> -->
                                     <form:FormElement label="{i18n>leadArchitect}">
                                         <form:fields>
                                             <Select id="landarchitectid"
@@ -251,7 +251,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
                                         <form:fields>
-                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="true"
+                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="false"
                                                 items="{
                                                     path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -261,7 +261,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadState}">
                                         <form:fields>
-                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="true"
+                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="false"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -284,11 +284,11 @@
                                             <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editOrderModel>/pincode}" change="onNumberInputChange"/>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement label="{i18n>leadMobileP}">
+                                    <!-- <form:FormElement label="{i18n>leadMobileP}">
                                         <form:fields>
                                             <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editOrderModel>/mobilep}"/>
                                         </form:fields>
-                                    </form:FormElement>
+                                    </form:FormElement> -->
                                     <form:FormElement label="{i18n>leadEmail}">
                                         <form:fields>
                                             <Input id="txtEmailId" valueLiveUpdate="true" value="{editOrderModel>/email}" change="onEmailChange"  />
@@ -304,11 +304,11 @@
                                             <Input id="panno" maxLength="10" valueLiveUpdate="true" value="{editOrderModel>/panno}"/>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement label="Primary Contact">
+                                    <!-- <form:FormElement label="Primary Contact">
                                         <form:fields>
                                             <Input id="primarycontact" maxLength="10" valueLiveUpdate="true" value="{editOrderModel>/primarycontact}"/>
                                         </form:fields>
-                                    </form:FormElement>
+                                    </form:FormElement> -->
                                     <form:FormElement label="Contact Person">
                                         <form:fields>
                                             <Input id="contactperson" valueLiveUpdate="true" value="{editOrderModel>/contactperson}"/>

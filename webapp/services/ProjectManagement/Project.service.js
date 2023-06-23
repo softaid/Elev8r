@@ -21,15 +21,7 @@ sap.ui.define([
             getAllProjectsDetail : function(callback){
                 commonService.runJQueryX("GET", "elevproject/projectsdetail/" + commonService.session("companyId"), null, callback, null);
             },    
-            getAllProjectsStagePerDetail : function(callback){
-                commonService.runJQueryX("GET", "elevproject/projectsdetailstageper/" + commonService.session("companyId"), null, callback, null);
-            },    
-            getAllProjectsProjWeightageDetail : function(callback){
-                commonService.runJQueryX("GET", "elevproject/projectsdetailproweightage/" + commonService.session("companyId"), null, callback, null);
-            },   
-            getAllProjectDepartmentDetail : function(callback){
-                commonService.runJQueryX("GET", "elevproject/projectsdetaildepartments/" + commonService.session("companyId"), null, callback, null);
-            },    
+            
             saveProject : function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/saveproject/", params,callback, null);
             },
@@ -44,7 +36,8 @@ sap.ui.define([
 
             getProjectList : function(params, callback){
                 commonService.runJQueryX("GET", "project/projectlist/" + params.leadid, null, callback, null);
-            }, 
+            },
+    
             
             getAllDepartment : function(callback){
                 commonService.runJQueryX("GET", "department/search/" + commonService.session("companyId"), null, callback, null);

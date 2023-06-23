@@ -186,14 +186,6 @@
 					"items": []
 				},
 				{
-					"title": "Project Management Detail",
-					"icon": "sap-icon://workflow-tasks",
-					"expanded": false,
-					"key": "projectmanagementaspermasterstages",
-					"eid": [32],
-					"items": []
-				},
-				{
 					"title": "Activities",
 					"icon": "sap-icon://activities",
 					"expanded": false,
