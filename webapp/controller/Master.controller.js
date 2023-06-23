@@ -69,7 +69,7 @@ sap.ui.define([
 				oModel.refresh();
 			});
 
-			// Notification Placeholders cached in browser
+			// // Notification Placeholders cached in browser
 			commonService.getNotificationCreatedFor({ userid: commonFunction.session("userId") }, function (data) {
 				var oModel = currentContext.getView().getModel("notificationCreatedForModel");
 				oModel.oData.modelData = data[0];
