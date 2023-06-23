@@ -20,7 +20,7 @@ sap.ui.define([
 
             getAllProjectsDetail : function(callback){
                 commonService.runJQueryX("GET", "elevproject/projectsdetail/" + commonService.session("companyId"), null, callback, null);
-            },
+            },    
             
             saveProject : function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/saveproject/", params,callback, null);
@@ -36,7 +36,8 @@ sap.ui.define([
 
             getProjectList : function(params, callback){
                 commonService.runJQueryX("GET", "project/projectlist/" + params.leadid, null, callback, null);
-            }, 
+            },
+    
             
             getAllDepartment : function(callback){
                 commonService.runJQueryX("GET", "department/search/" + commonService.session("companyId"), null, callback, null);

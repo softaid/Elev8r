@@ -39,8 +39,6 @@ sap.ui.define([
 		},
 
 		onInit: function () {
-			
-
 			var dateTimeModel = new JSONModel();
 			dateTimeModel.setData({
 				valueDTP3: new Date()
@@ -69,7 +67,7 @@ sap.ui.define([
 				oModel.refresh();
 			});
 
-			// Notification Placeholders cached in browser
+			// // Notification Placeholders cached in browser
 			commonService.getNotificationCreatedFor({ userid: commonFunction.session("userId") }, function (data) {
 				var oModel = currentContext.getView().getModel("notificationCreatedForModel");
 				oModel.oData.modelData = data[0];
@@ -554,9 +552,6 @@ sap.ui.define([
 			var oFixedNavigationList = this.byId('oFixedNavigationList');
 			oNavigationList.removeAllItems();
 			oFixedNavigationList.removeAllItems();
-
-			// clear cache
-			location.reload(true);
 		},
 
 		// onUserNamePress: function (oEvent) {

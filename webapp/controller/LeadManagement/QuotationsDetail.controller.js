@@ -656,7 +656,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
+			headertable1 += "[ { columns: [ [{text:'In Words:     " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'title'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
@@ -703,9 +703,9 @@ sap.ui.define([
 			headertable1 += " body: [";
 			
 			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [{text:'10%" + " " + "', style: 'subheaderformargine'} ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['60%'] ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['25%'] ] }],";
-			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['5%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['10%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['10%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['10%'] ] }],";
 			// headertable1 += "[ { columns: [ ['For request of mechanical material',' ',' '] ] },{ columns: [ ['60%'] ] }],";
 			// headertable1 += "[ { columns: [ ['For request of electrical material',' ',' '] ] },{ columns: [ ['25%'] ] }],";
 			// headertable1 += "[ { columns: [ ['On customer Handover',' ',' '] ] },{ columns: [ ['5%'] ] }],";
