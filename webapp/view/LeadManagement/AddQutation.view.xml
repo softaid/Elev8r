@@ -945,7 +945,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Travel">
                                     <form:fields>
-                                        <Input id="txttravel"  valueLiveUpdate="true" value="{editQutationModel>/travel}"  description=" "/>
+                                        <Input id="txttravel"  valueLiveUpdate="true" value="{editQutationModel>/travel}"  description="mts"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Pit Depth">
