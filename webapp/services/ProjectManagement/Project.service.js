@@ -30,6 +30,7 @@ sap.ui.define([
             getAllProjectDepartmentDetail : function(callback){
                 commonService.runJQueryX("GET", "elevproject/projectsdetaildepartments/" + commonService.session("companyId"), null, callback, null);
             },    
+            
             saveProject : function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/saveproject/", params,callback, null);
             },

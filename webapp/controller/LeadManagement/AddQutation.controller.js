@@ -231,6 +231,12 @@ sap.ui.define(
 					// bind auxilary supply system dropdown
 					commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
 
+					// bind shaft condition dropdown
+					commonFunction.getReferenceByType("ShftCndtn", "shaftConditionModel", this);
+
+					// bind unit dropdown
+					commonFunction.getReferenceByType("Unit", "unitModel", this);
+
 					//bind all Leads
 					leadService.getAllLeads(function (data) {
 						var oModel = new sap.ui.model.json.JSONModel();

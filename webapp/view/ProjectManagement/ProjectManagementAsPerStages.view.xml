@@ -204,13 +204,13 @@
 					<table:Column width="11rem">
 						<VBOX>
 						<Label text="NO OF JOBS" />
-                        <Label text="{projectModel>projectcount}" />
+                        <Label text="{projectModel>AdvanceCreditedDepartment}" />
                         </VBOX>  
 
                         <VBOX>
 						<Label text="NO OF JOBS1" />
-                        <Text text="{projectModel>orderno}" wrapping="true" />
-                        <Label text="{projectModel>projectcount}" />
+                        <Text text="{projectModel>AdvanceCreditedDepartment}" wrapping="true" />
+                        <Label text="{projectModel>AdvanceCreditedComPer}" />
                         <!-- <Label text="{projectModel>niengineer}" />      -->
                         </VBOX>  
                         <!-- <table:template>
@@ -310,18 +310,20 @@
 							<VBOX>
                                <Input 
                                class="customInputHeight"
-                                   editable="true" 
-                                    value="{projectModel>financeStartDate}" 
-                                    submit="oninputSelect" />  
+                                   editable="false" 
+                                    value="{projectModel>AdvanceCredited}" 
+                                     />        
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>financeEndDate}" />      
-                              <CheckBox 
+                                    value="{projectModel>AdvanceCredited}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy0',
-                                    type: 'sap.ui.model.type.Boolean' }" 
-                                 />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                             </VBOX>        
 						</table:template>
 					</table:Column>
@@ -336,18 +338,19 @@
 							<VBOX>
                                <Input class="customInputHeight"
                                    editable="true" 
-                                    value="{projectModel>saleStartDate}" 
+                                    value="{projectModel>FileHandedOverCCD}" 
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>saleEndDate}" 
-                                    />      
-                              <CheckBox 
-                            select="onCheckBoxSelect"
+                                    value="{projectModel>FileHandedOverCCD}" />      
+                            <CheckBox 
+                             select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy1',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                             </VBOX>        
 						</table:template>
 					</table:Column>
@@ -362,19 +365,20 @@
 						 <VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>CCDcheckStartDate}" 
-                                     />  
+                                    value="{projectModel>CheckSite}" />  
                                 <Input class="customInputHeight"
                                     editable="true" 
-                                    value="{projectModel>CCDcheckEndDate}" 
+                                    value="{projectModel>CheckSite}" 
                                     submit="oninputSelect"
                                     />      
                                 <CheckBox 
-                                 select="onCheckBoxSelect"
+                             select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy2',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                             </VBOX>     
 						</table:template>
 					</table:Column>
@@ -389,16 +393,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>GADRequest}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                            <CheckBox 
+                                value="{projectModel>GADRequest}" />      
+                             <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy3',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -413,16 +419,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>GADReady}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>GADReady}" />      
+                            <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy4',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />   
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -437,16 +445,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>JSVDone}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                               <CheckBox 
+                                value="{projectModel>JSVDone}" />      
+                             <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy5',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -461,19 +471,27 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>GADApproved}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                             <CheckBox 
+                                value="{projectModel>GADApproved}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy6',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
+
+
+
+
+
+
 
                     	<table:Column width="12rem">
 						<VBOX>
@@ -486,16 +504,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ShipmentScheduled}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>ShipmentScheduled}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy7',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -510,16 +530,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ApprovedGADDesign}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                             <CheckBox 
+                                value="{projectModel>ApprovedGADDesign}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy8',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -534,16 +556,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>EnterinFocus}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>EnterinFocus}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy9',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -558,16 +582,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>BOQReady}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                           <CheckBox 
+                                value="{projectModel>BOQReady}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy10',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -582,16 +608,18 @@
 							<VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>ProductionDrawingReady}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
-                                  <CheckBox 
+                                    value="{projectModel>ProductionDrawingReadyenddate}" />      
+                                   <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy11',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                             </VBOX>        
 						</table:template>
 					</table:Column>
@@ -606,16 +634,18 @@
 							<VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>ProductionStage1}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
-                             <CheckBox 
+                                    value="{projectModel>ProductionStage1}" />      
+                                   <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy12',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                             </VBOX>        
 						</table:template>
 					</table:Column>
@@ -630,41 +660,19 @@
 						 <VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>ProdQCStage1}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
-                                 <CheckBox 
+                                    value="{projectModel>ProdQCStage1}" />      
+                                   <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
                                     path: 'projectModel>Heavy13',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                             </VBOX>     
-						</table:template>
-					</table:Column>
-					<table:Column width="12rem">
-						<VBOX>
-                        <Label text="CCD"/>
-                        <Label text="GAD Request"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
-						<table:template>
-						 <VBOX>
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />  
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />      
-                             <CheckBox 
-                             select="onCheckBoxSelect"
-                              selected="{
-                                    path: 'projectModel>Heavy14',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
-                        </VBOX>     
 						</table:template>
 					</table:Column>
 					<table:Column width="12rem">
@@ -678,16 +686,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>PaymentStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                             <CheckBox 
+                                value="{projectModel>PaymentStage1}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy15',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy14',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -702,16 +712,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>DeliveryStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                            <CheckBox 
+                                value="{projectModel>DeliveryStage1}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy16',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy15',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -726,16 +738,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>InstallationStage1}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy17',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy16',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -751,16 +765,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationQCStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                             <CheckBox 
+                                value="{projectModel>InstallationQCStage1}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy18',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy17',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
                         </table:Column>
@@ -776,15 +792,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>PaymentStage2}" />  
                             <Input class="customInputHeight"
-                                editable="false" />
-                         <CheckBox 
+                                editable="false" 
+                                value="{projectModel>PaymentStage2}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy19',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy18',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
                         </table:Column>
@@ -800,16 +819,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>ProductionStage2}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy20',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy19',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column> 
@@ -826,16 +847,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionQCStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>ProductionQCStage2}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy21',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy20',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -850,16 +873,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>DeliveryStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>DeliveryStage2}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy22',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy21',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -874,16 +899,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>InstallationStage2}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy23',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy22',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -902,12 +929,14 @@
                             <Input class="customInputHeight"
                                 editable="false" 
                                 value="26/05/2023" />      
-                              <CheckBox 
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy3',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy0',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column> -->
@@ -922,16 +951,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationQCStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>InstallationQCStage3}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy24',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy23',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -946,16 +977,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>ProductionStage3}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy25',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy24',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -970,16 +1003,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionQCStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>ProductionQCStage3}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy26',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy25',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -994,16 +1029,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>DeliveryStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>DeliveryStage3}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy27',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy26',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -1018,16 +1055,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>InstallationStage3}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy28',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy27',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -1042,16 +1081,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>FinalInstallationQC}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>FinalInstallationQC}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy29',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy28',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column> 
@@ -1069,16 +1110,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InspectionByEI}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>InspectionByEI}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy30',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy29',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -1093,16 +1136,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>FinalPayment}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>FinalPayment}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy31',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy30',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -1117,16 +1162,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>HandedOverCustomer}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                              <CheckBox 
+                                value="{projectModel>HandedOverCustomer}" />      
+                                <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy32',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy31',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
                         </VBOX>     
 						</table:template>
 					</table:Column>
@@ -1141,16 +1188,18 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>JobAddedinWarranty}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
-                             <CheckBox 
+                                value="{projectModel>JobAddedinWarranty}" />      
+                              <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
-                                    path: 'projectModel>Heavy33',
-                                    type: 'sap.ui.model.type.Boolean'
-                                    }" />
+                                    path: 'projectModel>Heavy32',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    /> 
                         </VBOX>     
 						</table:template>
 					</table:Column>
