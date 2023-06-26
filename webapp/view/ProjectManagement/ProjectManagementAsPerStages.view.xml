@@ -204,13 +204,13 @@
 					<table:Column width="11rem">
 						<VBOX>
 						<Label text="NO OF JOBS" />
-                        <Label text="{projectModel>projectcount}" />
+                        <Label text="{projectModel>AdvanceCreditedDepartment}" />
                         </VBOX>  
 
                         <VBOX>
 						<Label text="NO OF JOBS1" />
-                        <Text text="{projectModel>orderno}" wrapping="true" />
-                        <Label text="{projectModel>projectcount}" />
+                        <Text text="{projectModel>AdvanceCreditedDepartment}" wrapping="true" />
+                        <Label text="{projectModel>AdvanceCreditedComPer}" />
                         <!-- <Label text="{projectModel>niengineer}" />      -->
                         </VBOX>  
                         <!-- <table:template>
@@ -315,7 +315,7 @@
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
+                                    value="{projectModel>AdvanceCredited}" />      
                               <CheckBox 
                              select="onCheckBoxSelect"
                               selected="{
@@ -336,11 +336,11 @@
 							<VBOX>
                                <Input class="customInputHeight"
                                    editable="true" 
-                                    value="26/05/2023" 
+                                    value="{projectModel>FileHandedOverCCD}" 
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
+                                    value="{projectModel>FileHandedOverCCD}" />      
                               <CheckBox 
                             select="onCheckBoxSelect"
                               selected="{
@@ -361,10 +361,10 @@
 						 <VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>CheckSite}" />  
                                 <Input class="customInputHeight"
                                     editable="true" 
-                                    value="26/05/2023" 
+                                    value="{projectModel>CheckSite}" 
                                     submit="oninputSelect"
                                     />      
                                 <CheckBox 
@@ -388,10 +388,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>GADRequest}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>GADRequest}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -411,10 +411,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>GADReady}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>GADReady}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -434,10 +434,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>JSVDone}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>JSVDone}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -457,10 +457,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>GADApproved}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>GADApproved}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -487,10 +487,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ShipmentScheduled}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>ShipmentScheduled}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -510,10 +510,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ApprovedGADDesign}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>ApprovedGADDesign}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -533,10 +533,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>EnterinFocus}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>EnterinFocus}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -556,10 +556,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>BOQReady}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>BOQReady}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -579,10 +579,10 @@
 							<VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>ProductionDrawingReady}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
+                                    value="{projectModel>ProductionDrawingReadyenddate}" />      
                                 <CheckBox selected="{
                                     path: 'Heavy',
                                     type: 'sap.ui.model.type.String',
@@ -602,10 +602,10 @@
 							<VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>ProductionStage1}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
+                                    value="{projectModel>ProductionStage1}" />      
                                 <CheckBox selected="{
                                     path: 'Heavy',
                                     type: 'sap.ui.model.type.String',
@@ -625,39 +625,16 @@
 						 <VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />  
+                                    value="{projectModel>ProdQCStage1}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="26/05/2023" />      
+                                    value="{projectModel>ProdQCStage1}" />      
                                 <CheckBox selected="{
                                     path: 'Heavy',
                                     type: 'sap.ui.model.type.String',
                                     align: 'Center'
                                     }"/> 
                             </VBOX>     
-						</table:template>
-					</table:Column>
-					<table:Column width="12rem">
-						<VBOX>
-                        <Label text="CCD"/>
-                        <Label text="GAD Request"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
-						<table:template>
-						 <VBOX>
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />  
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />      
-                            <CheckBox selected="{
-                                path: 'Heavy',
-                                type: 'sap.ui.model.type.String',
-                                align: 'Center'
-                                }"/> 
-                        </VBOX>     
 						</table:template>
 					</table:Column>
 					<table:Column width="12rem">
@@ -671,10 +648,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>PaymentStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>PaymentStage1}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -694,10 +671,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>DeliveryStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>DeliveryStage1}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -717,10 +694,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>InstallationStage1}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -741,10 +718,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationQCStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>InstallationQCStage1}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -765,10 +742,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>PaymentStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>PaymentStage2}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -789,10 +766,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>ProductionStage2}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -814,10 +791,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionQCStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>ProductionQCStage2}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -837,10 +814,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>DeliveryStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>DeliveryStage2}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -860,10 +837,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>InstallationStage2}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -906,10 +883,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationQCStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>InstallationQCStage3}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -929,10 +906,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>ProductionStage3}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -952,10 +929,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>ProductionQCStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>ProductionQCStage3}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -975,10 +952,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>DeliveryStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>DeliveryStage3}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -998,10 +975,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InstallationStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>InstallationStage3}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -1021,10 +998,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>FinalInstallationQC}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>FinalInstallationQC}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -1047,10 +1024,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>InspectionByEI}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>InspectionByEI}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -1070,10 +1047,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>FinalPayment}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>FinalPayment}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -1093,10 +1070,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>HandedOverCustomer}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>HandedOverCustomer}" />      
                             <CheckBox selected="{
                                 path: 'Heavy',
                                 type: 'sap.ui.model.type.String',
@@ -1116,10 +1093,10 @@
 						 <VBOX>
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />  
+                                value="{projectModel>JobAddedinWarranty}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="26/05/2023" />      
+                                value="{projectModel>JobAddedinWarranty}" />      
                             <CheckBox 
                             select="onCheckBoxSelect"
                             selected="{
