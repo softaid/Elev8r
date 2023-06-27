@@ -113,6 +113,7 @@ sap.ui.define([
 			let stageperarray = [];
 			let proweightageperarray = [];
 			let prodepartmentperarray = [];
+			let proenddateperarray = [];
 			let Finalarray = [];
 
 			await projectService.getAllProjectsDetail(function (data) {
@@ -229,6 +230,9 @@ sap.ui.define([
 					}
 				}
 			})
+
+
+			
 
 			await projectService.getAllProjectsStagePerDetail(function (StagePerdata) {
 				if (StagePerdata.length) {
@@ -498,6 +502,95 @@ sap.ui.define([
 
 			})
 
+			await projectService.getAllProjectEndDateDetail(function (projectEndDateData) {
+				if (projectEndDateData.length) {
+					console.log("---------------------------projectEndDateData*******------------------", projectEndDateData);
+					//let prodepartmentperarray = [];
+					if (projectEndDateData.length) {
+						if (projectEndDateData[0].length > 0 || projectEndDateData[1].length > 0 || projectEndDateData[2].length > 0 || projectEndDateData[3].length > 0) {
+							for (let f = 0; f < projectEndDateData[0].length; f++) {
+								let mergedObjectenddate = null; // Define mergedObjectenddate with initial value null
+								for (g = 0; g < projectEndDateData[1].length; g++) {
+									if (
+										projectEndDateData[0][f] &&
+										projectEndDateData[1][g] &&
+										projectEndDateData[0][f].projectid &&
+										projectEndDateData[1][g].projectid &&
+										projectEndDateData[0][f].projectid === projectEndDateData[1][g].projectid
+									) {
+										mergedObjectenddate = {
+											projectid: projectEndDateData[0][f].projectid,
+											AdvanceCreditedenddate: projectEndDateData[0][f].AdvanceCreditedenddate,
+											CheckSiteenddate: projectEndDateData[0][f].CheckSiteenddate,
+											FileHandedOverCCDenddate: projectEndDateData[0][f].FileHandedOverCCDenddate,
+											GADReadyenddate: projectEndDateData[0][f].GADReadyenddate,
+											GADRequestenddate: projectEndDateData[0][f].GADRequestenddate,
+											GADApprovedenddate: projectEndDateData[0][f].GADApprovedenddate,
+											JSVDoneenddate: projectEndDateData[0][f].JSVDoneenddate,
+											ShipmentScheduledenddate: projectEndDateData[0][f].ShipmentScheduledenddate,
+											ApprovedGADDesignenddate: projectEndDateData[1][g].ApprovedGADDesignenddate,
+											BOQReadyenddate: projectEndDateData[1][g].BOQReadyenddate,
+											DeliveryStage1enddate: projectEndDateData[1][g].DeliveryStage1enddate,
+											EnterinFocusenddate: projectEndDateData[1][g].EnterinFocusenddate,
+											InstallationQCStage1enddate: projectEndDateData[1][g].InstallationQCStage1enddate,
+											InstallationStage1enddate: projectEndDateData[1][g].InstallationStage1enddate,
+											PaymentStage1enddate: projectEndDateData[1][g].PaymentStage1enddate,
+											ProdQCStage1enddate: projectEndDateData[1][g].ProdQCStage1enddate,
+											ProductionDrawingReadyenddate: projectEndDateData[1][g].ProductionDrawingReadyenddate
+										};
+
+										console.log("--------mergedObjectenddate---------", mergedObjectenddate);
+									}
+								}
+
+								for (let h = 0; h < projectEndDateData[2].length; h++) {
+									if (
+										mergedObjectenddate &&
+										projectEndDateData[2][h] &&
+										mergedObjectenddate.projectid &&
+										projectEndDateData[2][h].projectid &&
+										mergedObjectenddate.projectid === projectEndDateData[2][h].projectid
+									) {
+										mergedObjectenddate.DeliveryStage2enddate = projectEndDateData[2][h].DeliveryStage2enddate;
+										mergedObjectenddate.DeliveryStage3enddate = projectEndDateData[2][h].DeliveryStage3enddate;
+										mergedObjectenddate.InstallationQCStage3enddate = projectEndDateData[2][h].InstallationQCStage3enddate;
+										mergedObjectenddate.InstallationStage2enddate = projectEndDateData[2][h].InstallationStage2enddate;
+										mergedObjectenddate.PaymentStage2enddate = projectEndDateData[2][h].PaymentStage2enddate;
+										mergedObjectenddate.ProductionQCStage2enddate = projectEndDateData[2][h].ProductionQCStage2enddate;
+										mergedObjectenddate.ProductionQCStage3enddate = projectEndDateData[2][h].ProductionQCStage3enddate;
+										mergedObjectenddate.ProductionStage2enddate = projectEndDateData[2][h].ProductionStage2enddate;
+									}
+								}
+
+								for (let s = 0; s< projectEndDateData[3].length; s++) {
+									if (
+										mergedObjectenddate &&
+										projectEndDateData[3][s] &&
+										mergedObjectenddate.projectid &&
+										projectEndDateData[3][s].projectid &&
+										mergedObjectenddate.projectid === projectEndDateData[3][s].projectid
+									) {
+										mergedObjectenddate.FinalInstallationQCenddate = projectEndDateData[3][s].FinalInstallationQCenddate;
+										mergedObjectenddate.FinalPaymentenddate = projectEndDateData[3][s].FinalPaymentenddate;
+										mergedObjectenddate.HandedOverCustomerenddate = projectEndDateData[3][s].HandedOverCustomerenddate;
+										mergedObjectenddate.InspectionByEIenddate = projectEndDateData[3][s].InspectionByEIenddate;
+										mergedObjectenddate.InstallationStage3enddate = projectEndDateData[3][s].InstallationStage3enddate;
+										mergedObjectenddate.JobAddedinWarrantyenddate = projectEndDateData[3][s].JobAddedinWarrantyenddate;
+									}
+								}
+
+								if (mergedObjectenddate) { // Check if mergedObjectdepartment is not null
+									proenddateperarray.push(mergedObjectenddate);
+									console.log("--------proenddateperarray---------", proenddateperarray);
+								}
+							}
+						}
+					}
+
+				}
+
+			})
+
 			await projectService.getAllProjectsDetail(function (projectDepartmentdata) {
 				if (projectDepartmentdata.length) {
 				
@@ -683,6 +776,47 @@ sap.ui.define([
 								mergedObjectfinal.ShipmentScheduledDepartment = prodepartmentperarray[r].ShipmentScheduledDepartment;
 							}
 						}
+
+						for (let r = 0; r < proenddateperarray.length; r++) {
+							if (
+								mergedObjectfinal &&
+								proenddateperarray[r] &&
+								mergedObjectfinal.projectid &&
+								proenddateperarray[r].projectid &&
+								mergedObjectfinal.projectid === proenddateperarray[r].projectid
+							) {
+								mergedObjectfinal.AdvanceCreditedenddate = proenddateperarray[r].AdvanceCreditedenddate;
+								mergedObjectfinal.ApprovedGADDesignenddate = proenddateperarray[r].ApprovedGADDesignenddate;
+								mergedObjectfinal.BOQReadyenddate = proenddateperarray[r].BOQReadyenddate;
+								mergedObjectfinal.CheckSiteenddate = proenddateperarray[r].CheckSiteenddate;
+								mergedObjectfinal.DeliveryStage1enddate = proenddateperarray[r].DeliveryStage1enddate;
+								mergedObjectfinal.DeliveryStage2enddate = proenddateperarray[r].DeliveryStage2enddate;
+								mergedObjectfinal.EnterinFocusenddate = proenddateperarray[r].EnterinFocusenddate;
+								mergedObjectfinal.FileHandedOverCCDenddate = proenddateperarray[r].FileHandedOverCCDenddate;
+								mergedObjectfinal.FinalInstallationQCenddate = proenddateperarray[r].FinalInstallationQCenddate;
+								mergedObjectfinal.FinalPaymentenddate = proenddateperarray[r].FinalPaymentenddate;
+								mergedObjectfinal.GADReadyenddate = proenddateperarray[r].GADReadyenddate;
+								mergedObjectfinal.GADRequestenddate = proenddateperarray[r].GADRequestenddate;
+								mergedObjectfinal.GADApprovedenddate = proenddateperarray[r].GADApprovedenddate;
+								mergedObjectfinal.HandedOverCustomerenddate = proenddateperarray[r].HandedOverCustomerenddate;
+								mergedObjectfinal.InspectionByEIenddate = proenddateperarray[r].InspectionByEIenddate;
+								mergedObjectfinal.InstallationQCStage1enddate = proenddateperarray[r].InstallationQCStage1enddate;
+								mergedObjectfinal.InstallationQCStage3enddate = proenddateperarray[r].InstallationQCStage3enddate;
+								mergedObjectfinal.InstallationStage1enddate = proenddateperarray[r].InstallationStage1enddate;
+								mergedObjectfinal.InstallationStage2enddate = proenddateperarray[r].InstallationStage2enddate;
+								mergedObjectfinal.InstallationStage3enddate = proenddateperarray[r].InstallationStage3enddate;
+								mergedObjectfinal.JSVDoneenddate = proenddateperarray[r].JSVDoneenddate;
+								mergedObjectfinal.JobAddedinWarrantyenddate = proenddateperarray[r].JobAddedinWarrantyenddate;
+								mergedObjectfinal.PaymentStage1enddate = proenddateperarray[r].PaymentStage1enddate;
+								mergedObjectfinal.PaymentStage2enddate = proenddateperarray[r].PaymentStage2enddate;
+								mergedObjectfinal.ProdQCStage1enddate = proenddateperarray[r].ProdQCStage1enddate;
+								mergedObjectfinal.ProductionDrawingReadyenddate = proenddateperarray[r].ProductionDrawingReadyenddate;
+								mergedObjectfinal.ProductionQCStage2enddate = proenddateperarray[r].ProductionQCStage2enddate;
+								mergedObjectfinal.ProductionStage2enddate = proenddateperarray[r].ProductionStage2enddate;
+								mergedObjectfinal.ShipmentScheduledenddate = proenddateperarray[r].ShipmentScheduledenddate;
+							}
+						}
+
 
 						if (mergedObjectfinal) { // Check if mergedObjectfinal is not null
 							Finalarray.push(mergedObjectfinal);
