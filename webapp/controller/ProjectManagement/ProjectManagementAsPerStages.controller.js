@@ -924,8 +924,11 @@ sap.ui.define([
 				let projectModelOne = oThis.getView().getModel("projectModel");
 				projectModelOne.setData({ modelData: Finalarray });
 				oThis.getView().setModel(projectModelOne, "projectModel")
-				console.log("------------------projectModel------------------", projectModelOne);
-				oThis.bindArray();
+
+				let dateModel = oThis.getView().getModel("dateModel");
+				dateModel.setData(Finalarray);
+				oThis.getView().setModel(dateModel, "dateModel");
+				// oThis.bindArray();
 			})
 
 		},
