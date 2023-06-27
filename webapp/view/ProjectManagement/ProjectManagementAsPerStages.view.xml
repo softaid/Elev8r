@@ -182,6 +182,7 @@
 	xmlns:u="sap.ui.unified"
 	xmlns:c="sap.ui.core"
 	xmlns="sap.m"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     height="100%">
 	<Page
 		showHeader="false"
@@ -315,15 +316,16 @@
                                      />        
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>AdvanceCredited}" />      
-                                <CheckBox 
+                                    value="{projectModel>AdvanceCreditedenddate}"/>    
+                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="0_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy0',
                                    type: 'sap.ui.model.type.Boolean',
                                     align: 'Center'
                                     }"
-                                    />  
+                                    /> 
                             </VBOX>        
 						</table:template>
 					</table:Column>
@@ -342,9 +344,10 @@
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>FileHandedOverCCD}" />      
+                                    value="{projectModel>FileHandedOverCCDenddate}" />      
                             <CheckBox 
                              select="onCheckBoxSelect"
+                            app:mySuperExtraData="1_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy1',
                                    type: 'sap.ui.model.type.Boolean',
@@ -368,11 +371,12 @@
                                     value="{projectModel>CheckSite}" />  
                                 <Input class="customInputHeight"
                                     editable="true" 
-                                    value="{projectModel>CheckSite}" 
+                                    value="{projectModel>CheckSiteenddate}" 
                                     submit="oninputSelect"
                                     />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="2_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy2',
                                    type: 'sap.ui.model.type.Boolean',
@@ -396,9 +400,10 @@
                                 value="{projectModel>GADRequest}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>GADRequest}" />      
+                                value="{projectModel>GADRequestenddate}" />      
                              <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="3_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy3',
                                    type: 'sap.ui.model.type.Boolean',
@@ -422,9 +427,10 @@
                                 value="{projectModel>GADReady}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>GADReady}" />      
+                                value="{projectModel>GADReadyenddate}" />      
                             <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="4_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy4',
                                    type: 'sap.ui.model.type.Boolean',
@@ -448,9 +454,10 @@
                                 value="{projectModel>JSVDone}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>JSVDone}" />      
+                                value="{projectModel>JSVDoneenddate}" />      
                              <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="5_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy5',
                                    type: 'sap.ui.model.type.Boolean',
@@ -474,9 +481,10 @@
                                 value="{projectModel>GADApproved}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>GADApproved}" />      
+                                value="{projectModel>GADApprovedenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="6_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy6',
                                    type: 'sap.ui.model.type.Boolean',
@@ -507,9 +515,10 @@
                                 value="{projectModel>ShipmentScheduled}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>ShipmentScheduled}" />      
+                                value="{projectModel>ShipmentScheduledenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="7_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy7',
                                    type: 'sap.ui.model.type.Boolean',
@@ -533,9 +542,10 @@
                                 value="{projectModel>ApprovedGADDesign}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>ApprovedGADDesign}" />      
+                                value="{projectModel>ApprovedGADDesignenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="8_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy8',
                                    type: 'sap.ui.model.type.Boolean',
@@ -559,9 +569,10 @@
                                 value="{projectModel>EnterinFocus}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>EnterinFocus}" />      
+                                value="{projectModel>EnterinFocusenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="9_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy9',
                                    type: 'sap.ui.model.type.Boolean',
@@ -585,9 +596,10 @@
                                 value="{projectModel>BOQReady}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>BOQReady}" />      
+                                value="{projectModel>BOQReadyenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                             app:mySuperExtraData="10_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy10',
                                    type: 'sap.ui.model.type.Boolean',
@@ -614,6 +626,7 @@
                                     value="{projectModel>ProductionDrawingReadyenddate}" />      
                                    <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="11_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy11',
                                    type: 'sap.ui.model.type.Boolean',
@@ -637,9 +650,10 @@
                                     value="{projectModel>ProductionStage1}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>ProductionStage1}" />      
+                                    value="{projectModel>ProductionStage1enddate}" />      
                                    <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="12_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy12',
                                    type: 'sap.ui.model.type.Boolean',
@@ -663,9 +677,10 @@
                                     value="{projectModel>ProdQCStage1}" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>ProdQCStage1}" />      
+                                    value="{projectModel>ProdQCStage1enddate}" />      
                                    <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="13_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy13',
                                    type: 'sap.ui.model.type.Boolean',
@@ -689,9 +704,10 @@
                                 value="{projectModel>PaymentStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>PaymentStage1}" />      
+                                value="{projectModel>PaymentStage1enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="14_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy14',
                                    type: 'sap.ui.model.type.Boolean',
@@ -715,9 +731,10 @@
                                 value="{projectModel>DeliveryStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>DeliveryStage1}" />      
+                                value="{projectModel>DeliveryStage1enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="15_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy15',
                                    type: 'sap.ui.model.type.Boolean',
@@ -741,9 +758,10 @@
                                 value="{projectModel>InstallationStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>InstallationStage1}" />      
+                                value="{projectModel>InstallationStage1enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="16_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy16',
                                    type: 'sap.ui.model.type.Boolean',
@@ -768,9 +786,10 @@
                                 value="{projectModel>InstallationQCStage1}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>InstallationQCStage1}" />      
+                                value="{projectModel>InstallationQCStage1enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="17_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy17',
                                    type: 'sap.ui.model.type.Boolean',
@@ -795,9 +814,10 @@
                                 value="{projectModel>PaymentStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>PaymentStage2}" />      
+                                value="{projectModel>PaymentStage2enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="18_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy18',
                                    type: 'sap.ui.model.type.Boolean',
@@ -822,9 +842,10 @@
                                 value="{projectModel>ProductionStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>ProductionStage2}" />      
+                                value="{projectModel>ProductionStage2enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="19_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy19',
                                    type: 'sap.ui.model.type.Boolean',
@@ -850,9 +871,10 @@
                                 value="{projectModel>ProductionQCStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>ProductionQCStage2}" />      
+                                value="{projectModel>ProductionQCStage2enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="20_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy20',
                                    type: 'sap.ui.model.type.Boolean',
@@ -876,9 +898,10 @@
                                 value="{projectModel>DeliveryStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>DeliveryStage2}" />      
+                                value="{projectModel>DeliveryStage2enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="21_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy21',
                                    type: 'sap.ui.model.type.Boolean',
@@ -902,9 +925,10 @@
                                 value="{projectModel>InstallationStage2}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>InstallationStage2}" />      
+                                value="{projectModel>InstallationStage2enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="22_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy22',
                                    type: 'sap.ui.model.type.Boolean',
@@ -954,9 +978,10 @@
                                 value="{projectModel>InstallationQCStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>InstallationQCStage3}" />      
+                                value="{projectModel>InstallationQCStage3enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="23_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy23',
                                    type: 'sap.ui.model.type.Boolean',
@@ -980,9 +1005,10 @@
                                 value="{projectModel>ProductionStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>ProductionStage3}" />      
+                                value="{projectModel>ProductionStage3enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="24_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy24',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1006,9 +1032,10 @@
                                 value="{projectModel>ProductionQCStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>ProductionQCStage3}" />      
+                                value="{projectModel>ProductionQCStage3enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="25_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy25',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1032,9 +1059,10 @@
                                 value="{projectModel>DeliveryStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>DeliveryStage3}" />      
+                                value="{projectModel>DeliveryStage3enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="26_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy26',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1058,9 +1086,10 @@
                                 value="{projectModel>InstallationStage3}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>InstallationStage3}" />      
+                                value="{projectModel>InstallationStage3enddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="27_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy27',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1084,9 +1113,10 @@
                                 value="{projectModel>FinalInstallationQC}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>FinalInstallationQC}" />      
+                                value="{projectModel>FinalInstallationQCenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="28_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy28',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1113,9 +1143,10 @@
                                 value="{projectModel>InspectionByEI}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>InspectionByEI}" />      
+                                value="{projectModel>InspectionByEIenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="29_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy29',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1139,9 +1170,10 @@
                                 value="{projectModel>FinalPayment}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>FinalPayment}" />      
+                                value="{projectModel>FinalPaymentenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="30_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy30',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1165,9 +1197,10 @@
                                 value="{projectModel>HandedOverCustomer}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>HandedOverCustomer}" />      
+                                value="{projectModel>HandedOverCustomerenddate}" />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy31',
                                    type: 'sap.ui.model.type.Boolean',
@@ -1191,9 +1224,10 @@
                                 value="{projectModel>JobAddedinWarranty}" />  
                             <Input class="customInputHeight"
                                 editable="false" 
-                                value="{projectModel>JobAddedinWarranty}" />      
+                                value="{projectModel>JobAddedinWarrantyenddate}" />      
                               <CheckBox 
                              select="onCheckBoxSelect"
+                              app:mySuperExtraData="32_{projectModel>orderno}"
                               selected="{
                                     path: 'projectModel>Heavy32',
                                    type: 'sap.ui.model.type.Boolean',
