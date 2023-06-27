@@ -6,8 +6,10 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/ProjectTracking.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/projectManagement/Project.service',
-	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast) {
+	'sap/m/MessageToast',
+	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+
+], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast, ocommonfunction) {
 
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages", {
@@ -903,6 +905,72 @@ sap.ui.define([
 				console.log("PActivityMasterModel", oModel);
 			});
 		},
+
+		onStartCheckBoxSelect: function (OEvent) {
+			// OEvent.mParameters.Id="2023-04-04";
+			var model = this.getView().getModel("projectModel").oData;
+			model.modelData[0].AdvanceCredited = "2023-04-04"
+			console.log(model);
+		},
+
+
+		onCheckBoxSelect: function (OEvent) {
+
+			let dateModelDetails = this.getView().getModel("dateModel").oData;
+
+			let arrStart = [0,"financeStartDate", "saleStartDate", "CCDcheckStartDate"];//start
+			let arrEnd = [0,"financeEndDate","saleEndDate","CCDcheckEndDate"];
+			let field = OEvent.mParameters.id
+			let rows = field.split("e");// rows
+			let row = (parseInt(rows[1]));
+
+			let resultrow = row > 39 ? parseInt(row / 39) : 0;//rows
+
+			let columning = field.split("");
+			let firstindex = columning.indexOf("x"); // column
+			let secondindex = columning.indexOf("-");
+
+			let columns = columning.splice(firstindex + 1, secondindex - (firstindex + 1))
+
+			let resultcolumn = parseInt(columns.join(""));// result column
+
+			let result_column_field_End = arrEnd[resultcolumn];//end date of current stage
+			let result_column_field_Start = arrStart[(resultcolumn+1)];// Start date of stage next to current  stage
+
+
+			let currentDate = new Date();
+
+			var resultDate = ocommonfunction.setTodaysDate(currentDate);
+
+			var model = this.getView().getModel("projectModel").oData;
+
+			if (OEvent.mParameters.selected == true) {
+
+				dateModelDetails.databaseSideEndDate = model.modelData[resultrow][result_column_field_End];
+				dateModelDetails.databaseSidestartDate = model.modelData[resultrow][result_column_field_Start];
+
+				model.modelData[resultrow][result_column_field_End] = resultDate;
+				model.modelData[resultrow][result_column_field_Start]= resultDate;
+
+				console.log(model);
+			}
+			else {
+
+				model.modelData[resultrow][result_column_field_End] = null;
+				model.modelData[resultrow][result_column_field_Start] = dateModelDetails.databaseSidestartDate;;
+
+				console.log(model);
+				this.getView().getModel("projectModel").refresh();
+			}
+
+		},
+
+		oninputSelect: function (OEvent) {
+			this.getView().byId("line").setValue("2023-04-04");
+			// OEvent.mParameters.value="2023-04-04";
+			console.log("selected")
+		},
+
 
 		onExit: function () {
 			this.bus.unsubscribe("settermaster", "setDetailPage", this.setDetailPage, this);
