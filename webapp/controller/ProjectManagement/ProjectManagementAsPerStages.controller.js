@@ -6,11 +6,17 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/ProjectTracking.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/projectManagement/Project.service',
-	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast) {
+	'sap/m/MessageToast',
+	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
+
+
+], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast, ocommonfunction,formatter) {
 
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages", {
+
+		formatter: formatter,
 
 		onInit: function () {
 
@@ -34,6 +40,9 @@ sap.ui.define([
 			stagestdPermodel.setData([]);
 			this.getView().setModel(stagestdPermodel, "stagePerModel");
 
+			var datemodel = new JSONModel();
+			datemodel.setData({projectArray:[], orderArray : []});
+			this.getView().setModel(datemodel, "dateModel");
 
 			var projectModel = new JSONModel();
 			projectModel.setData({ modelData: [] });
@@ -65,12 +74,13 @@ sap.ui.define([
 
 		bindTable: async function () {
 			let oThis = this;
+			let resultJobArray=[]
 			let startdataearray = [];
 			let stageperarray = [];
 			let proweightageperarray = [];
 			let prodepartmentperarray = [];
 			let proenddateperarray = [];
-			let Finalarray = [];
+			oThis.Finalarray = [];
 
 			await projectService.getAllProjectsDetail(function (data) {
 				if (data.length) {
@@ -775,8 +785,8 @@ sap.ui.define([
 
 
 								if (mergedObjectfinal) { // Check if mergedObjectfinal is not null
-									Finalarray.push(mergedObjectfinal);
-									console.log("--------****************Finalarray--*************************-------", Finalarray);
+									oThis.Finalarray.push(mergedObjectfinal);
+									console.log("--------****************Finalarray--*************************-------", oThis.Finalarray);
 								}
 							}
 						}
@@ -784,12 +794,8 @@ sap.ui.define([
 				}
 
 				let projectModelOne = oThis.getView().getModel("projectModel");
-				projectModelOne.setData({ modelData: Finalarray });
+				projectModelOne.setData({ modelData: oThis.Finalarray });
 				oThis.getView().setModel(projectModelOne, "projectModel")
-
-			
-
-				
 
 				let departmentModel = oThis.getView().getModel("DepartmentModel");
 				departmentModel.setData(prodepartmentperarray[0]);
@@ -872,6 +878,150 @@ sap.ui.define([
 				console.log("PActivityMasterModel", oModel);
 			});
 		},
+
+		onCheckBoxSelect: function (OEvent) {
+			let checkbox = OEvent.getSource();
+			let data = checkbox.data("mySuperExtraData");
+			
+			let dateModel = this.getView().getModel("dateModel");
+			
+
+			let dateModelDetails = this.getView().getModel("dateModel").oData;// it date model  for set field for reference
+			let model = this.getView().getModel("projectModel").oData;
+
+			// name of the stage start date in the project model  in sequence in array 
+			let arrStart = ["AdvanceCredited", "FileHandedOverCCD", "CheckSite", "GADRequest", "GADReady", "JSVDone", "GADApproved", "ShipmentScheduled", "ApprovedGADDesign", "EnterinFocus", "BOQReady", "ProductionDrawingReady", "ProductionStage1", "ProdQCStage1", "PaymentStage1", "DeliveryStage1", "InstallationStage1", "InstallationQCStage1", "PaymentStage2", "ProductionStage2", "ProductionQCStage2", "DeliveryStage2", "InstallationStage2", "InstallationQCStage3", "ProductionStage3", "ProductionQCStage3", "DeliveryStage3", "InstallationStage3", "FinalInstallationQC", "InspectionByEI", "FinalPayment", "HandedOverCustomer", "JobAddedinWarranty"];//start
+
+			// name of the stage end date in the project model  in sequence in array 
+			let arrEnd = ["AdvanceCreditedenddate", "FileHandedOverCCDenddate", "CheckSiteenddate", "GADRequestenddate", "GADReadyenddate", "JSVDoneenddate", "GADApprovedenddate", "ShipmentScheduledenddate", "ApprovedGADDesignenddate", "EnterinFocusenddate", "BOQReadyenddate", "ProductionDrawingReadyenddate", "ProductionStage1enddate", "ProdQCStage1enddate", "PaymentStage1enddate", "DeliveryStage1enddate", "InstallationStage1enddate", "InstallationQCStage1enddate", "PaymentStage2enddate", "ProductionStage2enddate", "ProductionQCStage2enddate", "DeliveryStage2enddate", "InstallationStage2enddate", "InstallationQCStage3enddate", "ProductionStage3enddate", "ProductionQCStage3enddate", "DeliveryStage3enddate", "InstallationStage3enddate", "FinalInstallationQCenddate", "InspectionByEIenddate", "FinalPaymentenddate", "HandedOverCustomerenddate", "JobAddedinWarrantyenddate"];//end	
+
+
+	
+
+			// // row logic  start
+			// let field = OEvent.mParameters.id
+			// let rows = field.split("e");// rows
+			// let row = (parseInt(rows[1]));
+			// let resultrow = row > 39 ? parseInt(row / 39) : 0;//rows
+			// //  row logic is complete 
+
+			// // column logic start
+			// let columning = field.split("");
+			// let firstindex = columning.indexOf("x"); // column
+			// let secondindex = columning.indexOf("-");
+
+			// // get column in the form of  array
+			// let columns = columning.splice(firstindex + 1, secondindex - (firstindex + 1))
+
+			// let resultcolumn = parseInt(columns.join(""));// result column
+
+			// // column logic ends
+
+
+
+
+			let resultarr = data.split("_");
+
+			let resultColumn = parseInt(resultarr[0]);  //  column
+
+			let resultingRow = parseInt(resultarr[1]);
+
+			let resultRow = parseInt(this.orderArray.indexOf(resultingRow)); // Row
+
+
+			let result_column_field_End = arrEnd[resultColumn];//end date of current stage field name in view
+			let result_column_field_Start = arrStart[(resultColumn + 1)]; // Start date of stage next to current  stage field name in view
+          
+			
+			// current date logic start
+			let currentDate = new Date();
+			var resultDate = ocommonfunction.setTodaysDate(currentDate);
+			// current date logic ends
+
+			let stageweightname = `${arrStart[resultColumn]}Proweightage`;// name of current stage project weight 
+
+
+
+			// if we select the checkbox 
+			if (OEvent.mParameters.selected == true) {
+
+				// bind  project completion date  
+			    if(result_column_field_End=="JobAddedinWarrantyenddate"){
+				model.modelData[resultRow].projectactdate=resultDate;
+				model.modelData[resultRow].actualdays=this.dayCalculation(model.modelData[resultRow].AdvanceCredited,resultDate);
+				}
+
+				// set value in dateModel for future reference
+				dateModelDetails.projectDetailArr[resultRow][result_column_field_End] = model.modelData[resultRow][result_column_field_End];
+				dateModelDetails.projectDetailArr[resultRow][result_column_field_Start] = model.modelData[resultRow][result_column_field_Start];
+				// console.log("dateModelDetails : ",dateModelDetails);
+
+				model.modelData[resultRow][result_column_field_End] = resultDate;// end date  of  current  stage
+				model.modelData[resultRow][result_column_field_Start] = resultDate;// start date of next stage
+
+				model.modelData[resultRow].Complete = parseFloat(model?.modelData[resultRow]?.Complete ?? 0) + parseFloat(model?.modelData[resultRow]?.[stageweightname] ?? 0);
+				console.log(model);
+			}
+
+			// checkbox  selection remove 
+			else {
+
+				// remove project completion date  
+				if(result_column_field_End=="JobAddedinWarrantyenddate"){
+					model.modelData[resultRow].projectactdate=null;
+					model.modelData[resultRow].actualdays=null;
+					}
+
+				   result_column_field_End=="JobAddedinWarrantyenddate"?model.modelData[resultRow].projectactdate=null:"1"; 
+				model.modelData[resultRow][result_column_field_End] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_End] ?? null; // set intial value as checkbox selection false
+				model.modelData[resultRow][result_column_field_Start] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_Start] ?? null;
+
+				//  substract completion % of stage 
+				model.modelData[resultRow].Complete = parseFloat(model?.modelData[resultRow]?.Complete ?? 0) - parseFloat(model?.modelData[resultRow]?.[stageweightname] ?? 0);
+			}
+			console.log(model);
+			this.getView().getModel("projectModel").refresh();
+		},
+
+
+		noOfJobCalculation: function(){
+
+			let model = this.getView().getModel("projectModel").oData.modelData;
+            let resultobj={};
+			let arrEnd = ["AdvanceCreditedenddate", "FileHandedOverCCDenddate", "CheckSiteenddate", "GADRequestenddate", "GADReadyenddate", "JSVDoneenddate", "GADApprovedenddate", "ShipmentScheduledenddate", "ApprovedGADDesignenddate", "EnterinFocusenddate", "BOQReadyenddate", "ProductionDrawingReadyenddate", "ProductionStage1enddate", "ProdQCStage1enddate", "PaymentStage1enddate", "DeliveryStage1enddate", "InstallationStage1enddate", "InstallationQCStage1enddate", "PaymentStage2enddate", "ProductionStage2enddate", "ProductionQCStage2enddate", "DeliveryStage2enddate", "InstallationStage2enddate", "InstallationQCStage3enddate", "ProductionStage3enddate", "ProductionQCStage3enddate", "DeliveryStage3enddate", "InstallationStage3enddate", "FinalInstallationQCenddate", "InspectionByEIenddate", "FinalPaymentenddate", "HandedOverCustomerenddate", "JobAddedinWarrantyenddate"];//end
+
+
+			arrEnd.map((enddate)=>{
+				let count=0;
+				model.map((projectdetail)=>{
+					(projectdetail.enddate && projectdetail.enddate.trim() !== "")?count++:1;
+				});
+				let result_field=enddate.replace("enddate","jobs")
+				resultobj[result_field]=count;
+			})
+
+
+
+		},
+
+
+		// calculate actual completion day
+		dayCalculation: async function (intialDate , finalDate) {
+
+			let oThis = this;
+			if (intialDate!=null&& finalDate!=null){
+				var parts = intialDate.split('/');
+				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
+
+				parts = finalDate.split('/');
+				let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
+
+			let completiondays = parseInt((enddate - startdate) / (86400 * 1000));// Days
+
+			return completiondays;
+			}
+		},
+
 
 		onExit: function () {
 			this.bus.unsubscribe("settermaster", "setDetailPage", this.setDetailPage, this);

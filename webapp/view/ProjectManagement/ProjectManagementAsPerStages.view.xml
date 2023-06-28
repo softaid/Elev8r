@@ -177,12 +177,12 @@
                                  <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="0_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy0',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                             selected="{
+                                   path: 'projectModel>AdvanceCreditedenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
-                                    /> 
+                           /> 
                             </VBOX>        
 						</table:template>
 					</table:Column>
@@ -216,10 +216,10 @@
                             <CheckBox 
                              select="onCheckBoxSelect"
                             app:mySuperExtraData="1_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy1',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>FileHandedOverCCDenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                             </VBOX>        
@@ -256,10 +256,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="2_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy2',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                             selected="{
+                                   path: 'projectModel>CheckSiteenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                             </VBOX>     
@@ -294,10 +294,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="3_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy3',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>GADRequestenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -329,15 +329,15 @@
                               <Input class="customInputHeight"
                                 editable="false" 
                                 value="{projectModel>GADReadyenddate}" />      
-                              <CheckBox 
-                                select="onCheckBoxSelect"
-                                app:mySuperExtraData="4_{projectModel>orderno}"
-                                selected="{
-                                        path: 'projectModel>Heavy4',
-                                    type: 'sap.ui.model.type.Boolean',
-                                        align: 'Center'
-                                        }"
-                                        />   
+                            <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="4_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>GADReadyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />   
                         </VBOX>     
 					</table:template>
 					</table:Column>
@@ -370,10 +370,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="5_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy5',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>JSVDoneenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -409,9 +409,9 @@
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="6_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy6',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>GADApprovedenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -446,10 +446,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="7_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy7',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>ShipmentScheduledenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -484,10 +484,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="8_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy8',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>ApprovedGADDesignenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -522,10 +522,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="9_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy9',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                selected="{
+                                   path: 'projectModel>EnterinFocusenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -560,10 +560,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="10_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy10',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>BOQReadyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -598,10 +598,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="11_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy11',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>ProductionDrawingReadyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                             </VBOX>        
@@ -636,10 +636,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="12_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy12',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                             selected="{
+                                   path: 'projectModel>ProductionStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                             </VBOX>        
@@ -674,10 +674,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="13_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy13',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                selected="{
+                                   path: 'projectModel>ProdQCStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                             </VBOX>     
@@ -712,10 +712,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="14_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy14',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                             selected="{
+                                   path: 'projectModel>PaymentStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -750,10 +750,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="15_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy15',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                             selected="{
+                                   path: 'projectModel>DeliveryStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -788,10 +788,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="16_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy16',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>InstallationStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -827,10 +827,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="17_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy17',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                selected="{
+                                   path: 'projectModel>InstallationQCStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -867,9 +867,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="18_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy18',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>PaymentStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -906,9 +906,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="19_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy19',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>ProductionStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -946,9 +946,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="20_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy20',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>ProductionQCStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -984,9 +984,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="21_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy21',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>DeliveryStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1022,9 +1022,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="22_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy22',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>InstallationStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1060,9 +1060,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="23_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy23',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>InstallationQCStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1097,10 +1097,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="24_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy24',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>ProductionStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1135,10 +1135,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="25_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy25',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>ProductionQCStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1173,10 +1173,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="26_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy26',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>DeliveryStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1211,10 +1211,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="27_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy27',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                             selected="{
+                                   path: 'projectModel>InstallationStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1249,10 +1249,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="28_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy28',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>FinalInstallationQCenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1288,9 +1288,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="29_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy29',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>InspectionByEIenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1325,10 +1325,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="30_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy30',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                               selected="{
+                                   path: 'projectModel>FinalPaymentenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1364,9 +1364,9 @@
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="31_{projectModel>orderno}"
                               selected="{
-                                    path: 'projectModel>Heavy31',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                   path: 'projectModel>HandedOverCustomerenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     />  
                         </VBOX>     
@@ -1401,10 +1401,10 @@
                               <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="32_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy32',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
+                                selected="{
+                                   path: 'projectModel>JobAddedinWarrantyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
                                     }"
                                     /> 
                         </VBOX>     
