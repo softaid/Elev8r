@@ -1,179 +1,3 @@
-<!-- <core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile" height="100%"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:f="sap.f"
-    xmlns:core="sap.ui.core"
-    xmlns:table="sap.ui.table"
-    xmlns:u="sap.ui.unified">
-    
-        
-    <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
-		<f:beginColumnPages>
-		    <f:DynamicPage toggleHeaderOnTitleClick="false">
-			    <f:title>
-		    	    <f:DynamicPageTitle enableScrolling="true">
-				        <f:heading>
-					       <Title text="Project Managament"/>
-				        </f:heading>
-			        </f:DynamicPageTitle>
-		        </f:title>
-				<f:content>	
-                        <VBox fitContainer="true">
-                        
-                            <ScrollContainer
-                                height="auto"
-                                width="auto"
-                                horizontal="true"
-                                vertical="true"
-                                focusable="true">
-                              
-                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px" growing="true" growingScrollToLoad="true"
-                                    rows="{ path: 'quotationModel>/modelData' }" selectionMode="None"
-                                    visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed">
-                                    <table:columns>
-                                        <table:Column width="2%">
-                                            <Label text=" " />
-                                            <table:template>
-                                            <VBOX>
-                                            <Text text="Order No:  {quotationModel>Sequence_no}" wrapping="true" />
-                                            <Text text="Order Name: {quotationModel>Sequence_no}" wrapping="true" />
-                                            <Text text="Model: {quotationModel>Sequence_no}" wrapping="true" />
-                                            </VBOX>
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                          <Label text="NI ENG - SALES ENG" />
-                                            <table:template>
-                                            <VBOX>
-                                            <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotename}" />
-                                            <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotename}" />
-                                            </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column hAlign="End" width="6%">
-                                            <Label text="% Complete"/>
-                                            <table:template>
-                                             <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotevalue}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotevalue}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="Plan Days - COMP DAYS" />
-                                            <table:template>
-                                                <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="ORDER DATE - PLAN COMP DATE - ACTUAL COMP DATE" />
-                                            <table:template>
-                                                <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="FINANCE - Advance Credited" />
-                                            <table:template>
-                                            <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="Site Checked" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="GAD Request" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-
-                                          <table:Column hAlign="End" width="10%">
-                                            <Label text="GAD Request1" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-
-                                          <table:Column hAlign="End" width="10%">
-                                            <Label text="GAD Request2" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                    </table:columns>
-                                </table:Table>
-                               
-                                 </ScrollContainer>
-
-                        </VBox> 
-                    </f:content>				
-			    </f:DynamicPage>
-		    </f:beginColumnPages>
-	    </f:FlexibleColumnLayout>
-</core:View> -->
-
-
 
 <mvc:View
 	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages"
@@ -201,29 +25,25 @@
 						<Title id="title" text="Projects"/>
 					</OverflowToolbar>
 				</table:extension>
+
+            
+
 				<table:columns>
 					<table:Column width="11rem">
-						<VBOX>
-						<Label text="NO OF JOBS" />
-                        <Label text="{projectModel>AdvanceCreditedDepartment}" />
-                        </VBOX>  
-
                         <VBOX>
-						<Label text="NO OF JOBS1" />
-                        <Text text="{projectModel>AdvanceCreditedDepartment}" wrapping="true" />
-                        <Label text="{projectModel>AdvanceCreditedComPer}" />
-                        <!-- <Label text="{projectModel>niengineer}" />      -->
+                        <VBOX>
+                        <Label text="Header 1" />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+
+						<Label text="NO OF JOBS" />
+                        <Text text="{DepartmentModel>/AdvanceCreditedDepartment}" wrapping="true" />
                         </VBOX>  
-                        <!-- <table:template>
-							<VBOX>
-                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
-                                <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
-                                <Text text="Model: {projectModel>modelname}" wrapping="true" />
-                            </VBOX>
-						</table:template> -->
 						<table:template>
 							<VBOX>
-                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
+                                <Text text="Order No:  {DepartmentModel>/Department1}" wrapping="true" />
                                 <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
                                 <Text text="Model: {projectModel>modelname}" wrapping="true" />
                             </VBOX>
@@ -231,6 +51,12 @@
 					</table:Column>
 					<table:Column width="11rem">
                         <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
 						<Label text="NI ENG" />
                         <Label text="SALES ENG" />
                         </VBOX>  
@@ -249,8 +75,13 @@
 					</table:Column>
 					<table:Column width="6rem" hAlign="End">
                       <VBOX>
-						<Label text="%" />
-                        <Label text="Complete" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <Label text="Complete %" />
                         <Label text="100%" />
                         </VBOX>  
 						<table:template>
@@ -263,6 +94,12 @@
 					</table:Column>
 					<table:Column width="9rem">
                         <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
 						<Label text="Plan Days"/>
                         <Label text="COMP DAYS"/>
                         </VBOX>
@@ -282,6 +119,15 @@
 					</table:Column>
 					<table:Column width="12rem">
                     <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
 						<Label text="ORDER DATE"/>
                         <Label text="PLAN COMP DATE"/>
                         <Label text="ACTUAL COMP DATE"/>
@@ -302,10 +148,21 @@
 					</table:Column>
 					<table:Column width="9rem">
                         <VBOX>
-                            <Label text="FINANCE"/>
-                            <Label text="Advance Credited"/>
-                            <Label text="Activity : 5%"/>
-                            <Label text="No Of Jobs : 1"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/AdvanceCreditedDepartment}- Department"/>
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <Label text="Advance Credited"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 5%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX> 
                         </VBOX>    
 						<table:template>
 							<VBOX>
@@ -316,7 +173,7 @@
                                      />        
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>AdvanceCreditedenddate}"/>    
+                                    value="{projectModel>AdvanceCreditedenddate}"/>     
                                  <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="0_{projectModel>orderno}"
@@ -330,12 +187,23 @@
 						</table:template>
 					</table:Column>
 					<table:Column width="9rem">
-					<VBOX>
-                        <Label text="SALES"/>
-                        <Label text="File Handed Over to CCD"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 1"/>
+					 <VBOX>
+                    <VBOX>
+                    <Label text="File Handed Over to CCD- Department"/>
                     </VBOX>    
+                    <VBOX>
+                        <Label text=" " />
+                    </VBOX>
+                        <Label text="File Handed Over to CCD"/>
+                         <Text text=" " wrapping="true" />
+                     <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
 						<table:template>
 							<VBOX>
                                <Input class="customInputHeight"
@@ -358,12 +226,23 @@
 						</table:template>
 					</table:Column>
 					<table:Column width="7rem">
+                     <VBOX>
                     <VBOX>
-                        <Label text="CCD"/>
-                        <Label text="Check Site"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="{DepartmentModel>/CheckSiteDepartment}-Department"/>
                     </VBOX>    
+                    <VBOX>
+                        <Label text=" " />
+                    </VBOX>
+                       <Label text="Check Site"/>
+                        <Text text=" " wrapping="true" />
+                    <VBOX>
+                    <Label text=" " />
+                    </VBOX> 
+                    <VBOX>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 1"/>
+                    </VBOX>      
+                    </VBOX>
 						<table:template>
 						 <VBOX>
                                <Input class="customInputHeight"
@@ -388,11 +267,22 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="CCD"/>
+                         <VBOX>
+                        <Label text="{DepartmentModel>/GADRequestDepartment}-Department"/>
+                        </VBOX>  
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>  
                         <Label text="GAD Request"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>
 						<table:template>
 						 <VBOX>
                             <Input class="customInputHeight"
@@ -415,37 +305,59 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="DESIGN"/>
-                        <Label text="GAD Ready"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
-						<table:template>
-						 <VBOX>
-                            <Input class="customInputHeight"
+                         <VBOX>
+                        <Label text="{DepartmentModel>/GADReadyDepartment}-Department"/>
+                        </VBOX>   
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>  
+                         <Label text="GAD Ready"/>
+                          <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>   
+					<table:template>
+						<VBOX>
+                              <Input class="customInputHeight"
                                 editable="false" 
                                 value="{projectModel>GADReady}" />  
-                            <Input class="customInputHeight"
+                              <Input class="customInputHeight"
                                 editable="false" 
                                 value="{projectModel>GADReadyenddate}" />      
-                            <CheckBox 
-                             select="onCheckBoxSelect"
-                             app:mySuperExtraData="4_{projectModel>orderno}"
-                              selected="{
-                                    path: 'projectModel>Heavy4',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
-                                    }"
-                                    />   
+                              <CheckBox 
+                                select="onCheckBoxSelect"
+                                app:mySuperExtraData="4_{projectModel>orderno}"
+                                selected="{
+                                        path: 'projectModel>Heavy4',
+                                    type: 'sap.ui.model.type.Boolean',
+                                        align: 'Center'
+                                        }"
+                                        />   
                         </VBOX>     
-						</table:template>
+					</table:template>
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="SALES"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/JSVDoneDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="JSV Done"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -469,10 +381,21 @@
 					</table:Column>
 				<table:Column width="12rem">
 						<VBOX>
-                        <Label text="SALES"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/GADApprovedDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="GAD Approved"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -494,19 +417,23 @@
                         </VBOX>     
 						</table:template>
 					</table:Column>
-
-
-
-
-
-
-
                     	<table:Column width="12rem">
 						<VBOX>
-                        <Label text="CCD"/>
-                        <Label text="SHipment Schduled"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ShipmentScheduledDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="SHipment Schduled"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                         </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -530,10 +457,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="CCD"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ApprovedGADDesignDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Approved GAD TO Design"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -557,11 +495,22 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="DESIGN"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/EnterinFocusDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Enter in Focus"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
+                        <Text text=" " wrapping="true" />
+                          <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
+                        </VBOX>    
 						<table:template>
 						 <VBOX>
                             <Input class="customInputHeight"
@@ -584,10 +533,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="DESIGN"/>
-                        <Label text="BOQ Ready"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/BOQReadyDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="BOQ Ready"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -611,10 +571,21 @@
 					</table:Column>
 					<table:Column width="9rem">
                         <VBOX>
-                            <Label text="DESIGN"/>
+                            <VBOX>
+                            <Label text="{DepartmentModel>/ProductionDrawingReadyDepartment}-Department"/>
+                            <VBOX>
+                            <Label text=" " />
+                            </VBOX>
                             <Label text="Production Drawing Ready"/>
-                            <Label text="Activity : 5%"/>
+                            <Text text=" " wrapping="true" />
+                            <VBOX>
+                            <Label text=" " />
+                            </VBOX> 
+                            <VBOX>
+                            <Label text="Activity : 1%"/>
                             <Label text="No Of Jobs : 1"/>
+                            </VBOX>      
+                            </VBOX>  
                         </VBOX>    
 						<table:template>
 							<VBOX>
@@ -638,10 +609,21 @@
 					</table:Column>
 					<table:Column width="9rem">
 					<VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PRODUCTION STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 1"/>
+                    <VBOX>
+                        <Label text="{DepartmentModel>/PaymentStage1Department}-Department"/>
+                     <VBOX>
+                    <Label text=" " />
+                    </VBOX>
+                    <Label text="PRODUCTION STAGE 1"/>
+                    <Text text=" " wrapping="true" />
+                    <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>      
                     </VBOX>    
 						<table:template>
 							<VBOX>
@@ -665,10 +647,21 @@
 					</table:Column>
 					<table:Column width="7rem">
                     <VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PROD QC STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                    <VBOX>
+                        <Label text="{DepartmentModel>/ProdQCStage1Department}-Department"/>
+                    <VBOX>
+                    <Label text=" " />
+                    </VBOX>
+                    <Label text="PROD QC STAGE 1"/>
+                    <Text text=" " wrapping="true" />
+                    <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>                              
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -692,10 +685,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="FINANCE"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/PaymentStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PAYMENT STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                                  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -719,10 +723,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/DeliveryStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="DELIVERY STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                                  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -746,10 +761,21 @@
 					</table:Column>
 				<table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -774,10 +800,21 @@
 
                     <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationQCStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION QC STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -802,10 +839,21 @@
 
                          <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FINANCE"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/PaymentStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PAYMENT STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -830,10 +878,21 @@
 
                     <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PRODUCTION STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ProductionStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="PRODUCTION STAGE 2"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -859,10 +918,21 @@
 
                     <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ProductionQCStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PRODUCTION QC STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -886,10 +956,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/DeliveryStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="DELIVERY STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -913,10 +994,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
-                        <Label text="INSTALLATION STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="INSTALLATION STAGE 2"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -938,38 +1030,23 @@
                         </VBOX>     
 						</table:template>
 					</table:Column>
-                     <!-- <table:Column width="12rem">
-						<VBOX>
-                        <Label text="NI"/>
-                        <Label text="INSTALLATION STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
-						<table:template>
-						 <VBOX>
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />  
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />      
-                                <CheckBox 
-                             select="onCheckBoxSelect"
-                              selected="{
-                                    path: 'projectModel>Heavy0',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
-                                    }"
-                                    />  
-                        </VBOX>     
-						</table:template>
-					</table:Column> -->
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationQCStage3Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION QC STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -993,10 +1070,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PRODUCTION STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="FACTORY-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="INSTALLATION QC STAGE 3"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1020,10 +1108,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="FACTORY-Department"/>
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PRODUCTION QC STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1047,10 +1146,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/DeliveryStage3Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="DELIVERY STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1074,10 +1184,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationStage3Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1101,10 +1222,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/FinalInstallationQCDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="FINAL INSTALLATION QC"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1126,15 +1258,23 @@
                         </VBOX>     
 						</table:template>
 					</table:Column> 
-
-
-
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="EI"/>
-                        <Label text="INSPECTION BY EI"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InspectionByEIDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="INSPECTION BY EI"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1158,10 +1298,21 @@
 					</table:Column>
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="SALES"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/FinalPaymentDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="FINAL PAYMENT"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1185,10 +1336,21 @@
 					</table:Column>
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Handed Over to Customer"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1212,10 +1374,21 @@
 					</table:Column>
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="EI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/JobAddedinWarrantyDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Job Added in Warantty"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : 1%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>

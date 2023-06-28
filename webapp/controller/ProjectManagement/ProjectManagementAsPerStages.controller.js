@@ -26,68 +26,24 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "partyModel");
 
+			var model = new JSONModel();
+			model.setData([]);
+			this.getView().setModel(model, "DepartmentModel");
+
+			var stagestdPermodel = new JSONModel();
+			stagestdPermodel.setData([]);
+			this.getView().setModel(stagestdPermodel, "stagePerModel");
+
+
 			var projectModel = new JSONModel();
 			projectModel.setData({ modelData: [] });
 			this.getView().setModel(projectModel, "projectModel");
 
-			this.loadDataOne();
-
 			var model = new JSONModel();
 			model.setData(emptyModel);
 			this.fnShortCut();
-
 			this.bindTable();
-
-
-			// leadService.getLeadDetails({ id: 51 }, function (data) {
-			// 	if (data.length) {
-			// 		if (data[4].length) {
-			// 			let aRowsCount = [];
-			// 			let quotationModelOne = this.getView().getModel("quotationModel");
-			// 			quotationModelOne.setData({ modelData: data[4] });
-			// 			this.getView().setModel(quotationModelOne, "quotationModel")
-			// 			console.log("quotationModel",quotationModelOne);
-
-			// 			aRowsCount.push({
-			// 				rowsCount: data[4].length
-			// 			});
-
-			// 			let oRowsCount = new JSONModel();
-			// 			oRowsCount.setData(aRowsCount[0]);
-			// 			console.log("oRowsCount", oRowsCount);
-			// 			oThis.getView().setModel(oRowsCount, "rowcount_model");
-			// 		}
-
-			// 		console.group(oThis.getView().getModel("liftModel"));
-			// 	}
-			// })
 		},
-
-		loadDataOne: function () {
-			let oThis = this;
-			// leadService.getLeadDetails({ id: 51 }, function (data) {
-			// 	if (data.length) {
-			// 		if (data[4].length) {
-			// 			let aRowsCount = [];
-			// 			let quotationModel = oThis.getView().getModel("quotationModel");
-			// 			quotationModel.setData({ modelData: data[4] });
-			// 			oThis.getView().setModel(quotationModel, "quotationModel")
-			// 			console.log("quotationModel", quotationModel);
-
-			// 			aRowsCount.push({
-			// 				rowsCount: data[4].length
-			// 			});
-
-			// 			let oRowsCount = new JSONModel();
-			// 			oRowsCount.setData(aRowsCount[0]);
-			// 			console.log("oRowsCount", oRowsCount);
-			// 			oThis.getView().setModel(oRowsCount, "rowcount_model");
-			// 		}
-			// 	}
-			// })
-		},
-
-
 		getModelDefault: function () {
 			return {
 
@@ -150,7 +106,7 @@ sap.ui.define([
 											modelname: data[0][i].modelname,
 											niengineer: data[0][i].niengineer,
 											orderno: data[0][i].orderno,
-											orderdate:data[0][i].orderdate,
+											orderdate: data[0][i].orderdate,
 											plandays: data[0][i].plandays,
 											projectactdate: data[0][i].projectactdate,
 											projectcomdate: data[0][i].projectcomdate,
@@ -200,7 +156,7 @@ sap.ui.define([
 										mergedObject.ProductionStage3 = data[2][q].ProductionStage3;
 
 
-										
+
 									}
 								}
 
@@ -232,7 +188,7 @@ sap.ui.define([
 			})
 
 
-			
+
 
 			await projectService.getAllProjectsStagePerDetail(function (StagePerdata) {
 				if (StagePerdata.length) {
@@ -293,7 +249,7 @@ sap.ui.define([
 										mergedObjectstageper.ProductionStage2Per = StagePerdata[2][d].ProductionStage2ComPer;
 										mergedObjectstageper.ProductionStage3Per = StagePerdata[2][d].ProductionStage3ComPer;
 
-										
+
 									}
 								}
 
@@ -562,7 +518,7 @@ sap.ui.define([
 									}
 								}
 
-								for (let s = 0; s< projectEndDateData[3].length; s++) {
+								for (let s = 0; s < projectEndDateData[3].length; s++) {
 									if (
 										mergedObjectenddate &&
 										projectEndDateData[3][s] &&
@@ -593,248 +549,261 @@ sap.ui.define([
 
 			await projectService.getAllProjectsDetail(function (projectDepartmentdata) {
 				if (projectDepartmentdata.length) {
-				
-				if (startdataearray.length) {
-				if (startdataearray.length > 0 || stageperarray.length > 0) {
-					for (let i = 0; i < startdataearray.length; i++) {
-						let mergedObjectfinal = null; // Define mergedObject with initial value null
-						for (let p = 0; p < stageperarray.length; p++) {
-							if (
-								startdataearray[i] &&
-								stageperarray[p] &&
-								startdataearray[i].projectid &&
-								stageperarray[p].projectid &&
-								startdataearray[i].projectid === stageperarray[p].projectid
-							) {
-								mergedObjectfinal = {
-									projectid: startdataearray[i].projectid,
-									Department: startdataearray[i].Department,
-									Complete: startdataearray[i].Complete,
-									actualdays: startdataearray[i].actualdays,
-									modelname: startdataearray[i].modelname,
-									niengineer:startdataearray[i].niengineer,
-									orderno: startdataearray[i].orderno,
-									orderdate: startdataearray[i].orderdate,
-									plandays: startdataearray[i].plandays,
-									projectactdate: startdataearray[i].projectactdate,
-									projectcomdate: startdataearray[i].projectcomdate,
-									projectcount: startdataearray[i].projectcount,
-									projectname: startdataearray[i].projectname,
-									saleengineer: startdataearray[i].saleengineer,
-									AdvanceCredited: startdataearray[i].AdvanceCredited,
-									CheckSite: startdataearray[i].CheckSite,
-									FileHandedOverCCD: startdataearray[i].FileHandedOverCCD,
-									GADReady: startdataearray[i].GADReady,
-									GADRequest: startdataearray[i].GADRequest,
-									GADApproved: startdataearray[i].GADApproved,
-									JSVDone: startdataearray[i].JSVDone,
-									ShipmentScheduled: startdataearray[i].ShipmentScheduled,
-									ApprovedGADDesign: startdataearray[i].ApprovedGADDesign,
-									BOQReady: startdataearray[i].BOQReady,
-									DeliveryStage1: startdataearray[i].DeliveryStage1,
-									EnterinFocus: startdataearray[i].EnterinFocus,
-									InstallationQCStage1: startdataearray[i].InstallationQCStage1,
-									InstallationStage1: startdataearray[i].InstallationStage1,
-									PaymentStage1: startdataearray[i].PaymentStage1,
-									ProdQCStage1: startdataearray[i].ProdQCStage1,
-									ProductionDrawingReady: startdataearray[i].ProductionDrawingReady,
-									ProductionStage1: startdataearray[i].ProductionStage1,
-									DeliveryStage2: startdataearray[i].DeliveryStage2,
-									DeliveryStage3: startdataearray[i].DeliveryStage3,
-									InstallationQCStage3: startdataearray[i].InstallationQCStage3,
-									InstallationStage2: startdataearray[i].InstallationStage2,
-									PaymentStage2: startdataearray[i].PaymentStage2,
-									ProductionQCStage2: startdataearray[i].ProductionQCStage2,
-									ProductionStage3: startdataearray[i].ProductionStage3,
-									ProductionQCStage3: startdataearray[i].ProductionQCStage3,
-									ProductionStage2: startdataearray[i].ProductionStage2,
-									FinalInstallationQC: startdataearray[i].FinalInstallationQC,
-									FinalPayment: startdataearray[i].FinalPayment,
-									HandedOverCustomer: startdataearray[i].HandedOverCustomer,
-									InspectionByEI: startdataearray[i].InspectionByEI,
-									InstallationStage3: startdataearray[i].InstallationStage3,
-									JobAddedinWarranty: startdataearray[i].JobAddedinWarranty,
-									AdvanceCreditedComPer: stageperarray[p].AdvanceCreditedComPer,
-									CheckSiteComPer: stageperarray[p].CheckSiteComPer,
-									FileHandedOverCCDComPer: stageperarray[p].FileHandedOverCCDComPer,
-									GADReadyComPer: stageperarray[p].GADReadyComPer,
-									GADRequestComPer: stageperarray[p].GADRequestComPer,
-									GADApprovedComPer: stageperarray[p].GADApprovedComPer,
-									JSVDoneComPer: stageperarray[p].JSVDoneComPer,
-									ShipmentScheduledComPer: stageperarray[p].ShipmentScheduledComPer,
-									ApprovedGADDesignComPer: stageperarray[p].ApprovedGADDesignComPer,
-									BOQReadyComPer: stageperarray[p].BOQReadyComPer,
-									DeliveryStage1ComPer: stageperarray[p].DeliveryStage1ComPer,
-									EnterinFocusComPer: stageperarray[p].EnterinFocusComPer,
-									InstallationQCStage1ComPer: stageperarray[p].InstallationQCStage1ComPer,
-									InstallationStage1ComPer: stageperarray[p].InstallationStage1ComPer,
-									PaymentStage1ComPer: stageperarray[p].PaymentStage1ComPer,
-									ProdQCStage1ComPer: stageperarray[p].ProdQCStage1ComPer,
-									ProductionDrawingReadyComPer: stageperarray[p].ProductionDrawingReadyComPer,
-									DeliveryStage2ComPer: stageperarray[p].DeliveryStage2ComPer,
-									DeliveryStage3ComPer: stageperarray[p].DeliveryStage3ComPer,
-									InstallationQCStage3ComPer: stageperarray[p].InstallationQCStage3ComPer,
-									InstallationStage2ComPer: stageperarray[p].InstallationStage2ComPer,
-								    PaymentStage2ComPer: stageperarray[p].PaymentStage2ComPer,
-									ProductionQCStage2ComPer: stageperarray[p].ProductionQCStage2ComPer,
-									ProductionStage2Per: stageperarray[p].ProductionStage2Per,
-									FinalInstallationQCComPer: stageperarray[p].FinalInstallationQCComPer,
-									FinalPaymentComPer: stageperarray[p].FinalPaymentComPer,
-									HandedOverCustomerComPer: stageperarray[p].HandedOverCustomerComPer,
-									InspectionByEIComPer: stageperarray[p].InspectionByEIComPer,
-									InstallationStage3ComPer: stageperarray[p].InstallationStage3ComPer,
-								    JobAddedinWarrantyComPer: stageperarray[p].JobAddedinWarrantyComPer,
-									ProductionStage3ComPer: stageperarray[p].ProductionStage3ComPer,
-									ProductionQCStage3ComPer: stageperarray[p].ProductionQCStage3ComPer,
-									
-									
-								};
 
-								console.log("--------mergedObjectfinal---------", mergedObjectfinal);
+					if (startdataearray.length) {
+						if (startdataearray.length > 0 || stageperarray.length > 0) {
+							for (let i = 0; i < startdataearray.length; i++) {
+								let mergedObjectfinal = null; // Define mergedObject with initial value null
+								for (let p = 0; p < stageperarray.length; p++) {
+									if (
+										startdataearray[i] &&
+										stageperarray[p] &&
+										startdataearray[i].projectid &&
+										stageperarray[p].projectid &&
+										startdataearray[i].projectid === stageperarray[p].projectid
+									) {
+										mergedObjectfinal = {
+											projectid: startdataearray[i].projectid,
+											Department: startdataearray[i].Department,
+											Complete: startdataearray[i].Complete,
+											actualdays: startdataearray[i].actualdays,
+											modelname: startdataearray[i].modelname,
+											niengineer: startdataearray[i].niengineer,
+											orderno: startdataearray[i].orderno,
+											orderdate: startdataearray[i].orderdate,
+											plandays: startdataearray[i].plandays,
+											projectactdate: startdataearray[i].projectactdate,
+											projectcomdate: startdataearray[i].projectcomdate,
+											projectcount: startdataearray[i].projectcount,
+											projectname: startdataearray[i].projectname,
+											saleengineer: startdataearray[i].saleengineer,
+											AdvanceCredited: startdataearray[i].AdvanceCredited,
+											CheckSite: startdataearray[i].CheckSite,
+											FileHandedOverCCD: startdataearray[i].FileHandedOverCCD,
+											GADReady: startdataearray[i].GADReady,
+											GADRequest: startdataearray[i].GADRequest,
+											GADApproved: startdataearray[i].GADApproved,
+											JSVDone: startdataearray[i].JSVDone,
+											ShipmentScheduled: startdataearray[i].ShipmentScheduled,
+											ApprovedGADDesign: startdataearray[i].ApprovedGADDesign,
+											BOQReady: startdataearray[i].BOQReady,
+											DeliveryStage1: startdataearray[i].DeliveryStage1,
+											EnterinFocus: startdataearray[i].EnterinFocus,
+											InstallationQCStage1: startdataearray[i].InstallationQCStage1,
+											InstallationStage1: startdataearray[i].InstallationStage1,
+											PaymentStage1: startdataearray[i].PaymentStage1,
+											ProdQCStage1: startdataearray[i].ProdQCStage1,
+											ProductionDrawingReady: startdataearray[i].ProductionDrawingReady,
+											ProductionStage1: startdataearray[i].ProductionStage1,
+											DeliveryStage2: startdataearray[i].DeliveryStage2,
+											DeliveryStage3: startdataearray[i].DeliveryStage3,
+											InstallationQCStage3: startdataearray[i].InstallationQCStage3,
+											InstallationStage2: startdataearray[i].InstallationStage2,
+											PaymentStage2: startdataearray[i].PaymentStage2,
+											ProductionQCStage2: startdataearray[i].ProductionQCStage2,
+											ProductionStage3: startdataearray[i].ProductionStage3,
+											ProductionQCStage3: startdataearray[i].ProductionQCStage3,
+											ProductionStage2: startdataearray[i].ProductionStage2,
+											FinalInstallationQC: startdataearray[i].FinalInstallationQC,
+											FinalPayment: startdataearray[i].FinalPayment,
+											HandedOverCustomer: startdataearray[i].HandedOverCustomer,
+											InspectionByEI: startdataearray[i].InspectionByEI,
+											InstallationStage3: startdataearray[i].InstallationStage3,
+											JobAddedinWarranty: startdataearray[i].JobAddedinWarranty,
+											AdvanceCreditedComPer: stageperarray[p].AdvanceCreditedComPer,
+											CheckSiteComPer: stageperarray[p].CheckSiteComPer,
+											FileHandedOverCCDComPer: stageperarray[p].FileHandedOverCCDComPer,
+											GADReadyComPer: stageperarray[p].GADReadyComPer,
+											GADRequestComPer: stageperarray[p].GADRequestComPer,
+											GADApprovedComPer: stageperarray[p].GADApprovedComPer,
+											JSVDoneComPer: stageperarray[p].JSVDoneComPer,
+											ShipmentScheduledComPer: stageperarray[p].ShipmentScheduledComPer,
+											ApprovedGADDesignComPer: stageperarray[p].ApprovedGADDesignComPer,
+											BOQReadyComPer: stageperarray[p].BOQReadyComPer,
+											DeliveryStage1ComPer: stageperarray[p].DeliveryStage1ComPer,
+											EnterinFocusComPer: stageperarray[p].EnterinFocusComPer,
+											InstallationQCStage1ComPer: stageperarray[p].InstallationQCStage1ComPer,
+											InstallationStage1ComPer: stageperarray[p].InstallationStage1ComPer,
+											PaymentStage1ComPer: stageperarray[p].PaymentStage1ComPer,
+											ProdQCStage1ComPer: stageperarray[p].ProdQCStage1ComPer,
+											ProductionDrawingReadyComPer: stageperarray[p].ProductionDrawingReadyComPer,
+											DeliveryStage2ComPer: stageperarray[p].DeliveryStage2ComPer,
+											DeliveryStage3ComPer: stageperarray[p].DeliveryStage3ComPer,
+											InstallationQCStage3ComPer: stageperarray[p].InstallationQCStage3ComPer,
+											InstallationStage2ComPer: stageperarray[p].InstallationStage2ComPer,
+											PaymentStage2ComPer: stageperarray[p].PaymentStage2ComPer,
+											ProductionQCStage2ComPer: stageperarray[p].ProductionQCStage2ComPer,
+											ProductionStage2Per: stageperarray[p].ProductionStage2Per,
+											FinalInstallationQCComPer: stageperarray[p].FinalInstallationQCComPer,
+											FinalPaymentComPer: stageperarray[p].FinalPaymentComPer,
+											HandedOverCustomerComPer: stageperarray[p].HandedOverCustomerComPer,
+											InspectionByEIComPer: stageperarray[p].InspectionByEIComPer,
+											InstallationStage3ComPer: stageperarray[p].InstallationStage3ComPer,
+											JobAddedinWarrantyComPer: stageperarray[p].JobAddedinWarrantyComPer,
+											ProductionStage3ComPer: stageperarray[p].ProductionStage3ComPer,
+											ProductionQCStage3ComPer: stageperarray[p].ProductionQCStage3ComPer,
+
+
+										};
+
+										console.log("--------mergedObjectfinal---------", mergedObjectfinal);
+									}
+								}
+
+								for (let q = 0; q < proweightageperarray.length; q++) {
+									if (
+										mergedObjectfinal &&
+										proweightageperarray[q] &&
+										mergedObjectfinal.projectid &&
+										proweightageperarray[q].projectid &&
+										mergedObjectfinal.projectid === proweightageperarray[q].projectid
+									) {
+										mergedObjectfinal.AdvanceCreditedProweightage = proweightageperarray[q].AdvanceCreditedProweightage;
+										mergedObjectfinal.ApprovedGADDesignProweightage = proweightageperarray[q].ApprovedGADDesignProweightage;
+										mergedObjectfinal.BOQReadyProweightage = proweightageperarray[q].BOQReadyProweightage;
+										mergedObjectfinal.DeliveryStage1Proweightage = proweightageperarray[q].DeliveryStage1Proweightage;
+										mergedObjectfinal.DeliveryStage2Proweightage = proweightageperarray[q].DeliveryStage2Proweightage;
+										mergedObjectfinal.DeliveryStage3Proweightage = proweightageperarray[q].DeliveryStage3Proweightage;
+										mergedObjectfinal.EnterinFocusProweightage = proweightageperarray[q].EnterinFocusProweightage;
+										mergedObjectfinal.FileHandedOverCCDProweightage = proweightageperarray[q].FileHandedOverCCDProweightage;
+										mergedObjectfinal.FinalInstallationQCProweightage = proweightageperarray[q].FinalInstallationQCProweightage;
+										mergedObjectfinal.FinalPaymentProweightage = proweightageperarray[q].FinalPaymentProweightage;
+										mergedObjectfinal.GADReadyProweightage = proweightageperarray[q].GADReadyProweightage;
+										mergedObjectfinal.GADRequestProweightage = proweightageperarray[q].GADRequestProweightage;
+										mergedObjectfinal.GADApprovedProweightage = proweightageperarray[q].GADApprovedProweightage;
+										mergedObjectfinal.HandedOverCustomerProweightage = proweightageperarray[q].HandedOverCustomerProweightage;
+										mergedObjectfinal.InspectionByEIProweightage = proweightageperarray[q].InspectionByEIProweightage;
+										mergedObjectfinal.InstallationQCStage1Proweightage = proweightageperarray[q].InstallationQCStage1Proweightage;
+										mergedObjectfinal.InstallationQCStage3Proweightage = proweightageperarray[q].InstallationQCStage3Proweightage;
+										mergedObjectfinal.InstallationStage1Proweightage = proweightageperarray[q].InstallationStage1Proweightage;
+										mergedObjectfinal.InstallationStage2Proweightage = proweightageperarray[q].InstallationStage2Proweightage;
+										mergedObjectfinal.InstallationStage3Proweightage = proweightageperarray[q].InstallationStage3Proweightage;
+										mergedObjectfinal.JSVDoneProweightage = proweightageperarray[q].JSVDoneProweightage;
+										mergedObjectfinal.JobAddedinWarrantyProweightage = proweightageperarray[q].JobAddedinWarrantyProweightage;
+										mergedObjectfinal.PaymentStage1Proweightage = proweightageperarray[q].PaymentStage1Proweightage;
+										mergedObjectfinal.PaymentStage2Proweightage = proweightageperarray[q].PaymentStage2Proweightage;
+										mergedObjectfinal.ProdQCStage1Proweightage = proweightageperarray[q].ProdQCStage1Proweightage;
+										mergedObjectfinal.ProductionDrawingReadyProweightage = proweightageperarray[q].ProductionDrawingReadyProweightage;
+										mergedObjectfinal.ProductionQCStage2Proweightage = proweightageperarray[q].ProductionQCStage2Proweightage;
+										mergedObjectfinal.ProductionStage2Proweightage = proweightageperarray[q].ProductionStage2Proweightage;
+										mergedObjectfinal.ShipmentScheduledProweightage = proweightageperarray[q].ShipmentScheduledProweightage;
+
+
+
+									}
+								}
+
+								for (let r = 0; r < prodepartmentperarray.length; r++) {
+									if (
+										mergedObjectfinal &&
+										prodepartmentperarray[r] &&
+										mergedObjectfinal.projectid &&
+										prodepartmentperarray[r].projectid &&
+										mergedObjectfinal.projectid === prodepartmentperarray[r].projectid
+									) {
+										mergedObjectfinal.AdvanceCreditedDepartment = prodepartmentperarray[r].AdvanceCreditedDepartment;
+										mergedObjectfinal.ApprovedGADDesignDepartment = prodepartmentperarray[r].ApprovedGADDesignDepartment;
+										mergedObjectfinal.BOQReadyDepartment = prodepartmentperarray[r].BOQReadyDepartment;
+										mergedObjectfinal.CheckSiteDepartment = prodepartmentperarray[r].CheckSiteDepartment;
+										mergedObjectfinal.DeliveryStage1Department = prodepartmentperarray[r].DeliveryStage1Department;
+										mergedObjectfinal.DeliveryStage2Department = prodepartmentperarray[r].DeliveryStage2Department;
+										mergedObjectfinal.EnterinFocusDepartment = prodepartmentperarray[r].EnterinFocusDepartment;
+										mergedObjectfinal.FileHandedOverCCDDepartment = prodepartmentperarray[r].FileHandedOverCCDDepartment;
+										mergedObjectfinal.FinalInstallationQCDepartment = prodepartmentperarray[r].FinalInstallationQCDepartment;
+										mergedObjectfinal.FinalPaymentDepartment = prodepartmentperarray[r].FinalPaymentDepartment;
+										mergedObjectfinal.GADReadyDepartment = prodepartmentperarray[r].GADReadyDepartment;
+										mergedObjectfinal.GADRequestDepartment = prodepartmentperarray[r].GADRequestDepartment;
+										mergedObjectfinal.GADApprovedDepartment = prodepartmentperarray[r].GADApprovedDepartment;
+										mergedObjectfinal.HandedOverCustomerDepartment = prodepartmentperarray[r].HandedOverCustomerDepartment;
+										mergedObjectfinal.InspectionByEIDepartment = prodepartmentperarray[r].InspectionByEIDepartment;
+										mergedObjectfinal.InstallationQCStage1Department = prodepartmentperarray[r].InstallationQCStage1Department;
+										mergedObjectfinal.InstallationQCStage3Department = prodepartmentperarray[r].InstallationQCStage3Department;
+										mergedObjectfinal.InstallationStage1Department = prodepartmentperarray[r].InstallationStage1Department;
+										mergedObjectfinal.InstallationStage2Department = prodepartmentperarray[r].InstallationStage2Department;
+										mergedObjectfinal.InstallationStage3Department = prodepartmentperarray[r].InstallationStage3Department;
+										mergedObjectfinal.JSVDoneDepartment = prodepartmentperarray[r].JSVDoneDepartment;
+										mergedObjectfinal.JobAddedinWarrantyDepartment = prodepartmentperarray[r].JobAddedinWarrantyDepartment;
+										mergedObjectfinal.PaymentStage1Department = prodepartmentperarray[r].PaymentStage1Department;
+										mergedObjectfinal.PaymentStage2Department = prodepartmentperarray[r].PaymentStage2Department;
+										mergedObjectfinal.ProdQCStage1Department = prodepartmentperarray[r].ProdQCStage1Department;
+										mergedObjectfinal.ProductionDrawingReadyDepartment = prodepartmentperarray[r].ProductionDrawingReadyDepartment;
+										mergedObjectfinal.ProductionQCStage2Department = prodepartmentperarray[r].ProductionQCStage2Department;
+										mergedObjectfinal.ProductionStage2Department = prodepartmentperarray[r].ProductionStage2Department;
+										mergedObjectfinal.ShipmentScheduledDepartment = prodepartmentperarray[r].ShipmentScheduledDepartment;
+									}
+								}
+
+								for (let r = 0; r < proenddateperarray.length; r++) {
+									if (
+										mergedObjectfinal &&
+										proenddateperarray[r] &&
+										mergedObjectfinal.projectid &&
+										proenddateperarray[r].projectid &&
+										mergedObjectfinal.projectid === proenddateperarray[r].projectid
+									) {
+										mergedObjectfinal.AdvanceCreditedenddate = proenddateperarray[r].AdvanceCreditedenddate;
+										mergedObjectfinal.ApprovedGADDesignenddate = proenddateperarray[r].ApprovedGADDesignenddate;
+										mergedObjectfinal.BOQReadyenddate = proenddateperarray[r].BOQReadyenddate;
+										mergedObjectfinal.CheckSiteenddate = proenddateperarray[r].CheckSiteenddate;
+										mergedObjectfinal.DeliveryStage1enddate = proenddateperarray[r].DeliveryStage1enddate;
+										mergedObjectfinal.DeliveryStage2enddate = proenddateperarray[r].DeliveryStage2enddate;
+										mergedObjectfinal.EnterinFocusenddate = proenddateperarray[r].EnterinFocusenddate;
+										mergedObjectfinal.FileHandedOverCCDenddate = proenddateperarray[r].FileHandedOverCCDenddate;
+										mergedObjectfinal.FinalInstallationQCenddate = proenddateperarray[r].FinalInstallationQCenddate;
+										mergedObjectfinal.FinalPaymentenddate = proenddateperarray[r].FinalPaymentenddate;
+										mergedObjectfinal.GADReadyenddate = proenddateperarray[r].GADReadyenddate;
+										mergedObjectfinal.GADRequestenddate = proenddateperarray[r].GADRequestenddate;
+										mergedObjectfinal.GADApprovedenddate = proenddateperarray[r].GADApprovedenddate;
+										mergedObjectfinal.HandedOverCustomerenddate = proenddateperarray[r].HandedOverCustomerenddate;
+										mergedObjectfinal.InspectionByEIenddate = proenddateperarray[r].InspectionByEIenddate;
+										mergedObjectfinal.InstallationQCStage1enddate = proenddateperarray[r].InstallationQCStage1enddate;
+										mergedObjectfinal.InstallationQCStage3enddate = proenddateperarray[r].InstallationQCStage3enddate;
+										mergedObjectfinal.InstallationStage1enddate = proenddateperarray[r].InstallationStage1enddate;
+										mergedObjectfinal.InstallationStage2enddate = proenddateperarray[r].InstallationStage2enddate;
+										mergedObjectfinal.InstallationStage3enddate = proenddateperarray[r].InstallationStage3enddate;
+										mergedObjectfinal.JSVDoneenddate = proenddateperarray[r].JSVDoneenddate;
+										mergedObjectfinal.JobAddedinWarrantyenddate = proenddateperarray[r].JobAddedinWarrantyenddate;
+										mergedObjectfinal.PaymentStage1enddate = proenddateperarray[r].PaymentStage1enddate;
+										mergedObjectfinal.PaymentStage2enddate = proenddateperarray[r].PaymentStage2enddate;
+										mergedObjectfinal.ProdQCStage1enddate = proenddateperarray[r].ProdQCStage1enddate;
+										mergedObjectfinal.ProductionDrawingReadyenddate = proenddateperarray[r].ProductionDrawingReadyenddate;
+										mergedObjectfinal.ProductionQCStage2enddate = proenddateperarray[r].ProductionQCStage2enddate;
+										mergedObjectfinal.ProductionStage2enddate = proenddateperarray[r].ProductionStage2enddate;
+										mergedObjectfinal.ShipmentScheduledenddate = proenddateperarray[r].ShipmentScheduledenddate;
+									}
+								}
+
+
+								if (mergedObjectfinal) { // Check if mergedObjectfinal is not null
+									Finalarray.push(mergedObjectfinal);
+									console.log("--------****************Finalarray--*************************-------", Finalarray);
+								}
 							}
-						}
-
-						for (let q = 0; q < proweightageperarray.length; q++) {
-							if (
-								mergedObjectfinal &&
-								proweightageperarray[q] &&
-								mergedObjectfinal.projectid &&
-								proweightageperarray[q].projectid &&
-								mergedObjectfinal.projectid === proweightageperarray[q].projectid
-							) {
-								mergedObjectfinal.AdvanceCreditedProweightage = proweightageperarray[q].AdvanceCreditedProweightage;
-								mergedObjectfinal.ApprovedGADDesignProweightage = proweightageperarray[q].ApprovedGADDesignProweightage;
-								mergedObjectfinal.BOQReadyProweightage = proweightageperarray[q].BOQReadyProweightage;
-								mergedObjectfinal.DeliveryStage1Proweightage = proweightageperarray[q].DeliveryStage1Proweightage;
-								mergedObjectfinal.DeliveryStage2Proweightage = proweightageperarray[q].DeliveryStage2Proweightage;
-								mergedObjectfinal.DeliveryStage3Proweightage = proweightageperarray[q].DeliveryStage3Proweightage;
-								mergedObjectfinal.EnterinFocusProweightage = proweightageperarray[q].EnterinFocusProweightage;
-								mergedObjectfinal.FileHandedOverCCDProweightage = proweightageperarray[q].FileHandedOverCCDProweightage;
-								mergedObjectfinal.FinalInstallationQCProweightage = proweightageperarray[q].FinalInstallationQCProweightage;
-								mergedObjectfinal.FinalPaymentProweightage = proweightageperarray[q].FinalPaymentProweightage;
-								mergedObjectfinal.GADReadyProweightage = proweightageperarray[q].GADReadyProweightage;
-								mergedObjectfinal.GADRequestProweightage = proweightageperarray[q].GADRequestProweightage;
-								mergedObjectfinal.GADApprovedProweightage = proweightageperarray[q].GADApprovedProweightage;
-								mergedObjectfinal.HandedOverCustomerProweightage = proweightageperarray[q].HandedOverCustomerProweightage;
-								mergedObjectfinal.InspectionByEIProweightage = proweightageperarray[q].InspectionByEIProweightage;
-								mergedObjectfinal.InstallationQCStage1Proweightage = proweightageperarray[q].InstallationQCStage1Proweightage;
-								mergedObjectfinal.InstallationQCStage3Proweightage = proweightageperarray[q].InstallationQCStage3Proweightage;
-								mergedObjectfinal.InstallationStage1Proweightage = proweightageperarray[q].InstallationStage1Proweightage;
-								mergedObjectfinal.InstallationStage2Proweightage = proweightageperarray[q].InstallationStage2Proweightage;
-								mergedObjectfinal.InstallationStage3Proweightage = proweightageperarray[q].InstallationStage3Proweightage;
-								mergedObjectfinal.JSVDoneProweightage = proweightageperarray[q].JSVDoneProweightage;
-								mergedObjectfinal.JobAddedinWarrantyProweightage = proweightageperarray[q].JobAddedinWarrantyProweightage;
-								mergedObjectfinal.PaymentStage1Proweightage = proweightageperarray[q].PaymentStage1Proweightage;
-								mergedObjectfinal.PaymentStage2Proweightage = proweightageperarray[q].PaymentStage2Proweightage;
-								mergedObjectfinal.ProdQCStage1Proweightage = proweightageperarray[q].ProdQCStage1Proweightage;
-								mergedObjectfinal.ProductionDrawingReadyProweightage = proweightageperarray[q].ProductionDrawingReadyProweightage;
-								mergedObjectfinal.ProductionQCStage2Proweightage = proweightageperarray[q].ProductionQCStage2Proweightage;
-								mergedObjectfinal.ProductionStage2Proweightage = proweightageperarray[q].ProductionStage2Proweightage;
-								mergedObjectfinal.ShipmentScheduledProweightage = proweightageperarray[q].ShipmentScheduledProweightage;
-								
-								
-								
-							}
-						}
-
-						for (let r = 0; r < prodepartmentperarray.length; r++) {
-							if (
-								mergedObjectfinal &&
-								prodepartmentperarray[r] &&
-								mergedObjectfinal.projectid &&
-								prodepartmentperarray[r].projectid &&
-								mergedObjectfinal.projectid === prodepartmentperarray[r].projectid
-							) {
-								mergedObjectfinal.AdvanceCreditedDepartment = prodepartmentperarray[r].AdvanceCreditedDepartment;
-								mergedObjectfinal.ApprovedGADDesignDepartment = prodepartmentperarray[r].ApprovedGADDesignDepartment;
-								mergedObjectfinal.BOQReadyDepartment = prodepartmentperarray[r].BOQReadyDepartment;
-								mergedObjectfinal.CheckSiteDepartment = prodepartmentperarray[r].CheckSiteDepartment;
-								mergedObjectfinal.DeliveryStage1Department = prodepartmentperarray[r].DeliveryStage1Department;
-								mergedObjectfinal.DeliveryStage2Department = prodepartmentperarray[r].DeliveryStage2Department;
-								mergedObjectfinal.EnterinFocusDepartment = prodepartmentperarray[r].EnterinFocusDepartment;
-								mergedObjectfinal.FileHandedOverCCDDepartment = prodepartmentperarray[r].FileHandedOverCCDDepartment;
-								mergedObjectfinal.FinalInstallationQCDepartment = prodepartmentperarray[r].FinalInstallationQCDepartment;
-								mergedObjectfinal.FinalPaymentDepartment = prodepartmentperarray[r].FinalPaymentDepartment;
-								mergedObjectfinal.GADReadyDepartment = prodepartmentperarray[r].GADReadyDepartment;
-								mergedObjectfinal.GADRequestDepartment = prodepartmentperarray[r].GADRequestDepartment;
-								mergedObjectfinal.GADApprovedDepartment = prodepartmentperarray[r].GADApprovedDepartment;
-								mergedObjectfinal.HandedOverCustomerDepartment = prodepartmentperarray[r].HandedOverCustomerDepartment;
-								mergedObjectfinal.InspectionByEIDepartment = prodepartmentperarray[r].InspectionByEIDepartment;
-								mergedObjectfinal.InstallationQCStage1Department = prodepartmentperarray[r].InstallationQCStage1Department;
-								mergedObjectfinal.InstallationQCStage3Department = prodepartmentperarray[r].InstallationQCStage3Department;
-								mergedObjectfinal.InstallationStage1Department = prodepartmentperarray[r].InstallationStage1Department;
-								mergedObjectfinal.InstallationStage2Department = prodepartmentperarray[r].InstallationStage2Department;
-								mergedObjectfinal.InstallationStage3Department = prodepartmentperarray[r].InstallationStage3Department;
-								mergedObjectfinal.JSVDoneDepartment = prodepartmentperarray[r].JSVDoneDepartment;
-								mergedObjectfinal.JobAddedinWarrantyDepartment = prodepartmentperarray[r].JobAddedinWarrantyDepartment;
-								mergedObjectfinal.PaymentStage1Department = prodepartmentperarray[r].PaymentStage1Department;
-								mergedObjectfinal.PaymentStage2Department = prodepartmentperarray[r].PaymentStage2Department;
-								mergedObjectfinal.ProdQCStage1Department = prodepartmentperarray[r].ProdQCStage1Department;
-								mergedObjectfinal.ProductionDrawingReadyDepartment = prodepartmentperarray[r].ProductionDrawingReadyDepartment;
-								mergedObjectfinal.ProductionQCStage2Department = prodepartmentperarray[r].ProductionQCStage2Department;
-								mergedObjectfinal.ProductionStage2Department = prodepartmentperarray[r].ProductionStage2Department;
-								mergedObjectfinal.ShipmentScheduledDepartment = prodepartmentperarray[r].ShipmentScheduledDepartment;
-							}
-						}
-
-						for (let r = 0; r < proenddateperarray.length; r++) {
-							if (
-								mergedObjectfinal &&
-								proenddateperarray[r] &&
-								mergedObjectfinal.projectid &&
-								proenddateperarray[r].projectid &&
-								mergedObjectfinal.projectid === proenddateperarray[r].projectid
-							) {
-								mergedObjectfinal.AdvanceCreditedenddate = proenddateperarray[r].AdvanceCreditedenddate;
-								mergedObjectfinal.ApprovedGADDesignenddate = proenddateperarray[r].ApprovedGADDesignenddate;
-								mergedObjectfinal.BOQReadyenddate = proenddateperarray[r].BOQReadyenddate;
-								mergedObjectfinal.CheckSiteenddate = proenddateperarray[r].CheckSiteenddate;
-								mergedObjectfinal.DeliveryStage1enddate = proenddateperarray[r].DeliveryStage1enddate;
-								mergedObjectfinal.DeliveryStage2enddate = proenddateperarray[r].DeliveryStage2enddate;
-								mergedObjectfinal.EnterinFocusenddate = proenddateperarray[r].EnterinFocusenddate;
-								mergedObjectfinal.FileHandedOverCCDenddate = proenddateperarray[r].FileHandedOverCCDenddate;
-								mergedObjectfinal.FinalInstallationQCenddate = proenddateperarray[r].FinalInstallationQCenddate;
-								mergedObjectfinal.FinalPaymentenddate = proenddateperarray[r].FinalPaymentenddate;
-								mergedObjectfinal.GADReadyenddate = proenddateperarray[r].GADReadyenddate;
-								mergedObjectfinal.GADRequestenddate = proenddateperarray[r].GADRequestenddate;
-								mergedObjectfinal.GADApprovedenddate = proenddateperarray[r].GADApprovedenddate;
-								mergedObjectfinal.HandedOverCustomerenddate = proenddateperarray[r].HandedOverCustomerenddate;
-								mergedObjectfinal.InspectionByEIenddate = proenddateperarray[r].InspectionByEIenddate;
-								mergedObjectfinal.InstallationQCStage1enddate = proenddateperarray[r].InstallationQCStage1enddate;
-								mergedObjectfinal.InstallationQCStage3enddate = proenddateperarray[r].InstallationQCStage3enddate;
-								mergedObjectfinal.InstallationStage1enddate = proenddateperarray[r].InstallationStage1enddate;
-								mergedObjectfinal.InstallationStage2enddate = proenddateperarray[r].InstallationStage2enddate;
-								mergedObjectfinal.InstallationStage3enddate = proenddateperarray[r].InstallationStage3enddate;
-								mergedObjectfinal.JSVDoneenddate = proenddateperarray[r].JSVDoneenddate;
-								mergedObjectfinal.JobAddedinWarrantyenddate = proenddateperarray[r].JobAddedinWarrantyenddate;
-								mergedObjectfinal.PaymentStage1enddate = proenddateperarray[r].PaymentStage1enddate;
-								mergedObjectfinal.PaymentStage2enddate = proenddateperarray[r].PaymentStage2enddate;
-								mergedObjectfinal.ProdQCStage1enddate = proenddateperarray[r].ProdQCStage1enddate;
-								mergedObjectfinal.ProductionDrawingReadyenddate = proenddateperarray[r].ProductionDrawingReadyenddate;
-								mergedObjectfinal.ProductionQCStage2enddate = proenddateperarray[r].ProductionQCStage2enddate;
-								mergedObjectfinal.ProductionStage2enddate = proenddateperarray[r].ProductionStage2enddate;
-								mergedObjectfinal.ShipmentScheduledenddate = proenddateperarray[r].ShipmentScheduledenddate;
-							}
-						}
-
-
-						if (mergedObjectfinal) { // Check if mergedObjectfinal is not null
-							Finalarray.push(mergedObjectfinal);
-							console.log("--------****************Finalarray--*************************-------", Finalarray);
 						}
 					}
 				}
-			}
-		 }
 
-		 let projectModelOne = oThis.getView().getModel("projectModel");
-		 projectModelOne.setData({ modelData: Finalarray });
-		 oThis.getView().setModel(projectModelOne, "projectModel")
-		 console.log("------------------projectModel------------------",projectModelOne);
+				let projectModelOne = oThis.getView().getModel("projectModel");
+				projectModelOne.setData({ modelData: Finalarray });
+				oThis.getView().setModel(projectModelOne, "projectModel")
+
+			
+
+				
+
+				let departmentModel = oThis.getView().getModel("DepartmentModel");
+				departmentModel.setData(prodepartmentperarray[0]);
+				oThis.getView().setModel(departmentModel, "DepartmentModel");
+				console.log("------------------DepartmentModel------------------", departmentModel);
+
+				let stagestdModel = oThis.getView().getModel("stagePerModel");
+				stagestdModel.setData(stageperarray[0]);
+				oThis.getView().setModel(stagestdModel, "stagePerModel");
+				console.log("------------------stagePerModel------------------", stagestdModel);
 			})
 
-			               
-			
+
+
 
 
 
