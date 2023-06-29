@@ -708,14 +708,6 @@ sap.ui.define(
 			}
 		}
 
-					// if (
-					// 	!commonFunction.isRequired(
-					// 		this,
-					// 		"txtLead",
-					// 		"Please enter lead name."
-					// 	)
-					// )
-					// 	isValid = false;
 
 					if (
 						!commonFunction.isRequired(

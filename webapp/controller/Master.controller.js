@@ -39,6 +39,8 @@ sap.ui.define([
 		},
 
 		onInit: function () {
+			
+
 			var dateTimeModel = new JSONModel();
 			dateTimeModel.setData({
 				valueDTP3: new Date()
@@ -552,6 +554,9 @@ sap.ui.define([
 			var oFixedNavigationList = this.byId('oFixedNavigationList');
 			oNavigationList.removeAllItems();
 			oFixedNavigationList.removeAllItems();
+
+			// clear cache
+			location.reload(true);
 		},
 
 		// onUserNamePress: function (oEvent) {

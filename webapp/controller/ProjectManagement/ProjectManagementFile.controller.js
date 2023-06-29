@@ -2,13 +2,12 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
-    'sap/ui/elev8rerp/componentcontainer/services/projectManagement/Project.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/ProjectTracking.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/projectManagement/Project.service',
 	'sap/m/MessageToast'
-], function (JSONModel, BaseController, Sorter, projectService, leadService, ProjectTracking, xlsx, projectService, MessageToast) {
+], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile", {

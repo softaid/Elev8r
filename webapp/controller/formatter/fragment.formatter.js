@@ -105,6 +105,39 @@ sap.ui.define(function () {
 				}
                 return
 		},
+
+		setCheckbox: function (sValue) 
+        {	
+			let a=true;
+			let b=false;
+			 if(sValue && sValue.trim() !== "")
+			 {
+				console.log(typeof(a));
+				return a;
+			 }
+			 else{
+				 console.log(typeof(b));
+				 return b;
+
+
+			 }
+
+		},
+
+		setCheckboxEnable: function (sValue) 
+        {	
+			
+			let a=true;
+			let b=false;
+			 if(sValue && sValue.trim() !== "")
+			 {
+				return b;
+			 }
+			 else{
+				 return a;
+			 }
+
+		}
 	
 	};
 

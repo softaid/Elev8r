@@ -563,7 +563,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text: '"+ leadLiftPDFModel.oData.specificationheader +"', style: 'subheader'}] ] }],";
+			headertable1 += "[ { columns: [ [{text: '"+ quotePDFModel.oData.specificationheader +"', style: 'subheader'}] ] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
@@ -1015,8 +1015,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:160, height:35,margin: [0, -30, 0, 0]}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter’s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State’s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:'from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.',style: 'title'},";
+
+			headertable1 += "{text: [{text:'    delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter’s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State’s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:' from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.', style: 'title'}]},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '15.    This contract shall be deemed to be an indivisible works contract. Any packing cases, or left over materials or tools tackles, instruments, etc. brought to site are and shall remain our property. We reserve the right to sub-contract the work as and when we deem fit',style: 'title'},";
@@ -1036,6 +1036,8 @@ sap.ui.define([
 
 			headertable1 += "{text: '21.    If materials supplied by us, whether installed or not, are required to be reconditioned/replaced at a later date due to delay on account of (i) non availability of power supply or other incomplete work by you, (ii) force majeure conditions, (iii) non –payment of dues, the related cost shall be payable by you on demand.',style: 'title'},";
 
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";

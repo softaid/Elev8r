@@ -1,0 +1,1238 @@
+<!-- <core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile" height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:u="sap.ui.unified">
+    
+        
+    <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle enableScrolling="true">
+				        <f:heading>
+					       <Title text="Project Managament"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                        <VBox fitContainer="true">
+                        
+                            <ScrollContainer
+                                height="auto"
+                                width="auto"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                              
+                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px" growing="true" growingScrollToLoad="true"
+                                    rows="{ path: 'quotationModel>/modelData' }" selectionMode="None"
+                                    visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed">
+                                    <table:columns>
+                                        <table:Column width="2%">
+                                            <Label text=" " />
+                                            <table:template>
+                                            <VBOX>
+                                            <Text text="Order No:  {quotationModel>Sequence_no}" wrapping="true" />
+                                            <Text text="Order Name: {quotationModel>Sequence_no}" wrapping="true" />
+                                            <Text text="Model: {quotationModel>Sequence_no}" wrapping="true" />
+                                            </VBOX>
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                          <Label text="NI ENG - SALES ENG" />
+                                            <table:template>
+                                            <VBOX>
+                                            <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                        <table:Column hAlign="End" width="6%">
+                                            <Label text="% Complete"/>
+                                            <table:template>
+                                             <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Plan Days - COMP DAYS" />
+                                            <table:template>
+                                                <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="ORDER DATE - PLAN COMP DATE - ACTUAL COMP DATE" />
+                                            <table:template>
+                                                <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="FINANCE - Advance Credited" />
+                                            <table:template>
+                                            <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Site Checked" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request1" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request2" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                               
+                                 </ScrollContainer>
+
+                        </VBox> 
+                    </f:content>				
+			    </f:DynamicPage>
+		    </f:beginColumnPages>
+	    </f:FlexibleColumnLayout>
+</core:View> -->
+
+
+
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    height="100%">
+	<Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding">
+		<content>
+			<table:Table
+                id= "MyTableId"
+				rows="{ path: 'projectModel>/modelData' }"
+                enableSelectAll="false"
+                selectionMode="MultiToggle"
+				visibleRowCount="2"
+				ariaLabelledBy="title">
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Projects"/>
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column width="11rem">
+						<VBOX>
+						<Label text="NO OF JOBS" />
+                        <Label text="{projectModel>AdvanceCreditedDepartment}" />
+                        </VBOX>  
+
+                        <VBOX>
+						<Label text="NO OF JOBS1" />
+                        <Text text="{projectModel>AdvanceCreditedDepartment}" wrapping="true" />
+                        <Label text="{projectModel>AdvanceCreditedComPer}" />
+                        <!-- <Label text="{projectModel>niengineer}" />      -->
+                        </VBOX>  
+                        <!-- <table:template>
+							<VBOX>
+                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
+                                <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
+                                <Text text="Model: {projectModel>modelname}" wrapping="true" />
+                            </VBOX>
+						</table:template> -->
+						<table:template>
+							<VBOX>
+                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
+                                <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
+                                <Text text="Model: {projectModel>modelname}" wrapping="true" />
+                            </VBOX>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+                        <VBOX>
+						<Label text="NI ENG" />
+                        <Label text="SALES ENG" />
+                        </VBOX>  
+						<table:template>
+							  <VBOX>
+                                <Input
+                                id="line"
+                                class="customInputHeight"
+                                        editable="false" 
+                                        value="{projectModel>niengineer}" />
+                                <Input class="customInputHeight"
+                                        editable="false" 
+                                        value="{projectModel>saleengineer}" />
+                                </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="6rem" hAlign="End">
+                      <VBOX>
+						<Label text="%" />
+                        <Label text="Complete" />
+                        <Label text="100%" />
+                        </VBOX>  
+						<table:template>
+							  <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Complete}" />
+                                </VBOX>  
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+						<Label text="Plan Days"/>
+                        <Label text="COMP DAYS"/>
+                        </VBOX>
+						<table:template>
+						   <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>plandays}" />
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>actualdays}" />    
+                            <!-- <Input class="customInputHeight"
+                                editable="false" 
+                                value=" " />     -->
+                            </VBOX>  
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+                    <VBOX>
+						<Label text="ORDER DATE"/>
+                        <Label text="PLAN COMP DATE"/>
+                        <Label text="ACTUAL COMP DATE"/>
+                    </VBOX>    
+						<table:template>
+							 <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>orderdate}" />    
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>projectcomdate}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>projectactdate}" />      
+                                </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="FINANCE"/>
+                            <Label text="Advance Credited"/>
+                            <Label text="Activity : 5%"/>
+                            <Label text="No Of Jobs : 1"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input 
+                               class="customInputHeight"
+                                   editable="false" 
+                                    value="{projectModel>AdvanceCredited}" 
+                                     />        
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>AdvanceCreditedenddate}"/>    
+                                 <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="0_{projectModel>orderno}"
+                             selected="{
+                                   path: 'projectModel>AdvanceCreditedenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                           /> 
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+					<VBOX>
+                        <Label text="SALES"/>
+                        <Label text="File Handed Over to CCD"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 1"/>
+                    </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                   editable="true" 
+                                    value="{projectModel>FileHandedOverCCD}" 
+                                    submit="oninputSelect" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>FileHandedOverCCDenddate}" />      
+                            <CheckBox 
+                             select="onCheckBoxSelect"
+                            app:mySuperExtraData="1_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>FileHandedOverCCDenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+                    <VBOX>
+                        <Label text="CCD"/>
+                        <Label text="Check Site"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>CheckSite}" />  
+                                <Input class="customInputHeight"
+                                    editable="true" 
+                                    value="{projectModel>CheckSiteenddate}" 
+                                    submit="oninputSelect"
+                                    />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="2_{projectModel>orderno}"
+                             selected="{
+                                   path: 'projectModel>CheckSiteenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="CCD"/>
+                        <Label text="GAD Request"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>GADRequest}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>GADRequestenddate}" />      
+                             <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="3_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>GADRequestenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="DESIGN"/>
+                        <Label text="GAD Ready"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>GADReady}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>GADReadyenddate}" />      
+                            <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="4_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>GADReadyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />   
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="SALES"/>
+                        <Label text="JSV Done"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>JSVDone}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>JSVDoneenddate}" />      
+                             <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="5_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>JSVDoneenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				<table:Column width="12rem">
+						<VBOX>
+                        <Label text="SALES"/>
+                        <Label text="GAD Approved"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>GADApproved}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>GADApprovedenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="6_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>GADApprovedenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+
+                    	<table:Column width="12rem">
+						<VBOX>
+                        <Label text="CCD"/>
+                        <Label text="SHipment Schduled"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ShipmentScheduled}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ShipmentScheduledenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="7_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>ShipmentScheduledenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="CCD"/>
+                        <Label text="Approved GAD TO Design"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ApprovedGADDesign}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ApprovedGADDesignenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="8_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>ApprovedGADDesignenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="DESIGN"/>
+                        <Label text="Enter in Focus"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>EnterinFocus}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>EnterinFocusenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="9_{projectModel>orderno}"
+                                selected="{
+                                   path: 'projectModel>EnterinFocusenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="DESIGN"/>
+                        <Label text="BOQ Ready"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>BOQReady}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>BOQReadyenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="10_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>BOQReadyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="DESIGN"/>
+                            <Label text="Production Drawing Ready"/>
+                            <Label text="Activity : 5%"/>
+                            <Label text="No Of Jobs : 1"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>ProductionDrawingReady}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>ProductionDrawingReadyenddate}" />      
+                                   <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="11_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>ProductionDrawingReadyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+					<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 1"/>
+                    </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>ProductionStage1}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>ProductionStage1enddate}" />      
+                                   <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="12_{projectModel>orderno}"
+                             selected="{
+                                   path: 'projectModel>ProductionStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+                    <VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PROD QC STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>ProdQCStage1}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>ProdQCStage1enddate}" />      
+                                   <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="13_{projectModel>orderno}"
+                                selected="{
+                                   path: 'projectModel>ProdQCStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="FINANCE"/>
+                        <Label text="PAYMENT STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>PaymentStage1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>PaymentStage1enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="14_{projectModel>orderno}"
+                             selected="{
+                                   path: 'projectModel>PaymentStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="DELIVERY STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>DeliveryStage1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>DeliveryStage1enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="15_{projectModel>orderno}"
+                             selected="{
+                                   path: 'projectModel>DeliveryStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				<table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationStage1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationStage1enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="16_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>InstallationStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION QC STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationQCStage1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationQCStage1enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="17_{projectModel>orderno}"
+                                selected="{
+                                   path: 'projectModel>InstallationQCStage1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+                        </table:Column>
+
+                         <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FINANCE"/>
+                        <Label text="PAYMENT STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>PaymentStage2}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>PaymentStage2enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="18_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>PaymentStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+                        </table:Column>
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionStage2}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionStage2enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="19_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>ProductionStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> 
+
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION QC STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionQCStage2}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionQCStage2enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="20_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>ProductionQCStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="DELIVERY STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>DeliveryStage2}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>DeliveryStage2enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="21_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>DeliveryStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationStage2}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationStage2enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="22_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>InstallationStage2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <!-- <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              selected="{
+                                    path: 'projectModel>Heavy0',
+                                   type: 'sap.ui.model.type.Boolean',
+                                    align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> -->
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION QC STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationQCStage3}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationQCStage3enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="23_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>InstallationQCStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionStage3}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionStage3enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="24_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>ProductionStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION QC STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionQCStage3}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>ProductionQCStage3enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="25_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>ProductionQCStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="DELIVERY STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>DeliveryStage3}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>DeliveryStage3enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="26_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>DeliveryStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationStage3}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InstallationStage3enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="27_{projectModel>orderno}"
+                             selected="{
+                                   path: 'projectModel>InstallationStage3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="FINAL INSTALLATION QC"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>FinalInstallationQC}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>FinalInstallationQCenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="28_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>FinalInstallationQCenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> 
+
+
+
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="EI"/>
+                        <Label text="INSPECTION BY EI"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InspectionByEI}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>InspectionByEIenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="29_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>InspectionByEIenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="SALES"/>
+                        <Label text="FINAL PAYMENT"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>FinalPayment}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>FinalPaymentenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="30_{projectModel>orderno}"
+                               selected="{
+                                   path: 'projectModel>FinalPaymentenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="Handed Over to Customer"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomer}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomerenddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                              selected="{
+                                   path: 'projectModel>HandedOverCustomerenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="EI"/>
+                        <Label text="Job Added in Warantty"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>JobAddedinWarranty}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>JobAddedinWarrantyenddate}" />      
+                              <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="32_{projectModel>orderno}"
+                                selected="{
+                                   path: 'projectModel>JobAddedinWarrantyenddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    /> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</content> 
+	</Page>
+</mvc:View>

@@ -272,6 +272,11 @@
 					"target": "projectmanagement"
 				},
 				{
+					"pattern": "projectmanagementaspermasterstages",
+					"name": "projectmanagementaspermasterstages",
+					"target": "projectmanagementaspermasterstages"
+				},
+				{
 					"pattern": "projectactivities",
 					"name": "projectactivities",
 					"target": "projectactivities"
@@ -503,6 +508,12 @@
 				"projectmanagement" : {
 					"viewId": "projectmanagement",
 					"viewName": "ProjectManagement/ProjectManagementFile",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectmanagementaspermasterstages" : {
+					"viewId": "projectmanagementaspermasterstages",
+					"viewName": "ProjectManagement/ProjectManagementAsPerStages",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
