@@ -133,7 +133,38 @@ sap.ui.define([
                 });
             },
 
+            runJQueryXSendEmail: function (sType, sMethodName, oData, callBackFn, errorCallback, objArray) {
 
+                let sContentType = 'application/json; charset=utf-8';
+    
+                let oConfig = sap.ui.getCore().getModel("configModel");
+    
+                let oBusyDialog = new sap.m.BusyDialog('busy0' + Math.floor(Math.random() * 1000000), {text: 'Please wait...'});
+    
+                oBusyDialog.open();
+    
+                let aData = jQuery.ajax({
+                    type: sType,
+                    contentType: sContentType,
+                    url: oConfig.oData.webapi.emailurl + sMethodName,
+                    data: oData !== null ? JSON.stringify(oData) : null,
+                    beforeSend: function (request) {
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        var fn = eval(callBackFn);
+                        fn(data, objArray);
+                        oBusyDialog.close();
+                    },
+                    error: function (err) {
+                        if (errorCallback) {
+                            var fn = eval(errorCallback);
+                            fn(err);
+                        }
+                        console.log('Service Error :', err);
+                        oBusyDialog.close();
+                    }
+                });
+            },
 
             masterDataExport: function (params, callback, errcallback) {
                 console.log("params", params);

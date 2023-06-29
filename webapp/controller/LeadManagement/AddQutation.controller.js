@@ -9,6 +9,7 @@ sap.ui.define(
 		"sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service",
 		"sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service",
 		"sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service",
+		"sap/ui/elev8rerp/componentcontainer/services/login.service",
 	],
 	function (
 		JSONModel,
@@ -19,7 +20,8 @@ sap.ui.define(
 		commonService,
 		locationService,
 		leadService,
-		quotationService
+		quotationService,
+		loginService
 	) {
 		"use strict";
 
@@ -668,7 +670,7 @@ sap.ui.define(
 									: "Qutation edited successfully!";
 							currentContext.onCancel();
 							MessageToast.show(message);
-							oThis.sendEmail(data.id, emaildate);
+							currentContext.sendEmail(data.id, emaildate);
 							currentContext.bus = sap.ui.getCore().getEventBus();
 							currentContext.bus.publish(
 								"loadquotationdata",
@@ -698,18 +700,10 @@ sap.ui.define(
 
 					let quotevalue = this.getView().byId("txtQutationValue").getValue();
 
-					let leadValue = this.getView().byId("txtLeadValue").getValue();
-
 
 
         if(quotevalue!=null){
 		if (!commonFunction.isNumbermessage(this, "txtQutationValue", "please enter correct quotation value!")){
-				isValid = false;
-			}
-		}
-
-		if(leadValue!=null){
-			 if (!commonFunction.isNumbermessage(this, "txtLeadScore", "please enter correct quote  score!")) {
 				isValid = false;
 			}
 		}
@@ -825,7 +819,7 @@ sap.ui.define(
 					let oThis = this;
 					let sUserName = (typeof sessionStorage.CustomerCardName !== "undefined" && sessionStorage.CustomerCardName !== null) ? sessionStorage.CustomerCardName : "Customer";
 					let params = {
-						from: "palnitkarsavita@gmail.com",
+						from: "support@poultryos.com",
 						to: 'savita.g@logicaldna.com',
 						subject: "Thanks You, Your Order with Sakas PartnerConnect is complete – Order No " + DocEntry,
 						text: "Dear " + sUserName + "!\n\n" +
@@ -834,6 +828,7 @@ sap.ui.define(
 							"\n\n" + 
 							"For any queries, please contact Sakas Administrator at sakasmilk@gmail.com"
 					};
+					console.log(params);
 					loginService.sendEmail(params, function (data1) {
 						if (data1 === 'SENT'){
 							MessageToast.show("Sales order booked successfully!");

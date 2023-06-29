@@ -184,6 +184,23 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "editOrderModel");
 
+			var pdfModel = new JSONModel();
+			pdfModel.setData([]);
+			this.getView().setModel(pdfModel, "pdfModel");
+
+			this.imagepath = null;
+			this.toDataURL('../images/snehaelev8r.png', function (dataUrl) {
+				currentContext.imagepath = dataUrl;
+			});
+
+			// get all Company Details  
+			this.companyname = commonFunction.session("companyname");
+			this.companycontact = commonFunction.session("companycontact");
+			this.companyemail = commonFunction.session("companyemail");
+			this.address = commonFunction.session("address");
+			this.city = commonFunction.session("city");
+			this.pincode = commonFunction.session("pincode");
+
 			this.getAllOrders();
 		},
 
@@ -233,6 +250,20 @@ sap.ui.define([
 			var currentContext = this;
 			this.model = currentContext.getView().getModel("viewModel");
 			currentContext.getAllOrders();
+		},
+
+		toDataURL: function (url, callback) {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function () {
+				var reader = new FileReader();
+				reader.onloadend = function () {
+					callback(reader.result);
+				}
+				reader.readAsDataURL(xhr.response);
+			};
+			xhr.open('GET', url);
+			xhr.responseType = 'blob';
+			xhr.send();
 		},
 
 		getAllOrders: function () {
@@ -292,6 +323,8 @@ sap.ui.define([
 
 			if (selRow != null) {
 
+				oThis.getView().byId("pdf").setVisible(true);
+
 				if (selRow.action == "view") {
 					oThis.getView().byId("btnSave").setEnabled(false);
 				} else {
@@ -300,11 +333,14 @@ sap.ui.define([
 
 				oThis.bindOrderDetails(selRow.id);
 
+				oThis.getPDFDetails(selRow.id);
+
 			}
 
 			else {
 				var oModel = new JSONModel();
 				this.getView().setModel(oModel, "editOrderModel");
+				oThis.getView().byId("pdf").setVisible(false);
 			}
 
 		},
@@ -657,6 +693,487 @@ sap.ui.define([
 
 
 			// oQutationModel.refresh();
+		},
+
+		getPDFDetails : function(id){
+			let oThis = this;
+			let pdfModel = oThis.getView().getModel("pdfModel");
+			orderService.getOrderPDF({id : id}, function(data){
+				pdfModel.setData(data[0][0]);
+				oThis.getView().setModel(pdfModel,"pdfModel");
+			})
+
+			console.log("pdfModel : ",pdfModel);
+		},
+
+		onPdfExport : function(){
+			var fullHtml = "";
+			var headertable1 = "";
+			headertable1 += "<!DOCTYPE html> <html> <head> <title>" + "Order" + "</title>" +
+				"<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>" +
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js'></script>" +
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/vfs_fonts.js'></script>" +
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>" +
+				"<style type='text/css'>" +
+				"table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%; } td, th {border: 1px solid #000;text-align: left;padding: 5px; } th, td {width: 100px;overflow: hidden; } img { width: 180px; height: 120px; text-align: center; } </style> </head>";
+
+			headertable1 += "<body id='tblCustomers' class='amin-logo'>";
+			headertable1 += "</body>";
+			headertable1 += "<script>";
+
+			var phone = (this.companycontact === null || this.companycontact == undefined) ? "-" : this.companycontact;
+			var email = (this.companyemail === null || this.companyemail == undefined) ? "-" : this.companyemail;
+			var address = (this.address === null || this.address == undefined) ? "-" : this.address;
+			var city = (this.city === null || this.city == undefined) ? "-" : this.city;
+			var pincode = (this.pincode === null || this.pincode == undefined) ? "-" : this.pincode;
+			var companyname = this.companyname;
+			
+			let pdfModel = this.getView().getModel("pdfModel");
+
+			var array = [];
+			//Availabls vaules are dynamic and other values are static need to discuss about static values
+			array.push({
+					name: "TYPE",
+					value: pdfModel.oData.model,
+				}, {
+					name: "CAPACITY",
+					value: pdfModel.oData.capacity,
+				}, {
+					name: "SPEED",
+					value: pdfModel.oData.speed,
+				},
+				{
+					name: "RISE (M) (Approximately)",
+					value: pdfModel.oData.travel,
+				},
+				{
+					name: "STOPS",
+					value: pdfModel.oData.stop+"Landings/"+pdfModel.oData.stop+"Openings (All Openings are same Side)",// "7 Landings / 7 Openings (All Openings are same Side)",
+				},
+				{
+					name: "CONTROLLER",
+					value: pdfModel.oData.control,
+				},
+				{
+					name: "DRIVE",
+					value: pdfModel.oData.drive,
+				},
+				{
+					name: "SHAFT SIZE",
+					value: pdfModel.oData.shaftsize,
+				},
+				{
+					name: "CAR SIZE",
+					value: pdfModel.oData.carsize,
+				},
+				{
+					name: "CLEAR OPENING",
+					value: pdfModel.oData.clearopening,
+				},
+				{
+					name: "PIT DEPTH",
+					value: pdfModel.oData.pitdepth,
+				},
+				{
+					name: "OVER HEAD",
+					value: pdfModel.oData.overhead,
+				},
+				{
+					name: "CAR PANEL",
+					value: pdfModel.oData.carpanel
+				},
+				{
+					name: "CAR DOOR",
+					value: pdfModel.oData.cardoor,
+				},
+				{
+					name: "LANDING DOOR",
+					value: pdfModel.oData.landingdoor,
+				},
+				{
+					name: "FALSE CEILING",
+					value: pdfModel.oData.falseceiling,
+				},
+				{
+					name: "VENTILATION",
+					value: pdfModel.oData.ventilation,
+				},
+				{
+					name: "FLOORING",
+					value: pdfModel.oData.flooring,
+				},
+				{
+					name: "C.O.P",
+					value: "S.S Push Buttons",
+				},
+
+				{
+					name: "CAR POSITION INDICATOR",
+					value: pdfModel.oData.carpositionindicator,
+				},
+				{
+					name: "MACHINE",
+					value: pdfModel.oData.machine,
+				},
+				{
+					name: "TRACTION MEDIA",
+					value: pdfModel.oData.tractionmedia,
+				},
+				{
+					name: "TYPE OF OPERATION",
+					value: pdfModel.oData.operation,
+				},
+				{
+					name: "MAIN POWER SYSTEM",
+					value: pdfModel.oData.mainpowersystem,
+				},
+				{
+					name: "AUXILARY SUPPLY SYSTEM",
+					value: pdfModel.oData.auxilarysupplysystem,
+				},
+			);
+
+			headertable1 += "html2canvas($('#tblCustomers')[0], {" +
+				"onrendered: function (canvas) {" +
+				"var data = canvas.toDataURL();" +
+				"var width = canvas.width;" +
+				"var height = canvas.height;" +
+				"var docDefinition = {" +
+				"pageMargins: [ 40, 20, 40, 60 ]," +
+				"content: [";
+			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
+			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
+
+			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:160, height:35,margin: [0, -30, 0, 0]}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'Rev. No. " + pdfModel.oData.revision + "', style: 'subheader'},{text:'Dt. " + pdfModel.oData.orderdate + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '" + pdfModel.oData.quotename + "', style: 'subheader'},";
+			headertable1 += "{text: '" + pdfModel.oData.siteaddress + "', style: 'subheader'},";
+			headertable1 += "{text: '" + pdfModel.oData.city + "', style: 'subheader'},";
+			headertable1 += "{text: '" + "Contact No" + "-" + pdfModel.oData.phoneno + "', style: 'subheader'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'Dear Sir/Madam', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'Thank you for giving us an opportunity to provide a proposal for supply & installation of Sneha Elevators at your prestigious project. We would like to give you a brief synopsis about our company, product & after sales service setup. ', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'SNEHA ELEVATORS:', style: 'titlewithbold'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'Sneha elevators LLP is a part of a diversified Sneha~ Group and is leading provider of vertical transport solutions and is active in the areas of Elevator production, installation, maintenance and modernization. ', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: [{text:'Sneha Elevator has been bagging major landmark projects like ', style: 'title'},{text:'Cyprus Palms, Rajapushpa Properties Ltd., Radhey, Muppa Indraprastha, My Home, Lumbini SLN Springs, Vamsiram Builders, Hallmark County, Vesella Meadows, Oorjitha Villas, SSVC ', style: 'subheaderwithbold'},{text:'etc', style: 'title'}]},";
+			
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			
+			headertable1 += "{text: [{text:'Sneha Elevator Factory - ', style: 'subheaderwithbold'},{text:'Sneha Elevator Factory in Hyderabad, reaffirms a clear commitment to customer focus, sustainability & growth.This stage of art elevator manufacturing will enable Sneha Elevator to serve its customer with cost effective and sustainable products recreating the genuine quality. ', style: 'title'}]},";
+			
+			//headertable1 += "{text: 'Sneha Elevator Factory - Sneha Elevator Factory in Hyderabad, reaffirms a clear commitment tocustomer focus, sustainability & growth.This stage of art elevator manufacturing will enableSnehaElevator to serve its customer with cost effective and sustainable products recreating the genuinequality.', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'We are confident that you will find our proposal in line with your expectation. If you have any queries, please do not hesitate to contact us. The undersigned backed by the entire sneha Organization, will be responsible for all activities related to the project. Starting from submission of our offer to the satisfactory handing over of the elevator. The undersigned will be your single point of contact.', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'We thank you once again for your interest shown in Sneha Elevator and look forward to receive your valued order. For more information, kindly visit our website www.snehaelevator.com', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: 'Yours Sincerely,', style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+			headertable1 += "{text: ' " + "For SNEHA ELEVATORS LLP" + "', style: 'subheader'},";
+			headertable1 += "{text: '" + "T. Prashanth" + "', style: 'subheader'},";
+			headertable1 += "{text: '" + "Assistant Manager - Sales" + "', style: 'subheader'},";
+			headertable1 += "{text: '" + "Contact No. 7337331523" + "', style: 'subheader'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
+			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheader'},{text:'Customer Signature" + " " + "', style: 'subheaderone'}]},";
+		
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			// SECOND PAGE OF PDF
+			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
+			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
+
+			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:160, height:35,margin: [0, -30, 0, 0]}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			headertable1 += "{ style: 'specificationTableExample',";
+			headertable1 += " table: {";
+			headertable1 += "widths: ['*','auto','*'],";
+			headertable1 += " body: [";
+			for (var i = 0; i < array.length; i++) {
+				headertable1 += "[ {text: '" + array[i].name + "'},{text: '" + " " + "'},{text: '" + array[i].value + "'},],";
+			}
+
+			headertable1 += "]";
+			headertable1 += "}";
+			headertable1 += "},";
+		
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheader'},";
+			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheader'},{text:'Customer Signature" + " " + "', style: 'subheaderone'}]},";
+
+			//Define Style For PDF Content
+			headertable1 += "]," +
+				// "footer: function (currentPage, pageCount) {" +
+				// "return {" +
+				// "style: 'Footer'," +
+				// "table: {" +
+				// "widths: ['*', 5]," +
+				// "body: [" +
+				// "[" +
+				// "{ text: 'Page ' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', style: 'normalText' }" +
+				// "]," +
+				// "]" +
+				// "}," +
+				// // "layout: 'noBorders'" +
+				// "};" +
+				// "}," +
+				"styles: {" +
+
+				"todatecss: {" +
+				"fontSize:9," +
+				"bold: true," +
+				"alignment:'right'" +
+				"}," +
+
+				"header: {" +
+				"fontSize:8," +
+				"bold: true," +
+				"border: [false, true, false, false]," +
+				"fillColor: '#eeeeee'," +
+				"alignment: 'center'," +
+				"margin: [0, 5, 0, 0]," +
+				"}," +
+
+				"title: {" +
+				"fontSize:10," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titleboldheader: {" +
+				"fontSize:11," +
+				"decoration: 'underline',"+
+				"bold: true," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titlebold: {" +
+				"fontSize:10," +
+				"bold: true," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titlewithbold: {" +
+				"fontSize:10," +
+				"bold: true," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titleincenter: {" +
+				"fontSize:11," +
+				"bold: true," +
+				"alignment: 'center'," +
+				"}," +
+
+				"titleincenterwithunderline: {" +
+				"fontSize:11," +
+				"bold: true," +
+				"decoration: 'underline',"+
+				"alignment: 'center'," +
+				"}," +
+
+				"headertitleincenter: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment: 'center'," +
+				"}," +
+
+				"titleheader: {" +
+				"fontSize:16," +
+				"bold: true," +
+				"border: [false, true, false, false]," +
+				"fillColor: '#eeeeee'," +
+				"alignment: 'center'," +
+				"margin: [0, 5, 0, 0]," +
+				"}," +
+
+				"Footer: {" +
+				"fontSize: 7," +
+				"margin: [19, 5, 5, 5]," +
+				"}," +
+
+				"subheader: {" +
+				"fontSize:9," +
+				"bold: true," +
+				"margin: [0, 5, 0, 0]," +
+				"}," +
+
+				"subheaderformargine: {" +
+				"fontSize:9," +
+				"bold: true," +
+				"margin: [0, 5, 0, 20]," +
+				"}," +
+
+				"subheaderspace: {" +
+				"fontSize:1," +
+				"bold: true," +
+				"margin: [0, 5, 0, 0]," +
+				"}," +
+
+				"subheaderwithbold: {" +
+				"fontSize:10," +
+				"bold: true," +
+				"margin: [0, 5, 0, 0]," +
+				"}," +
+
+				"subheaderwithbold13: {" +
+				"fontSize:10," +
+				"bold: true," +
+				"margin: [0, 0, 0, 0]," +
+				"}," +
+
+				"tablecontent: {" +
+				"fontSize:10," +
+				"margin: [0, 5, 0, 0]," +
+				"}," +
+
+				"subheaderone: {" +
+				"fontSize:9," +
+				"bold: true," +
+				"alignment:'right'," +
+				"margin: [0, 05, 0, 4]," +
+				"}," +
+
+				"subheaderonespace: {" +
+				"fontSize:1," +
+				"bold: true," +
+				"alignment:'right'," +
+				"margin: [0, 05, 0, 4]," +
+				"}," +
+
+				"subheaderbold: {" +
+				"fontSize:9," +
+				"bold: true," +
+				"alignment:'right'," +
+				"margin: [0, 04, 0, 4]," +
+				"}," +
+
+				"subheaderleft: {" +
+				"fontSize:9," +
+				"bold: true," +
+				"alignment:'left'," +
+				"margin: [0, 05, 0, 4]," +
+				"}," +
+
+				"amtinwords: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment:'left'," +
+				"margin: [0,180, 0,0]," +
+				"}," +
+
+				"subheadercost: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment:'right'," +
+				"margin: [0,200, 0, 0]," +
+				"}," +
+
+				"subheaderremark4: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment:'left'," +
+				"margin: [0,200, 0, 0]," +
+				"}," +
+
+				"subheaderremark: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment:'left'," +
+				"margin: [0,200, 0, 0]," +
+				"}," +
+
+				"subheadercost1: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment:'right'," +
+				"margin: [0,15, 0, 0]," +
+				"}," +
+
+				"subheaderremark1: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment:'left'," +
+				"margin: [0,15, 0, 0]," +
+				"}," +
+
+				"tableExample: {" +
+				"margin: [0, 50, 0, 0]," +
+				"fontSize: 8," +
+				"}," +
+
+				"tableExample2: {" +
+				"margin: [0, 15, 0, 0]," +
+				"fontSize: 8," +
+				"}," +
+
+				"specificationHeader: {" +
+				"margin: [0, 15, 0, 0]," +
+				"alignment : 'center'," +
+				"fontSize: 8," +
+				"}," +
+
+				"specificationTableExample: {" +
+				"margin: [0, 0, 0, 0]," +
+				"fontSize: 8," +
+				"}," +
+
+				"tableExample5: {" +
+				"margin: [0, 0, 0, 0]," +
+				"fontSize: 8," +
+				"}," +
+
+				"tableExample4: {" +
+				"margin: [0, 15, 0, 0]," +
+				"fontSize: 10," +
+				"}," +
+
+				"tableExample3: {" +
+				"margin: [0, 15, 0, 340]," +
+				"fontSize: 8," +
+				"}," +
+
+
+				"tableHeader: {" +
+				"bold: true," +
+				"fontSize: 8," +
+				"color: 'black'," +
+				"}," +
+				"}," +
+
+				"defaultStyle: {" +
+				"fontSize: 8" +
+				"}" +
+				"};" +
+				"pdfMake.createPdf(docDefinition).download('order.pdf');" +
+				"} });";
+			headertable1 += "</script></html>";
+			fullHtml += headertable1;
+			var wind = window.open();
+			wind.document.write(fullHtml);
+			console.log("fullHtml", fullHtml);
+
+			setTimeout(function () {
+				wind.close();
+			}, 3000);
 		},
 
 		onCancel: function () {
