@@ -61,9 +61,13 @@ sap.ui.define([
             var model = {
                 "id": viewModel.getProperty("id"),
                 "typecode":viewModel.getProperty("typecode"),
+                "parentid": viewModel.getProperty("parentid"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
                 "defaultvalue": viewModel.getProperty("defaultvalue"),
+                "projectper": viewModel.getProperty("projectper"),
+                "stageper": viewModel.getProperty("stageper"),
+                "departmentid": viewModel.getProperty("departmentid"),
             }
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "LeadMasterDetail", viewModel: model });

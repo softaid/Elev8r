@@ -765,5 +765,9 @@ div#componentcontainer---cbfdashboard--batchwiseDashboard, div#__data45{
     margin-top: 11px !important;
   }
 
+  #MyTableId,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+  }
 
 

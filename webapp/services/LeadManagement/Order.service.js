@@ -25,6 +25,10 @@ sap.ui.define([
 
             deleteOrder : function(Params, Callback){
                 commonService.runJQueryX("DELETE", "order/deleteorder/" + Params.id, null, Callback, null);
+            },
+
+            getOrderPDF : function(Params, Callback){
+                commonService.runJQueryX("GET", "order/converttopdf/" + Params.id, null, Callback, null);
             }
         };
     }

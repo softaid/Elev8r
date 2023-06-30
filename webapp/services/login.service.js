@@ -46,6 +46,10 @@ sap.ui.define([
                 common.runJQueryX("POST", "login/email/send", params, callback, errorCallback, objArray);
             },
 
+            sendEmail : async function(params, callback, errorCallback, objArray){
+                common.runJQueryXSendEmail("POST", "profile/send-email", params, callback, errorCallback, objArray);
+            },
+
         };
     }
 );
