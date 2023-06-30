@@ -100,6 +100,11 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement label="{i18n>leadSequenceNo}">
+                                    <form:fields>
+                                        <Input id="sequenceno" value="{editMasterModel>/sequenceno}"/>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadDescription}">
                                     <form:fields>
                                         <Input id="description" value="{editMasterModel>/description}"/>

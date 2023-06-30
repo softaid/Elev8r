@@ -193,7 +193,7 @@
                 id= "MyTableId"
 				rows="{ path: 'projectModel>/modelData' }"
                 enableSelectAll="false"
-                selectionMode="MultiToggle"
+                selectionMode="None"
 				visibleRowCount="2"
 				ariaLabelledBy="title">
 				<table:extension>
