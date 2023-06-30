@@ -11,7 +11,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 
 
-], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast, ocommonfunction,formatter) {
+], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast, ocommonfunction, formatter) {
 
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages", {
@@ -41,7 +41,7 @@ sap.ui.define([
 			this.getView().setModel(stagestdPermodel, "stagePerModel");
 
 			var datemodel = new JSONModel();
-			datemodel.setData({projectArray:[], orderArray : []});
+			datemodel.setData({ projectArray: [], orderArray: [] });
 			this.getView().setModel(datemodel, "dateModel");
 
 			var projectModel = new JSONModel();
@@ -74,7 +74,7 @@ sap.ui.define([
 
 		bindTable: async function () {
 			let oThis = this;
-			let resultJobArray=[]
+			let resultJobArray = []
 			let startdataearray = [];
 			let stageperarray = [];
 			let proweightageperarray = [];
@@ -218,6 +218,7 @@ sap.ui.define([
 									) {
 										mergedObjectstageper = {
 											projectid: StagePerdata[0][b].projectid,
+											projectcount: StagePerdata[0][b].projectcount,
 											AdvanceCreditedComPer: StagePerdata[0][b].AdvanceCreditedComPer,
 											CheckSiteComPer: StagePerdata[0][b].CheckSiteComPer,
 											FileHandedOverCCDComPer: StagePerdata[0][b].FileHandedOverCCDComPer,
@@ -796,6 +797,21 @@ sap.ui.define([
 				let projectModelOne = oThis.getView().getModel("projectModel");
 				projectModelOne.setData({ modelData: oThis.Finalarray });
 				oThis.getView().setModel(projectModelOne, "projectModel")
+				console.log("------------------projectModel------------------", projectModelOne);
+
+				let dateModel = oThis.getView().getModel("dateModel");
+
+				let projectDetailArr = []
+
+				oThis.orderArray = [];// array of orderIds
+				for (let projectdetail of oThis.Finalarray) {
+					oThis.orderArray.push(projectdetail.orderno);
+					projectDetailArr.push({});
+				}
+				oThis.noOfJobCalculation();
+				dateModel.setData({ projectDetailArr: projectDetailArr })
+
+
 
 				let departmentModel = oThis.getView().getModel("DepartmentModel");
 				departmentModel.setData(prodepartmentperarray[0]);
@@ -806,6 +822,7 @@ sap.ui.define([
 				stagestdModel.setData(stageperarray[0]);
 				oThis.getView().setModel(stagestdModel, "stagePerModel");
 				console.log("------------------stagePerModel------------------", stagestdModel);
+
 			})
 
 
@@ -882,9 +899,9 @@ sap.ui.define([
 		onCheckBoxSelect: function (OEvent) {
 			let checkbox = OEvent.getSource();
 			let data = checkbox.data("mySuperExtraData");
-			
+
 			let dateModel = this.getView().getModel("dateModel");
-			
+
 
 			let dateModelDetails = this.getView().getModel("dateModel").oData;// it date model  for set field for reference
 			let model = this.getView().getModel("projectModel").oData;
@@ -896,7 +913,7 @@ sap.ui.define([
 			let arrEnd = ["AdvanceCreditedenddate", "FileHandedOverCCDenddate", "CheckSiteenddate", "GADRequestenddate", "GADReadyenddate", "JSVDoneenddate", "GADApprovedenddate", "ShipmentScheduledenddate", "ApprovedGADDesignenddate", "EnterinFocusenddate", "BOQReadyenddate", "ProductionDrawingReadyenddate", "ProductionStage1enddate", "ProdQCStage1enddate", "PaymentStage1enddate", "DeliveryStage1enddate", "InstallationStage1enddate", "InstallationQCStage1enddate", "PaymentStage2enddate", "ProductionStage2enddate", "ProductionQCStage2enddate", "DeliveryStage2enddate", "InstallationStage2enddate", "InstallationQCStage3enddate", "ProductionStage3enddate", "ProductionQCStage3enddate", "DeliveryStage3enddate", "InstallationStage3enddate", "FinalInstallationQCenddate", "InspectionByEIenddate", "FinalPaymentenddate", "HandedOverCustomerenddate", "JobAddedinWarrantyenddate"];//end	
 
 
-	
+
 
 			// // row logic  start
 			// let field = OEvent.mParameters.id
@@ -931,8 +948,8 @@ sap.ui.define([
 
 			let result_column_field_End = arrEnd[resultColumn];//end date of current stage field name in view
 			let result_column_field_Start = arrStart[(resultColumn + 1)]; // Start date of stage next to current  stage field name in view
-          
-			
+
+
 			// current date logic start
 			let currentDate = new Date();
 			var resultDate = ocommonfunction.setTodaysDate(currentDate);
@@ -946,9 +963,9 @@ sap.ui.define([
 			if (OEvent.mParameters.selected == true) {
 
 				// bind  project completion date  
-			    if(result_column_field_End=="JobAddedinWarrantyenddate"){
-				model.modelData[resultRow].projectactdate=resultDate;
-				model.modelData[resultRow].actualdays=this.dayCalculation(model.modelData[resultRow].AdvanceCredited,resultDate);
+				if (result_column_field_End == "JobAddedinWarrantyenddate") {
+					model.modelData[resultRow].projectactdate = resultDate;
+					model.modelData[resultRow].actualdays = this.dayCalculation(model.modelData[resultRow].AdvanceCredited, resultDate);
 				}
 
 				// set value in dateModel for future reference
@@ -967,12 +984,12 @@ sap.ui.define([
 			else {
 
 				// remove project completion date  
-				if(result_column_field_End=="JobAddedinWarrantyenddate"){
-					model.modelData[resultRow].projectactdate=null;
-					model.modelData[resultRow].actualdays=null;
-					}
+				if (result_column_field_End == "JobAddedinWarrantyenddate") {
+					model.modelData[resultRow].projectactdate = null;
+					model.modelData[resultRow].actualdays = null;
+				}
 
-				   result_column_field_End=="JobAddedinWarrantyenddate"?model.modelData[resultRow].projectactdate=null:"1"; 
+				result_column_field_End == "JobAddedinWarrantyenddate" ? model.modelData[resultRow].projectactdate = null : "1";
 				model.modelData[resultRow][result_column_field_End] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_End] ?? null; // set intial value as checkbox selection false
 				model.modelData[resultRow][result_column_field_Start] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_Start] ?? null;
 
@@ -984,20 +1001,20 @@ sap.ui.define([
 		},
 
 
-		noOfJobCalculation: function(){
+		noOfJobCalculation: function () {
 
 			let model = this.getView().getModel("projectModel").oData.modelData;
-            let resultobj={};
+			let resultobj = {};
 			let arrEnd = ["AdvanceCreditedenddate", "FileHandedOverCCDenddate", "CheckSiteenddate", "GADRequestenddate", "GADReadyenddate", "JSVDoneenddate", "GADApprovedenddate", "ShipmentScheduledenddate", "ApprovedGADDesignenddate", "EnterinFocusenddate", "BOQReadyenddate", "ProductionDrawingReadyenddate", "ProductionStage1enddate", "ProdQCStage1enddate", "PaymentStage1enddate", "DeliveryStage1enddate", "InstallationStage1enddate", "InstallationQCStage1enddate", "PaymentStage2enddate", "ProductionStage2enddate", "ProductionQCStage2enddate", "DeliveryStage2enddate", "InstallationStage2enddate", "InstallationQCStage3enddate", "ProductionStage3enddate", "ProductionQCStage3enddate", "DeliveryStage3enddate", "InstallationStage3enddate", "FinalInstallationQCenddate", "InspectionByEIenddate", "FinalPaymentenddate", "HandedOverCustomerenddate", "JobAddedinWarrantyenddate"];//end
 
 
-			arrEnd.map((enddate)=>{
-				let count=0;
-				model.map((projectdetail)=>{
-					(projectdetail.enddate && projectdetail.enddate.trim() !== "")?count++:1;
+			arrEnd.map((enddate) => {
+				let count = 0;
+				model.map((projectdetail) => {
+					(projectdetail.enddate && projectdetail.enddate.trim() !== "") ? count++ : 1;
 				});
-				let result_field=enddate.replace("enddate","jobs")
-				resultobj[result_field]=count;
+				let result_field = enddate.replace("enddate", "jobs")
+				resultobj[result_field] = count;
 			})
 
 
@@ -1006,19 +1023,19 @@ sap.ui.define([
 
 
 		// calculate actual completion day
-		dayCalculation: async function (intialDate , finalDate) {
+		dayCalculation: async function (intialDate, finalDate) {
 
 			let oThis = this;
-			if (intialDate!=null&& finalDate!=null){
+			if (intialDate != null && finalDate != null) {
 				var parts = intialDate.split('/');
 				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
 
 				parts = finalDate.split('/');
 				let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
 
-			let completiondays = parseInt((enddate - startdate) / (86400 * 1000));// Days
+				let completiondays = parseInt((enddate - startdate) / (86400 * 1000));// Days
 
-			return completiondays;
+				return completiondays;
 			}
 		},
 

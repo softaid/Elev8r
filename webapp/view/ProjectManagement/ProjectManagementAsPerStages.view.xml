@@ -13,6 +13,7 @@
 		enableScrolling="false"
 		class="sapUiContentPadding">
 		<content>
+             
 			<table:Table
                 id= "MyTableId"
 				rows="{ path: 'projectModel>/modelData' }"
@@ -23,27 +24,32 @@
 				<table:extension>
 					<OverflowToolbar style="Clear">
 						<Title id="title" text="Projects"/>
+                        <VBOX align="right">
+                         <Button
+                        text="{i18n>saveButtonText}"
+                        id="btnSave"
+                        type="Emphasized"
+                        align="right"
+                        press = "onSave"/>	
+                        </VBOX>
 					</OverflowToolbar>
 				</table:extension>
-
-            
-
 				<table:columns>
 					<table:Column width="11rem">
                         <VBOX>
                         <VBOX>
-                        <Label text="Header 1" />
+                        <Label text=" " />
                         </VBOX> 
                         <VBOX>
                         <Label text=" " />
                         </VBOX> 
 
-						<Label text="NO OF JOBS" />
-                        <Text text="{DepartmentModel>/AdvanceCreditedDepartment}" wrapping="true" />
+						<Label text="NO OF JOBS: {stagePerModel>/projectcount}" />
+                        <Text text=" " wrapping="true" />
                         </VBOX>  
 						<table:template>
 							<VBOX>
-                                <Text text="Order No:  {DepartmentModel>/Department1}" wrapping="true" />
+                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
                                 <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
                                 <Text text="Model: {projectModel>modelname}" wrapping="true" />
                             </VBOX>
@@ -149,7 +155,7 @@
 					<table:Column width="9rem">
                         <VBOX>
                         <VBOX>
-                        <Label text="{DepartmentModel>/AdvanceCreditedDepartment}- Department"/>
+                        <Label text="{DepartmentModel>/AdvanceCreditedDepartment}-Department"/>
                         </VBOX> 
                         <VBOX>
                         <Label text=" " />
@@ -160,7 +166,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 5%"/>
+                          <Label text="Activity : {stagePerModel>/AdvanceCreditedComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX> 
                         </VBOX>    
@@ -200,7 +206,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/FileHandedOverCCDComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -239,7 +245,7 @@
                     <Label text=" " />
                     </VBOX> 
                     <VBOX>
-                        <Label text="Activity : 1%"/>
+                        <Label text="Activity : {stagePerModel>/CheckSiteComPer}%"/>
                         <Label text="No Of Jobs : 1"/>
                     </VBOX>      
                     </VBOX>
@@ -279,7 +285,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/GADRequestComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>
@@ -317,7 +323,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/GADReadyComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>   
@@ -354,7 +360,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity :{stagePerModel>/JSVDoneComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -392,7 +398,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/GADApprovedComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -430,7 +436,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/ShipmentScheduledComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -468,7 +474,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/ApprovedGADDesignComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -506,7 +512,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/EnterinFocusComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -544,7 +550,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/BOQReadyComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>  
@@ -582,7 +588,7 @@
                             <Label text=" " />
                             </VBOX> 
                             <VBOX>
-                            <Label text="Activity : 1%"/>
+                            <Label text="Activity : {stagePerModel>/ProductionDrawingReadyComPer}%"/>
                             <Label text="No Of Jobs : 1"/>
                             </VBOX>      
                             </VBOX>  
@@ -620,7 +626,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/PaymentStage1ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>      
@@ -658,7 +664,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/ProdQCStage1ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                     </VBOX>                              
@@ -696,7 +702,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity :  {stagePerModel>/PaymentStage1ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                                  
@@ -734,7 +740,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/DeliveryStage1ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                                  
@@ -772,7 +778,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InstallationStage1ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -811,7 +817,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InstallationQCStage1ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -850,7 +856,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/PaymentStage2ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -889,7 +895,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/ProductionStage2Per}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -929,7 +935,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/ProductionQCStage2ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -967,7 +973,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/DeliveryStage2ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -1005,7 +1011,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InstallationStage2ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                         
@@ -1043,7 +1049,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InstallationQCStage3ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                   
@@ -1081,7 +1087,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InstallationQCStage3ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                   
@@ -1119,7 +1125,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/ProductionQCStage3ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                   
@@ -1157,7 +1163,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/DeliveryStage3ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                   
@@ -1195,7 +1201,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InstallationStage3ComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                   
@@ -1233,7 +1239,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/FinalInstallationQCComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                
@@ -1271,7 +1277,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/InspectionByEIComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                
@@ -1309,7 +1315,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/FinalPaymentComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                
@@ -1347,7 +1353,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/HandedOverCustomerComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                
@@ -1385,7 +1391,7 @@
                         <Label text=" " />
                         </VBOX> 
                         <VBOX>
-                          <Label text="Activity : 1%"/>
+                          <Label text="Activity : {stagePerModel>/JobAddedinWarrantyComPer}%"/>
                           <Label text="No Of Jobs : 1"/>
                         </VBOX>      
                         </VBOX>                
