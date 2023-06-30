@@ -16,7 +16,22 @@ sap.ui.define([
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages", {
 
-		formatter: formatter,
+        formatter:formatter,
+
+		
+		setCheckboxEnable: function (sValue) 
+        {	
+			
+			let a=true;
+			let b=false;
+			 if(sValue && sValue.trim() !== "")
+			 {
+				return b;
+			 }
+			 else{
+				 return a;
+			 }
+		},
 
 		onInit: function () {
 
@@ -35,6 +50,13 @@ sap.ui.define([
 			var datemodel = new JSONModel();
 			datemodel.setData({projectArray:[], orderArray : []});
 			this.getView().setModel(datemodel, "dateModel");
+
+			let jobmodel = new JSONModel();
+			jobmodel.setData({ count:0});
+			this.getView().setModel(jobmodel, "jobModel");
+
+			this.count=0;
+
 
 			var projectModel = new JSONModel();
 			projectModel.setData({ modelData: [] });
@@ -851,6 +873,7 @@ sap.ui.define([
 					oThis.orderArray.push(projectdetail.orderno);
 					projectDetailArr.push({});
 				}
+				oThis.noOfJobCalculation();
 				dateModel.setData({projectDetailArr:projectDetailArr})
 				
 			})
@@ -926,11 +949,13 @@ sap.ui.define([
 		onCheckBoxSelect: function (OEvent) {
 			let checkbox = OEvent.getSource();
 			let data = checkbox.data("mySuperExtraData");
+			this.count=1;
 			
 			let dateModel = this.getView().getModel("dateModel");
-			
 
 			let dateModelDetails = this.getView().getModel("dateModel").oData;// it date model  for set field for reference
+
+		    let jobModel= this.getView().getModel('jobModel').oData;
 			let model = this.getView().getModel("projectModel").oData;
 
 			// name of the stage start date in the project model  in sequence in array 
@@ -939,9 +964,7 @@ sap.ui.define([
 			// name of the stage end date in the project model  in sequence in array 
 			let arrEnd = ["AdvanceCreditedenddate", "FileHandedOverCCDenddate", "CheckSiteenddate", "GADRequestenddate", "GADReadyenddate", "JSVDoneenddate", "GADApprovedenddate", "ShipmentScheduledenddate", "ApprovedGADDesignenddate", "EnterinFocusenddate", "BOQReadyenddate", "ProductionDrawingReadyenddate", "ProductionStage1enddate", "ProdQCStage1enddate", "PaymentStage1enddate", "DeliveryStage1enddate", "InstallationStage1enddate", "InstallationQCStage1enddate", "PaymentStage2enddate", "ProductionStage2enddate", "ProductionQCStage2enddate", "DeliveryStage2enddate", "InstallationStage2enddate", "InstallationQCStage3enddate", "ProductionStage3enddate", "ProductionQCStage3enddate", "DeliveryStage3enddate", "InstallationStage3enddate", "FinalInstallationQCenddate", "InspectionByEIenddate", "FinalPaymentenddate", "HandedOverCustomerenddate", "JobAddedinWarrantyenddate"];//end	
 
-
 	
-
 			// // row logic  start
 			// let field = OEvent.mParameters.id
 			// let rows = field.split("e");// rows
@@ -995,6 +1018,10 @@ sap.ui.define([
 				model.modelData[resultRow].actualdays=this.dayCalculation(model.modelData[resultRow].AdvanceCredited,resultDate);
 				}
 
+				let resultString=result_column_field_End.replace("enddate","jobs")
+
+				jobModel[resultString]=jobModel[resultString]+1;
+
 				// set value in dateModel for future reference
 				dateModelDetails.projectDetailArr[resultRow][result_column_field_End] = model.modelData[resultRow][result_column_field_End];
 				dateModelDetails.projectDetailArr[resultRow][result_column_field_Start] = model.modelData[resultRow][result_column_field_Start];
@@ -1016,6 +1043,10 @@ sap.ui.define([
 					model.modelData[resultRow].actualdays=null;
 					}
 
+					let resultString=result_column_field_End.replace("enddate","jobs")
+
+					jobModel[resultString]=jobModel[resultString]-1;
+
 				   result_column_field_End=="JobAddedinWarrantyenddate"?model.modelData[resultRow].projectactdate=null:"1"; 
 				model.modelData[resultRow][result_column_field_End] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_End] ?? null; // set intial value as checkbox selection false
 				model.modelData[resultRow][result_column_field_Start] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_Start] ?? null;
@@ -1024,28 +1055,38 @@ sap.ui.define([
 				model.modelData[resultRow].Complete = parseFloat(model?.modelData[resultRow]?.Complete ?? 0) - parseFloat(model?.modelData[resultRow]?.[stageweightname] ?? 0);
 			}
 			console.log(model);
+			console.log(jobModel);
+
+			OEvent.getSource().setEnabled(true);
+
+
+
+			this.getView().getModel("jobModel").refresh();
 			this.getView().getModel("projectModel").refresh();
 		},
 
 
 		noOfJobCalculation: function(){
-
+            let oThis=this;
 			let model = this.getView().getModel("projectModel").oData.modelData;
             let resultobj={};
 			let arrEnd = ["AdvanceCreditedenddate", "FileHandedOverCCDenddate", "CheckSiteenddate", "GADRequestenddate", "GADReadyenddate", "JSVDoneenddate", "GADApprovedenddate", "ShipmentScheduledenddate", "ApprovedGADDesignenddate", "EnterinFocusenddate", "BOQReadyenddate", "ProductionDrawingReadyenddate", "ProductionStage1enddate", "ProdQCStage1enddate", "PaymentStage1enddate", "DeliveryStage1enddate", "InstallationStage1enddate", "InstallationQCStage1enddate", "PaymentStage2enddate", "ProductionStage2enddate", "ProductionQCStage2enddate", "DeliveryStage2enddate", "InstallationStage2enddate", "InstallationQCStage3enddate", "ProductionStage3enddate", "ProductionQCStage3enddate", "DeliveryStage3enddate", "InstallationStage3enddate", "FinalInstallationQCenddate", "InspectionByEIenddate", "FinalPaymentenddate", "HandedOverCustomerenddate", "JobAddedinWarrantyenddate"];//end
 
-
-			arrEnd.map((enddate)=>{
+			arrEnd.map((enddates)=>{
 				let count=0;
+				let enddate=enddates;
 				model.map((projectdetail)=>{
-					(projectdetail.enddate && projectdetail.enddate.trim() !== "")?count++:1;
+					// console.log(projectdetail[enddate]);
+					if(projectdetail[enddate] && projectdetail[enddate].trim() !== ""){
+                         count++;
+					}
 				});
 				let result_field=enddate.replace("enddate","jobs")
 				resultobj[result_field]=count;
-			})
+			});
 
-
-
+			oThis.getView().getModel('jobModel').setData(resultobj);
+			console.log(resultobj)
 		},
 
 

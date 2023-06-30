@@ -305,7 +305,7 @@
                             <Label text="FINANCE"/>
                             <Label text="Advance Credited"/>
                             <Label text="Activity : 5%"/>
-                            <Label text="No Of Jobs : 1"/>
+                            <Label text="No Of Jobs:{jobModel>/AdvanceCreditedjobs}"/>
                         </VBOX>    
 						<table:template>
 							<VBOX>
@@ -320,6 +320,11 @@
                                  <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="0_{projectModel>orderno}"
+                             editable="{
+                                        path: 'projectModel>AdvanceCreditedenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+
                              selected="{
                                    path: 'projectModel>AdvanceCreditedenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -334,7 +339,7 @@
                         <Label text="SALES"/>
                         <Label text="File Handed Over to CCD"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 1"/>
+                        <Label text="No Of Jobs:{jobModel>/FileHandedOverCCDjobs}"/>
                     </VBOX>    
 						<table:template>
 							<VBOX>
@@ -348,6 +353,10 @@
                             <CheckBox 
                              select="onCheckBoxSelect"
                             app:mySuperExtraData="1_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>FileHandedOverCCDenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FileHandedOverCCDenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -362,7 +371,7 @@
                         <Label text="CCD"/>
                         <Label text="Check Site"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="No Of Jobs:{jobModel>/CheckSitejobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -377,6 +386,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="2_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>CheckSiteenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>CheckSiteenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -391,7 +404,7 @@
                         <Label text="CCD"/>
                         <Label text="GAD Request"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="No Of Jobs:{jobModel>/GADRequestjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -404,6 +417,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="3_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADRequestenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>GADRequestenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -418,7 +435,7 @@
                         <Label text="DESIGN"/>
                         <Label text="GAD Ready"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="No Of Jobs:{jobModel>/GADReadyjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -431,6 +448,10 @@
                             <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="4_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>GADReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -445,7 +466,7 @@
                         <Label text="SALES"/>
                         <Label text="JSV Done"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="No Of Jobs:{jobModel>/JSVDonejobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -458,6 +479,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="5_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>JSVDoneenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>JSVDoneenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -472,7 +497,7 @@
                         <Label text="SALES"/>
                         <Label text="GAD Approved"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="No Of Jobs:{jobModel>/GADApprovedjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -485,6 +510,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="6_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADApprovedenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>GADApprovedenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -500,7 +529,7 @@
                         <Label text="CCD"/>
                         <Label text="SHipment Schduled"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ShipmentScheduledjobs}"/>
                         </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -513,6 +542,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="7_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>ShipmentScheduledenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ShipmentScheduledenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -527,7 +560,7 @@
                         <Label text="CCD"/>
                         <Label text="Approved GAD TO Design"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ApprovedGADDesignjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -540,6 +573,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="8_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>ApprovedGADDesignenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ApprovedGADDesignenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -554,7 +591,7 @@
                         <Label text="DESIGN"/>
                         <Label text="Enter in Focus"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/EnterinFocusjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -567,6 +604,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="9_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>EnterinFocusenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>EnterinFocusenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -581,7 +622,7 @@
                         <Label text="DESIGN"/>
                         <Label text="BOQ Ready"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/BOQReadyjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -594,6 +635,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="10_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>BOQReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>BOQReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -608,7 +653,7 @@
                             <Label text="DESIGN"/>
                             <Label text="Production Drawing Ready"/>
                             <Label text="Activity : 5%"/>
-                            <Label text="No Of Jobs : 1"/>
+                           <Label text="No Of Jobs:{jobModel>/ProductionDrawingReadyjobs}"/>
                         </VBOX>    
 						<table:template>
 							<VBOX>
@@ -621,6 +666,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="11_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionDrawingReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionDrawingReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -635,7 +684,7 @@
                         <Label text="FACTORY"/>
                         <Label text="PRODUCTION STAGE 1"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 1"/>
+                       <Label text="No Of Jobs:{jobModel>/ProductionStage1jobs}"/>
                     </VBOX>    
 						<table:template>
 							<VBOX>
@@ -648,6 +697,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="12_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>ProductionStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -662,7 +715,7 @@
                         <Label text="FACTORY"/>
                         <Label text="PROD QC STAGE 1"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ProdQCStage1jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -675,6 +728,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="13_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProdQCStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>ProdQCStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -689,7 +746,7 @@
                         <Label text="FINANCE"/>
                         <Label text="PAYMENT STAGE 1"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/PaymentStage1jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -702,6 +759,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="14_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>PaymentStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>PaymentStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -716,7 +777,7 @@
                         <Label text="FACTORY"/>
                         <Label text="DELIVERY STAGE 1"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/DeliveryStage1jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -729,6 +790,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="15_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>DeliveryStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -743,7 +808,7 @@
                         <Label text="NI"/>
                         <Label text="INSTALLATION STAGE 1"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/InstallationStage1jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -756,6 +821,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="16_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>InstallationStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -771,7 +840,7 @@
                         <Label text="NI"/>
                         <Label text="INSTALLATION QC STAGE 1"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/InstallationQCStage1jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -784,6 +853,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="17_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationQCStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>InstallationQCStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -799,7 +872,7 @@
                         <Label text="FINANCE"/>
                         <Label text="PAYMENT STAGE 2"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/PaymentStage2jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -812,6 +885,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="18_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>PaymentStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>PaymentStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -827,7 +904,7 @@
                         <Label text="FACTORY"/>
                         <Label text="PRODUCTION STAGE 2"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ProductionStage2jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -840,6 +917,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="19_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>ProductionStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -856,7 +937,7 @@
                         <Label text="FACTORY"/>
                         <Label text="PRODUCTION QC STAGE 2"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ProductionQCStage2jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -869,6 +950,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="20_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionQCStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>ProductionQCStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -883,7 +968,7 @@
                         <Label text="FACTORY"/>
                         <Label text="DELIVERY STAGE 2"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/DeliveryStage2jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -896,6 +981,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="21_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>DeliveryStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -910,7 +999,7 @@
                         <Label text="NI"/>
                         <Label text="INSTALLATION STAGE 2"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/InstallationStage2jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -923,6 +1012,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="22_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InstallationStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -937,7 +1030,7 @@
                         <Label text="NI"/>
                         <Label text="INSTALLATION STAGE 2"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/AdvanceCreditedjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -963,7 +1056,7 @@
                         <Label text="NI"/>
                         <Label text="INSTALLATION QC STAGE 3"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/InstallationQCStage3jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -976,6 +1069,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="23_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationQCStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InstallationQCStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -990,7 +1087,7 @@
                         <Label text="FACTORY"/>
                         <Label text="PRODUCTION STAGE 3"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ProductionStage3jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1003,6 +1100,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="24_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1017,7 +1118,7 @@
                         <Label text="FACTORY"/>
                         <Label text="PRODUCTION QC STAGE 3"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/ProductionQCStage3jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1030,6 +1131,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="25_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionQCStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionQCStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1044,7 +1149,7 @@
                         <Label text="FACTORY"/>
                         <Label text="DELIVERY STAGE 3"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/DeliveryStage3jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1057,6 +1162,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="26_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>DeliveryStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1071,7 +1180,7 @@
                         <Label text="NI"/>
                         <Label text="INSTALLATION STAGE 3"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/InstallationStage3jobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1084,6 +1193,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="27_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>InstallationStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1098,7 +1211,7 @@
                         <Label text="NI"/>
                         <Label text="FINAL INSTALLATION QC"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/FinalInstallationQCjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1111,6 +1224,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="28_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>FinalInstallationQCenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FinalInstallationQCenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1128,7 +1245,7 @@
                         <Label text="EI"/>
                         <Label text="INSPECTION BY EI"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/InspectionByEIjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1141,6 +1258,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="29_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InspectionByEIenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InspectionByEIenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1155,7 +1276,7 @@
                         <Label text="SALES"/>
                         <Label text="FINAL PAYMENT"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/FinalPaymentjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1168,6 +1289,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="30_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>FinalPaymentenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FinalPaymentenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1182,7 +1307,7 @@
                         <Label text="NI"/>
                         <Label text="Handed Over to Customer"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/HandedOverCustomerjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1195,6 +1320,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>HandedOverCustomerenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1209,7 +1338,7 @@
                         <Label text="EI"/>
                         <Label text="Job Added in Warantty"/>
                         <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                       <Label text="No Of Jobs:{jobModel>/JobAddedinWarrantyjobs}"/>
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1222,6 +1351,10 @@
                               <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="32_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>JobAddedinWarrantyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>JobAddedinWarrantyenddate',
                                    formatter: '.formatter.setCheckbox',
