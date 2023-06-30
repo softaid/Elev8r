@@ -344,7 +344,7 @@
 						<table:template>
 							<VBOX>
                                <Input class="customInputHeight"
-                                   editable="true" 
+                                   editable="false" 
                                     value="{projectModel>FileHandedOverCCD}" 
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
@@ -379,7 +379,7 @@
                                     editable="false" 
                                     value="{projectModel>CheckSite}" />  
                                 <Input class="customInputHeight"
-                                    editable="true" 
+                                    editable="false" 
                                     value="{projectModel>CheckSiteenddate}" 
                                     submit="oninputSelect"
                                     />      

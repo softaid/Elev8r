@@ -641,7 +641,7 @@ sap.ui.define([
 											projectid: startdataearray[i].projectid,
 											Department: startdataearray[i].Department,
 											Complete: startdataearray[i].Complete,
-											actualdays: startdataearray[i].actualdays,
+											// actualdays: startdataearray[i].actualdays,
 											modelname: startdataearray[i].modelname,
 											niengineer: startdataearray[i].niengineer,
 											orderno: startdataearray[i].orderno,
