@@ -85,6 +85,9 @@ sap.ui.define([
                 "defaultvalue": viewModel.getProperty("defaultvalue"),
                 "projectper": viewModel.getProperty("projectper"),
                 "stageper": viewModel.getProperty("stageper"),
+                "departmentid": viewModel.getProperty("departmentid"),
+                "parentid": viewModel.getProperty("parentid"),
+                "sequenceno": viewModel.getProperty("sequenceno"),
                 "row1": "true",
             }
             this.bus = sap.ui.getCore().getEventBus();

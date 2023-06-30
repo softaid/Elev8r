@@ -9,6 +9,7 @@ sap.ui.define(
 		"sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service",
 		"sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service",
 		"sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service",
+		"sap/ui/elev8rerp/componentcontainer/services/login.service",
 	],
 	function (
 		JSONModel,
@@ -19,7 +20,8 @@ sap.ui.define(
 		commonService,
 		locationService,
 		leadService,
-		quotationService
+		quotationService,
+		loginService
 	) {
 		"use strict";
 
@@ -654,7 +656,7 @@ sap.ui.define(
 					if (this.validateForm()) {
 					var currentContext = this;
 					var model = this.getView().getModel("editQutationModel").oData;
-					let QuoteModel = this.getView().getModel("locationModel").oData;
+					let emaildate = model.quotedate;
 					console.log("editQutationModel", model);
 					model["companyid"] = commonService.session("companyId");
 					model["quotedate"] = commonFunction.getDate(model.quotedate);
@@ -668,6 +670,7 @@ sap.ui.define(
 									: "Qutation edited successfully!";
 							currentContext.onCancel();
 							MessageToast.show(message);
+							currentContext.sendEmail(data.id, emaildate);
 							currentContext.bus = sap.ui.getCore().getEventBus();
 							currentContext.bus.publish(
 								"loadquotationdata",
@@ -803,6 +806,28 @@ sap.ui.define(
 
 					return isValid;
 				},
+
+				sendEmail : function(DocEntry, DocDate){
+					let oThis = this;
+					let sUserName = (typeof sessionStorage.CustomerCardName !== "undefined" && sessionStorage.CustomerCardName !== null) ? sessionStorage.CustomerCardName : "Customer";
+					let params = {
+						from: "support@poultryos.com",
+						to: 'savita.g@logicaldna.com',
+						subject: "Thanks You, Your Order with Sakas PartnerConnect is complete – Order No " + DocEntry,
+						text: "Dear " + sUserName + "!\n\n" +
+		
+							"Thanks for placing order with us on " + DocDate + ", your order no is " + DocEntry + "."+ 
+							"\n\n" + 
+							"For any queries, please contact Sakas Administrator at sakasmilk@gmail.com"
+					};
+					console.log(params);
+					loginService.sendEmail(params, function (data1) {
+						if (data1 === 'SENT'){
+							MessageToast.show("Sales order booked successfully!");
+							oThis.reset();
+						}
+					});
+				},		
 
 				onEmailChange: function (oEvent) {
 					var emailId = oEvent.mParameters.value;

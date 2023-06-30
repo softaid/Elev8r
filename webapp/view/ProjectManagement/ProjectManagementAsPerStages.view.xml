@@ -18,7 +18,7 @@
                 id= "MyTableId"
 				rows="{ path: 'projectModel>/modelData' }"
                 enableSelectAll="false"
-                selectionMode="MultiToggle"
+                selectionMode="None"
 				visibleRowCount="2"
 				ariaLabelledBy="title">
 				<table:extension>
@@ -183,6 +183,11 @@
                                  <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="0_{projectModel>orderno}"
+                             editable="{
+                                        path: 'projectModel>AdvanceCreditedenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+
                              selected="{
                                    path: 'projectModel>AdvanceCreditedenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -222,6 +227,10 @@
                             <CheckBox 
                              select="onCheckBoxSelect"
                             app:mySuperExtraData="1_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>FileHandedOverCCDenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FileHandedOverCCDenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -262,6 +271,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="2_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>CheckSiteenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>CheckSiteenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -300,6 +313,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="3_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADRequestenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>GADRequestenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -338,6 +355,10 @@
                             <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="4_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>GADReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -376,6 +397,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="5_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>JSVDoneenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>JSVDoneenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -414,6 +439,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="6_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADApprovedenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>GADApprovedenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -452,6 +481,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="7_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>ShipmentScheduledenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ShipmentScheduledenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -490,6 +523,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="8_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>ApprovedGADDesignenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ApprovedGADDesignenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -528,6 +565,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="9_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>EnterinFocusenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>EnterinFocusenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -566,6 +607,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="10_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>BOQReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>BOQReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -604,6 +649,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="11_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionDrawingReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionDrawingReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -642,6 +691,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="12_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>ProductionStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -680,6 +733,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="13_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProdQCStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>ProdQCStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -718,6 +775,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="14_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>PaymentStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>PaymentStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -756,6 +817,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="15_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>DeliveryStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -794,6 +859,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="16_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>InstallationStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -833,6 +902,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="17_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationQCStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>InstallationQCStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -872,6 +945,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="18_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>PaymentStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>PaymentStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -911,6 +988,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="19_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>ProductionStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -951,6 +1032,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="20_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionQCStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>ProductionQCStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -989,6 +1074,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="21_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>DeliveryStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1027,6 +1116,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="22_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InstallationStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1065,6 +1158,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="23_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationQCStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InstallationQCStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1103,6 +1200,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="24_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1141,6 +1242,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="25_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionQCStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionQCStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1179,6 +1284,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="26_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>DeliveryStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1217,6 +1326,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="27_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>InstallationStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1255,6 +1368,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="28_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>FinalInstallationQCenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FinalInstallationQCenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1293,6 +1410,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="29_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InspectionByEIenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InspectionByEIenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1331,6 +1452,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="30_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>FinalPaymentenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FinalPaymentenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1369,6 +1494,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>HandedOverCustomerenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1407,6 +1536,10 @@
                               <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="32_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>JobAddedinWarrantyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>JobAddedinWarrantyenddate',
                                    formatter: '.formatter.setCheckbox',

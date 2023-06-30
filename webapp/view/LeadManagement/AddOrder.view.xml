@@ -23,7 +23,7 @@
                         id="btnSave"
                         type="Emphasized"
                         press = "onSave"/>
-                    <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/>
+                    <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport" visible="false"/>
                 </f:actions>
                 <f:navigationActions>
                     <Button
@@ -251,7 +251,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
                                         <form:fields>
-                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="false"
+                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -261,7 +261,7 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadState}">
                                         <form:fields>
-                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="false"
+                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -271,7 +271,7 @@
                                     </form:FormElement>                                
                                     <form:FormElement label="{i18n>leadCity}">
                                         <form:fields>
-                                            <Select id="ddlCity1" selectedKey="{editOrderModel>/cityid}" 
+                                            <Select id="ddlCity1" selectedKey="{editOrderModel>/cityid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyCityModel>/modelData'                                                    
                                                 }" change="onStatusChange">

@@ -108,15 +108,15 @@ sap.ui.define(function () {
 
 		setCheckbox: function (sValue) 
         {	
+			let model = this.getView().getModel("projectModel").oData.modelData;
+
 			let a=true;
 			let b=false;
 			 if(sValue && sValue.trim() !== "")
 			 {
-				console.log(typeof(a));
 				return a;
 			 }
 			 else{
-				 console.log(typeof(b));
 				 return b;
 
 
@@ -129,7 +129,7 @@ sap.ui.define(function () {
 			
 			let a=true;
 			let b=false;
-			 if(sValue && sValue.trim() !== "")
+			 if(sValue && sValue.trim() !== "" && this.count==0)
 			 {
 				return b;
 			 }
