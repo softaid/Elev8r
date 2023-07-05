@@ -167,7 +167,7 @@ sap.ui.define([
 						oTable.bindRows("/rows");
 
 						var pnlPrjMgnttable = oThis.getView().byId("pnlPrjMgnttable");
-						pnlPrjMgnttable.addContent(oTable);
+						// pnlPrjMgnttable.addContent(oTable);
 
 					}
 				}
@@ -425,7 +425,7 @@ sap.ui.define([
 					
 						oTable.bindRows("/rows");
 						var pnlPrjMgnttable = oThis.getView().byId("pnlPrjMgnttable");
-						pnlPrjMgnttable.addContent(oTable);
+						// pnlPrjMgnttable.addContent(oTable);
 						console.log("-----------------oTable----------------------",oTable);
 					}
 				}

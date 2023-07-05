@@ -1,179 +1,3 @@
-<!-- <core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile" height="100%"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:f="sap.f"
-    xmlns:core="sap.ui.core"
-    xmlns:table="sap.ui.table"
-    xmlns:u="sap.ui.unified">
-    
-        
-    <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
-		<f:beginColumnPages>
-		    <f:DynamicPage toggleHeaderOnTitleClick="false">
-			    <f:title>
-		    	    <f:DynamicPageTitle enableScrolling="true">
-				        <f:heading>
-					       <Title text="Project Managament"/>
-				        </f:heading>
-			        </f:DynamicPageTitle>
-		        </f:title>
-				<f:content>	
-                        <VBox fitContainer="true">
-                        
-                            <ScrollContainer
-                                height="auto"
-                                width="auto"
-                                horizontal="true"
-                                vertical="true"
-                                focusable="true">
-                              
-                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px" growing="true" growingScrollToLoad="true"
-                                    rows="{ path: 'quotationModel>/modelData' }" selectionMode="None"
-                                    visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed">
-                                    <table:columns>
-                                        <table:Column width="2%">
-                                            <Label text=" " />
-                                            <table:template>
-                                            <VBOX>
-                                            <Text text="Order No:  {quotationModel>Sequence_no}" wrapping="true" />
-                                            <Text text="Order Name: {quotationModel>Sequence_no}" wrapping="true" />
-                                            <Text text="Model: {quotationModel>Sequence_no}" wrapping="true" />
-                                            </VBOX>
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                          <Label text="NI ENG - SALES ENG" />
-                                            <table:template>
-                                            <VBOX>
-                                            <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotename}" />
-                                            <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotename}" />
-                                            </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column hAlign="End" width="6%">
-                                            <Label text="% Complete"/>
-                                            <table:template>
-                                             <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotevalue}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>quotevalue}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="Plan Days - COMP DAYS" />
-                                            <table:template>
-                                                <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="ORDER DATE - PLAN COMP DATE - ACTUAL COMP DATE" />
-                                            <table:template>
-                                                <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="FINANCE - Advance Credited" />
-                                            <table:template>
-                                            <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="Site Checked" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                        <table:Column hAlign="End" width="10%">
-                                            <Label text="GAD Request" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-
-                                          <table:Column hAlign="End" width="10%">
-                                            <Label text="GAD Request1" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-
-                                          <table:Column hAlign="End" width="10%">
-                                            <Label text="GAD Request2" />
-                                            <table:template>
-                                                 <VBOX>
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />
-                                                <Input class="customInputHeight"
-                                                    editable="false" 
-                                                    value="{quotationModel>leadname}" />    
-                                             </VBOX>        
-                                            </table:template>
-                                        </table:Column>
-                                    </table:columns>
-                                </table:Table>
-                               
-                                 </ScrollContainer>
-
-                        </VBox> 
-                    </f:content>				
-			    </f:DynamicPage>
-		    </f:beginColumnPages>
-	    </f:FlexibleColumnLayout>
-</core:View> -->
-
-
 
 <mvc:View
 	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages"
@@ -189,6 +13,7 @@
 		enableScrolling="false"
 		class="sapUiContentPadding">
 		<content>
+             
 			<table:Table
                 id= "MyTableId"
                 class="projectTbl"
@@ -200,28 +25,29 @@
 				<table:extension>
 					<OverflowToolbar style="Clear">
 						<Title id="title" text="Projects"/>
+                        <VBOX align="right">
+                         <Button
+                        text="{i18n>saveButtonText}"
+                        id="btnSave"
+                        type="Emphasized"
+                        align="right"
+                        press = "onSave"/>	
+                        </VBOX>
 					</OverflowToolbar>
 				</table:extension>
 				<table:columns>
 					<table:Column width="11rem">
-						<VBOX>
-						<Label text="NO OF JOBS" />
-                        <Label text="{projectModel>AdvanceCreditedDepartment}" />
-                        </VBOX>  
-
                         <VBOX>
-						<Label text="NO OF JOBS1" />
-                        <Text text="{projectModel>AdvanceCreditedDepartment}" wrapping="true" />
-                        <Label text="{projectModel>AdvanceCreditedComPer}" />
-                        <!-- <Label text="{projectModel>niengineer}" />      -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+
+						<Label text="NO OF JOBS: {stagePerModel>/projectcount}" />
+                        <Text text=" " wrapping="true" />
                         </VBOX>  
-                        <!-- <table:template>
-							<VBOX>
-                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
-                                <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
-                                <Text text="Model: {projectModel>modelname}" wrapping="true" />
-                            </VBOX>
-						</table:template> -->
 						<table:template>
 							<VBOX>
                                 <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
@@ -232,6 +58,12 @@
 					</table:Column>
 					<table:Column width="11rem">
                         <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
 						<Label text="NI ENG" />
                         <Label text="SALES ENG" />
                         </VBOX>  
@@ -250,8 +82,13 @@
 					</table:Column>
 					<table:Column width="6rem" hAlign="End">
                       <VBOX>
-						<Label text="%" />
-                        <Label text="Complete" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <Label text="Complete %" />
                         <Label text="100%" />
                         </VBOX>  
 						<table:template>
@@ -264,6 +101,12 @@
 					</table:Column>
 					<table:Column width="9rem">
                         <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
 						<Label text="Plan Days"/>
                         <Label text="COMP DAYS"/>
                         </VBOX>
@@ -283,6 +126,15 @@
 					</table:Column>
 					<table:Column width="12rem">
                     <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
 						<Label text="ORDER DATE"/>
                         <Label text="PLAN COMP DATE"/>
                         <Label text="ACTUAL COMP DATE"/>
@@ -303,10 +155,21 @@
 					</table:Column>
 					<table:Column width="9rem">
                         <VBOX>
-                            <Label text="FINANCE"/>
-                            <Label text="Advance Credited"/>
-                            <Label text="Activity : 5%"/>
-                            <Label text="No Of Jobs : 1"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/AdvanceCreditedDepartment}-Department"/>
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <Label text="Advance Credited"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/AdvanceCreditedComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX> 
                         </VBOX>    
 						<table:template>
 							<VBOX>
@@ -317,10 +180,15 @@
                                      />        
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>AdvanceCreditedenddate}"/>    
+                                    value="{projectModel>AdvanceCreditedenddate}"/>     
                                  <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="0_{projectModel>orderno}"
+                             editable="{
+                                        path: 'projectModel>AdvanceCreditedenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+
                              selected="{
                                    path: 'projectModel>AdvanceCreditedenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -331,16 +199,27 @@
 						</table:template>
 					</table:Column>
 					<table:Column width="9rem">
-					<VBOX>
-                        <Label text="SALES"/>
-                        <Label text="File Handed Over to CCD"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 1"/>
+					 <VBOX>
+                    <VBOX>
+                    <Label text="File Handed Over to CCD- Department"/>
                     </VBOX>    
+                    <VBOX>
+                        <Label text=" " />
+                    </VBOX>
+                        <Label text="File Handed Over to CCD"/>
+                         <Text text=" " wrapping="true" />
+                     <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/FileHandedOverCCDComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
 						<table:template>
 							<VBOX>
                                <Input class="customInputHeight"
-                                   editable="true" 
+                                   editable="false" 
                                     value="{projectModel>FileHandedOverCCD}" 
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
@@ -349,6 +228,10 @@
                             <CheckBox 
                              select="onCheckBoxSelect"
                             app:mySuperExtraData="1_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>FileHandedOverCCDenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FileHandedOverCCDenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -359,25 +242,40 @@
 						</table:template>
 					</table:Column>
 					<table:Column width="7rem">
+                     <VBOX>
                     <VBOX>
-                        <Label text="CCD"/>
-                        <Label text="Check Site"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Label text="{DepartmentModel>/CheckSiteDepartment}-Department"/>
                     </VBOX>    
+                    <VBOX>
+                        <Label text=" " />
+                    </VBOX>
+                       <Label text="Check Site"/>
+                        <Text text=" " wrapping="true" />
+                    <VBOX>
+                    <Label text=" " />
+                    </VBOX> 
+                    <VBOX>
+                        <Label text="Activity : {stagePerModel>/CheckSiteComPer}%"/>
+                        <Label text="No Of Jobs : 1"/>
+                    </VBOX>      
+                    </VBOX>
 						<table:template>
 						 <VBOX>
                                <Input class="customInputHeight"
                                     editable="false" 
                                     value="{projectModel>CheckSite}" />  
                                 <Input class="customInputHeight"
-                                    editable="true" 
+                                    editable="false" 
                                     value="{projectModel>CheckSiteenddate}" 
                                     submit="oninputSelect"
                                     />      
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="2_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>CheckSiteenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>CheckSiteenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -389,11 +287,22 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="CCD"/>
+                         <VBOX>
+                        <Label text="{DepartmentModel>/GADRequestDepartment}-Department"/>
+                        </VBOX>  
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>  
                         <Label text="GAD Request"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/GADRequestComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>
 						<table:template>
 						 <VBOX>
                             <Input class="customInputHeight"
@@ -405,6 +314,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="3_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADRequestenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>GADRequestenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -416,22 +329,37 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="DESIGN"/>
-                        <Label text="GAD Ready"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
-						<table:template>
-						 <VBOX>
-                            <Input class="customInputHeight"
+                         <VBOX>
+                        <Label text="{DepartmentModel>/GADReadyDepartment}-Department"/>
+                        </VBOX>   
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>  
+                         <Label text="GAD Ready"/>
+                          <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/GADReadyComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>   
+					<table:template>
+						<VBOX>
+                              <Input class="customInputHeight"
                                 editable="false" 
                                 value="{projectModel>GADReady}" />  
-                            <Input class="customInputHeight"
+                              <Input class="customInputHeight"
                                 editable="false" 
                                 value="{projectModel>GADReadyenddate}" />      
                             <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="4_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>GADReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -439,14 +367,25 @@
                                     }"
                                     />   
                         </VBOX>     
-						</table:template>
+					</table:template>
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="SALES"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/JSVDoneDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="JSV Done"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity :{stagePerModel>/JSVDoneComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -459,6 +398,10 @@
                              <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="5_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>JSVDoneenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>JSVDoneenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -470,10 +413,21 @@
 					</table:Column>
 				<table:Column width="12rem">
 						<VBOX>
-                        <Label text="SALES"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/GADApprovedDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="GAD Approved"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/GADApprovedComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -486,6 +440,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="6_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>GADApprovedenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>GADApprovedenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -495,13 +453,23 @@
                         </VBOX>     
 						</table:template>
 					</table:Column>
-
                     	<table:Column width="12rem">
 						<VBOX>
-                        <Label text="CCD"/>
-                        <Label text="SHipment Schduled"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ShipmentScheduledDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="SHipment Schduled"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/ShipmentScheduledComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                         </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -514,6 +482,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="7_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>ShipmentScheduledenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ShipmentScheduledenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -525,10 +497,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="CCD"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ApprovedGADDesignDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Approved GAD TO Design"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/ApprovedGADDesignComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -541,6 +524,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="8_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>ApprovedGADDesignenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ApprovedGADDesignenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -552,11 +539,22 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="DESIGN"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/EnterinFocusDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Enter in Focus"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
+                        <Text text=" " wrapping="true" />
+                          <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/EnterinFocusComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
+                        </VBOX>    
 						<table:template>
 						 <VBOX>
                             <Input class="customInputHeight"
@@ -568,6 +566,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="9_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>EnterinFocusenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>EnterinFocusenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -579,10 +581,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="DESIGN"/>
-                        <Label text="BOQ Ready"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/BOQReadyDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="BOQ Ready"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/BOQReadyComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -595,6 +608,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                              app:mySuperExtraData="10_{projectModel>orderno}"
+                              editable="{
+                                        path: 'projectModel>BOQReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>BOQReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -606,10 +623,21 @@
 					</table:Column>
 					<table:Column width="9rem">
                         <VBOX>
-                            <Label text="DESIGN"/>
+                            <VBOX>
+                            <Label text="{DepartmentModel>/ProductionDrawingReadyDepartment}-Department"/>
+                            <VBOX>
+                            <Label text=" " />
+                            </VBOX>
                             <Label text="Production Drawing Ready"/>
-                            <Label text="Activity : 5%"/>
+                            <Text text=" " wrapping="true" />
+                            <VBOX>
+                            <Label text=" " />
+                            </VBOX> 
+                            <VBOX>
+                            <Label text="Activity : {stagePerModel>/ProductionDrawingReadyComPer}%"/>
                             <Label text="No Of Jobs : 1"/>
+                            </VBOX>      
+                            </VBOX>  
                         </VBOX>    
 						<table:template>
 							<VBOX>
@@ -622,6 +650,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="11_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionDrawingReadyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionDrawingReadyenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -633,10 +665,21 @@
 					</table:Column>
 					<table:Column width="9rem">
 					<VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PRODUCTION STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 1"/>
+                    <VBOX>
+                        <Label text="{DepartmentModel>/PaymentStage1Department}-Department"/>
+                     <VBOX>
+                    <Label text=" " />
+                    </VBOX>
+                    <Label text="PRODUCTION STAGE 1"/>
+                    <Text text=" " wrapping="true" />
+                    <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/PaymentStage1ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>      
                     </VBOX>    
 						<table:template>
 							<VBOX>
@@ -649,6 +692,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="12_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>ProductionStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -660,10 +707,21 @@
 					</table:Column>
 					<table:Column width="7rem">
                     <VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PROD QC STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                    <VBOX>
+                        <Label text="{DepartmentModel>/ProdQCStage1Department}-Department"/>
+                    <VBOX>
+                    <Label text=" " />
+                    </VBOX>
+                    <Label text="PROD QC STAGE 1"/>
+                    <Text text=" " wrapping="true" />
+                    <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/ProdQCStage1ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                    </VBOX>                              
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -676,6 +734,10 @@
                                    <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="13_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProdQCStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>ProdQCStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -687,10 +749,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="FINANCE"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/PaymentStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PAYMENT STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity :  {stagePerModel>/PaymentStage1ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                                  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -703,6 +776,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="14_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>PaymentStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>PaymentStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -714,10 +791,21 @@
 					</table:Column>
 					<table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/DeliveryStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="DELIVERY STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/DeliveryStage1ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                                  
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -730,6 +818,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="15_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>DeliveryStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -741,10 +833,21 @@
 					</table:Column>
 				<table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InstallationStage1ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -757,6 +860,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="16_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>InstallationStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -769,10 +876,21 @@
 
                     <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationQCStage1Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION QC STAGE 1"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InstallationQCStage1ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -785,6 +903,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="17_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationQCStage1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>InstallationQCStage1enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -797,10 +919,21 @@
 
                          <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FINANCE"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/PaymentStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PAYMENT STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/PaymentStage2ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -813,6 +946,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="18_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>PaymentStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>PaymentStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -825,10 +962,21 @@
 
                     <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PRODUCTION STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ProductionStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="PRODUCTION STAGE 2"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/ProductionStage2Per}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -841,6 +989,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="19_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>ProductionStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -854,10 +1006,21 @@
 
                     <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/ProductionQCStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PRODUCTION QC STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/ProductionQCStage2ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -870,6 +1033,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="20_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionQCStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>ProductionQCStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -881,10 +1048,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/DeliveryStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="DELIVERY STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/DeliveryStage2ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -897,6 +1075,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="21_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>DeliveryStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -908,10 +1090,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
-                        <Label text="INSTALLATION STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationStage2Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="INSTALLATION STAGE 2"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InstallationStage2ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                         
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -924,6 +1117,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="22_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InstallationStage2enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -933,38 +1130,23 @@
                         </VBOX>     
 						</table:template>
 					</table:Column>
-                     <!-- <table:Column width="12rem">
-						<VBOX>
-                        <Label text="NI"/>
-                        <Label text="INSTALLATION STAGE 2"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
-                    </VBOX>    
-						<table:template>
-						 <VBOX>
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />  
-                            <Input class="customInputHeight"
-                                editable="false" 
-                                value="26/05/2023" />      
-                                <CheckBox 
-                             select="onCheckBoxSelect"
-                              selected="{
-                                    path: 'projectModel>Heavy0',
-                                   type: 'sap.ui.model.type.Boolean',
-                                    align: 'Center'
-                                    }"
-                                    />  
-                        </VBOX>     
-						</table:template>
-					</table:Column> -->
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationQCStage3Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION QC STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InstallationQCStage3ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -977,6 +1159,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="23_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationQCStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InstallationQCStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -988,10 +1174,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
-                        <Label text="PRODUCTION STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="FACTORY-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="INSTALLATION QC STAGE 3"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InstallationQCStage3ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1004,6 +1201,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="24_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1015,10 +1216,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="FACTORY-Department"/>
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="PRODUCTION QC STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/ProductionQCStage3ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1031,6 +1243,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="25_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>ProductionQCStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>ProductionQCStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1042,10 +1258,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="FACTORY"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/DeliveryStage3Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="DELIVERY STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/DeliveryStage3ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1058,6 +1285,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="26_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>DeliveryStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>DeliveryStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1069,10 +1300,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InstallationStage3Department}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="INSTALLATION STAGE 3"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InstallationStage3ComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                   
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1085,6 +1327,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="27_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InstallationStage3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                              selected="{
                                    path: 'projectModel>InstallationStage3enddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1096,10 +1342,21 @@
 					</table:Column>
                      <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/FinalInstallationQCDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="FINAL INSTALLATION QC"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/FinalInstallationQCComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1112,6 +1369,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="28_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>FinalInstallationQCenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FinalInstallationQCenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1121,15 +1382,23 @@
                         </VBOX>     
 						</table:template>
 					</table:Column> 
-
-
-
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="EI"/>
-                        <Label text="INSPECTION BY EI"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/InspectionByEIDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                         <Label text="INSPECTION BY EI"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/InspectionByEIComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1142,6 +1411,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="29_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>InspectionByEIenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>InspectionByEIenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1153,10 +1426,21 @@
 					</table:Column>
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="SALES"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/FinalPaymentDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="FINAL PAYMENT"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/FinalPaymentComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1169,6 +1453,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="30_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>FinalPaymentenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                selected="{
                                    path: 'projectModel>FinalPaymentenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1180,10 +1468,21 @@
 					</table:Column>
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="NI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Handed Over to Customer"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/HandedOverCustomerComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1196,6 +1495,10 @@
                                 <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                               selected="{
                                    path: 'projectModel>HandedOverCustomerenddate',
                                    formatter: '.formatter.setCheckbox',
@@ -1207,10 +1510,21 @@
 					</table:Column>
                       <table:Column width="12rem">
 						<VBOX>
-                        <Label text="EI"/>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/JobAddedinWarrantyDepartment}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
                         <Label text="Job Added in Warantty"/>
-                        <Label text="Activity : 1%"/>
-                        <Label text="No Of Jobs : 0"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {stagePerModel>/JobAddedinWarrantyComPer}%"/>
+                          <Label text="No Of Jobs : 1"/>
+                        </VBOX>      
+                        </VBOX>                
                     </VBOX>    
 						<table:template>
 						 <VBOX>
@@ -1223,6 +1537,10 @@
                               <CheckBox 
                              select="onCheckBoxSelect"
                               app:mySuperExtraData="32_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>JobAddedinWarrantyenddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
                                 selected="{
                                    path: 'projectModel>JobAddedinWarrantyenddate',
                                    formatter: '.formatter.setCheckbox',

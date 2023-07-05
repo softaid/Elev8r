@@ -187,7 +187,6 @@
 		showHeader="false"
 		enableScrolling="false"
 		class="sapUiContentPadding">
-<<<<<<< HEAD
         <!-- <Panel id ="pnlPrjMgnttable" width="auto">
             <headerToolbar>
                 <Toolbar height="3rem">
@@ -208,20 +207,14 @@
             <content>
             </content>
         </Panel> -->
-        <content>
-			 <table:Table
-				rows="{ path: 'projectMgntModel>/modelData' }"
-				visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed"
-				paste="onPaste"
-=======
-		<!-- <content>
+        
+		 <content>
 			<table:Table
                 id= "MyTableId"
 				rows="{ path: 'quotationModel>/modelData' }"
                 enableSelectAll="false"
                 selectionMode="MultiToggle"
 				visibleRowCount="{rowcount_model>/rowsCount}"
->>>>>>> 9ffc4ac69624a9453540ce3eaed633dbb348a179
 				ariaLabelledBy="title">
 				<table:extension>
 					<OverflowToolbar style="Clear">
