@@ -765,9 +765,14 @@ div#componentcontainer---cbfdashboard--batchwiseDashboard, div#__data45{
     margin-top: 11px !important;
   }
 
-  #MyTableId,th,td{
+  .projectTbl .sapUiTableCnt,.projectTbl .sapUiTableCnt td{
         border: 1px solid black;
         border-collapse: collapse;
   }
 
+  .projectTitle{
+    padding-left: 1.25rem !important;
+    align-items: initial !important;
+    justify-content: left !important;
+  }
 

@@ -188,6 +188,10 @@ sap.ui.define([
 			pdfModel.setData([]);
 			this.getView().setModel(pdfModel, "pdfModel");
 
+			var previousModel = new JSONModel();
+			previousModel.setData([]);
+			this.getView().setModel(previousModel, "previousModel");
+
 			this.imagepath = null;
 			this.toDataURL('../images/snehaelev8r.png', function (dataUrl) {
 				currentContext.imagepath = dataUrl;
@@ -698,12 +702,19 @@ sap.ui.define([
 		getPDFDetails : function(id){
 			let oThis = this;
 			let pdfModel = oThis.getView().getModel("pdfModel");
-			orderService.getOrderPDF({id : id}, function(data){
-				pdfModel.setData(data[0][0]);
-				oThis.getView().setModel(pdfModel,"pdfModel");
-			})
 
-			console.log("pdfModel : ",pdfModel);
+			let previousModel = oThis.getView().getModel("previousModel");
+
+			orderService.getOrderPDF({id : id}, function(data){
+				if(data.length && data[0].length){
+					pdfModel.setData(data[0][0]);
+					oThis.getView().setModel(pdfModel,"pdfModel");
+				}
+				if(data.length && data[1].length){
+					previousModel.setData(data[1][0]);
+					oThis.getView().setModel(previousModel,"previousModel");
+				}
+			})
 		},
 
 		onPdfExport : function(){
@@ -729,109 +740,137 @@ sap.ui.define([
 			var companyname = this.companyname;
 			
 			let pdfModel = this.getView().getModel("pdfModel");
+			let previousModel = this.getView().getModel("previousModel");
 
 			var array = [];
 			//Availabls vaules are dynamic and other values are static need to discuss about static values
 			array.push({
-					name: "TYPE",
-					value: pdfModel.oData.model,
-				}, {
-					name: "CAPACITY",
-					value: pdfModel.oData.capacity,
-				}, {
-					name: "SPEED",
-					value: pdfModel.oData.speed,
-				},
-				{
-					name: "RISE (M) (Approximately)",
-					value: pdfModel.oData.travel,
-				},
-				{
-					name: "STOPS",
-					value: pdfModel.oData.stop+"Landings/"+pdfModel.oData.stop+"Openings (All Openings are same Side)",// "7 Landings / 7 Openings (All Openings are same Side)",
-				},
-				{
-					name: "CONTROLLER",
-					value: pdfModel.oData.control,
-				},
-				{
-					name: "DRIVE",
-					value: pdfModel.oData.drive,
-				},
-				{
-					name: "SHAFT SIZE",
-					value: pdfModel.oData.shaftsize,
-				},
-				{
-					name: "CAR SIZE",
-					value: pdfModel.oData.carsize,
-				},
-				{
-					name: "CLEAR OPENING",
-					value: pdfModel.oData.clearopening,
-				},
-				{
-					name: "PIT DEPTH",
-					value: pdfModel.oData.pitdepth,
-				},
-				{
-					name: "OVER HEAD",
-					value: pdfModel.oData.overhead,
-				},
-				{
-					name: "CAR PANEL",
-					value: pdfModel.oData.carpanel
-				},
-				{
-					name: "CAR DOOR",
-					value: pdfModel.oData.cardoor,
-				},
-				{
-					name: "LANDING DOOR",
-					value: pdfModel.oData.landingdoor,
-				},
-				{
-					name: "FALSE CEILING",
-					value: pdfModel.oData.falseceiling,
-				},
-				{
-					name: "VENTILATION",
-					value: pdfModel.oData.ventilation,
-				},
-				{
-					name: "FLOORING",
-					value: pdfModel.oData.flooring,
-				},
-				{
-					name: "C.O.P",
-					value: "S.S Push Buttons",
-				},
+				name: "TYPE",
+				value: pdfModel.oData.model,
+				previousvalue : previousModel.oData.model
+			}, {
+				name: "CAPACITY",
+				value: pdfModel.oData.capacity,
+				previousvalue : previousModel.oData.capacity
+			}, {
+				name: "SPEED",
+				value: pdfModel.oData.speed,
+				previousvalue : previousModel.oData.speed
+			},
+			{
+				name: "RISE (M) (Approximately)",
+				value: pdfModel.oData.travel,
+				previousvalue : previousModel.oData.travel
+			},
+			{
+				name: "STOPS",
+				value: pdfModel.oData.stop+"Landings/"+pdfModel.oData.stop+"Openings (All Openings are same Side)",// "7 Landings / 7 Openings (All Openings are same Side)",
+				previousvalue : previousModel.oData.stop+"Landings/"+previousModel.oData.stop+"Openings (All Openings are same Side)"
+			},
+			{
+				name: "CONTROLLER",
+				value: pdfModel.oData.control,
+				previousvalue : previousModel.oData.control
+			},
+			{
+				name: "DRIVE",
+				value: pdfModel.oData.drive,
+				previousvalue : previousModel.oData.drive
+			},
+			{
+				name: "SHAFT SIZE",
+				value: pdfModel.oData.shaftsize,
+				previousvalue : previousModel.oData.shaftsize
+			},
+			{
+				name: "CAR SIZE",
+				value: pdfModel.oData.carsize,
+				previousvalue : previousModel.oData.carsize
+			},
+			{
+				name: "CLEAR OPENING",
+				value: pdfModel.oData.clearopening,
+				previousvalue : previousModel.oData.clearopening
+			},
+			{
+				name: "PIT DEPTH",
+				value: pdfModel.oData.pitdepth,
+				previousvalue : previousModel.oData.pitdepth
+			},
+			{
+				name: "OVER HEAD",
+				value: pdfModel.oData.overhead,
+				previousvalue : previousModel.oData.overhead
+			},
+			{
+				name: "CAR PANEL",
+				value: pdfModel.oData.carpanel,
+				previousvalue : previousModel.oData.carpanel
+			},
+			{
+				name: "CAR DOOR",
+				value: pdfModel.oData.cardoor,
+				previousvalue : previousModel.oData.cardoor
+			},
+			{
+				name: "LANDING DOOR",
+				value: pdfModel.oData.landingdoor,
+				previousvalue : previousModel.oData.landingdoor
+			},
+			{
+				name: "FALSE CEILING",
+				value: pdfModel.oData.falseceiling,
+				previousvalue : previousModel.oData.falseceiling
+			},
+			{
+				name: "VENTILATION",
+				value: pdfModel.oData.ventilation,
+				previousvalue : previousModel.oData.ventilation
+			},
+			{
+				name: "FLOORING",
+				value: pdfModel.oData.flooring,
+				previousvalue : previousModel.oData.flooring
+			},
+			{
+				name: "C.O.P",
+				value: "S.S Push Buttons",
+				previousvalue : "S.S Push Buttons"
+			},
 
-				{
-					name: "CAR POSITION INDICATOR",
-					value: pdfModel.oData.carpositionindicator,
-				},
-				{
-					name: "MACHINE",
-					value: pdfModel.oData.machine,
-				},
-				{
-					name: "TRACTION MEDIA",
-					value: pdfModel.oData.tractionmedia,
-				},
-				{
-					name: "TYPE OF OPERATION",
-					value: pdfModel.oData.operation,
-				},
-				{
-					name: "MAIN POWER SYSTEM",
-					value: pdfModel.oData.mainpowersystem,
-				},
-				{
-					name: "AUXILARY SUPPLY SYSTEM",
-					value: pdfModel.oData.auxilarysupplysystem,
-				},
-			);
+			{
+				name: "CAR POSITION INDICATOR",
+				value: pdfModel.oData.carpositionindicator,
+				previousvalue : previousModel.oData.carpositionindicator
+			},
+			{
+				name: "MACHINE",
+				value: pdfModel.oData.machine,
+				previousvalue : previousModel.oData.machine
+			},
+			{
+				name: "TRACTION MEDIA",
+				value: pdfModel.oData.tractionmedia,
+				previousvalue : previousModel.oData.tractionmedia
+			},
+			{
+				name: "TYPE OF OPERATION",
+				value: pdfModel.oData.operation,
+				previousvalue : previousModel.oData.operation
+			},
+			{
+				name: "MAIN POWER SYSTEM",
+				value: pdfModel.oData.mainpowersystem,
+				previousvalue : previousModel.oData.mainpowersystem
+			},
+			{
+				name: "AUXILARY SUPPLY SYSTEM",
+				value: pdfModel.oData.auxilarysupplysystem,
+				previousvalue : previousModel.oData.auxilarysupplysystem
+			},
+		);
+
+		console.log("Array : ",array);
 
 			headertable1 += "html2canvas($('#tblCustomers')[0], {" +
 				"onrendered: function (canvas) {" +
@@ -908,8 +947,9 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['*','auto','*'],";
 			headertable1 += " body: [";
+			headertable1 += "[ { columns: [ {text:'Lift Specifications" + " " + "', style: 'subheader'} ] },{ columns: [ {text:'Current Specifications" + " " + "', style: 'subheader'} ] },{ columns: [ {text:'Previous Specifications" + " " + "', style: 'subheader'} ] }],";
 			for (var i = 0; i < array.length; i++) {
-				headertable1 += "[ {text: '" + array[i].name + "'},{text: '" + " " + "'},{text: '" + array[i].value + "'},],";
+				headertable1 += "[ {text: '" + array[i].name + "'},{text: '" + array[i].value + "'},{text: '" + array[i].previousvalue + "'},],";
 			}
 
 			headertable1 += "]";

@@ -989,6 +989,52 @@
                         </form:FormContainer>
                     </form:formContainers>
                 </form:Form>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="Payment Terms" width="100%">
+					        <form:formElements>
+                                <form:FormElement label="Advance on Order Reception">
+                                    <form:fields>
+                                        <Input id="advanceonorderreception" value="{editQutationModel>/advanceonorderreception}" description="%" required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>  
+                                <form:FormElement label="For Request of Mechanical Material">
+                                    <form:fields>
+                                        <Input id="forrequestofmechanicalmaterial" value="{editQutationModel>/forrequestofmechanicalmaterial}" description="%" required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="For Request of Electrical Material">
+                                    <form:fields>
+                                        <Input id="forrequestofelectricalmaterial" value="{editQutationModel>/forrequestofelectricalmaterial}" description="%" required="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="On Customer Handover">
+                                    <form:fields>
+                                        <Input id="oncustomerhandover" value="{editQutationModel>/oncustomerhandover}" description="%" required="false" />
+                                    </form:fields>
+                                </form:FormElement>  
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
             </VBox>
 		</f:content>
 	</f:DynamicPage>

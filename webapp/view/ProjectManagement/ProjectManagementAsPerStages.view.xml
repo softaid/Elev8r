@@ -191,6 +191,7 @@
 		<content>
 			<table:Table
                 id= "MyTableId"
+                class="projectTbl"
 				rows="{ path: 'projectModel>/modelData' }"
                 enableSelectAll="false"
                 selectionMode="None"

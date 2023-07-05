@@ -702,10 +702,10 @@ sap.ui.define([
 			headertable1 += "widths: ['50%','50%'],";
 			headertable1 += " body: [";
 			
-			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [{text:'10%" + " " + "', style: 'subheaderformargine'} ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['60%'] ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['25%'] ] }],";
-			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['5%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [{text:'" + leadLiftPDFModel.oData.advanceonorderreception + "' , style: 'subheaderformargine'} ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['" + leadLiftPDFModel.oData.forrequestofmechanicalmaterial + "'] ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['" + leadLiftPDFModel.oData.forrequestofelectricalmaterial + "'] ] }],";
+			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['" + leadLiftPDFModel.oData.oncustomerhandover + "'] ] }],";
 			// headertable1 += "[ { columns: [ ['For request of mechanical material',' ',' '] ] },{ columns: [ ['60%'] ] }],";
 			// headertable1 += "[ { columns: [ ['For request of electrical material',' ',' '] ] },{ columns: [ ['25%'] ] }],";
 			// headertable1 += "[ { columns: [ ['On customer Handover',' ',' '] ] },{ columns: [ ['5%'] ] }],";

@@ -631,3 +631,2432 @@ END$$
 DELIMITER ;
 ;
 
+
+DROP procedure IF EXISTS `spc_reference_save`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_reference_save`(
+ IN p_id INT(11),
+ IN p_typecode VARCHAR(100),
+ IN p_parentid INT(11),
+ IN p_parenttypecode VARCHAR(200),
+ IN p_description VARCHAR(200),
+ IN p_active TINYINT(4),
+ IN p_defaultvalue TINYINT(4),
+ IN p_projectper DECIMAL(9,3),
+ IN p_stageper DECIMAL(9,3),
+ IN p_departmentid INT(11),
+ IN p_sequenceno INT(11),
+ IN p_companyid INT(11),
+ IN p_userid INT(11),
+ OUT out_id INT )
+BEGIN
+	SET @action = null;
+	IF(p_defaultvalue = 1) THEN
+		UPDATE reference SET defaultvalue = 0 WHERE typecode = p_typecode;
+    END IF;
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		INSERT INTO reference(typecode, parentid, parenttypecode, description, active, defaultvalue,projectper,stageper, createddate, modifieddate, departmentid, sequenceno, companyid)
+		VALUES (p_typecode, p_parentid, p_parenttypecode, p_description, p_active,p_defaultvalue,p_projectper,p_stageper, now(), now(), p_departmentid, p_sequenceno, p_companyid);
+		
+		SET @action = 'INSERT';
+        
+        IF(p_typecode = 'ProMilestones') THEN
+			SET @row_number = 0;
+            
+			DROP TABLE IF EXISTS tempproject;
+			CREATE TEMPORARY TABLE tempproject
+			
+			SELECT (@row_number:=@row_number + 1) AS num, id as projectid from (
+				SELECT 
+					id
+				FROM project
+			) 
+			as tblproject;
+
+			BEGIN
+				DECLARE n INT DEFAULT 0;
+				DECLARE i INT DEFAULT 0; 
+				SELECT COUNT(*) FROM tempproject INTO n;
+
+				WHILE i < n DO
+					SET @projectid = NULL;
+					SELECT projectid INTO @projectid FROM tempproject WHERE num = i + 1;
+
+					SET @projectdetailid = null;
+					 CALL spc_projectdetail_save( 	
+						NULL,
+						@projectid,
+						(SELECT id FROM reference WHERE description = p_description LIMIT 1),
+						p_description,
+						p_parentid,
+						p_stageper,
+						p_projectper,
+						NULL,
+						NULL,
+						0,
+						Null,
+						NULL,
+						NULL,
+						NULL,
+						NULL,
+						NULL,
+						p_departmentid,
+						p_active,
+						NULL,
+						1,
+						0,
+						NULL,
+						p_companyid,
+						p_userid,
+						@projectdetailid
+					 );
+
+					SET i = i + 1;
+				END WHILE;
+			END;
+        END IF;
+	
+	ELSE
+		UPDATE reference
+		SET typecode = p_typecode, 
+			parentid = p_parentid, 
+            parenttypecode = p_parenttypecode, 
+			description = p_description,
+            active = p_active,
+            defaultvalue = p_defaultvalue,
+            projectper = p_projectper,
+            stageper = p_stageper,
+            modifieddate = now(),
+            departmentid = p_departmentid,
+            sequenceno = p_sequenceno,
+			companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+        
+        SET @master = null;
+        SELECT master INTO @master FROM referencetype WHERE typecode = p_typecode;
+        
+        IF(@master = 'ProjectMaster') THEN
+			UPDATE project_detail
+            SET stagename = p_description
+            WHERE stageid = p_id;
+        END IF;
+		
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+	-- record log
+   CALL spc_commonlog_save(p_companyid, 'reference', out_id, @action, p_userid);
+
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `spc_order_save`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_order_save`(
+	IN p_id int(11), 
+    IN p_quoteid int(11),
+	IN p_leadid int(11), 
+	IN p_quotevalue decimal(12,3), 
+	IN p_quotetype int(11), 
+	IN p_orderdate date, 
+	IN p_quotename varchar(45), 
+	IN p_quotediscription varchar(45), 
+	IN p_quotestatusid int(11), 
+	IN p_quotescore decimal(9,3), 
+	IN p_quotecategory int(11), 
+	IN p_quotesubcategory int(11), 
+	IN p_leadsourceid int(11),
+	IN p_quotestageid int(11), 
+	IN p_typeoflift int(11), 
+	IN p_nooflifts int(11), 
+	IN p_capacityid int(11), 
+	IN p_modelid int(11), 
+	IN p_driveid int(11), 
+	IN p_machineid int(11), 
+	IN p_controlid int(11), 
+	IN p_groupcontrolid int(11), 
+	IN p_operationid int(11), 
+	IN p_speedid int(11), 
+	IN p_typeofdoorid int(11), 
+	IN p_landingdoorid int(11), 
+	IN p_cardoorid int(11), 
+	IN p_lowestfloorid int(11), 
+	IN p_cwtpositionid int(11), 
+	IN p_floorheaightid int(11), 
+    IN p_carpanelid int(11),
+	IN p_ventilationid int(11),
+	IN p_tractionmediaid int(11),
+	IN p_mainpowersystemid int(11),
+	IN p_carpositionindicatorid int(11),
+	IN p_falseceilingid int(11),
+	IN p_auxilarysupplysystemid int(11),
+	IN p_flooringid int(11),
+	IN p_architectidid int(11), 
+	IN p_consaltantid int(11), 
+	IN p_stopsid int(11), 
+	IN p_floormarking int(11), 
+	IN p_allopeningsameside varchar(45), 
+	IN p_frontopening varchar(45), 
+	IN p_backopening varchar(45), 
+	IN p_leftopening varchar(45), 
+	IN p_rightopening varchar(45), 
+	IN p_shaftwidth int(11), 
+	IN p_shaftdepth int(11), 
+	IN p_cardepth int(11), 
+	IN p_carwidth int(11), 
+	IN p_carheight int(11), 
+	IN p_doorwidth int(11), 
+	IN p_doorheight int(11), 
+	IN p_travel varchar(45), 
+	IN p_pitdepth int(11), 
+	IN p_overhead int(11), 
+	IN p_mrwidth int(11), 
+	IN p_mrdepth int(11), 
+	IN p_mrheight int(11), 
+	IN p_isdeleted tinyint(4), 
+	IN p_winprobability decimal(9,3), 
+	IN p_siteaddress varchar(150), 
+	IN p_cityid int(11), 
+	IN p_stateid int(11), 
+	IN p_countryid int(11), 
+	IN p_pincode int(11), 
+	IN p_phoneno VARCHAR(45), 
+	IN p_officialemail varchar(100), 
+	IN p_gstn varchar(100), 
+	IN p_panno varchar(100), 
+	IN p_sociallink1 varchar(100), 
+	IN p_sociallink2 varchar(100), 
+	IN p_sociallink3 varchar(100),
+	IN p_primarycontactid varchar(45), 
+	IN p_contactperson varchar(45), 
+	IN p_designation varchar(45), 
+	IN p_mobileno1 varchar(45), 
+    IN p_status VARCHAR(45),
+	IN p_companyid int(11),
+	IN p_userid INT(11), 
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO `order`(id,
+							  quoteid,
+							  leadid,
+							  quotevalue,
+                              quotetype,
+                              orderdate,
+                              quotename,
+                              quotediscription,
+                              quotestatusid,
+                              quotescore,
+                              quotecategory, 
+							  quotesubcategory,
+                              leadsourceid,
+                              quotestageid,
+                              typeoflift,
+                              nooflifts,
+                              capacityid,
+                              modelid,
+                              driveid,
+                              machineid, 
+                              controlid,
+                              operationid,
+                              speedid,
+                              typeofdoorid,
+                              landingdoorid,
+                              cardoorid,
+                              lowestfloorid,
+                              cwtpositionid,
+                              floorheaightid,
+                              carpanelid,
+                              ventilationid,
+                              tractionmediaid,
+                              mainpowersystemid,
+                              carpositionindicatorid,
+                              falseceilingid,
+							  auxilarysupplysystemid,
+                              flooringid,
+                              architectidid, 
+                              leadconsaltantid,
+                              stopsid,
+                              floormarking,
+                              allopeningsameside,
+                              frontopening,
+                              backopening,
+                              leftopening,
+                              rightopening, 
+                              shaftwidth,
+                              shaftdepth,
+                              cardepth,
+                              carwidth,
+                              carheight,
+                              doorwidth,
+                              doorheight,
+                              travel,
+                              pitdepth,
+                              overhead,
+                              mrwidth,
+                              mrdepth, 
+                              mrheight,
+                              isdeleted,
+                              groupcontrolid,
+                              winprobability,
+                              siteaddress,
+                              cityid,
+                              stateid,
+                              countryid,
+                              pincode,
+                              phoneno,
+                              officialemail,
+                              gstn,
+                              panno,
+                              sociallink1,
+                              sociallink2,
+                              sociallink3,
+                              primarycontactid,
+                              contactperson,
+                              designation,
+                              mobileno1,
+                              status,
+                              revisionno,
+                              companyid)
+					   VALUES (p_id,
+						       p_quoteid,
+                               p_leadid,
+						       p_quotevalue,
+                               p_quotetype,
+                               p_orderdate,
+                               p_quotename,
+                               p_quotediscription,
+                               p_quotestatusid,
+                               p_quotescore,
+                               p_quotecategory, 
+							   p_quotesubcategory,
+                               p_leadsourceid,
+                               p_quotestageid,
+                               p_typeoflift,
+                               p_nooflifts,
+                               p_capacityid,
+                               p_modelid,
+                               p_driveid,
+                               p_machineid, 
+                               p_controlid,
+                               p_operationid,
+                               p_speedid,
+                               p_typeofdoorid,
+                               p_landingdoorid,
+                               p_cardoorid,
+                               p_lowestfloorid,
+                               p_cwtpositionid,
+                               p_floorheaightid,
+                               p_carpanelid,
+							   p_ventilationid,
+							   p_tractionmediaid,
+							   p_mainpowersystemid,
+							   p_carpositionindicatorid,
+							   p_falseceilingid,
+							   p_auxilarysupplysystemid,
+							   p_flooringid,
+                               p_architectidid, 
+                               p_consaltantid,
+                               p_stopsid,
+                               p_floormarking,
+                               p_allopeningsameside,
+                               p_frontopening,
+                               p_backopening,
+                               p_leftopening,
+                               p_rightopening, 
+                               p_shaftwidth,
+                               p_shaftdepth,
+                               p_cardepth,
+                               p_carwidth,
+                               p_carheight,
+                               p_doorwidth,
+                               p_doorheight,
+                               p_travel,
+                               p_pitdepth,
+                               p_overhead,
+                               p_mrwidth,
+                               p_mrdepth, 
+                               p_mrheight,
+                               0,
+                               p_groupcontrolid,
+                               p_winprobability,
+                               p_siteaddress,
+                               p_cityid,
+                               p_stateid,
+                               p_countryid,
+                               p_pincode,
+                               p_phoneno,
+                               p_officialemail,
+                               p_gstn,
+                               p_panno,
+                               p_sociallink1,
+                               p_sociallink2,
+                               p_sociallink3,
+                               p_primarycontactid,
+                               p_contactperson,
+                               p_designation,
+                               p_mobileno1,
+                               p_status,
+                               1,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		-- save previous values in metadata column
+        SET @previouscol = null;
+        SET @revisionno = null;
+        SET @currval = null;
+        SELECT JSON_OBJECT('id',IFNULL(id,'-'),'quoteid',IFNULL(quoteid,'-'),'leadid',IFNULL(leadid,'-'),'quotevalue',IFNULL(quotevalue,'-'),'quotetype',IFNULL(quotetype,'-'),'orderdate',IFNULL(orderdate,'-'),'quotename',IFNULL(quotename,''),
+							  'quotediscription',IFNULL(quotediscription,'-'),'quotestatusid',IFNULL(quotestatusid,'-'),'quotescore',IFNULL(quotescore,'-'),'quotecategory',IFNULL(quotecategory,'-'), 
+							  'quotesubcategory',IFNULL(quotesubcategory,'-'),'leadsourceid',IFNULL(leadsourceid,'-'),'quotestageid',IFNULL(quotestageid,'-'),'typeoflift',IFNULL(typeoflift,'-'),'nooflifts',IFNULL(nooflifts,'-'),'capacityid',IFNULL(capacityid,'-'),'modelid',IFNULL(modelid,'-'),'driveid',IFNULL(driveid,'-'),'machineid',IFNULL(machineid,'-'), 
+                              'controlid',IFNULL(controlid,'-'),'operationid',IFNULL(operationid,'-'),'speedid',IFNULL(speedid,'-'),'typeofdoorid',IFNULL(typeofdoorid,'-'),'landingdoorid',IFNULL(landingdoorid,'-'),'cardoorid',IFNULL(cardoorid,'-'),'lowestfloorid',IFNULL(lowestfloorid,'-'),'cwtpositionid',IFNULL(cwtpositionid,'-'),'floorheaightid',IFNULL(floorheaightid,'-'),
+                              'architectidid',IFNULL(architectidid,'-'),'leadconsaltantid',IFNULL(leadconsaltantid,'-'),'stopsid',IFNULL(stopsid,'-'),'floormarking',IFNULL(floormarking,'-'),'allopeningsameside',IFNULL(allopeningsameside,'-'),'frontopening',IFNULL(frontopening,'-'),'backopening',IFNULL(backopening,'-'),'leftopening',IFNULL(leftopening,'-'),
+                              'rightopening',IFNULL(rightopening,'-'),'shaftwidth',IFNULL(shaftwidth,'-'),'shaftdepth',IFNULL(shaftdepth,'-'),'cardepth',IFNULL(cardepth,'-'),'carwidth',IFNULL(carwidth,'-'),'carheight',IFNULL(carheight,'-'),'doorwidth',IFNULL(doorwidth,'-'),'doorheight',IFNULL(doorheight,'-'),'travel',IFNULL(travel,'-'),'pitdepth',IFNULL(pitdepth,'-'),
+                              'overhead',IFNULL(overhead,'-'),'mrwidth',IFNULL(mrwidth,'-'),'mrdepth',IFNULL(mrdepth,'-'),'mrheight',IFNULL(mrheight,'-'),'isdeleted',IFNULL(isdeleted,'-'),'groupcontrolid',IFNULL(groupcontrolid,'-'),'winprobability',IFNULL(winprobability,'-'),'siteaddress',IFNULL(siteaddress,'-'),'cityid',IFNULL(cityid,'-'),'stateid',IFNULL(stateid,'-'),
+                              'countryid',IFNULL(countryid,'-'),'pincode',IFNULL(pincode,'-'),'phoneno',IFNULL(phoneno,'-'),'officialemail',IFNULL(officialemail,'-'),'gstn',IFNULL(gstn,'-'),'panno',IFNULL(panno,'-'),'sociallink1',IFNULL(sociallink1,'-'),'sociallink2',IFNULL(sociallink2,'-'),'sociallink3',IFNULL(sociallink3,'-'),'primarycontactid',IFNULL(primarycontactid,'-'),
+                              'contactperson',IFNULL(contactperson,'-'),'destination',IFNULL(designation,'-'),'mobileno1',IFNULL(mobileno1,'-'),'status',IFNULL(status,'-'),'includinggst',IFNULL(includinggst,'-'),'snehasalescontactname',IFNULL(snehasalescontactname,'-'),
+                              'snehasalescontactno',IFNULL(snehasalescontactno,'-'),'revisionno',IFNULL(revisionno,'-'),'carpanelid',IFNULL(carpanelid,'-'),'ventilationid',IFNULL(ventilationid,'-'),'tractionmediaid',IFNULL(tractionmediaid,'-'),'mainpowersystemid',IFNULL(mainpowersystemid,'-'),'carpositionindicatorid',IFNULL(carpositionindicatorid,'-'),
+                              'falseceilingid',IFNULL(falseceilingid,'-'),'auxilarysupplysystemid',IFNULL(auxilarysupplysystemid,'-'),'flooringid',IFNULL(flooringid,'-'),'shaftconditionid',IFNULL(shaftconditionid,'-'),'unitid',IFNULL(unitid,'-'))
+		INTO @currval FROM `order` WHERE id = p_id;
+        
+        SELECT @currval;
+        
+        -- get current value form metadata
+        SELECT previousvalues INTO @previouscol FROM `order` WHERE id = p_id AND previousvalues IS NOT NULL;
+		SELECT revisionno INTO @revisionno FROM `order` WHERE id = p_id;
+
+		IF @previouscol IS NOT NULL THEN
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY_APPEND(CAST(@previouscol AS JSON), '$', @currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		ELSE
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY(@currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		END IF;
+       
+		UPDATE `order`
+		SET 
+            leadid = p_leadid,
+            quoteid = p_quoteid,
+            quotevalue = p_quotevalue,
+            quotetype = p_quotetype,
+            orderdate = p_orderdate,
+            quotename = p_quotename,
+            quotediscription = p_quotediscription,
+            quotestatusid = p_quotestatusid,
+            quotescore = p_quotescore,
+            quotecategory = p_quotecategory,
+            quotesubcategory = p_quotesubcategory,
+            leadsourceid = p_leadsourceid,
+            quotestageid = p_quotestageid,
+            typeoflift = p_typeoflift,
+            nooflifts = p_nooflifts,
+            capacityid = p_capacityid,
+            modelid = p_modelid,
+            driveid = p_driveid,
+            machineid = p_machineid,
+			controlid = p_controlid,
+            operationid = p_operationid,
+            speedid = p_speedid,
+            typeofdoorid = p_typeofdoorid,
+            landingdoorid = p_landingdoorid,
+            cardoorid = p_cardoorid,
+            lowestfloorid = p_lowestfloorid,
+            cwtpositionid = p_cwtpositionid,
+            floorheaightid = p_floorheaightid,
+            carpanelid = p_carpanelid,
+			ventilationid = p_ventilationid,
+			tractionmediaid = p_tractionmediaid,
+			mainpowersystemid = p_mainpowersystemid,
+			carpositionindicatorid = p_carpositionindicatorid,
+			falseceilingid = p_falseceilingid,
+			auxilarysupplysystemid = p_auxilarysupplysystemid,
+			flooringid = p_flooringid,
+            architectidid = p_architectidid, 
+			leadconsaltantid = p_consaltantid,
+            stopsid = p_stopsid,
+            floormarking = p_floormarking,
+            allopeningsameside = p_allopeningsameside,
+            frontopening = p_frontopening,
+            backopening = p_backopening,
+            leftopening = p_leftopening,
+            rightopening = p_rightopening, 
+			shaftwidth = p_shaftwidth,
+            shaftdepth = p_shaftdepth,
+            cardepth = p_cardepth,
+            carwidth = p_carwidth,
+            carheight = p_carheight,
+            doorwidth = p_doorwidth,
+            doorheight = p_doorheight,
+            travel = p_travel,
+            pitdepth = p_pitdepth,
+            overhead = p_overhead,
+            mrwidth = p_mrwidth,
+            mrdepth = p_mrdepth, 
+			mrheight = p_mrheight,
+            isdeleted = p_isdeleted,
+            groupcontrolid = p_groupcontrolid,
+            winprobability = p_winprobability,
+            siteaddress = p_siteaddress,
+            cityid = p_cityid,
+            stateid = p_stateid,
+            countryid = p_countryid,
+            pincode = p_pincode,
+            phoneno = p_phoneno,
+			officialemail = p_officialemail,
+            gstn = p_gstn,
+            panno = p_panno,
+            sociallink1 = p_sociallink1,
+            sociallink2 = p_sociallink2,
+            sociallink3 = p_sociallink3,
+            primarycontactid = p_primarycontactid,
+            contactperson = p_contactperson,
+            designation = p_designation,
+			mobileno1 = p_mobileno1,
+            status = p_status,
+            companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+		
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+    
+    -- save order as project when order gets confirmed
+  /*  IF(p_status = 148) THEN
+		
+		SET @projectid = null;
+		call spc_project_save(
+			null, OUT_ID, p_quotevalue, null, p_orderdate, null,null, 1,null,null, null, null, p_companyid, p_userid, @projectid
+        );
+        
+        SET @row_number = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectdetail;
+		CREATE TEMPORARY TABLE tempprojectdetail
+		
+		SELECT (@row_number:=@row_number + 1) AS num, id as stageid, description, stageper, projectper from (
+			SELECT 
+				id,
+				description,
+				stageper,
+				projectper
+			FROM reference
+			where typecode = 'ProMilestones'
+		) 
+		as tblprojectdetail;
+        
+        BEGIN
+			DECLARE n INT DEFAULT 0;
+			DECLARE i INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectdetail INTO n;
+			 
+			WHILE i<n DO 
+				SET @stageid = null;
+				SET @description = null;
+				SET @stageper = null;
+				SET @projectper = null;
+				select stageid, description, stageper, projectper 
+                into @stageid, @description, @stageper, @projectper from tempprojectdetail where num = i+1;
+				 
+				 SET @projectdetailid = null;
+				 CALL spc_projectdetail_save( 	
+					NULL,
+					@projectid,
+					@stageid,
+					@description,
+					NULL,
+					@stageper,
+					@projectper,
+					NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					NULL,
+					NULL,
+                    NULL,
+					NULL,
+					NULL,
+                    NULL,
+                    NULL,
+                    0,
+                    0,
+					NULL,
+					p_companyid,
+					p_userid,
+					@projectdetailid
+				 );
+				
+				SET i = i + 1;
+			END WHILE;
+		End;
+    END IF;*/
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `spc_orderpdf`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_orderpdf`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SET @@sql_mode = '';
+	SELECT O.revisionno as revision,
+		   DATE_FORMAT(O.orderdate,'%d/%m/%Y') as orderdate,
+           O.id as orderid,
+           Q.quotename,
+           O.snehasalescontactname,
+           Q.snehasalescontactno,
+           O.designation,
+           Q.siteaddress,
+           Q.phoneno,
+           C.cityname as city,
+           S.statename as state,
+           CO.countryname as country,
+           Q.pincode as zipcode,
+           Q.gstn,
+           Q.panno,
+           Q.phoneno as customercontactperson,
+           Q.officialemail,
+           REF.description as model,
+           REF1.description as lifttype,
+           REF2.description as capacity,
+           REF3.description as speed,
+           O.stopsid,
+           REF4.description as control,
+           GROUP_CONCAT(REF5.description,' mts') as drive,
+           ifnull(GROUP_CONCAT(O.shaftwidth,'mm(W)','X',O.shaftdepth,'mm(D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+           ifnull(GROUP_CONCAT(O.carwidth,'mm(W)','X',O.cardepth,'mm(D)','X',O.carheight,'mm(H) (Approximately)'),'-') as carsize,
+           ifnull(GROUP_CONCAT(O.doorwidth, 'mm Open','X',O.doorheight,'mm Height'),'-') as clearopening,
+           ifnull(CONCAT(O.pitdepth,'mm'),'-')as pitdepth,
+           ifnull(CONCAT(O.overhead,'mm'),'-')as overhead,
+           ifnull(CONCAT(REF6.description,'(Manual)'),'-') as cardoor,
+           REF8.description as cwtposition,
+		   REF9.description as carpanel,
+		   REF10.description as ventilation,
+		   REF11.description as tractionmedia,
+	       REF12.description as mainpowersystem,
+		   REF13.description as carpositionindicator,
+		   REF14.description as falseceiling,
+		   REF15.description as auxilarysupplysystem,
+		   REF16.description as flooring,
+		   REF17.description as operation,
+           REF18.description as travel,
+           O.stopsid  as stop,
+           REF19.description as landingdoor,
+           REF20.description as machine
+	FROM `order` O
+    LEFT JOIN quotation Q ON Q.id = O.quoteid
+    LEFT JOIN city C ON C.id = Q.cityid
+    LEFT JOIN state S ON S.id = Q.stateid
+    LEFT JOIN country CO ON CO.id = Q.countryid
+    LEFT JOIN reference REF ON REF.id = O.modelid
+    LEFT JOIN reference REF1 ON REF1.id = O.typeoflift
+    LEFT JOIN reference REF2 ON REF2.id = O.capacityid
+    LEFT JOIN reference REF3 ON REF3.id = O.speedid
+    LEFT JOIN reference REF4 ON REF4.id = O.controlid
+    LEFT JOIN reference REF5 ON REF5.id = O.driveid
+    LEFT JOIN reference REF6 ON REF6.id = O.cardoorid
+	LEFT JOIN reference REF7 ON REF7.id = O.shaftconditionid
+    LEFT JOIN reference REF8 ON REF8.id = O.cwtpositionid
+    LEFT JOIN reference REF9 ON REF9.id = O.carpanelid
+    LEFT JOIN reference REF10 ON REF10.id = O.ventilationid
+    LEFT JOIN reference REF11 ON REF11.id = O.tractionmediaid
+    LEFT JOIN reference REF12 ON REF12.id = O.mainpowersystemid
+    LEFT JOIN reference REF13 ON REF13.id = O.carpositionindicatorid
+    LEFT JOIN reference REF14 ON REF14.id = O.falseceilingid
+    LEFT JOIN reference REF15 ON REF15.id = O.auxilarysupplysystemid
+    LEFT JOIN reference REF16 ON REF16.id = O.flooringid
+    LEFT JOIN reference REF17 ON REF17.id = O.operationid
+    LEFT JOIN reference REF18 ON REF18.id = O.travel
+    LEFT JOIN reference REF19 ON REF19.id = O.landingdoorid
+    LEFT JOIN reference REF20 ON REF20.id = O.machineid
+    WHERE O.id = p_id;
+    
+    IF((SELECT previousvalues FROM `order` WHERE id = p_id) IS NOT NULL) THEN
+    
+		SET @collen = 0;
+		SELECT (JSON_LENGTH(previousvalues))-1 INTO @collen from `order` where id = p_id;
+		
+		SET @rectifiedJson = null;
+		SELECT JSON_UNQUOTE(JSON_EXTRACT(previousvalues, CONCAT('$[', @collen, ']'))) INTO @rectifiedJson FROM `order` WHERE id = p_id;
+		
+        DROP TEMPORARY TABLE IF EXISTS temporder;
+		CREATE TEMPORARY TABLE temporder
+        SELECT id as orderid, quotetype,orderdate,quotename,quotestatusid,quotescore,quotecategory,quotesubcategory,leadsourceid,
+        quotestageid,typeoflift,nooflifts,capacityid,modelid,driveid,machineid,controlid,operationid,speedid,typeofdoorid,landingdoorid,
+        cardoorid,lowestfloorid,cwtpositionid,floorheightid,architectid,leadconsaltantid,stopsid,floormarking,allopeningsameside,frontopening,
+        backopening,leftopening,rightopening,shaftwidth,shaftdepth,cardepth,carwidth,carheight,doorwidth,doorheight,travel,pitdepth,overhead,
+        mrwidth,mrdepth,mrheight,groupcontrolid,siteaddress,cityid,stateid,countryid,pincode,phoneno,officialemail,contactperson,destination,
+		snehasalescontactname,snehasalescontactno,revisionno,carpanelid,ventilationid,tractionmediaid,mainpowersystemid,carpositionindicatorid,
+        falseceilingid,auxilarysupplysystemid,flooringid,shaftconditionid,unitid FROM(
+			SELECT 
+				-- JSON_EXTRACT(previousvalues, CONCAT('$[', @collen, '].leadid')) AS leadid,
+				JSON_EXTRACT(@rectifiedJson, '$.id') AS id,
+				JSON_EXTRACT(@rectifiedJson, '$.quotetype') AS quotetype,
+				JSON_EXTRACT(@rectifiedJson, '$.orderdate') AS orderdate,
+				JSON_EXTRACT(@rectifiedJson, '$.quotename') AS quotename,
+				JSON_EXTRACT(@rectifiedJson, '$.quotestatusid') AS quotestatusid,
+				JSON_EXTRACT(@rectifiedJson, '$.quotescore') AS quotescore,
+				JSON_EXTRACT(@rectifiedJson, '$.quotecategory') AS quotecategory,
+				JSON_EXTRACT(@rectifiedJson, '$.quotesubcategory') AS quotesubcategory,
+				JSON_EXTRACT(@rectifiedJson, '$.leadsourceid') AS leadsourceid,
+				JSON_EXTRACT(@rectifiedJson, '$.quotestageid') AS quotestageid,
+				JSON_EXTRACT(@rectifiedJson, '$.typeoflift') AS typeoflift,
+				JSON_EXTRACT(@rectifiedJson, '$.nooflifts') AS nooflifts,        
+				JSON_EXTRACT(@rectifiedJson, '$.capacityid') AS capacityid,
+				JSON_EXTRACT(@rectifiedJson, '$.modelid') AS modelid,
+				JSON_EXTRACT(@rectifiedJson, '$.driveid') AS driveid,
+				JSON_EXTRACT(@rectifiedJson, '$.machineid') AS machineid,
+				JSON_EXTRACT(@rectifiedJson, '$.controlid') AS controlid,
+				JSON_EXTRACT(@rectifiedJson, '$.operationid') AS operationid,
+				JSON_EXTRACT(@rectifiedJson, '$.speedid') AS speedid,
+				JSON_EXTRACT(@rectifiedJson, '$.typeofdoorid') AS typeofdoorid,
+				JSON_EXTRACT(@rectifiedJson, '$.landingdoorid') AS landingdoorid,
+				JSON_EXTRACT(@rectifiedJson, '$.cardoorid') AS cardoorid,
+				JSON_EXTRACT(@rectifiedJson, '$.lowestfloorid') AS lowestfloorid,
+				JSON_EXTRACT(@rectifiedJson, '$.cwtpositionid') AS cwtpositionid,
+				JSON_EXTRACT(@rectifiedJson, '$.floorheaightid') AS floorheightid,
+				JSON_EXTRACT(@rectifiedJson, '$.architectidid') AS architectid,
+				JSON_EXTRACT(@rectifiedJson, '$.leadconsaltantid') AS leadconsaltantid,
+				JSON_EXTRACT(@rectifiedJson, '$.stopsid') AS stopsid,
+				JSON_EXTRACT(@rectifiedJson, '$.floormarking') AS floormarking,
+				JSON_EXTRACT(@rectifiedJson, '$.allopeningsameside') AS allopeningsameside,
+				JSON_EXTRACT(@rectifiedJson, '$.frontopening') AS frontopening,
+				JSON_EXTRACT(@rectifiedJson, '$.backopening') AS backopening,
+				JSON_EXTRACT(@rectifiedJson, '$.leftopening') AS leftopening,
+				JSON_EXTRACT(@rectifiedJson, '$.rightopening') AS rightopening,
+				JSON_EXTRACT(@rectifiedJson, '$.shaftwidth') AS shaftwidth,
+				JSON_EXTRACT(@rectifiedJson, '$.shaftdepth') AS shaftdepth,
+				JSON_EXTRACT(@rectifiedJson, '$.cardepth') AS cardepth,
+				JSON_EXTRACT(@rectifiedJson, '$.carwidth') AS carwidth,
+				JSON_EXTRACT(@rectifiedJson, '$.carheight') AS carheight,
+				JSON_EXTRACT(@rectifiedJson, '$.doorwidth') AS doorwidth,
+				JSON_EXTRACT(@rectifiedJson, '$.doorheight') AS doorheight,
+				JSON_EXTRACT(@rectifiedJson, '$.travel') AS travel,
+				JSON_EXTRACT(@rectifiedJson, '$.pitdepth') AS pitdepth,
+				JSON_EXTRACT(@rectifiedJson, '$.overhead') AS overhead,
+				JSON_EXTRACT(@rectifiedJson, '$.mrwidth') AS mrwidth,
+				JSON_EXTRACT(@rectifiedJson, '$.mrdepth') AS mrdepth,
+				JSON_EXTRACT(@rectifiedJson, '$.mrheight') AS mrheight,
+				JSON_EXTRACT(@rectifiedJson, '$.groupcontrolid') AS groupcontrolid,
+				JSON_EXTRACT(@rectifiedJson, '$.siteaddress') AS siteaddress,
+				JSON_EXTRACT(@rectifiedJson, '$.cityid') AS cityid,
+				JSON_EXTRACT(@rectifiedJson, '$.stateid') AS stateid,
+				JSON_EXTRACT(@rectifiedJson, '$.countryid') AS countryid,
+				JSON_EXTRACT(@rectifiedJson, '$.pincode') AS pincode,
+				JSON_EXTRACT(@rectifiedJson, '$.phoneno') AS phoneno,
+				JSON_EXTRACT(@rectifiedJson, '$.officialemail') AS officialemail,
+				JSON_EXTRACT(@rectifiedJson, '$.contactperson') AS contactperson,
+				JSON_EXTRACT(@rectifiedJson, '$.destination') AS destination,
+				JSON_EXTRACT(@rectifiedJson, '$.snehasalescontactname') AS snehasalescontactname,
+				JSON_EXTRACT(@rectifiedJson, '$.snehasalescontactno') AS snehasalescontactno,
+				JSON_EXTRACT(@rectifiedJson, '$.revisionno') AS revisionno,
+				JSON_EXTRACT(@rectifiedJson, '$.carpanelid') AS carpanelid,
+				JSON_EXTRACT(@rectifiedJson, '$.ventilationid') AS ventilationid,
+				JSON_EXTRACT(@rectifiedJson, '$.tractionmediaid') AS tractionmediaid,
+				JSON_EXTRACT(@rectifiedJson, '$.mainpowersystemid') AS mainpowersystemid,
+				JSON_EXTRACT(@rectifiedJson, '$.carpositionindicatorid') AS carpositionindicatorid,
+				JSON_EXTRACT(@rectifiedJson, '$.falseceilingid') AS falseceilingid,
+				JSON_EXTRACT(@rectifiedJson, '$.auxilarysupplysystemid') AS auxilarysupplysystemid,
+				JSON_EXTRACT(@rectifiedJson, '$.flooringid') AS flooringid,
+				JSON_EXTRACT(@rectifiedJson, '$.shaftconditionid') AS shaftconditionid,
+				JSON_EXTRACT(@rectifiedJson, '$.unitid') AS  unitid
+			FROM `order` WHERE id = p_id) as orderdetails;
+            
+			-- GET PREVIOUS VALUES DESCRIPTIONS FROM REFERENCE TABLE
+            SELECT 
+				REF.description as model,
+                REF1.description as capacity,
+                REF2.description as speed,
+                REF3.description as travel,
+                TMO.speedid,
+                REF4.description as control,
+                GROUP_CONCAT(REF5.description,' mts') as drive,
+				ifnull(GROUP_CONCAT(CAST(TMO.shaftwidth AS UNSIGNED),'mm(W)','X',CAST(TMO.shaftdepth AS UNSIGNED),'mm(D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+				ifnull(GROUP_CONCAT(CAST(TMO.carwidth AS UNSIGNED),'mm(W)','X',CAST(TMO.cardepth AS UNSIGNED),'mm(D)','X',CAST(TMO.carheight AS UNSIGNED),'mm(H) (Approximately)'),'-') as carsize,
+				ifnull(GROUP_CONCAT(CAST(TMO.doorwidth AS UNSIGNED), 'mm Open','X',CAST(TMO.doorheight AS UNSIGNED),'mm Height'),'-') as clearopening,
+				ifnull(CONCAT(CAST(TMO.pitdepth AS UNSIGNED),'mm'),'-')as pitdepth,
+				ifnull(CONCAT(CAST(TMO.overhead AS UNSIGNED),'mm'),'-')as overhead,
+				ifnull(CONCAT(REF6.description,'(Manual)'),'-') as cardoor,
+                REF8.description as cwtposition,
+				REF9.description as carpanel,
+				REF10.description as ventilation,
+				REF11.description as tractionmedia,
+				REF12.description as mainpowersystem,
+				REF13.description as carpositionindicator,
+				REF14.description as falseceiling,
+				REF15.description as auxilarysupplysystem,
+				REF16.description as flooring,
+				REF17.description as operation,
+				REF18.description as travel,
+				CAST(TMO.stopsid AS UNSIGNED) as stop,
+				REF19.description as landingdoor,
+				REF20.description as machine
+            FROM temporder TMO
+            LEFT JOIN reference REF ON REF.id = CAST(TMO.modelid AS UNSIGNED)
+            LEFT JOIN reference REF1 ON REF1.id = CAST(TMO.capacityid AS UNSIGNED)
+            LEFT JOIN reference REF2 ON REF2.id = CAST(TMO.speedid AS UNSIGNED)
+            LEFT JOIN reference REF3 ON REF3.id = CAST(TMO.travel AS UNSIGNED)
+            LEFT JOIN reference REF4 ON REF4.id = CAST(TMO.controlid AS UNSIGNED)
+            LEFT JOIN reference REF5 ON REF5.id = CAST(TMO.driveid AS UNSIGNED)
+			LEFT JOIN reference REF6 ON REF6.id = CAST(TMO.cardoorid AS UNSIGNED)
+			LEFT JOIN reference REF7 ON REF7.id = CAST(TMO.shaftconditionid AS UNSIGNED)
+			LEFT JOIN reference REF8 ON REF8.id = CAST(TMO.cwtpositionid AS UNSIGNED)
+			LEFT JOIN reference REF9 ON REF9.id = CAST(TMO.carpanelid AS UNSIGNED)
+			LEFT JOIN reference REF10 ON REF10.id = CAST(TMO.ventilationid AS UNSIGNED)
+			LEFT JOIN reference REF11 ON REF11.id = CAST(TMO.tractionmediaid AS UNSIGNED)
+			LEFT JOIN reference REF12 ON REF12.id = CAST(TMO.mainpowersystemid AS UNSIGNED)
+			LEFT JOIN reference REF13 ON REF13.id = CAST(TMO.carpositionindicatorid AS UNSIGNED)
+			LEFT JOIN reference REF14 ON REF14.id = CAST(TMO.falseceilingid AS UNSIGNED)
+			LEFT JOIN reference REF15 ON REF15.id = CAST(TMO.auxilarysupplysystemid AS UNSIGNED)
+			LEFT JOIN reference REF16 ON REF16.id = CAST(TMO.flooringid AS UNSIGNED)
+			LEFT JOIN reference REF17 ON REF17.id = CAST(TMO.operationid AS UNSIGNED)
+			LEFT JOIN reference REF18 ON REF18.id = CAST(TMO.travel AS UNSIGNED)
+			LEFT JOIN reference REF19 ON REF19.id = CAST(TMO.landingdoorid AS UNSIGNED)
+			LEFT JOIN reference REF20 ON REF20.id = CAST(TMO.machineid AS UNSIGNED);
+	END IF;
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `spc_quotation_save`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotation_save`(
+	IN p_id int(11), 
+	IN p_leadid int(11), 
+	IN p_quotevalue decimal(12,3), 
+    IN p_withgst TINYINT(4),
+	IN p_quotetype int(11), 
+	IN p_quotedate date, 
+	IN p_quotename varchar(45), 
+	IN p_quotediscription varchar(45), 
+	IN p_quotestatusid int(11), 
+	IN p_quotescore decimal(9,3), 
+	IN p_quotecategory int(11), 
+	IN p_quotesubcategory int(11), 
+	IN p_leadsourceid int(11),
+	IN p_quotestageid int(11), 
+	IN p_typeoflift int(11), 
+	IN p_nooflifts int(11), 
+	IN p_capacityid int(11), 
+	IN p_modelid int(11), 
+	IN p_driveid int(11), 
+	IN p_machineid int(11), 
+	IN p_controlid int(11), 
+	IN p_groupcontrolid int(11), 
+	IN p_operationid int(11), 
+	IN p_speedid int(11), 
+	IN p_typeofdoorid int(11), 
+	IN p_landingdoorid int(11), 
+	IN p_cardoorid int(11), 
+	IN p_lowestfloorid int(11), 
+	IN p_cwtpositionid int(11), 
+	IN p_floorheaightid int(11), 
+    IN p_carpanelid int(11),
+    IN p_ventilationid int(11),
+    IN p_tractionmediaid int(11),
+    IN p_mainpowersystemid int(11),
+    IN p_carpositionindicatorid int(11),
+    IN p_falseceilingid int(11),
+    IN p_auxilarysupplysystemid int(11),
+    IN p_flooringid int(11),
+	IN p_architectidid int(11), 
+	IN p_consaltantid int(11), 
+	IN p_stopsid int(11), 
+	IN p_floormarking int(11), 
+	IN p_allopeningsameside varchar(45), 
+	IN p_frontopening varchar(45), 
+	IN p_backopening varchar(45), 
+	IN p_leftopening varchar(45), 
+	IN p_rightopening varchar(45), 
+	IN p_shaftwidth int(11), 
+	IN p_shaftdepth int(11), 
+    IN p_shaftconditionid INT(11),
+    IN p_unitid INT(11),
+	IN p_cardepth int(11), 
+	IN p_carwidth int(11), 
+	IN p_carheight int(11), 
+	IN p_doorwidth int(11), 
+	IN p_doorheight int(11), 
+	IN p_travel varchar(45), 
+	IN p_pitdepth int(11), 
+	IN p_overhead int(11), 
+	IN p_mrwidth int(11), 
+	IN p_mrdepth int(11), 
+	IN p_mrheight int(11), 
+	IN p_isdeleted tinyint(4), 
+	IN p_winprobability decimal(9,3), 
+	IN p_siteaddress varchar(150),
+    IN p_leadstatus INT(11),
+    IN p_locationid int(11),
+	IN p_cityid int(11), 
+	IN p_stateid int(11), 
+	IN p_countryid int(11), 
+	IN p_pincode int(11), 
+	IN p_phoneno VARCHAR(45), 
+	IN p_officialemail varchar(100), 
+	IN p_gstn varchar(100), 
+	IN p_panno varchar(100), 
+	IN p_sociallink1 varchar(100), 
+	IN p_sociallink2 varchar(100), 
+	IN p_sociallink3 varchar(100),
+	IN p_primarycontactid varchar(45), 
+	IN p_contactperson varchar(45), 
+	IN p_designation varchar(45), 
+	IN p_mobileno1 varchar(45), 
+    IN p_completiondays INT(11),
+    IN p_remark1 VARCHAR(100),
+    IN p_remark2 VARCHAR(100),
+    IN p_remark3 VARCHAR(100),
+    IN p_remark4 VARCHAR(100),
+    IN p_remark5 VARCHAR(100),
+    IN p_advanceonorderreception DECIMAL(9,3),
+    IN p_forrequestofmechanicalmaterial DECIMAL(9,3),
+    IN p_forrequestofelectricalmaterial DECIMAL(9,3),
+    IN p_oncustomerhandover DECIMAL(9,3),
+	IN p_companyid int(11),
+	IN p_userid INT(11), 
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+    
+    SET @revisionno = null;
+    SELECT count(*) INTO @revisionno FROM quotation WHERE leadid = p_leadid;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO quotation(id,
+							  leadid,
+							  quotevalue,
+                              withgst,
+                              quotetype,
+                              quotedate,
+                              quotename,
+                              quotediscription,
+                              quotestatusid,
+                              quotescore,
+                              quotecategory, 
+							  quotesubcategory,
+                              leadsourceid,
+                              quotestageid,
+                              typeoflift,
+                              nooflifts,
+                              capacityid,
+                              modelid,
+                              driveid,
+                              machineid, 
+                              controlid,
+                              operationid,
+                              speedid,
+                              typeofdoorid,
+                              landingdoorid,
+                              cardoorid,
+                              lowestfloorid,
+                              cwtpositionid,
+                              floorheaightid,
+                              carpanelid,
+							  ventilationid,
+							  tractionmediaid,
+							  mainpowersystemid,
+							  carpositionindicatorid,
+							  falseceilingid,
+							  auxilarysupplysystemid,
+							  flooringid,
+                              architectidid, 
+                              leadconsaltantid,
+                              stopsid,
+                              floormarking,
+                              allopeningsameside,
+                              frontopening,
+                              backopening,
+                              leftopening,
+                              rightopening, 
+                              shaftwidth,
+                              shaftdepth,
+                              shaftconditionid,
+                              unitid,
+                              cardepth,
+                              carwidth,
+                              carheight,
+                              doorwidth,
+                              doorheight,
+                              travel,
+                              pitdepth,
+                              overhead,
+                              mrwidth,
+                              mrdepth, 
+                              mrheight,
+                              isdeleted,
+                              groupcontrolid,
+                              winprobability,
+                              siteaddress,
+                              cityid,
+                              stateid,
+                              countryid,
+                              pincode,
+                              phoneno,
+                              officialemail,
+                              gstn,
+                              panno,
+                              sociallink1,
+                              sociallink2,
+                              sociallink3,
+                              primarycontactid,
+                              contactperson,
+                              designation,
+                              mobileno1,
+                              completiondays,
+                              revisionno,
+                              remark1,
+                              remark2,
+                              remark3,
+                              remark4,
+                              remark5,
+                              advanceonorderreception,
+                              forrequestofmechanicalmaterial,
+                              forrequestofelectricalmaterial,
+							  oncustomerhandover,
+                              companyid)
+					   VALUES (p_id,
+                               p_leadid,
+						       p_quotevalue,
+                               p_withgst,
+                               p_quotetype,
+                               p_quotedate,
+                               p_quotename,
+                               p_quotediscription,
+                               p_quotestatusid,
+                               p_quotescore,
+                               p_quotecategory, 
+							   p_quotesubcategory,
+                               p_leadsourceid,
+                               p_quotestageid,
+                               p_typeoflift,
+                               p_nooflifts,
+                               p_capacityid,
+                               p_modelid,
+                               p_driveid,
+                               p_machineid, 
+                               p_controlid,
+                               p_operationid,
+                               p_speedid,
+                               p_typeofdoorid,
+                               p_landingdoorid,
+                               p_cardoorid,
+                               p_lowestfloorid,
+                               p_cwtpositionid,
+                               p_floorheaightid,
+                               p_carpanelid,
+							   p_ventilationid,
+							   p_tractionmediaid,
+							   p_mainpowersystemid,
+							   p_carpositionindicatorid,
+							   p_falseceilingid,
+							   p_auxilarysupplysystemid,
+							   p_flooringid,
+                               p_architectidid, 
+                               p_consaltantid,
+                               p_stopsid,
+                               p_floormarking,
+                               p_allopeningsameside,
+                               p_frontopening,
+                               p_backopening,
+                               p_leftopening,
+                               p_rightopening, 
+                               p_shaftwidth,
+                               p_shaftdepth,
+                               p_shaftconditionid,
+                               p_unitid,
+                               p_cardepth,
+                               p_carwidth,
+                               p_carheight,
+                               p_doorwidth,
+                               p_doorheight,
+                               p_travel,
+                               p_pitdepth,
+                               p_overhead,
+                               p_mrwidth,
+                               p_mrdepth, 
+                               p_mrheight,
+                               0,
+                               p_groupcontrolid,
+                               p_winprobability,
+                               p_siteaddress,
+                               p_cityid,
+                               p_stateid,
+                               p_countryid,
+                               p_pincode,
+                               p_phoneno,
+                               p_officialemail,
+                               p_gstn,
+                               p_panno,
+                               p_sociallink1,
+                               p_sociallink2,
+                               p_sociallink3,
+                               p_primarycontactid,
+                               p_contactperson,
+                               p_designation,
+                               p_mobileno1,
+                               p_completiondays,
+                               (@revisionno + 1),
+							   p_remark1,
+							   p_remark2,
+							   p_remark3,
+							   p_remark4,
+							   p_remark5,
+                               p_advanceonorderreception,
+                               p_forrequestofmechanicalmaterial,
+                               p_forrequestofelectricalmaterial,
+							   p_oncustomerhandover,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		UPDATE quotation
+		SET 
+            leadid = p_leadid,
+            quotevalue = p_quotevalue,
+            withgst = p_withgst,
+            quotetype = p_quotetype,
+            quotedate = p_quotedate,
+            quotename = p_quotename,
+            quotediscription = p_quotediscription,
+            quotestatusid = p_quotestatusid,
+            quotescore = p_quotescore,
+            quotecategory = p_quotecategory,
+            quotesubcategory = p_quotesubcategory,
+            leadsourceid = p_leadsourceid,
+            quotestageid = p_quotestageid,
+            typeoflift = p_typeoflift,
+            nooflifts = p_nooflifts,
+            capacityid = p_capacityid,
+            modelid = p_modelid,
+            driveid = p_driveid,
+            machineid = p_machineid,
+			controlid = p_controlid,
+            operationid = p_operationid,
+            speedid = p_speedid,
+            typeofdoorid = p_typeofdoorid,
+            landingdoorid = p_landingdoorid,
+            cardoorid = p_cardoorid,
+            lowestfloorid = p_lowestfloorid,
+            cwtpositionid = p_cwtpositionid,
+            floorheaightid = p_floorheaightid,
+            carpanelid = p_carpanelid,
+			ventilationid = p_ventilationid,
+			tractionmediaid = p_tractionmediaid,
+			mainpowersystemid = p_mainpowersystemid,
+			carpositionindicatorid = p_carpositionindicatorid,
+			falseceilingid = p_falseceilingid,
+			auxilarysupplysystemid = p_auxilarysupplysystemid,
+			flooringid = p_flooringid,
+            architectidid = p_architectidid, 
+			leadconsaltantid = p_consaltantid,
+            stopsid = p_stopsid,
+            floormarking = p_floormarking,
+            allopeningsameside = p_allopeningsameside,
+            frontopening = p_frontopening,
+            backopening = p_backopening,
+            leftopening = p_leftopening,
+            rightopening = p_rightopening, 
+			shaftwidth = p_shaftwidth,
+            shaftdepth = p_shaftdepth,
+            shaftconditionid = p_shaftconditionid,
+			unitid = p_unitid,
+            cardepth = p_cardepth,
+            carwidth = p_carwidth,
+            carheight = p_carheight,
+            doorwidth = p_doorwidth,
+            doorheight = p_doorheight,
+            travel = p_travel,
+            pitdepth = p_pitdepth,
+            overhead = p_overhead,
+            mrwidth = p_mrwidth,
+            mrdepth = p_mrdepth, 
+			mrheight = p_mrheight,
+            isdeleted = p_isdeleted,
+            groupcontrolid = p_groupcontrolid,
+            winprobability = p_winprobability,
+            siteaddress = p_siteaddress,
+            cityid = p_cityid,
+            stateid = p_stateid,
+            countryid = p_countryid,
+            pincode = p_pincode,
+            phoneno = p_phoneno,
+			officialemail = p_officialemail,
+            gstn = p_gstn,
+            panno = p_panno,
+            sociallink1 = p_sociallink1,
+            sociallink2 = p_sociallink2,
+            sociallink3 = p_sociallink3,
+            primarycontactid = p_primarycontactid,
+            contactperson = p_contactperson,
+            designation = p_designation,
+			mobileno1 = p_mobileno1,
+            completiondays = p_completiondays,
+			remark1 = p_remark1,
+			remark2 = p_remark2,
+			remark3 = p_remark3,
+			remark4 = p_remark4,
+			remark5 = p_remark5,
+            companyid = p_companyid,
+            advanceonorderreception = p_advanceonorderreception,
+			forrequestofmechanicalmaterial = p_forrequestofmechanicalmaterial,
+			forrequestofelectricalmaterial = p_forrequestofelectricalmaterial,
+			oncustomerhandover = p_oncustomerhandover,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+         
+         UPDATE leads L
+         SET
+		 L.locationid=p_locationid,
+         L.leadstatus=p_leadstatus
+         WHERE L.id = p_leadid 
+		 AND companyid = p_companyid;
+                
+
+		SET @action = 'UPDATE';
+		
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+    
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `spc_quotation_search`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotation_search`(
+	IN p_companyid INT(11)
+)
+BEGIN
+
+	SELECT 
+    Q.id,
+    Q.leadid,
+    Q.quotevalue,
+    Q.quotetype,
+	DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+    Q.quotename,
+    Q.quotediscription,
+    Q.quotestatusid,
+    -- Q.quotescore,
+    Q.quotecategory,
+    Q.quotesubcategory,
+    L.leadscore,
+    Q.companyid,
+    L.leadname,
+    R.description as leadstatus,
+    R1.description as quotecategory,
+    Q.advanceonorderreception,
+	Q.forrequestofmechanicalmaterial,
+	Q.forrequestofelectricalmaterial,
+	Q.oncustomerhandover
+    
+    FROM quotation Q
+    LEFT JOIN leads L ON L.id = Q.leadid
+    LEFT JOIN reference R ON R.id =  Q.quotestatusid
+    LEFT JOIN reference R1 ON R1.id =  Q.quotecategory
+    WHERE Q.companyid = p_companyid;
+
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `spc_quotation_select`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotation_select`(
+	IN p_id INT(11)
+)
+BEGIN
+	SELECT 
+				Q.id,
+                Q.id as quotationid,
+				Q.leadid,
+                Q.groupcontrolid,
+                Q.quotestatusid,
+				Q.quotevalue,
+				Q.quotetype,
+                DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+				Q.quotename,
+				Q.quotediscription,
+				Q.quotestatusid,
+				Q.quotescore,
+				Q.quotecategory,
+				Q.quotesubcategory,
+				Q.companyid,
+				Q.completiondays,
+				L.leadname,
+                L.mobileno,
+                L.companyname,
+                L.email,
+                L.sourceid,
+                L.stageid,
+                L.leadscategory,
+                L.leadvalue,
+                L.typeoflift,
+                L.nooflifts,
+                L.contactperson,
+                L.leadstatus,
+                L.locationid,
+                L.salesrep,
+                Q.capacityid,
+                Q.modelid,
+                Q.driveid,
+                Q.machineid,
+                Q.controlid,
+                Q.operationid,
+                Q.speedid,
+                Q.typeofdoorid,
+				Q.landingdoorid,
+				Q.cardoorid,
+				Q.lowestfloorid,
+				Q.cwtpositionid,
+				Q.floorheaightid,
+				Q.architectidid,
+				Q.leadconsaltantid,
+                Q.officialemail,
+                Q.gstn,
+                Q.panno,
+                Q.primarycontactid,
+                Q.designation,
+                Q.mobileno1,
+                Q.includinggst,
+				DATE_FORMAT(L.leaddate,'%d/%m/%Y') as leaddate,
+				L.phoneno,
+				L.leaddescription,
+				L.leadscore,
+                L.salesrep,
+				L.cityid,
+				L.stateid,
+				L.pincode,
+				Q.stopsid,
+				Q.floormarking,
+				Q.allopeningsameside,
+				Q.frontopening,
+				Q.backopening,
+				Q.leftopening,
+                Q.leadsourceid,
+				Q.rightopening,
+				Q.shaftwidth,
+				Q.shaftdepth,
+                Q.shaftconditionid,
+                Q.unitid,
+				Q.cardepth,
+				Q.carwidth,
+				Q.carheight,
+				Q.doorwidth,
+				Q.doorheight,
+				Q.travel,
+                Q.remark1,
+			    Q.remark1,
+			    Q.remark2,
+			    Q.remark3,
+			    Q.remark4,
+			    Q.remark5,
+				Q.pitdepth,
+				Q.overhead,
+				Q.mrwidth,
+				Q.mrdepth,
+				Q.mrheight,
+				Q.mainpowersystemid,
+                Q.carpositionindicatorid,
+                Q.falseceilingid,
+                Q.tractionmediaid,
+                Q.auxilarysupplysystemid,
+                Q.carpanelid,
+                Q.ventilationid,
+                Q.flooringid,
+				L.companyname,
+				L.countryid,
+				L.linkedin,
+				L.facebook,
+				L.youtube,
+                R.description as leadstatusdetail,
+				R1.description as quotecategorydetail,
+                Q.advanceonorderreception,
+				Q.forrequestofmechanicalmaterial,
+				Q.forrequestofelectricalmaterial,
+				Q.oncustomerhandover
+                 
+    FROM quotation Q
+    
+    LEFT JOIN leads L ON L.id = Q.leadid
+	LEFT JOIN reference R ON R.id =  Q.quotestatusid
+    LEFT JOIN reference R1 ON R1.id =  Q.quotecategory
+    WHERE Q.id = p_id;
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `spc_quotepdf`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotepdf`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+        Q.id as negno,
+		   Q.quotename,
+		   Q.siteaddress,
+           DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+           Q.contactperson,
+           Q.snehasalescontactname,
+           Q.snehasalescontactno,
+           Q.designation,
+		   REF.description as modelcode,
+           REF1.description as lifttype,
+           REF2.description as capacity,
+           REF3.description as speed,
+           Q.stopsid,
+           REF4.description as controller,
+           GROUP_CONCAT(REF5.description,' mts') as drive,
+           ifnull(GROUP_CONCAT(Q.shaftwidth,'mm(W)','X',Q.shaftdepth,'mm(D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+           ifnull(GROUP_CONCAT(Q.carwidth,'mm(W)','X',Q.cardepth,'mm(D)','X',Q.carheight,'mm(H) (Approximately)'),'-') as carsize,
+           ifnull(GROUP_CONCAT(Q.doorwidth, 'mm Open','X',Q.doorheight,'mm Height'),'-') as clearopening,
+           ifnull(CONCAT(Q.pitdepth,'mm'),'-')as pitdepth,
+           ifnull(CONCAT(Q.overhead,'mm'),'-')as overhead,
+           ifnull(CONCAT(REF6.description,'(Manual)'),'-') as cardoor,
+           GROUP_CONCAT(REGEXP_SUBSTR(REF2.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF.description,' Unit:',Q.nooflifts) as specificationheader,
+           Q.advanceonorderreception,
+		   Q.forrequestofmechanicalmaterial,
+		   Q.forrequestofelectricalmaterial,
+		   Q.oncustomerhandover
+	FROM quotation Q
+    LEFT JOIN city C ON C.id = Q.cityid
+    LEFT JOIN reference REF ON REF.id = Q.modelid
+    LEFT JOIN reference REF1 ON REF1.id = Q.typeoflift
+    LEFT JOIN reference REF2 ON REF2.id = Q.capacityid
+    LEFT JOIN reference REF3 ON REF3.id = Q.speedid
+    LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+    LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+    LEFT JOIN reference REF6 ON REF6.id = Q.cardoorid
+	LEFT JOIN reference REF7 ON REF7.id = Q.shaftconditionid
+    WHERE Q.id = p_id;
+    
+    select ifnull(leadname,'-')as leadname,
+		   ifnull(address,'-')as address,
+           ifnull(shaftwidth,'-')as shaftwidth,
+           ifnull(carwidth,'-')as carwidth,
+           ifnull(pitdepth,'-')as pitdepth,
+           ifnull(overhead,'-')as overhead,
+           ifnull(city,'-')as city,
+           ifnull(contactno,'-')as contactno,
+           ifnull(quotedate,'-')as quotedate,
+           ifnull(quotevalue,'-')as quotevalue,
+           ifnull(model,'-')as model,
+           ifnull(capacity,'-')as capacity,
+           ifnull(speed,'-')as speed,
+           ifnull(`stop`,'-')as `stop`,
+           ifnull(control,'-')as control,
+           ifnull(drive,'-')as drive,
+           ifnull(allopeningsameside,'-')as allopeningsameside,
+           ifnull(cardoor,'-')as cardoor,
+           ifnull(specificationheader,'-') as specificationheader,
+           ifnull(landingdoor,'-')as landingdoor,
+           ifnull(floormarking,'-')as floormarking,
+		   ifnull(machine,'-')as machine,
+           ifnull(cityuppercase,'-')as cityuppercase,
+           ifnull(month,'-')as month,
+           year,
+           version,
+		   CONCAT('SELLP/',cityuppercase,'/',month,'/',year,'/',quoteid,'/',version) as negno,
+           modeldetails,
+           ifnull(travel,'-')as travel,
+           result,
+           unit,
+           ifnull(carpanel,'-')as carpanel,
+           ifnull(ventilation,'-')as ventilation,
+           ifnull(tractionmedia,'-')as tractionmedia,
+           ifnull(mainpowersystem,'-')as mainpowersystem,
+           ifnull(carpositionindicator,'-')as carpositionindicator,
+           ifnull(falseceiling,'-')as falseceiling,
+           ifnull(auxilarysupplysystem,'-')as auxilarysupplysystem,
+           ifnull(flooring,'-')as flooring,
+           ifnull(operation,'-')as operation
+	from(
+	select 
+			 -- GROUP_CONCAT('ELE/',Q.id) as negno,
+			 L.leadname,
+			 L.address,
+			 Q.modelid,
+			 Q.capacityid,
+			 Q.speedid,
+			 Q.stopsid,
+			 Q.controlid,
+			 Q.driveid,
+			 Q.shaftwidth,
+			 Q.carwidth,
+			 Q.allopeningsameside as allopeningsamesideid,
+			 Q.pitdepth,
+			 Q.overhead,
+			 Q.cardoorid,
+             GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF5.description,' Unit:',Q.nooflifts) as specificationheader,
+			 Q.landingdoorid,
+             GROUP_CONCAT(Q.travel,'mts') as travel,
+             -- 6P - 7S(C+G+5) - REF.description - S.S Car Panel - cwtposition 
+			GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' ', '-',' ',Q.stopsid,'S(G','+',(Q.stopsid-1),')',' ','-',' ',REF.description,' ','-',' ',ifnull(REF12.description,'-'),' ',REF8.description) as modeldetails,
+			GROUP_CONCAT(Q.nooflifts,' ','Units') as unit,
+            REGEXP_SUBSTR(REF1.description, '[0-9]+') AS result,
+            Q.floormarking as floormarkingid,
+			Q.machineid,
+			GROUP_CONCAT(C.cityname,' ','-',' ',L.pincode) as city,
+			L.mobileno as contactno,
+            DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+            Q.quotevalue,
+            Q.cwtpositionid,
+            REF.description as model,
+            REF1.description as capacity,
+            REF2.description as speed,
+            Q.stopsid  as stop,
+            REF4.description as control,
+            REF5.description as drive,
+            REF6.description as allopeningsameside,
+            REF7.description as cardoor,
+            REF8.description as landingdoor,
+            REF9.description as floormarking,
+            REF10.description as machine,
+			REF11.description as cwtposition,
+			REF12.description as carpanel,
+            REF13.description as ventilation,
+            REF14.description as tractionmedia,
+            REF15.description as mainpowersystem,
+            REF16.description as carpositionindicator,
+            REF17.description as falseceiling,
+            REF18.description as auxilarysupplysystem,
+			REF19.description as flooring,
+            REF20.description as operation,
+			UPPER(SUBSTRING( CO.city, 1, 3)) as cityuppercase,
+			MONTHNAME(Q.quotedate) AS month,
+            YEAR(Q.quotedate) AS year,
+            Q.leadid,
+            Q.id as quoteid,
+            ( select
+			ROW_NUMBER() OVER (ORDER BY id)  Sequence_no
+			-- id as quoteid
+			from quotation 
+			where leadid = Q.leadid order by id DESC limit 1)as version
+            
+            
+		
+		from quotation Q
+		LEFT JOIN leads L ON L.id = Q.leadid
+		LEFT JOIN city C ON L.cityid = C.id
+		LEFT JOIN company CO ON CO.id = Q.companyid
+		LEFT JOIN reference REF ON REF.id = Q.modelid
+		LEFT JOIN reference REF1 ON REF1.id = Q.capacityid
+		LEFT JOIN reference REF2 ON REF2.id = Q.speedid
+		LEFT JOIN reference REF3 ON REF3.id = Q.stopsid
+		LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+		LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+		LEFT JOIN reference REF6 ON REF6.id = Q.allopeningsameside
+        LEFT JOIN reference REF7 ON REF7.id = Q.cardoorid
+		LEFT JOIN reference REF8 ON REF8.id = Q.landingdoorid
+		LEFT JOIN reference REF9 ON REF9.id = Q.floormarking
+        LEFT JOIN reference REF10 ON REF10.id = Q.machineid
+        LEFT JOIN reference REF11 ON REF11.id = Q.cwtpositionid
+        LEFT JOIN reference REF12 ON REF12.id = Q.carpanelid
+		LEFT JOIN reference REF13 ON REF13.id = Q.ventilationid
+        LEFT JOIN reference REF14 ON REF14.id = Q.tractionmediaid
+		LEFT JOIN reference REF15 ON REF15.id = Q.mainpowersystemid
+		LEFT JOIN reference REF16 ON REF16.id = Q.carpositionindicatorid
+        LEFT JOIN reference REF17 ON REF17.id = Q.falseceilingid
+        LEFT JOIN reference REF18 ON REF18.id = Q.auxilarysupplysystemid
+		LEFT JOIN reference REF19 ON REF19.id = Q.flooringid
+        LEFT JOIN reference REF20 ON REF20.id = Q.operationid
+		where Q.id=p_id)temp;
+        
+		SELECT
+           -- IFNULL((UR.username),'-') as salemanager,
+           ifnull(UR.username,'-') assalemanager,
+           CONCAT('Contact No.','-','  ',UR.mobile) as salecontactno
+			FROM user1 UR
+			INNER JOIN userlicense UL ON UR.id = UL.userid
+			INNER JOIN `role` R ON UL.roleid = R.id
+        WHERE R.description = 'Sales Manager';
+
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `spc_convertto_quote`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_convertto_quote`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+L.leadname,
+L.mobileno,
+L.companyname,
+L.email ,
+L.sourceid ,
+L.stageid ,
+L.leadscategory,
+L.leadvalue,
+L.typeoflift ,
+L.nooflifts ,
+L.contactperson ,
+L.leadstatus ,
+L.locationid ,
+L.salesrep ,
+L.capacityid ,
+L.modelid ,
+L.driveid ,
+L.machineid , 
+L.controlid ,
+L.operationid ,
+L.speedid ,
+L.typeofdoorid ,
+L.landingdoorid ,
+L.cardoorid ,
+L.lowestfloorid ,
+L.cwtpositionid ,
+L.floorheaightid ,
+L.architectidid ,
+L.leadconsaltantid ,
+L.leaddate ,
+L.leadscore ,
+L.leaddescription  ,
+L.cityid  ,
+L.stateid ,
+L.countryid ,
+L.phoneno , 
+L.linkedin ,
+L.facebook ,
+L.youtube , 
+L.pincode , 
+L.stopsid ,
+L.floormarking ,
+L.allopeningsameside ,
+L.frontopening ,
+L.backopening ,
+L.leftopening , 
+L.rightopening, 
+L.shaftwidth ,
+L.shaftdepth ,
+L.cardepth ,
+L.carwidth ,
+L.carheight , 
+L.doorwidth , 
+L.doorheight ,
+L.travel,
+L.pitdepth ,
+L.overhead,
+L.mrwidth , 
+L.mrdepth ,
+L.mrheight ,
+L.leadtype,
+L.isdeleted ,
+L.companyid ,
+L.groupcontrolid ,
+L.leadsubcategoryid  ,
+L.address ,
+L.gstn ,
+L.mobilep ,
+L.scoutername ,
+L.reference ,
+L.preferedlead ,
+L.panno ,
+L.winprobability , 
+L.carpanelid ,
+L.ventilationid ,
+L.tractionmediaid ,
+L.mainpowersystemid ,
+L.carpositionindicatorid ,
+L.falseceilingid ,
+L.auxilarysupplysystemid ,
+L.flooringid,
+        L.id as leadid,
+		L.leadname as quotename,
+		L.sourceid as leadsourceid,
+		L.stageid as quotestageid,
+		L.leadscategory as quotecategory,
+        L.leadvalue as quotevalue,
+        DATE_FORMAT(L.leaddate,'%d/%m/%Y') as quotedate,
+        L.leaddescription as quotediscription,
+        L.leadscore as quotescore,
+        L.address as siteaddress,
+		L.linkedin as sociallink1,
+        L.facebook as sociallink2,
+        L.youtube as sociallink3,
+        (SELECT id FROM quotation ORDER BY id DESC LIMIT 1) as lastquoteid,
+        10 as advanceonorderreception,
+		60 as forrequestofmechanicalmaterial,
+		25 as forrequestofelectricalmaterial,
+		5 as oncustomerhandover
+
+		FROM leads L
+		WHERE L.id = p_id;
+
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `spc_quotepdf`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotepdf`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+        Q.id as negno,
+		   Q.quotename,
+		   Q.siteaddress,
+           DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+           Q.contactperson,
+           Q.snehasalescontactname,
+           Q.snehasalescontactno,
+           Q.designation,
+		   REF.description as modelcode,
+           REF1.description as lifttype,
+           REF2.description as capacity,
+           REF3.description as speed,
+           Q.stopsid,
+           REF4.description as controller,
+           GROUP_CONCAT(REF5.description,' mts') as drive,
+           ifnull(GROUP_CONCAT(Q.shaftwidth,'mm(W)','X',Q.shaftdepth,'mm(D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+           ifnull(GROUP_CONCAT(Q.carwidth,'mm(W)','X',Q.cardepth,'mm(D)','X',Q.carheight,'mm(H) (Approximately)'),'-') as carsize,
+           ifnull(GROUP_CONCAT(Q.doorwidth, 'mm Open','X',Q.doorheight,'mm Height'),'-') as clearopening,
+           ifnull(CONCAT(Q.pitdepth,'mm'),'-')as pitdepth,
+           ifnull(CONCAT(Q.overhead,'mm'),'-')as overhead,
+           ifnull(CONCAT(REF6.description,'(Manual)'),'-') as cardoor,
+           GROUP_CONCAT(REGEXP_SUBSTR(REF2.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF.description,' Unit:',Q.nooflifts) as specificationheader,
+           IFNULL(CONCAT(Q.advanceonorderreception,'%'),'-'),
+		   IFNULL(CONCAT(Q.forrequestofmechanicalmaterial,'%'),'-'),
+		   IFNULL(CONCAT(Q.forrequestofelectricalmaterial,'%'),'-'),
+		   IFNULL(CONCAT(Q.oncustomerhandover,'%'),'-')
+	FROM quotation Q
+    LEFT JOIN city C ON C.id = Q.cityid
+    LEFT JOIN reference REF ON REF.id = Q.modelid
+    LEFT JOIN reference REF1 ON REF1.id = Q.typeoflift
+    LEFT JOIN reference REF2 ON REF2.id = Q.capacityid
+    LEFT JOIN reference REF3 ON REF3.id = Q.speedid
+    LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+    LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+    LEFT JOIN reference REF6 ON REF6.id = Q.cardoorid
+	LEFT JOIN reference REF7 ON REF7.id = Q.shaftconditionid
+    WHERE Q.id = p_id;
+    
+    select ifnull(leadname,'-')as leadname,
+		   ifnull(address,'-')as address,
+           ifnull(shaftwidth,'-')as shaftwidth,
+           ifnull(carwidth,'-')as carwidth,
+           ifnull(pitdepth,'-')as pitdepth,
+           ifnull(overhead,'-')as overhead,
+           ifnull(city,'-')as city,
+           ifnull(contactno,'-')as contactno,
+           ifnull(quotedate,'-')as quotedate,
+           ifnull(quotevalue,'-')as quotevalue,
+           ifnull(model,'-')as model,
+           ifnull(capacity,'-')as capacity,
+           ifnull(speed,'-')as speed,
+           ifnull(`stop`,'-')as `stop`,
+           ifnull(control,'-')as control,
+           ifnull(drive,'-')as drive,
+           ifnull(allopeningsameside,'-')as allopeningsameside,
+           ifnull(cardoor,'-')as cardoor,
+           ifnull(specificationheader,'-') as specificationheader,
+           ifnull(landingdoor,'-')as landingdoor,
+           ifnull(floormarking,'-')as floormarking,
+		   ifnull(machine,'-')as machine,
+           ifnull(cityuppercase,'-')as cityuppercase,
+           ifnull(month,'-')as month,
+           year,
+           version,
+		   CONCAT('SELLP/',cityuppercase,'/',month,'/',year,'/',quoteid,'/',version) as negno,
+           modeldetails,
+           ifnull(travel,'-')as travel,
+           result,
+           unit,
+           ifnull(carpanel,'-')as carpanel,
+           ifnull(ventilation,'-')as ventilation,
+           ifnull(tractionmedia,'-')as tractionmedia,
+           ifnull(mainpowersystem,'-')as mainpowersystem,
+           ifnull(carpositionindicator,'-')as carpositionindicator,
+           ifnull(falseceiling,'-')as falseceiling,
+           ifnull(auxilarysupplysystem,'-')as auxilarysupplysystem,
+           ifnull(flooring,'-')as flooring,
+           ifnull(operation,'-')as operation
+	from(
+	select 
+			 -- GROUP_CONCAT('ELE/',Q.id) as negno,
+			 L.leadname,
+			 L.address,
+			 Q.modelid,
+			 Q.capacityid,
+			 Q.speedid,
+			 Q.stopsid,
+			 Q.controlid,
+			 Q.driveid,
+			 Q.shaftwidth,
+			 Q.carwidth,
+			 Q.allopeningsameside as allopeningsamesideid,
+			 Q.pitdepth,
+			 Q.overhead,
+			 Q.cardoorid,
+             GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF5.description,' Unit:',Q.nooflifts) as specificationheader,
+			 Q.landingdoorid,
+             GROUP_CONCAT(Q.travel,'mts') as travel,
+             -- 6P - 7S(C+G+5) - REF.description - S.S Car Panel - cwtposition 
+			GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' ', '-',' ',Q.stopsid,'S(G','+',(Q.stopsid-1),')',' ','-',' ',REF.description,' ','-',' ',ifnull(REF12.description,'-'),' ',REF8.description) as modeldetails,
+			GROUP_CONCAT(Q.nooflifts,' ','Units') as unit,
+            REGEXP_SUBSTR(REF1.description, '[0-9]+') AS result,
+            Q.floormarking as floormarkingid,
+			Q.machineid,
+			GROUP_CONCAT(C.cityname,' ','-',' ',L.pincode) as city,
+			L.mobileno as contactno,
+            DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+            Q.quotevalue,
+            Q.cwtpositionid,
+            REF.description as model,
+            REF1.description as capacity,
+            REF2.description as speed,
+            Q.stopsid  as stop,
+            REF4.description as control,
+            REF5.description as drive,
+            REF6.description as allopeningsameside,
+            REF7.description as cardoor,
+            REF8.description as landingdoor,
+            REF9.description as floormarking,
+            REF10.description as machine,
+			REF11.description as cwtposition,
+			REF12.description as carpanel,
+            REF13.description as ventilation,
+            REF14.description as tractionmedia,
+            REF15.description as mainpowersystem,
+            REF16.description as carpositionindicator,
+            REF17.description as falseceiling,
+            REF18.description as auxilarysupplysystem,
+			REF19.description as flooring,
+            REF20.description as operation,
+			UPPER(SUBSTRING( CO.city, 1, 3)) as cityuppercase,
+			MONTHNAME(Q.quotedate) AS month,
+            YEAR(Q.quotedate) AS year,
+            Q.leadid,
+            Q.id as quoteid,
+            ( select
+			ROW_NUMBER() OVER (ORDER BY id)  Sequence_no
+			-- id as quoteid
+			from quotation 
+			where leadid = Q.leadid order by id DESC limit 1)as version
+            
+            
+		
+		from quotation Q
+		LEFT JOIN leads L ON L.id = Q.leadid
+		LEFT JOIN city C ON L.cityid = C.id
+		LEFT JOIN company CO ON CO.id = Q.companyid
+		LEFT JOIN reference REF ON REF.id = Q.modelid
+		LEFT JOIN reference REF1 ON REF1.id = Q.capacityid
+		LEFT JOIN reference REF2 ON REF2.id = Q.speedid
+		LEFT JOIN reference REF3 ON REF3.id = Q.stopsid
+		LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+		LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+		LEFT JOIN reference REF6 ON REF6.id = Q.allopeningsameside
+        LEFT JOIN reference REF7 ON REF7.id = Q.cardoorid
+		LEFT JOIN reference REF8 ON REF8.id = Q.landingdoorid
+		LEFT JOIN reference REF9 ON REF9.id = Q.floormarking
+        LEFT JOIN reference REF10 ON REF10.id = Q.machineid
+        LEFT JOIN reference REF11 ON REF11.id = Q.cwtpositionid
+        LEFT JOIN reference REF12 ON REF12.id = Q.carpanelid
+		LEFT JOIN reference REF13 ON REF13.id = Q.ventilationid
+        LEFT JOIN reference REF14 ON REF14.id = Q.tractionmediaid
+		LEFT JOIN reference REF15 ON REF15.id = Q.mainpowersystemid
+		LEFT JOIN reference REF16 ON REF16.id = Q.carpositionindicatorid
+        LEFT JOIN reference REF17 ON REF17.id = Q.falseceilingid
+        LEFT JOIN reference REF18 ON REF18.id = Q.auxilarysupplysystemid
+		LEFT JOIN reference REF19 ON REF19.id = Q.flooringid
+        LEFT JOIN reference REF20 ON REF20.id = Q.operationid
+		where Q.id=p_id)temp;
+        
+		SELECT
+           -- IFNULL((UR.username),'-') as salemanager,
+           ifnull(UR.username,'-') assalemanager,
+           CONCAT('Contact No.','-','  ',UR.mobile) as salecontactno
+			FROM user1 UR
+			INNER JOIN userlicense UL ON UR.id = UL.userid
+			INNER JOIN `role` R ON UL.roleid = R.id
+        WHERE R.description = 'Sales Manager';
+
+END$$
+
+DELIMITER ;
+;
+
+
+
+DROP procedure IF EXISTS `spc_quotepdf`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotepdf`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+        Q.id as negno,
+		   Q.quotename,
+		   Q.siteaddress,
+           DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+           Q.contactperson,
+           Q.snehasalescontactname,
+           Q.snehasalescontactno,
+           Q.designation,
+		   REF.description as modelcode,
+           REF1.description as lifttype,
+           REF2.description as capacity,
+           REF3.description as speed,
+           Q.stopsid,
+           REF4.description as controller,
+           GROUP_CONCAT(REF5.description,' mts') as drive,
+           ifnull(GROUP_CONCAT(Q.shaftwidth,'mm(W)','X',Q.shaftdepth,'mm(D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+           ifnull(GROUP_CONCAT(Q.carwidth,'mm(W)','X',Q.cardepth,'mm(D)','X',Q.carheight,'mm(H) (Approximately)'),'-') as carsize,
+           ifnull(GROUP_CONCAT(Q.doorwidth, 'mm Open','X',Q.doorheight,'mm Height'),'-') as clearopening,
+           ifnull(CONCAT(Q.pitdepth,'mm'),'-')as pitdepth,
+           ifnull(CONCAT(Q.overhead,'mm'),'-')as overhead,
+           ifnull(CONCAT(REF6.description,'(Manual)'),'-') as cardoor,
+           GROUP_CONCAT(REGEXP_SUBSTR(REF2.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF.description,' Unit:',Q.nooflifts) as specificationheader,
+           IFNULL(CONCAT(Q.advanceonorderreception,'%'),'-'),
+		   IFNULL(CONCAT(Q.forrequestofmechanicalmaterial,'%'),'-'),
+		   IFNULL(CONCAT(Q.forrequestofelectricalmaterial,'%'),'-'),
+		   IFNULL(CONCAT(Q.oncustomerhandover,'%'),'-')
+	FROM quotation Q
+    LEFT JOIN city C ON C.id = Q.cityid
+    LEFT JOIN reference REF ON REF.id = Q.modelid
+    LEFT JOIN reference REF1 ON REF1.id = Q.typeoflift
+    LEFT JOIN reference REF2 ON REF2.id = Q.capacityid
+    LEFT JOIN reference REF3 ON REF3.id = Q.speedid
+    LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+    LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+    LEFT JOIN reference REF6 ON REF6.id = Q.cardoorid
+	LEFT JOIN reference REF7 ON REF7.id = Q.shaftconditionid
+    WHERE Q.id = p_id;
+    
+    select ifnull(leadname,'-')as leadname,
+		   ifnull(address,'-')as address,
+           ifnull(shaftwidth,'-')as shaftwidth,
+           ifnull(carwidth,'-')as carwidth,
+           ifnull(pitdepth,'-')as pitdepth,
+           ifnull(overhead,'-')as overhead,
+           ifnull(city,'-')as city,
+           ifnull(contactno,'-')as contactno,
+           ifnull(quotedate,'-')as quotedate,
+           ifnull(quotevalue,'-')as quotevalue,
+           ifnull(model,'-')as model,
+           ifnull(capacity,'-')as capacity,
+           ifnull(speed,'-')as speed,
+           ifnull(`stop`,'-')as `stop`,
+           ifnull(control,'-')as control,
+           ifnull(drive,'-')as drive,
+           ifnull(allopeningsameside,'-')as allopeningsameside,
+           ifnull(cardoor,'-')as cardoor,
+           ifnull(specificationheader,'-') as specificationheader,
+           ifnull(landingdoor,'-')as landingdoor,
+           ifnull(floormarking,'-')as floormarking,
+		   ifnull(machine,'-')as machine,
+           ifnull(cityuppercase,'-')as cityuppercase,
+           ifnull(month,'-')as month,
+           year,
+           version,
+		   CONCAT('SELLP/',cityuppercase,'/',month,'/',year,'/',quoteid,'/',version) as negno,
+           modeldetails,
+           ifnull(travel,'-')as travel,
+           result,
+           unit,
+           ifnull(carpanel,'-')as carpanel,
+           ifnull(ventilation,'-')as ventilation,
+           ifnull(tractionmedia,'-')as tractionmedia,
+           ifnull(mainpowersystem,'-')as mainpowersystem,
+           ifnull(carpositionindicator,'-')as carpositionindicator,
+           ifnull(falseceiling,'-')as falseceiling,
+           ifnull(auxilarysupplysystem,'-')as auxilarysupplysystem,
+           ifnull(flooring,'-')as flooring,
+           ifnull(operation,'-')as operation,
+           IFNULL(advanceonorderreception,'-'),
+		   IFNULL(forrequestofmechanicalmaterial,'-'),
+		   IFNULL(forrequestofelectricalmaterial,'-'),
+		   IFNULL(oncustomerhandover,'-')
+	from(
+	select 
+			 -- GROUP_CONCAT('ELE/',Q.id) as negno,
+			 L.leadname,
+			 L.address,
+			 Q.modelid,
+			 Q.capacityid,
+			 Q.speedid,
+			 Q.stopsid,
+			 Q.controlid,
+			 Q.driveid,
+			 Q.shaftwidth,
+			 Q.carwidth,
+			 Q.allopeningsameside as allopeningsamesideid,
+			 Q.pitdepth,
+			 Q.overhead,
+			 Q.cardoorid,
+             GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF5.description,' Unit:',Q.nooflifts) as specificationheader,
+			 Q.landingdoorid,
+             GROUP_CONCAT(Q.travel,'mts') as travel,
+             -- 6P - 7S(C+G+5) - REF.description - S.S Car Panel - cwtposition 
+			GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' ', '-',' ',Q.stopsid,'S(G','+',(Q.stopsid-1),')',' ','-',' ',REF.description,' ','-',' ',ifnull(REF12.description,'-'),' ',REF8.description) as modeldetails,
+			GROUP_CONCAT(Q.nooflifts,' ','Units') as unit,
+            REGEXP_SUBSTR(REF1.description, '[0-9]+') AS result,
+            Q.floormarking as floormarkingid,
+			Q.machineid,
+			GROUP_CONCAT(C.cityname,' ','-',' ',L.pincode) as city,
+			L.mobileno as contactno,
+            DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+            Q.quotevalue,
+            Q.cwtpositionid,
+            REF.description as model,
+            REF1.description as capacity,
+            REF2.description as speed,
+            Q.stopsid  as stop,
+            REF4.description as control,
+            REF5.description as drive,
+            REF6.description as allopeningsameside,
+            REF7.description as cardoor,
+            REF8.description as landingdoor,
+            REF9.description as floormarking,
+            REF10.description as machine,
+			REF11.description as cwtposition,
+			REF12.description as carpanel,
+            REF13.description as ventilation,
+            REF14.description as tractionmedia,
+            REF15.description as mainpowersystem,
+            REF16.description as carpositionindicator,
+            REF17.description as falseceiling,
+            REF18.description as auxilarysupplysystem,
+			REF19.description as flooring,
+            REF20.description as operation,
+            CONCAT(Q.advanceonorderreception,'%') as advanceonorderreception,
+			CONCAT(Q.forrequestofmechanicalmaterial,'%') as forrequestofmechanicalmaterial,
+		    CONCAT(Q.forrequestofelectricalmaterial,'%') as forrequestofelectricalmaterial,
+		    CONCAT(Q.oncustomerhandover,'%') as oncustomerhandover,
+			UPPER(SUBSTRING( CO.city, 1, 3)) as cityuppercase,
+			MONTHNAME(Q.quotedate) AS month,
+            YEAR(Q.quotedate) AS year,
+            Q.leadid,
+            Q.id as quoteid,
+            ( select
+			ROW_NUMBER() OVER (ORDER BY id)  Sequence_no
+			-- id as quoteid
+			from quotation 
+			where leadid = Q.leadid order by id DESC limit 1)as version
+            
+            
+		
+		from quotation Q
+		LEFT JOIN leads L ON L.id = Q.leadid
+		LEFT JOIN city C ON L.cityid = C.id
+		LEFT JOIN company CO ON CO.id = Q.companyid
+		LEFT JOIN reference REF ON REF.id = Q.modelid
+		LEFT JOIN reference REF1 ON REF1.id = Q.capacityid
+		LEFT JOIN reference REF2 ON REF2.id = Q.speedid
+		LEFT JOIN reference REF3 ON REF3.id = Q.stopsid
+		LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+		LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+		LEFT JOIN reference REF6 ON REF6.id = Q.allopeningsameside
+        LEFT JOIN reference REF7 ON REF7.id = Q.cardoorid
+		LEFT JOIN reference REF8 ON REF8.id = Q.landingdoorid
+		LEFT JOIN reference REF9 ON REF9.id = Q.floormarking
+        LEFT JOIN reference REF10 ON REF10.id = Q.machineid
+        LEFT JOIN reference REF11 ON REF11.id = Q.cwtpositionid
+        LEFT JOIN reference REF12 ON REF12.id = Q.carpanelid
+		LEFT JOIN reference REF13 ON REF13.id = Q.ventilationid
+        LEFT JOIN reference REF14 ON REF14.id = Q.tractionmediaid
+		LEFT JOIN reference REF15 ON REF15.id = Q.mainpowersystemid
+		LEFT JOIN reference REF16 ON REF16.id = Q.carpositionindicatorid
+        LEFT JOIN reference REF17 ON REF17.id = Q.falseceilingid
+        LEFT JOIN reference REF18 ON REF18.id = Q.auxilarysupplysystemid
+		LEFT JOIN reference REF19 ON REF19.id = Q.flooringid
+        LEFT JOIN reference REF20 ON REF20.id = Q.operationid
+		where Q.id=p_id)temp;
+        
+		SELECT
+           -- IFNULL((UR.username),'-') as salemanager,
+           ifnull(UR.username,'-') assalemanager,
+           CONCAT('Contact No.','-','  ',UR.mobile) as salecontactno
+			FROM user1 UR
+			INNER JOIN userlicense UL ON UR.id = UL.userid
+			INNER JOIN `role` R ON UL.roleid = R.id
+        WHERE R.description = 'Sales Manager';
+
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `spc_quotepdf`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_quotepdf`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+        Q.id as negno,
+		   Q.quotename,
+		   Q.siteaddress,
+           DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+           Q.contactperson,
+           Q.snehasalescontactname,
+           Q.snehasalescontactno,
+           Q.designation,
+		   REF.description as modelcode,
+           REF1.description as lifttype,
+           REF2.description as capacity,
+           REF3.description as speed,
+           Q.stopsid,
+           REF4.description as controller,
+           GROUP_CONCAT(REF5.description,' mts') as drive,
+           ifnull(GROUP_CONCAT(Q.shaftwidth,'mm(W)','X',Q.shaftdepth,'mm(D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+           ifnull(GROUP_CONCAT(Q.carwidth,'mm(W)','X',Q.cardepth,'mm(D)','X',Q.carheight,'mm(H) (Approximately)'),'-') as carsize,
+           ifnull(GROUP_CONCAT(Q.doorwidth, 'mm Open','X',Q.doorheight,'mm Height'),'-') as clearopening,
+           ifnull(CONCAT(Q.pitdepth,'mm'),'-')as pitdepth,
+           ifnull(CONCAT(Q.overhead,'mm'),'-')as overhead,
+           ifnull(CONCAT(REF6.description,'(Manual)'),'-') as cardoor,
+           GROUP_CONCAT(REGEXP_SUBSTR(REF2.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF.description,' Unit:',Q.nooflifts) as specificationheader,
+           IFNULL(CONCAT(Q.advanceonorderreception,'%'),'-') as advanceonorderreception,
+		   IFNULL(CONCAT(Q.forrequestofmechanicalmaterial,'%'),'-') as forrequestofmechanicalmaterial,
+		   IFNULL(CONCAT(Q.forrequestofelectricalmaterial,'%'),'-') as forrequestofelectricalmaterial,
+		   IFNULL(CONCAT(Q.oncustomerhandover,'%'),'-') as oncustomerhandover
+	FROM quotation Q
+    LEFT JOIN city C ON C.id = Q.cityid
+    LEFT JOIN reference REF ON REF.id = Q.modelid
+    LEFT JOIN reference REF1 ON REF1.id = Q.typeoflift
+    LEFT JOIN reference REF2 ON REF2.id = Q.capacityid
+    LEFT JOIN reference REF3 ON REF3.id = Q.speedid
+    LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+    LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+    LEFT JOIN reference REF6 ON REF6.id = Q.cardoorid
+	LEFT JOIN reference REF7 ON REF7.id = Q.shaftconditionid
+    WHERE Q.id = p_id;
+    
+    select ifnull(leadname,'-')as leadname,
+		   ifnull(address,'-')as address,
+           ifnull(shaftwidth,'-')as shaftwidth,
+           ifnull(carwidth,'-')as carwidth,
+           ifnull(pitdepth,'-')as pitdepth,
+           ifnull(overhead,'-')as overhead,
+           ifnull(city,'-')as city,
+           ifnull(contactno,'-')as contactno,
+           ifnull(quotedate,'-')as quotedate,
+           ifnull(quotevalue,'-')as quotevalue,
+           ifnull(model,'-')as model,
+           ifnull(capacity,'-')as capacity,
+           ifnull(speed,'-')as speed,
+           ifnull(`stop`,'-')as `stop`,
+           ifnull(control,'-')as control,
+           ifnull(drive,'-')as drive,
+           ifnull(allopeningsameside,'-')as allopeningsameside,
+           ifnull(cardoor,'-')as cardoor,
+           ifnull(specificationheader,'-') as specificationheader,
+           ifnull(landingdoor,'-')as landingdoor,
+           ifnull(floormarking,'-')as floormarking,
+		   ifnull(machine,'-')as machine,
+           ifnull(cityuppercase,'-')as cityuppercase,
+           ifnull(month,'-')as month,
+           year,
+           version,
+		   CONCAT('SELLP/',cityuppercase,'/',month,'/',year,'/',quoteid,'/',version) as negno,
+           modeldetails,
+           ifnull(travel,'-')as travel,
+           result,
+           unit,
+           ifnull(carpanel,'-')as carpanel,
+           ifnull(ventilation,'-')as ventilation,
+           ifnull(tractionmedia,'-')as tractionmedia,
+           ifnull(mainpowersystem,'-')as mainpowersystem,
+           ifnull(carpositionindicator,'-')as carpositionindicator,
+           ifnull(falseceiling,'-')as falseceiling,
+           ifnull(auxilarysupplysystem,'-')as auxilarysupplysystem,
+           ifnull(flooring,'-')as flooring,
+           ifnull(operation,'-')as operation,
+           IFNULL(advanceonorderreception,'-') as advanceonorderreception,
+		   IFNULL(forrequestofmechanicalmaterial,'-') as forrequestofmechanicalmaterial,
+		   IFNULL(forrequestofelectricalmaterial,'-') as forrequestofelectricalmaterial,
+		   IFNULL(oncustomerhandover,'-') as oncustomerhandover
+	from(
+	select 
+			 -- GROUP_CONCAT('ELE/',Q.id) as negno,
+			 L.leadname,
+			 L.address,
+			 Q.modelid,
+			 Q.capacityid,
+			 Q.speedid,
+			 Q.stopsid,
+			 Q.controlid,
+			 Q.driveid,
+			 Q.shaftwidth,
+			 Q.carwidth,
+			 Q.allopeningsameside as allopeningsamesideid,
+			 Q.pitdepth,
+			 Q.overhead,
+			 Q.cardoorid,
+             GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF5.description,' Unit:',Q.nooflifts) as specificationheader,
+			 Q.landingdoorid,
+             GROUP_CONCAT(Q.travel,'mts') as travel,
+             -- 6P - 7S(C+G+5) - REF.description - S.S Car Panel - cwtposition 
+			GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' ', '-',' ',Q.stopsid,'S(G','+',(Q.stopsid-1),')',' ','-',' ',REF.description,' ','-',' ',ifnull(REF12.description,'-'),' ',REF8.description) as modeldetails,
+			GROUP_CONCAT(Q.nooflifts,' ','Units') as unit,
+            REGEXP_SUBSTR(REF1.description, '[0-9]+') AS result,
+            Q.floormarking as floormarkingid,
+			Q.machineid,
+			GROUP_CONCAT(C.cityname,' ','-',' ',L.pincode) as city,
+			L.mobileno as contactno,
+            DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+            Q.quotevalue,
+            Q.cwtpositionid,
+            REF.description as model,
+            REF1.description as capacity,
+            REF2.description as speed,
+            Q.stopsid  as stop,
+            REF4.description as control,
+            REF5.description as drive,
+            REF6.description as allopeningsameside,
+            REF7.description as cardoor,
+            REF8.description as landingdoor,
+            REF9.description as floormarking,
+            REF10.description as machine,
+			REF11.description as cwtposition,
+			REF12.description as carpanel,
+            REF13.description as ventilation,
+            REF14.description as tractionmedia,
+            REF15.description as mainpowersystem,
+            REF16.description as carpositionindicator,
+            REF17.description as falseceiling,
+            REF18.description as auxilarysupplysystem,
+			REF19.description as flooring,
+            REF20.description as operation,
+            CONCAT(Q.advanceonorderreception,'%') as advanceonorderreception,
+			CONCAT(Q.forrequestofmechanicalmaterial,'%') as forrequestofmechanicalmaterial,
+		    CONCAT(Q.forrequestofelectricalmaterial,'%') as forrequestofelectricalmaterial,
+		    CONCAT(Q.oncustomerhandover,'%') as oncustomerhandover,
+			UPPER(SUBSTRING( CO.city, 1, 3)) as cityuppercase,
+			MONTHNAME(Q.quotedate) AS month,
+            YEAR(Q.quotedate) AS year,
+            Q.leadid,
+            Q.id as quoteid,
+            ( select
+			ROW_NUMBER() OVER (ORDER BY id)  Sequence_no
+			-- id as quoteid
+			from quotation 
+			where leadid = Q.leadid order by id DESC limit 1)as version
+            
+            
+		
+		from quotation Q
+		LEFT JOIN leads L ON L.id = Q.leadid
+		LEFT JOIN city C ON L.cityid = C.id
+		LEFT JOIN company CO ON CO.id = Q.companyid
+		LEFT JOIN reference REF ON REF.id = Q.modelid
+		LEFT JOIN reference REF1 ON REF1.id = Q.capacityid
+		LEFT JOIN reference REF2 ON REF2.id = Q.speedid
+		LEFT JOIN reference REF3 ON REF3.id = Q.stopsid
+		LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+		LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+		LEFT JOIN reference REF6 ON REF6.id = Q.allopeningsameside
+        LEFT JOIN reference REF7 ON REF7.id = Q.cardoorid
+		LEFT JOIN reference REF8 ON REF8.id = Q.landingdoorid
+		LEFT JOIN reference REF9 ON REF9.id = Q.floormarking
+        LEFT JOIN reference REF10 ON REF10.id = Q.machineid
+        LEFT JOIN reference REF11 ON REF11.id = Q.cwtpositionid
+        LEFT JOIN reference REF12 ON REF12.id = Q.carpanelid
+		LEFT JOIN reference REF13 ON REF13.id = Q.ventilationid
+        LEFT JOIN reference REF14 ON REF14.id = Q.tractionmediaid
+		LEFT JOIN reference REF15 ON REF15.id = Q.mainpowersystemid
+		LEFT JOIN reference REF16 ON REF16.id = Q.carpositionindicatorid
+        LEFT JOIN reference REF17 ON REF17.id = Q.falseceilingid
+        LEFT JOIN reference REF18 ON REF18.id = Q.auxilarysupplysystemid
+		LEFT JOIN reference REF19 ON REF19.id = Q.flooringid
+        LEFT JOIN reference REF20 ON REF20.id = Q.operationid
+		where Q.id=p_id)temp;
+        
+		SELECT
+           -- IFNULL((UR.username),'-') as salemanager,
+           ifnull(UR.username,'-') assalemanager,
+           CONCAT('Contact No.','-','  ',UR.mobile) as salecontactno
+			FROM user1 UR
+			INNER JOIN userlicense UL ON UR.id = UL.userid
+			INNER JOIN `role` R ON UL.roleid = R.id
+        WHERE R.description = 'Sales Manager';
+
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `spc_convertto_quote`;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_convertto_quote`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+L.leadname,
+L.mobileno,
+L.companyname,
+L.email ,
+L.sourceid ,
+L.stageid ,
+L.leadscategory,
+L.leadvalue,
+L.typeoflift ,
+L.nooflifts ,
+L.contactperson ,
+L.leadstatus ,
+L.locationid ,
+L.salesrep ,
+L.capacityid ,
+L.modelid ,
+L.driveid ,
+L.machineid , 
+L.controlid ,
+L.operationid ,
+L.speedid ,
+L.typeofdoorid ,
+L.landingdoorid ,
+L.cardoorid ,
+L.lowestfloorid ,
+L.cwtpositionid ,
+L.floorheaightid ,
+L.architectidid ,
+L.leadconsaltantid ,
+L.leaddate ,
+L.leadscore ,
+L.leaddescription  ,
+L.cityid  ,
+L.stateid ,
+L.countryid ,
+L.phoneno , 
+L.linkedin ,
+L.facebook ,
+L.youtube , 
+L.pincode , 
+L.stopsid ,
+L.floormarking ,
+L.allopeningsameside ,
+L.frontopening ,
+L.backopening ,
+L.leftopening , 
+L.rightopening, 
+L.shaftwidth ,
+L.shaftdepth ,
+L.cardepth ,
+L.carwidth ,
+L.carheight , 
+L.doorwidth , 
+L.doorheight ,
+L.travel,
+L.pitdepth ,
+L.overhead,
+L.mrwidth , 
+L.mrdepth ,
+L.mrheight ,
+L.leadtype,
+L.isdeleted ,
+L.companyid ,
+L.groupcontrolid ,
+L.leadsubcategoryid  ,
+L.address ,
+L.gstn ,
+L.mobilep ,
+L.scoutername ,
+L.reference ,
+L.preferedlead ,
+L.panno ,
+L.winprobability , 
+L.carpanelid ,
+L.ventilationid ,
+L.tractionmediaid ,
+L.mainpowersystemid ,
+L.carpositionindicatorid ,
+L.falseceilingid ,
+L.auxilarysupplysystemid ,
+L.flooringid,
+        L.id as leadid,
+		L.leadname as quotename,
+		L.sourceid as leadsourceid,
+		L.stageid as quotestageid,
+		L.leadscategory as quotecategory,
+        L.leadvalue as quotevalue,
+        DATE_FORMAT(L.leaddate,'%d/%m/%Y') as quotedate,
+        L.leaddescription as quotediscription,
+        L.leadscore as quotescore,
+        L.address as siteaddress,
+		L.linkedin as sociallink1,
+        L.facebook as sociallink2,
+        L.youtube as sociallink3,
+        (SELECT id FROM quotation ORDER BY id DESC LIMIT 1) as lastquoteid,
+        CONCAT(10.00,'%') as advanceonorderreception,
+		CONCAT(60.00,'%') as forrequestofmechanicalmaterial,
+		CONCAT(25.00,'%') as forrequestofelectricalmaterial,
+		CONCAT(5.00,'%') as oncustomerhandover
+
+		FROM leads L
+		WHERE L.id = p_id;
+
+END$$
+
+DELIMITER ;
+;
+
