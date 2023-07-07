@@ -1,7 +1,0 @@
-{
-  "sEntity": "Library",
-  "sId": "sap/ushell",
-  "sLabel": "Unified Shell",
-  "sVendor": "SAP",
-  "oExtends": "UI5.sap/ui/core"
-}

@@ -2,7 +2,8 @@
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
-    xmlns:u="sap.ui.unified">    
+    xmlns:u="sap.ui.unified"
+    xmlns:form="sap.ui.layout.form">    
     <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
 		<f:beginColumnPages>
 		    <f:DynamicPage toggleHeaderOnTitleClick="false">

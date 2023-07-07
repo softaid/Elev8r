@@ -1118,12 +1118,8 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
-<<<<<<< HEAD
-			</table:Table> 
-		</content>
-=======
 			</table:Table>
-		</content> -->
+		</content>
 
         <Panel id ="pnlPrjMgnttable" width="auto">
             <headerToolbar>
@@ -1145,6 +1141,5 @@
             <content>
             </content>
         </Panel>
->>>>>>> 9ffc4ac69624a9453540ce3eaed633dbb348a179
 	</Page>
 </mvc:View>

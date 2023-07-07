@@ -1,3 +1,0 @@
-.sapFCard:not(.sapFCardPreview):not(.sapFCardTransparent):hover {
-  box-shadow: var(--sapUiShadowLevel0);
-}

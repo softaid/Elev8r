@@ -345,6 +345,11 @@
                     <form:formContainers>
                         <form:FormContainer title="Lift Details">
 					        <form:formElements>
+                                <form:FormElement label="{i18n>leadnooflift}">
+                                    <form:fields>
+                                        <Input id="txtnooflifts"  valueLiveUpdate="true" value="{editQutationModel>/nooflifts}"  required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement> 
                                 <form:FormElement label="{i18n>leadtypeoflift}">
                                     <form:fields>
                                         <Select id="typeofliftid"
@@ -831,12 +836,7 @@
                                             <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
                                         </Select>
                                     </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="{i18n>leadnooflift}">
-                                    <form:fields>
-                                        <Input id="txtnooflifts"  valueLiveUpdate="true" value="{editQutationModel>/nooflifts}"  required="false" change="onPartyNameChange"/>
-                                    </form:fields>
-                                </form:FormElement>  
+                                </form:FormElement> 
                                 <form:FormElement label="All Opening Same Side">
                                     <form:fields>
                                         <Select id="txtallopeningsameside"
