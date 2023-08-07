@@ -53,7 +53,6 @@ sap.ui.define([
             },   
             getAllProjectEndDateDetailFinal : function(callback){
                 commonService.runJQueryX("GET", "elevproject/finalprojectsdetailenddate/" + commonService.session("companyId"), null, callback, null);
-<<<<<<< HEAD
             },
             
             getAllNiProjectsDetail : function(callback){
@@ -85,16 +84,6 @@ sap.ui.define([
             getAllNIstagesSequencewise : function(callback){
                 commonService.runJQueryX("GET", "elevproject/finalprojectsdetailnistagesandsequence/" + commonService.session("companyId"), null, callback, null);
             },    
-=======
-            }, 
-
-            getAllProjectstageDetail : function(callback){
-                commonService.runJQueryX("GET", "elevproject/finalprojectsdetailstagedate/" + commonService.session("companyId"), null, callback, null);
-            },    
-            getAllstagesSequencewise : function(callback){
-                commonService.runJQueryX("GET", "elevproject/finalprojectsdetailstagesandsequence/" + commonService.session("companyId"), null, callback, null);
-            },    
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
             
             saveProject : function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/saveproject/", params,callback, null);
@@ -105,14 +94,11 @@ sap.ui.define([
                 commonService.runJQueryX("POST", "elevproject/updateProjectManagement/", params,callback, null);
             },
 
-<<<<<<< HEAD
             // save project details like  end date , completion per
             updateNIProjectDetail : function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/updateProjectNIManagement/", params,callback, null);
             },
 
-=======
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
             saveProjectActivityDetail: function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/saveprojectdetail/",params, callback, null);
             },
@@ -123,12 +109,9 @@ sap.ui.define([
             updateProjectActivityDetail: function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/updateprojectdetail/",params, callback, null);
             },
-<<<<<<< HEAD
             updateNIProjectActivityDetail: function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/updateniprojectdetail/",params, callback, null);
             },
-=======
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
 
             deleteProjectActivityDetail : function(params,callback){
                 commonService.runJQueryX("DELETE", "elevproject/deleteprojectdetail/"+params.id, null, callback, null);

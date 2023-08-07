@@ -39,11 +39,8 @@ sap.ui.define([
 		},
 
 		onInit: function () {
-<<<<<<< HEAD
-=======
 			
 
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
 			var dateTimeModel = new JSONModel();
 			dateTimeModel.setData({
 				valueDTP3: new Date()
@@ -131,13 +128,9 @@ sap.ui.define([
 				}
 			}, 60000);
 			
-<<<<<<< HEAD
-			window.setTimeout(this.defaultfunction(), 5000);
-=======
 		window.setTimeout(this.defaultfunction(), 5000);
 
 
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
 		},
 
 		defaultfunction: function () {
@@ -216,10 +209,7 @@ sap.ui.define([
 				companyname: commonFunction.session("companyname"),
 				countrycode: commonFunction.session("countrycode"),
 				address: commonFunction.session("address"),
-<<<<<<< HEAD
 				detailaddress: commonFunction.session("detailaddress"),
-=======
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
 				companycontact: commonFunction.session("companycontact"),
 				companyemail: commonFunction.session("companyemail"),
 				city: commonFunction.session("city"),
@@ -550,7 +540,6 @@ sap.ui.define([
 			}
 
 			if (sKey != "") {
-<<<<<<< HEAD
 				if (sKey == "logout") {
 					this.fnLogoutPress("");
 				}else{
@@ -559,11 +548,6 @@ sap.ui.define([
 				}
 			}
 
-=======
-				this.getRouter().getTargets().display(sKey, {});
-				this.getRouter().navTo(sKey);
-			}
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
 		},
 
 		clearAllonLogout: function () {

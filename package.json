@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "poultryos_erp",
-=======
   "name": "PoultryOS_ERP",
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
   "version": "1.0.0",
   "description": "PoultryOS is a cloud-based poultry management software that allows for comprehensive flock traceability. Poultry ERP that includes all operations.",
   "private": true,
@@ -30,31 +26,6 @@
     "local-web-server": "^4.2.1",
     "rimraf": "^3.0.2"
   },
-<<<<<<< HEAD
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
-  "dependencies": {
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.1.1",
-    "onesignal-node": "^2.1.0",
-    "pdfmake": "^0.2.7",
-    "ui5-tooling-modules": "^0.9.10"
-  },
-  "main": "Gruntfile.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/softaid/Elev8r.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/softaid/Elev8r/issues"
-  },
-  "homepage": "https://github.com/softaid/Elev8r#readme"
-=======
   "dependencies": {
     "docx": "^8.2.0",
     "jspdf": "^2.5.1",
@@ -65,5 +36,4 @@
   "babel": {
     "presets": ["@babel/preset-env"]
   }
->>>>>>> 978f37c726055391073d9f35e3163659e3ef6b6e
 }
